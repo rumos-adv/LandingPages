@@ -1,0 +1,28 @@
+# Rumos Advocacia — robots.txt
+# https://rumosadv.com.br
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+# IA crawlers — política conservadora (advocacia + LGPD)
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+Sitemap: https://rumosadv.com.br/sitemap.xml
