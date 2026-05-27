@@ -1,0 +1,2211 @@
+
+========PAGE_INDEX_START_LEN_16175========
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Rumos Advocacia | Advocacia extrajudicial em Campinas/SP</title>
+  <meta name="description" content="Resolva no cartório o que não precisa virar processo. Divórcio, inventário e regularização registral em Campinas/SP — atendimento direto com advogado.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rumosadv.com.br/">
+  <meta name="theme-color" content="#2d4d2d">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Rumos Advocacia">
+  <meta property="og:title" content="Rumos Advocacia | Advocacia extrajudicial em Campinas">
+  <meta property="og:description" content="Resolva no cartório o que não precisa virar processo.">
+  <meta property="og:url" content="https://rumosadv.com.br/">
+  <meta property="og:image" content="https://rumosadv.com.br/assets/img/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232d4d2d'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' font-weight='700' text-anchor='middle' fill='%23fbfaf9'%3ER%3C/text%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <link rel="preconnect" href="https://www.clarity.ms">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LegalService",
+    "name": "Rumos Advocacia",
+    "description": "Advocacia extrajudicial em Campinas/SP especializada em divórcio em cartório, inventário extrajudicial e regularização registral.",
+    "url": "https://rumosadv.com.br/",
+    "image": "https://rumosadv.com.br/assets/img/og-image.jpg",
+    "telephone": "+5519989119770",
+    "areaServed": {"@type":"City","name":"Campinas","containedInPlace":{"@type":"State","name":"São Paulo"}},
+    "address": {"@type":"PostalAddress","addressLocality":"Campinas","addressRegion":"SP","addressCountry":"BR"},
+    "founder": {"@type":"Person","name":"Dr. Rodrigo Moura Silva","jobTitle":"Advogado","alumniOf":"Ibmec — Especialização em Direito Notarial e Registral","identifier":"OAB/SP 188.004"}
+  }
+  </script>
+
+  <!-- GTM -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-NQTH2XWD');</script>
+
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wlk4llvctc");
+  </script>
+
+  <style>
+    :root {
+      --bg: #fbfaf9; --bg-alt: #f4f1ee;
+      --fg: #223a23; --fg-soft: #4a5d4a; --muted: #6b7565;
+      --primary: #2d4d2d; --primary-hover: #1f3a20;
+      --secondary: #3a2752; --accent: #eee9f3;
+      --border: #e5e0d9; --whatsapp: #25d366; --whatsapp-hover: #1ebe5d;
+      --max: 1120px;
+      --serif: "Playfair Display", Georgia, serif;
+      --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font: 16px/1.6 var(--sans); color: var(--fg); background: var(--bg); -webkit-font-smoothing: antialiased; }
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    h1, h2, h3 { font-family: var(--serif); font-weight: 700; line-height: 1.2; margin: 0 0 .5em; color: var(--fg); }
+    h1 { font-size: clamp(2rem, 5vw, 3rem); letter-spacing: -.01em; }
+    h2 { font-size: clamp(1.5rem, 3.2vw, 2.1rem); }
+    p { margin: 0 0 1em; color: var(--fg-soft); }
+    .container { max-width: var(--max); margin: 0 auto; padding: 0 1.25rem; }
+
+    .site-header { position: sticky; top: 0; z-index: 50; background: rgba(251,250,249,.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
+    .site-header__inner { display: flex; align-items: center; justify-content: space-between; padding: .85rem 1.25rem; max-width: var(--max); margin: 0 auto; }
+    .logo { font-family: var(--serif); font-weight: 700; font-size: 1.35rem; color: var(--primary); letter-spacing: -.01em; }
+    .nav-cta { display: inline-flex; align-items: center; gap: .5rem; background: var(--whatsapp); color: #fff; padding: .55rem 1rem; border-radius: 999px; font-weight: 600; font-size: .9rem; }
+    .nav-cta:hover { background: var(--whatsapp-hover); text-decoration: none; color: #fff; }
+
+    .hero { padding: 4.5rem 0 3rem; text-align: center; }
+    .hero__eyebrow { display: inline-block; font-size: .82rem; letter-spacing: .08em; text-transform: uppercase; color: var(--secondary); font-weight: 600; margin-bottom: 1rem; }
+    .hero h1 { max-width: 820px; margin: 0 auto .8rem; }
+    .hero__sub { font-size: 1.15rem; color: var(--fg-soft); max-width: 640px; margin: 0 auto 2rem; }
+
+    .services { padding: 1rem 0 4rem; }
+    .services__grid { display: grid; gap: 1.5rem; grid-template-columns: 1fr; }
+    @media (min-width: 720px) { .services__grid { grid-template-columns: repeat(3, 1fr); } }
+    .service {
+      background: #fff; border: 1px solid var(--border); border-radius: 14px;
+      padding: 2rem 1.75rem; transition: transform .2s ease, box-shadow .2s ease;
+      display: flex; flex-direction: column;
+    }
+    .service:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(34,58,35,.1); }
+    .service__icon { width: 44px; height: 44px; border-radius: 10px; background: var(--accent); color: var(--secondary); display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; font: 700 1.1rem var(--serif); }
+    .service h3 { color: var(--primary); margin-bottom: .5rem; }
+    .service p { font-size: .95rem; flex: 1; }
+    .service__link { margin-top: 1rem; font-weight: 600; color: var(--primary); display: inline-flex; align-items: center; gap: .35rem; }
+    .service__link:hover { gap: .55rem; transition: gap .15s ease; }
+    .service__link[aria-disabled="true"] { color: var(--muted); pointer-events: none; font-size: .9rem; }
+
+    .author-section { background: var(--bg-alt); padding: 4rem 0; }
+    .author { display: grid; gap: 1.5rem; grid-template-columns: 1fr; align-items: center; background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 1.75rem; max-width: 860px; margin: 0 auto; }
+    @media (min-width: 720px) { .author { grid-template-columns: 200px 1fr; gap: 2rem; } }
+    .author__photo { width: 160px; height: 160px; border-radius: 50%; object-fit: cover; border: 4px solid var(--accent); margin: 0 auto; }
+    @media (min-width: 720px) { .author__photo { width: 200px; height: 200px; margin: 0; } }
+    .author__name { font-family: var(--serif); font-size: 1.4rem; color: var(--fg); margin-bottom: .15rem; }
+    .author__role { font-size: .9rem; color: var(--secondary); font-weight: 600; margin-bottom: .8rem; }
+
+    .site-footer { background: var(--primary); color: #d8dcd0; padding: 3rem 1.25rem 1.5rem; font-size: .9rem; }
+    .site-footer a { color: #fff; }
+    .site-footer__grid { max-width: var(--max); margin: 0 auto; display: grid; gap: 2rem; grid-template-columns: 1fr; }
+    @media (min-width: 720px) { .site-footer__grid { grid-template-columns: 1.4fr 1fr 1fr; } }
+    .site-footer h4 { color: #fff; font: 600 .92rem var(--sans); letter-spacing: .04em; text-transform: uppercase; margin: 0 0 .8rem; }
+    .site-footer__brand { font-family: var(--serif); font-size: 1.5rem; color: #fff; margin-bottom: .8rem; }
+    .site-footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: .45rem; }
+    .site-footer__bottom { max-width: var(--max); margin: 2rem auto 0; padding-top: 1.25rem; border-top: 1px solid rgba(255,255,255,.12); font-size: .82rem; color: #c4cab8; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; }
+
+    .float-wa { position: fixed; bottom: 1.25rem; right: 1.25rem; z-index: 100; width: 56px; height: 56px; border-radius: 50%; background: var(--whatsapp); color: #fff; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 20px rgba(37,211,102,.45); }
+    .float-wa:hover { transform: scale(1.06); text-decoration: none; color: #fff; }
+    .float-wa svg { width: 28px; height: 28px; }
+  </style>
+</head>
+<body>
+
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NQTH2XWD" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <div class="logo"><a href="/">RUMOS<span style="color:var(--secondary)">.</span></a></div>
+    <a href="https://wa.me/5519989119770?text=Ol%C3%A1%2C%20Dr.%20Rodrigo!%20Gostaria%20de%20uma%20orienta%C3%A7%C3%A3o%20jur%C3%ADdica." class="nav-cta" data-wa-source="header" rel="noopener" target="_blank">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width:16px;height:16px"><path d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7 0-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.4.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5 0 1.5 1.1 2.9 1.3 3.1.2.2 2.2 3.3 5.3 4.6 1.9.7 2.6.8 3.5.7.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.2-.6-.4zM12 .9C5.9.9.9 5.9.9 12c0 2 .5 3.9 1.5 5.6L.7 23.3l5.9-1.5c1.6.9 3.5 1.4 5.4 1.4 6.1 0 11.1-5 11.1-11.1S18.1.9 12 .9z"/></svg>
+      WhatsApp
+    </a>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="container">
+      <span class="hero__eyebrow">Advocacia extrajudicial · Campinas/SP</span>
+      <h1>Resolva no cartório o que não precisa virar processo.</h1>
+      <p class="hero__sub">Atuação consultiva especializada em divórcio em cartório, inventário extrajudicial e regularização registral. Soluções claras, técnicas e com sigilo profissional, em Campinas e região.</p>
+    </div>
+  </section>
+
+  <section class="services">
+    <div class="container">
+      <div class="services__grid">
+
+        <article class="service">
+          <div class="service__icon">D</div>
+          <h3>Divórcio em cartório</h3>
+          <p>Para casais consensuais. Possível mesmo com filhos menores, conforme Resolução 571/2024 do CNJ. Resolvido em poucas semanas, sem audiência.</p>
+          <a href="/divorcio" class="service__link">Saiba mais →</a>
+        </article>
+
+        <article class="service">
+          <div class="service__icon">I</div>
+          <h3>Inventário extrajudicial</h3>
+          <p>Para herdeiros maiores e capazes em consenso. Conduzimos com cuidado pela escritura pública, da reunião dos documentos à partilha final.</p>
+          <a href="/inventario" class="service__link">Saiba mais →</a>
+        </article>
+
+        <article class="service">
+          <div class="service__icon">R</div>
+          <h3>Regularização registral</h3>
+          <p>Imóveis com escritura pendente, contratos de gaveta, usucapião extrajudicial. Diagnóstico claro do caminho e do tempo previsto.</p>
+          <a href="#" class="service__link" aria-disabled="true">Em breve</a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="author-section">
+    <div class="container">
+      <article class="author">
+        <picture>
+          <source type="image/webp" srcset="/assets/img/rodrigo-moura-400.webp 1x, /assets/img/rodrigo-moura-800.webp 2x">
+          <img class="author__photo"
+               src="/assets/img/rodrigo-moura-400.jpg"
+               srcset="/assets/img/rodrigo-moura-400.jpg 1x, /assets/img/rodrigo-moura-800.jpg 2x"
+               width="200" height="200"
+               alt="Dr. Rodrigo Moura Silva, advogado responsável"
+               loading="lazy">
+        </picture>
+        <div>
+          <div class="author__name">Dr. Rodrigo Moura Silva</div>
+          <div class="author__role">OAB/SP 188.004 · Especialista em Direito Notarial e Registral pelo Ibmec</div>
+          <p>Advogado com prática consultiva voltada à atuação extrajudicial — divórcios em cartório, inventários e regularização registral. Conduz cada caso pessoalmente, com atenção ao momento da família e foco em soluções claras, técnicas e com sigilo profissional.</p>
+          <p style="margin: 0; font-size: .88rem; color: var(--muted);">Atendimento em Campinas/SP e região. Reuniões presenciais ou online.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer__grid">
+    <div>
+      <div class="site-footer__brand">RUMOS<span style="color:#a087c0">.</span></div>
+      <p style="margin: 0;">Advocacia extrajudicial em Campinas/SP.<br>Divórcio em cartório · Inventário · Regularização registral.</p>
+      <p style="margin: .8rem 0 0; font-size: .85rem;">Dr. Rodrigo Moura Silva — OAB/SP 188.004<br>Especialista em Direito Notarial e Registral pelo Ibmec</p>
+    </div>
+    <div>
+      <h4>Contato</h4>
+      <ul>
+        <li><a href="https://wa.me/5519989119770?text=Ol%C3%A1%2C%20Dr.%20Rodrigo!%20Gostaria%20de%20uma%20orienta%C3%A7%C3%A3o%20jur%C3%ADdica." data-wa-source="footer" target="_blank" rel="noopener">WhatsApp: (19) 98911-9770</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#b7c5d8d3c5ded0d8f7c5c2dad8c4d6d3c199d4d8da99d5c5"><span class="__cf_email__" data-cfemail="52203d36203b353d1220273f3d213336247c313d3f7c3020">[email&#160;protected]</span></a></li>
+        <li><a href="https://www.google.com/maps/place/Condom%C3%ADnio+Alpha+Park+Tower/@-22.889377,-47.0213503,17z" target="_blank" rel="noopener">Condomínio Alphapark Tower</a><br>Campinas/SP</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Institucional</h4>
+      <ul>
+        <li><a href="/divorcio">Divórcio em cartório</a></li>
+        <li><a href="/politica-de-privacidade">Política de Privacidade</a></li>
+        <li><a href="/lgpd">LGPD</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="site-footer__bottom">
+    <span>© 2026 Rumos Advocacia · OAB/SP 188.004</span>
+    <span>Conteúdo informativo. Provimento 205/2021 OAB.</span>
+  </div>
+</footer>
+
+<a href="https://wa.me/5519989119770?text=Ol%C3%A1%2C%20Dr.%20Rodrigo!%20Gostaria%20de%20uma%20orienta%C3%A7%C3%A3o%20jur%C3%ADdica." class="float-wa" data-wa-source="float" aria-label="Conversar pelo WhatsApp" rel="noopener" target="_blank">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7 0-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.4.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5 0 1.5 1.1 2.9 1.3 3.1.2.2 2.2 3.3 5.3 4.6 1.9.7 2.6.8 3.5.7.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.2-.6-.4zM12 .9C5.9.9.9 5.9.9 12c0 2 .5 3.9 1.5 5.6L.7 23.3l5.9-1.5c1.6.9 3.5 1.4 5.4 1.4 6.1 0 11.1-5 11.1-11.1S18.1.9 12 .9z"/></svg>
+</a>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ event: 'page_view_lp', page: 'home', service: 'Institucional' });
+
+ 
+========PAGE_INDEX_END========
+
+========PAGE_DIVORCIO_START_LEN_41637========
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ========== SEO ========== -->
+  <title>Divórcio e Dissolução de União Estável em Cartório · Campinas | Rumos Advocacia</title>
+  <meta name="description" content="Divórcio e dissolução de união estável em cartório · Campinas/SP. Lei 11.441/2007 e Resolução CNJ 571/2024. Atendimento direto com advogado, sigilo e plano por escrito em 48h. Dr. Rodrigo Moura — OAB/SP 188.004.">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <link rel="canonical" href="https://rumosadv.com.br/divorcio">
+  <meta name="author" content="Dr. Rodrigo Moura Silva — OAB/SP 188.004">
+  <meta name="theme-color" content="#2d4d2d">
+
+  <!-- ========== Open Graph / Twitter ========== -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Rumos Advocacia">
+  <meta property="og:title" content="Divórcio e Dissolução de União Estável em Cartório · Campinas | Rumos Advocacia">
+  <meta property="og:description" content="Divórcio e dissolução de união estável em cartório, com clareza, sigilo e segurança jurídica. Atendimento direto com advogado em Campinas/SP.">
+  <meta property="og:url" content="https://rumosadv.com.br/divorcio">
+  <meta property="og:image" content="https://rumosadv.com.br/assets/img/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Divórcio e Dissolução de União Estável em Cartório · Campinas">
+  <meta name="twitter:description" content="Divórcio e dissolução de união estável em cartório · Campinas/SP. Atendimento direto com advogado, plano por escrito em 48h.">
+  <meta name="twitter:image" content="https://rumosadv.com.br/assets/img/og-image.jpg">
+
+  <!-- ========== Favicon ========== -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232d4d2d'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' font-weight='700' text-anchor='middle' fill='%23fbfaf9'%3ER%3C/text%3E%3C/svg%3E">
+
+  <!-- ========== Preconnect ========== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <link rel="preconnect" href="https://www.clarity.ms">
+  <link rel="preconnect" href="https://tally.so">
+
+  <!-- ========== Fonts ========== -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap"></noscript>
+
+  <!-- ========== Schema.org JSON-LD ========== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LegalService",
+    "name": "Rumos Advocacia",
+    "description": "Advocacia extrajudicial em Campinas/SP especializada em divórcio em cartório, dissolução de união estável, inventário extrajudicial e regularização registral.",
+    "url": "https://rumosadv.com.br/divorcio",
+    "image": "https://rumosadv.com.br/assets/img/og-image.jpg",
+    "telephone": "+5519989119770",
+    "priceRange": "$$",
+    "areaServed": {
+      "@type": "City",
+      "name": "Campinas",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "São Paulo"
+      }
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Campinas",
+      "addressRegion": "SP",
+      "addressCountry": "BR"
+    },
+    "founder": {
+      "@type": "Person",
+      "name": "Dr. Rodrigo Moura Silva",
+      "jobTitle": "Advogado",
+      "alumniOf": "Ibmec — Especialização em Direito Notarial e Registral",
+      "identifier": "OAB/SP 188.004"
+    },
+    "serviceType": ["Divórcio extrajudicial (em cartório)", "Dissolução extrajudicial de união estável"],
+    "knowsAbout": ["Divórcio consensual", "Dissolução de união estável", "Reconhecimento de união estável", "Resolução 571 CNJ", "Lei 11.441/2007", "Direito Notarial e Registral"]
+  }
+  </script>
+
+  <!-- ========== Google Tag Manager ========== -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-NQTH2XWD');</script>
+
+  <!-- ========== Microsoft Clarity ========== -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wlk4llvctc");
+  </script>
+
+  <!-- ========== Critical CSS ========== -->
+  <style>
+    :root {
+      --bg: #fbfaf9;
+      --bg-alt: #f4f1ee;
+      --fg: #223a23;
+      --fg-soft: #4a5d4a;
+      --muted: #6b7565;
+      --primary: #2d4d2d;
+      --primary-hover: #1f3a20;
+      --secondary: #3a2752;
+      --secondary-hover: #2a1a3e;
+      --accent: #eee9f3;
+      --border: #e5e0d9;
+      --whatsapp: #25d366;
+      --whatsapp-hover: #1ebe5d;
+      --max: 1120px;
+      --serif: "Playfair Display", Georgia, serif;
+      --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --shadow-sm: 0 1px 2px rgba(34,58,35,.05);
+      --shadow-md: 0 4px 16px rgba(34,58,35,.08);
+      --shadow-lg: 0 12px 32px rgba(34,58,35,.12);
+      --radius: 8px;
+      --radius-lg: 14px;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--fg);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    h1, h2, h3 { font-family: var(--serif); font-weight: 700; line-height: 1.2; margin: 0 0 .5em; color: var(--fg); }
+    h1 { font-size: clamp(1.9rem, 4.5vw, 2.85rem); letter-spacing: -.01em; }
+    h2 { font-size: clamp(1.5rem, 3.2vw, 2.1rem); letter-spacing: -.005em; }
+    h3 { font-size: 1.2rem; }
+    p { margin: 0 0 1em; color: var(--fg-soft); }
+    .container { max-width: var(--max); margin: 0 auto; padding: 0 1.25rem; }
+
+    /* Header */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(251, 250, 249, .92);
+      backdrop-filter: saturate(180%) blur(10px);
+      -webkit-backdrop-filter: saturate(180%) blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .site-header__inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: .85rem 1.25rem; max-width: var(--max); margin: 0 auto;
+    }
+    .logo { font-family: var(--serif); font-weight: 700; font-size: 1.35rem; color: var(--primary); letter-spacing: -.01em; }
+    .logo a { color: inherit; }
+    .nav-cta {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: var(--whatsapp); color: #fff;
+      padding: .55rem 1rem; border-radius: 999px;
+      font-weight: 600; font-size: .9rem;
+      transition: background .15s ease;
+    }
+    .nav-cta:hover { background: var(--whatsapp-hover); text-decoration: none; color: #fff; }
+    .nav-cta svg { width: 16px; height: 16px; }
+
+    /* Hero */
+    .hero { padding: 3rem 0 2.5rem; }
+    .hero__grid {
+      display: grid; gap: 2.5rem;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 860px) {
+      .hero__grid { grid-template-columns: 1.1fr .9fr; align-items: start; }
+      .hero { padding: 4.5rem 0 4rem; }
+    }
+    .hero__eyebrow {
+      display: inline-block;
+      font-size: .82rem; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--secondary); font-weight: 600; margin-bottom: .8rem;
+    }
+    .hero__title { margin-bottom: 1rem; }
+    .hero__sub { font-size: 1.1rem; color: var(--fg-soft); max-width: 520px; }
+    .hero__bullets { list-style: none; padding: 0; margin: 1.5rem 0 0; display: grid; gap: .6rem; max-width: 480px; }
+    .hero__bullets li { padding-left: 1.6rem; position: relative; color: var(--fg-soft); }
+    .hero__bullets li::before {
+      content: ""; position: absolute; left: 0; top: .5em;
+      width: 14px; height: 8px; border-left: 2px solid var(--primary); border-bottom: 2px solid var(--primary);
+      transform: rotate(-45deg);
+    }
+    .hero__bullets li > details > summary {
+      cursor: pointer; list-style: none; display: inline;
+      color: var(--fg-soft);
+      border-bottom: 1px dotted var(--secondary);
+    }
+    .hero__bullets li > details > summary::-webkit-details-marker { display: none; }
+    .hero__bullets li > details > summary::after {
+      content: " +"; color: var(--secondary); font-weight: 600;
+    }
+    .hero__bullets li > details[open] > summary::after { content: " −"; }
+    .hero__bullets__detail {
+      margin-top: .6rem;
+      padding: .75rem 1rem;
+      background: rgba(58, 39, 82, .05);
+      border-left: 3px solid var(--secondary);
+      border-radius: 4px;
+      font-size: .9rem;
+    }
+    .hero__bullets__detail p { margin: 0 0 .45rem; color: var(--fg-soft); }
+    .hero__bullets__detail p:last-child { margin: 0; }
+    .hero__bullets__detail strong { color: var(--fg); }
+    .hero__cta-row { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.8rem; }
+    .btn {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .85rem 1.4rem;
+      font: 600 .98rem var(--sans);
+      border-radius: 999px;
+      cursor: pointer; border: none;
+      transition: all .15s ease;
+    }
+    .btn--primary { background: var(--primary); color: #fff; }
+    .btn--primary:hover { background: var(--primary-hover); text-decoration: none; color: #fff; transform: translateY(-1px); box-shadow: var(--shadow-md); }
+    .btn--whatsapp { background: var(--whatsapp); color: #fff; }
+    .btn--whatsapp:hover { background: var(--whatsapp-hover); text-decoration: none; color: #fff; transform: translateY(-1px); box-shadow: var(--shadow-md); }
+    .btn--outline { background: transparent; color: var(--primary); border: 1.5px solid var(--primary); }
+    .btn--outline:hover { background: var(--primary); color: #fff; text-decoration: none; }
+
+    /* Form card */
+    .form-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-md);
+    }
+    .form-card__title { font-family: var(--serif); font-size: 1.35rem; margin-bottom: .25rem; color: var(--fg); }
+    .form-card__sub { font-size: .92rem; color: var(--muted); margin-bottom: 1.2rem; }
+    .tally-frame { position: relative; }
+    .tally-frame iframe { width: 100%; border: 0; min-height: 580px; display: block; }
+    .tally-frame::after {
+      content: ''; position: absolute; bottom: 0; right: 0;
+      width: 150px; height: 42px; background: #fff; pointer-events: none;
+      border-bottom-right-radius: var(--radius-lg);
+    }
+
+    /* Sections */
+    section { padding: 3.5rem 0; }
+    .section--alt { background: var(--bg-alt); }
+    .section__head { text-align: center; max-width: 720px; margin: 0 auto 2.5rem; }
+    .section__eyebrow { display: inline-block; font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; color: var(--secondary); font-weight: 600; margin-bottom: .6rem; }
+
+    /* Steps */
+    .steps {
+      display: grid; gap: 1.25rem;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 720px) { .steps { grid-template-columns: repeat(3, 1fr); } }
+    .step {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 1.5rem;
+    }
+    .step__num {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--accent); color: var(--secondary);
+      display: inline-flex; align-items: center; justify-content: center;
+      font: 700 1rem var(--serif); margin-bottom: .8rem;
+    }
+    .step h3 { color: var(--primary); margin-bottom: .4rem; font-size: 1.1rem; }
+    .step p { font-size: .95rem; margin: 0; }
+
+    /* Resolução 571 box */
+    .res-box {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--secondary);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.75rem;
+      margin: 0 auto;
+      max-width: 760px;
+    }
+    .res-box h3 { color: var(--secondary); margin-bottom: .6rem; }
+    .checklist { list-style: none; padding: 0; margin: 1rem 0 0; display: grid; gap: .55rem; }
+    .checklist li { padding-left: 1.6rem; position: relative; color: var(--fg-soft); font-size: .95rem; }
+    .checklist li::before {
+      content: ""; position: absolute; left: 0; top: .45em;
+      width: 12px; height: 7px; border-left: 2px solid var(--secondary); border-bottom: 2px solid var(--secondary);
+      transform: rotate(-45deg);
+    }
+
+    /* Author block */
+    .author {
+      display: grid; gap: 1.5rem;
+      grid-template-columns: 1fr;
+      align-items: center;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      max-width: 860px; margin: 0 auto;
+      box-shadow: var(--shadow-sm);
+    }
+    @media (min-width: 720px) { .author { grid-template-columns: 200px 1fr; gap: 2rem; } }
+    .author__photo {
+      width: 160px; height: 160px; border-radius: 50%;
+      object-fit: cover; border: 4px solid var(--accent);
+      margin: 0 auto;
+    }
+    @media (min-width: 720px) { .author__photo { width: 200px; height: 200px; margin: 0; } }
+    .author__name { font-family: var(--serif); font-size: 1.35rem; color: var(--fg); margin-bottom: .15rem; }
+    .author__role { font-size: .9rem; color: var(--secondary); font-weight: 600; margin-bottom: .8rem; letter-spacing: .02em; }
+    .author p { font-size: .96rem; }
+
+    /* FAQ */
+    .faq { max-width: 760px; margin: 0 auto; }
+    .faq__item {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: .75rem;
+      overflow: hidden;
+    }
+    .faq__item summary {
+      cursor: pointer;
+      padding: 1.1rem 1.4rem;
+      font-weight: 600;
+      color: var(--fg);
+      list-style: none;
+      display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+    }
+    .faq__item summary::-webkit-details-marker { display: none; }
+    .faq__item summary::after {
+      content: "+"; font-size: 1.5rem; color: var(--primary); font-weight: 400;
+      transition: transform .2s ease;
+    }
+    .faq__item[open] summary::after { content: "−"; }
+    .faq__answer { padding: 0 1.4rem 1.2rem; font-size: .95rem; color: var(--fg-soft); }
+
+    /* União Estável — Layout B (lead aberto, detalhes colapsáveis) */
+    .ue-toggle {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .ue-toggle > summary {
+      cursor: pointer;
+      list-style: none;
+      display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--secondary);
+      border-radius: var(--radius);
+      padding: 1.1rem 1.4rem;
+      font-weight: 600;
+      color: var(--fg);
+      transition: background .15s ease;
+    }
+    .ue-toggle > summary:hover { background: var(--accent); }
+    .ue-toggle > summary::-webkit-details-marker { display: none; }
+    .ue-toggle__label { flex: 1; }
+    .ue-toggle__icon {
+      font-size: 1.5rem; color: var(--primary); font-weight: 400;
+      width: 1.5rem; line-height: 1; text-align: center;
+      transition: transform .2s ease;
+    }
+    .ue-toggle[open] > summary .ue-toggle__icon { transform: rotate(45deg); }
+    .ue-toggle__content { padding: 2rem 0 0; }
+    .ue-grid {
+      display: grid; gap: 1.5rem;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 720px) { .ue-grid { grid-template-columns: 1fr 1fr; gap: 2rem; } }
+    .ue-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem 1.75rem;
+    }
+    .ue-card h3 { color: var(--primary); margin-bottom: .8rem; font-size: 1.1rem; }
+    .ue-card p { font-size: .95rem; margin: 0; }
+    .ue-card .checklist { margin-top: 0; }
+
+    /* Final CTA */
+    .cta-final {
+      background: var(--primary); color: #fff;
+      text-align: center;
+      padding: 4rem 1.25rem;
+    }
+    .cta-final h2, .cta-final p { color: #fff; }
+    .cta-final h2 { margin-bottom: .8rem; }
+    .cta-final p { opacity: .92; max-width: 580px; margin: 0 auto 1.8rem; }
+    .cta-final .btn--whatsapp { background: #fff; color: var(--primary); }
+    .cta-final .btn--whatsapp:hover { background: var(--accent); color: var(--primary); }
+
+    /* Floating WhatsApp */
+    .float-wa {
+      position: fixed; bottom: 1.25rem; right: 1.25rem; z-index: 100;
+      width: 56px; height: 56px; border-radius: 50%;
+      background: var(--whatsapp); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 6px 20px rgba(37,211,102,.45);
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .float-wa:hover { transform: scale(1.06); box-shadow: 0 8px 28px rgba(37,211,102,.55); text-decoration: none; color: #fff; }
+    .float-wa svg { width: 28px; height: 28px; }
+
+    /* Footer */
+    .site-footer {
+      background: var(--primary); color: #d8dcd0;
+      padding: 3rem 1.25rem 1.5rem;
+      font-size: .9rem;
+    }
+    .site-footer a { color: #fff; }
+    .site-footer__grid {
+      max-width: var(--max); margin: 0 auto;
+      display: grid; gap: 2rem;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 720px) { .site-footer__grid { grid-template-columns: 1.4fr 1fr 1fr; } }
+    .site-footer h4 { color: #fff; font: 600 .92rem var(--sans); letter-spacing: .04em; text-transform: uppercase; margin: 0 0 .8rem; }
+    .site-footer__brand { font-family: var(--serif); font-size: 1.5rem; color: #fff; margin-bottom: .8rem; }
+    .site-footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: .45rem; }
+    .site-footer__bottom {
+      max-width: var(--max); margin: 2rem auto 0;
+      padding-top: 1.25rem; border-top: 1px solid rgba(255,255,255,.12);
+      font-size: .82rem; color: #c4cab8;
+      display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between;
+    }
+
+    /* Skip link */
+    .skip { position: absolute; left: -9999px; }
+    .skip:focus { position: static; padding: .5rem 1rem; background: var(--primary); color: #fff; }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+      html { scroll-behavior: auto; }
+    }
+
+    /* Focus visible */
+    *:focus-visible { outline: 2px solid var(--secondary); outline-offset: 3px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+
+<!-- GTM noscript -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NQTH2XWD" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<a href="#main" class="skip">Pular para conteúdo</a>
+
+<!-- ========== HEADER ========== -->
+<header class="site-header">
+  <div class="site-header__inner">
+    <div class="logo"><a href="/">RUMOS<span style="color:var(--secondary)">.</span></a></div>
+    <a href="https://wa.me/5519989119770?text=Ol%C3%A1%2C%20gostaria%20de%20uma%20orienta%C3%A7%C3%A3o%20sobre%20div%C3%B3rcio%20em%20cart%C3%B3rio."
+       class="nav-cta"
+       data-wa-source="header"
+       rel="noopener"
+       target="_blank">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7 0-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.4.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5 0 1.5 1.1 2.9 1.3 3.1.2.2 2.2 3.3 5.3 4.6 1.9.7 2.6.8 3.5.7.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.2-.6-.4zM12 .9C5.9.9.9 5.9.9 12c0 2 .5 3.9 1.5 5.6L.7 23.3l5.9-1.5c1.6.9 3.5 1.4 5.4 1.4 6.1 0 11.1-5 11.1-11.1S18.1.9 12 .9z"/></svg>
+      WhatsApp
+    </a>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ========== HERO ========== -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero__grid">
+        <div>
+          <span class="hero__eyebrow">Divórcio extrajudicial · Campinas</span>
+          <h1 class="hero__title">Divórcio em cartório com clareza, sigilo e segurança jurídica.</h1>
+          <p class="hero__sub">A participação de advogado é indispensável. Já que você vai precisar, vale escolher quem é especializado e conduz com todo o cuidado necessário: humanização e primor técnico combinados.</p>
+          <ul class="hero__bullets">
+            <li>
+              <details>
+                <summary>Possível mesmo com filhos menores</summary>
+                <div class="hero__bullets__detail">
+                  <p><strong>Regra geral:</strong> divórcio com filhos menores ainda é judicial.</p>
+                  <p><strong>Exceção:</strong> é possível em cartório se as questões dos filhos já foram resolvidas antes pelo juiz (guarda, alimentos e regime de convivência).</p>
+                </div>
+              </details>
+            </li>
+            <li>Com documentação organizada, é plenamente possível resolver em uma única ida ao cartório</li>
+            <li>Custo inteligente, a melhor estratégia para o mesmo resultado</li>
+            <li>Presença de advogado é indispensável — atendimento direto com o responsável pelo seu caso</li>
+          </ul>
+          <div class="hero__cta-row">
+            <a href="https://wa.me/5519989119770?text=Ol%C3%A1%2C%20gostaria%20de%20uma%20orienta%C3%A7%C3%A3o%20sobre%20div%C3%B3rcio%20em%20cart%C3%B3rio."
+               class="btn btn--whatsapp"
+               data-wa-source="hero"
+               rel="noopener"
+               target="_blank">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width:18px;height:18px"><path d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7 0-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.4.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5 0 1.5 1.1 2.9 1.3 3.1.2.2 2.2 3.3 5.3 4.6 1.9.7 2.6.8 3.5.7.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.2-.6-.4zM12 .9C5.9.9.9 5.9.9 12c0 2 .5 3.9 1.5 5.6L.7 23.3l5.9-1.5c1.6.9 3.5 1.4 5.4 1.4 6.1 0 11.1-5 11.1-11.1S18.1.9 12 .9z"/></svg>
+              Falar agora no WhatsApp
+            </a>
+            <a href="#consulta" class="btn btn--outline">Pedir orientação por formulário</a>
+          </div>
+        </div>
+
+        <!-- Form card -->
+        <aside id="consulta" class="form-card">
+          <h2 class="form-card__title">Receba orientação sobre seu caso</h2>
+          <p class="form-card__sub">Sigilo profissional. Resposta direta com o advogado em até 24h.</p>
+          <div class="tally-frame">
+            <iframe data-tally-src="https://tally.so/embed/7R4J90?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+                    loading="lazy"
+                    width="100%"
+                    height="580"
+                    frameborder="0"
+                    marginheight="0"
+                    marginwidth="0"
+                    title="Formulário de consulta — Divórcio extrajudicial"></iframe>
+          </div>
+          <script>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}</script>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== COMO FUNCIONA ========== -->
+  <section class="section--alt" id="como-funciona">
+    <div class="container">
+      <div class="section__head">
+        <span class="section__eyebrow">Como funciona</span>
+        <h2>O caminho do divórcio em cartório</h2>
+        <p>Três etapas claras. Nosso trabalho é estratégico, de modo que o ato no tabelionato, em si, pode ser resolvido em um único comparecimento ao cartório.</p>
+      </div>
+      <div class="steps">
+        <article class="step">
+          <span class="step__num">1</span>
+          <h3>Conversa inicial</h3>
+          <p>Avaliamos juntos se o caso se enquadra na via extrajudicial. Você recebe um diagnóstico claro antes de qualquer compromisso.</p>
+        </article>
+        <article class="step">
+          <span class="step__num">2</span>
+          <h3>Documentação e definição dos termos</h3>
+          <p>Reunimos os documentos necessários e oferecemos toda a orientação para a melhor decisão sobre a forma de partilha que atenda aos interesses de ambos, visando o equilíbrio e a conciliação.</p>
+        </article>
+        <article class="step">
+          <span class="step__num">3</span>
+          <h3>Assinatura no cartório</h3>
+          <p>Acompanhamos a assinatura no Tabelionato de Notas. A escritura equivale à sentença judicial, com a vantagem de um procedimento sem delongas, sem desgaste desnecessário.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== UNIÃO ESTÁVEL ========== -->
+  <section id="uniao-estavel">
+    <div class="container">
+      <div class="section__head">
+        <span class="section__eyebrow">Também aplicável a</span>
+        <h2>Dissolução de União Estável em Cartório</h2>
+        <p style="margin-top: 1rem; color: var(--fg-soft);">
+          A mesma porta extrajudicial vale para união estável: dissolução por escritura pública, sem audiência, sem litígio.
+        </p>
+      </div>
+
+      <details class="ue-toggle">
+        <summary>
+          <span class="ue-toggle__label">Ver detalhes sobre dissolução de união estável</span>
+          <span class="ue-toggle__icon" aria-hidden="true">+</span>
+        </summary>
+
+        <div class="ue-toggle__content">
+
+          <div class="ue-grid">
+            <article class="ue-card">
+              <h3>Quando cabe</h3>
+              <ul class="checklist">
+                <li>União estável <strong>reconhecida</strong> — por escritura pública declaratória, contrato particular ou decisão judicial anterior.</li>
+                <li><strong>Consenso</strong> entre os companheiros sobre o fim da relação e seus efeitos (partilha, uso do nome, alimentos).</li>
+                <li>Com ou sem filhos menores: a Resolução CNJ 571/2024 estendeu à dissolução as mesmas hipóteses do divórcio com filhos.</li>
+                <li>Bens a partilhar (ou não): conforme o regime adotado durante a união.</li>
+              </ul>
+            </article>
+
+            <article class="ue-card">
+              <h3>O que muda em relação ao divórcio</h3>
+              <p>Na prática, o procedimento é equivalente: mesmas bases legais (Lei 11.441/2007 com a regulamentação do CNJ) e o tabelionato como sede do ato.</p>
+              <p style="margin-top: .8rem;">Duas diferenças relevantes: o <strong>ato registral</strong> — dissolução de união estável gera averbação no registro civil (se houve registro prévio) e, eventualmente, no registro de imóveis para os bens partilhados; e o <strong>custo</strong> — a lei prevê redução de emolumentos para a dissolução de união estável em relação ao divórcio.</p>
+            </article>
+          </div>
+
+          <div class="res-box" style="margin-top: 2rem;">
+            <h3>E se a união estável nunca foi formalizada?</h3>
+            <p>É comum: o casal viveu junto, formou patrimônio, mas nunca lavrou escritura nem celebrou contrato. Nesse caso, há dois caminhos antes da dissolução:</p>
+            <ol style="margin: 1rem 0 0; padding-left: 1.25rem; display: grid; gap: .6rem;">
+              <li><strong>Reconhecimento e dissolução simultâneos em cartório</strong>, quando ambos concordam com a existência da união, suas datas e efeitos. Tudo num único ato.</li>
+              <li><strong>Reconhecimento judicial prévio</strong>, quando há divergência sobre a existência ou duração da união — só depois cabe a dissolução extrajudicial.</li>
+            </ol>
+            <p style="margin: 1rem 0 0; font-size: .9rem; color: var(--muted);">Na análise inicial em 48h, definimos qual caminho se aplica ao seu caso.</p>
+          </div>
+
+          <div class="faq" style="margin-top: 2rem;">
+            <h3 style="text-align: center; margin-bottom: 1.5rem; color: var(--primary);">Perguntas frequentes — União Estável</h3>
+
+            <details class="faq__item">
+              <summary>Preciso de escritura de união estável para dissolver?</summary>
+              <div class="faq__answer">Idealmente sim — a escritura prévia (ou contrato registrado) torna a dissolução mais simples e rápida. Sem ela, normalmente o reconhecimento e a dissolução são feitos no mesmo ato, mas exige mais documentação probatória (declarações, comprovantes de residência conjunta, fotos, eventualmente testemunhos).</div>
+            </details>
+
+            <details class="faq__item">
+              <summary>Como fica a partilha de bens sem casamento civil?</summary>
+              <div class="faq__answer">Aplica-se o regime de bens vigente durante a união. Por padrão legal, união estável adota <strong>comunhão parcial</strong> — bens adquiridos onerosamente durante a união são divididos meio a meio. Outro regime só vale se foi formalizado em contrato escrito antes ou durante a união.</div>
+            </details>
+
+            <details class="faq__item">
+              <summary>Tem que averbar em algum lugar?</summary>
+              <div class="faq__answer">Sim. A escritura de dissolução é levada ao Registro Civil onde a união foi registrada (se houve registro). Se a partilha incluiu imóveis, também é averbada nas matrículas junto ao Registro de Imóveis. Cuidamos dessas averbações junto com a escritura.</div>
+            </details>
+
+            <details class="faq__item">
+              <summary>Filhos menores impedem a via cartorial?</summary>
+              <div class="faq__answer">Não, desde a Resolução CNJ 571/2024. Se guarda, alimentos e direito de convivência já foram definidos judicialmente (por sentença, acordo homologado ou termo de audiência), a dissolução pode ser feita em cartório. Se essas questões ainda estão em aberto, é necessário resolvê-las antes — judicialmente ou em mediação.</div>
+            </details>
+
+            <details class="faq__item">
+              <summary>Quanto tempo demora?</summary>
+              <div class="faq__answer">Igual ao divórcio extrajudicial: com documentação organizada e minuta previamente alinhada, é plenamente possível concluir em <strong>uma única ida ao cartório</strong>. Casos com bens complexos ou reconhecimento pendente demandam mais tempo na etapa preparatória — sempre com plano por escrito antes.</div>
+            </details>
+          </div>
+
+        </div>
+      </details>
+    </div>
+  </section>
+  <!-- ========== /UNIÃO ESTÁVEL ========== -->
+
+  <!-- ========== AUTOR ========== -->
+  <section class="section--alt">
+    <div class="container">
+      <div class="section__head">
+        <span class="section__eyebrow">Quem conduz seu caso</span>
+        <h2>Atendimento direto com o advogado</h2>
+      </div>
+      <article class="author">
+        <picture>
+          <source type="image/webp" srcset="/assets/img/rodrigo-moura-400.webp 1x, /assets/img/rodrigo-moura-800.webp 2x">
+          <img class="author__photo"
+               src="/assets/img/rodrigo-moura-400.jpg"
+               srcset="/assets/img/rodrigo-moura-400.jpg 1x, /assets/img/rodrigo-moura-800.jpg 2x"
+               width="200" height="200"
+               alt="Dr. Rodrigo Moura Silva, advogado responsável"
+               loading="lazy">
+        </picture>
+        <div>
+          <div class="author__name">Dr. Rodrigo Moura Silva</div>
+          <div class="author__role">OAB/SP 188.004 · Especialista em Direito Notarial e Registral pelo Ibmec</div>
+          <p>Advogado com prática consultiva voltada à atuação extrajudicial — divórcios em cartório, inventários e regularização registral. Conduz cada caso pessoalmente, com atenção ao momento da família e foco em soluções claras, técnicas e com sigilo profissional.</p>
+          <p style="margin: 0; font-size: .88rem; color: var(--muted);">Atendimento em Campinas/SP e região. Reuniões presenciais ou online conforme sua preferência.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- UE movida para a posição da antiga Resolução 571 -->
+
+  <!-- ========== FAQ ========== -->
+  <section id="faq">
+    <div class="container">
+      <div class="section__head">
+        <span class="section__eyebrow">Perguntas frequentes</span>
+        <h2>Dúvidas comuns sobre divórcio em cartório</h2>
+      </div>
+      <div class="faq">
+        <details class="faq__item">
+          <summary>Quanto tempo leva o divórcio extrajudicial?</summary>
+          <div class="faq__answer">Com nossa atuação estratégica, é plenamente possível concluir tudo em <strong>uma única ida ao cartório</strong>. O valor do nosso trabalho é percebido na etapa preparatória: orientação clara sobre as consequências de cada rumo a ser tomado.</div>
+        </details>
+        <details class="faq__item">
+          <summary>Posso me divorciar em cartório se tenho filhos menores?</summary>
+          <div class="faq__answer">Essa possibilidade depende de uma resolução prévia perante a Justiça sobre alimentos e guarda dos filhos, mas existe e é absolutamente viável.</div>
+        </details>
+        <details class="faq__item">
+          <summary>Preciso de dois advogados ou pode ser apenas um?</summary>
+          <div class="faq__answer">Em divórcio consensual, é permitido que um único advogado represente ambos os cônjuges, pois não há litígio. Os dois precisam concordar com isso e assinar a procuração.</div>
+        </details>
+        <details class="faq__item">
+          <summary>Qual a diferença entre o divórcio em cartório e o judicial?</summary>
+          <div class="faq__answer">O extrajudicial se formaliza por meio de uma escritura pública lavrada em Tabelionato de Notas, sem audiência e sem juiz. Tem o mesmo efeito legal do divórcio judicial, mas é mais rápido e menos dispendioso financeira e emocionalmente.</div>
+        </details>
+        <details class="faq__item">
+          <summary>E se houver bens a partilhar?</summary>
+          <div class="faq__answer">A partilha pode ser feita junto com o divórcio na mesma escritura — incluindo imóveis, veículos, contas bancárias e investimentos —, desde que os cônjuges estejam de acordo sobre como dividir. Se o momento não for apropriado para esse acordo patrimonial, a partilha pode ser deixada para um momento posterior.</div>
+        </details>
+        <details class="faq__item">
+          <summary>Quanto custa o divórcio em cartório?</summary>
+          <div class="faq__answer">O custo tem dois componentes: emolumentos do cartório (tabela oficial, definida por lei) e honorários advocatícios. Apresentamos o orçamento completo quando for possível entender as peculiaridades do caso. Entregamos alto valor nos serviços: atendimento de qualidade até a entrega final.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CTA FINAL ========== -->
+  <section class="cta-final">
+    <h2>Pronto para resolver com tranquilidade?</h2>
+    <p>Mande uma mensagem e converse com o advogado responsável. Atendimento sigiloso, sem compromisso na primeira orientação.</p>
+    <a href="https://wa.me/5519989119770?text=Ol%C3%A1%2C%20gostaria%20de%20uma%20orienta%C3%A7%C3%A3o%20sobre%20div%C3%B3rcio%20em%20cart%C3%B3rio."
+       class="btn btn--whatsapp"
+       data-wa-source="cta-final"
+       rel="noopener"
+       target="_blank">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width:18px;height:18px"><path d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7 0-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.4.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5 0 1.5 1.1 2.9 1.3 3.1.2.2 2.2 3.3 5.3 4.6 1.9.7 2.6.8 3.5.7.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.2-.6-.4zM12 .9C5.9.9.9 5.9.9 12c0 2 .5 3.9 1.5 5.6L.7 23.3l5.9-1.5c1.6.9 3.5 1.4 5.4 1.4 6.1 0 11.1-5 11.1-11.1S18.1.9 12 .9z"/></svg>
+      Falar no WhatsApp
+    </a>
+  </section>
+
+</main>
+
+<!-- ========== FOOTER ========== -->
+<footer class="site-footer">
+  <div class="site-footer__grid">
+    <div>
+      <div class="site-footer__brand">RUMOS<span style="color:#a087c0">.</span></div>
+      <p style="margin: 0;">Advocacia extrajudicial em Campinas/SP.<br>Divórcio em cartório · Inventário · Regularização registral.</p>
+      <p style="margin: .8rem 0 0; font-size: .85rem;">Dr. Rodrigo Moura Silva — OAB/SP 188.004<br>Especialista em Direito Notarial e Registral pelo Ibmec</p>
+    </div>
+    <div>
+      <h4>Contato</h4>
+      <ul>
+        <li><a href="https://wa.me/5519989119770?text=Ol%C3%A1%2C%20gostaria%20de%20uma%20orienta%C3%A7%C3%A3o%20sobre%20div%C3%B3rcio%20em%20cart%C3%B3rio." data-wa-source="footer" target="_blank" rel="noopener">WhatsApp: (19) 98911-9770</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#6f1d000b1d0608002f1d1a02001c0e0b19410c0002410d1d"><span class="__cf_email__" data-cfemail="c4b6aba0b6ada3ab84b6b1a9abb7a5a0b2eaa7aba9eaa6b6">[email&#160;protected]</span></a></li>
+        <li><a href="https://www.google.com/maps/place/Condom%C3%ADnio+Alpha+Park+Tower/@-22.889377,-47.0213503,17z" target="_blank" rel="noopener">Condomínio Alphapark Tower</a><br>Campinas/SP</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Institucional</h4>
+      <ul>
+        <li><a href="/">Página inicial</a></li>
+        <li><a href="/politica-de-privacidade">Política de Privacidade</a></li>
+        <li><a href="/lgpd">LGPD</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="site-footer__bottom">
+    <span>© 2026 Rumos Advocacia · OAB/SP 188.004</span>
+    <span>Conteúdo informativo. Provimento 205/2021 OAB.</span>
+  </div>
+</footer>
+
+<!-- Floating WhatsApp -->
+<a href="https://wa.me/5519989119770?text=Ol%C3%A1%2C%20gostaria%20de%20uma%20orienta%C3%A7%C3%A3o%20sobre%20div%C3%B3rcio%20em%20cart%C3%B3rio."
+   class="float-wa"
+   data-wa-source="float"
+   aria-label="Conversar pelo WhatsApp"
+   rel="noopener"
+   target="_blank">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7 0-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.4.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5 0 1.5 1.1 2.9 1.3 3.1.2.2 2.2 3.3 5.3 4.6 1.9.7 2.6.8 3.5.7.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.2-.6-.4zM12 .9C5.9.9.9 5.9.9 12c0 2 .5 3.9 1.5 5.6L.7 23.3l5.9-1.5c1.6.9 3.5 1.4 5.4 1.4 6.1 0 11.1-5 11.1-11.1S18.1.9 12 .9z"/></svg>
+</a>
+
+<!-- ========== Tracking & dataLayer ========== -->
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // dataLayer já inicializado pelo GTM acima.
+
+  // Page view enriquecido
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: 'page_view_lp',
+    page: 'divorcio',
+    service: 'Divórcio em cartório'
+  });
+
+  // WhatsApp click tracking
+  document.querySelectorAll('[data-wa-source]').forEach(function(el){
+    el.addEventListener('click', function(){
+      window.dataLayer.push({
+        event: 'whatsapp_click',
+        source: el.getAttribute('data-wa-source'),
+        page: 'divorcio',
+        service: 'Divórcio em cartório'
+      });
+    });
+  });
+
+  // Tally form submit tracking — listener idempotente
+  // (GTM Custom HTML também escuta; o flag impede dupla execução se ambos rodarem)
+  if (!window.__tallyListenerInstalled) {
+    window.__tallyListenerInstalled = true;
+    window.addEventListener('message', function(e) {
+      if (!e.data || typeof e.data !== 'string') return;
+      if (e.data.indexOf('Tally.FormSubmitted') === -1) return;
+      try {
+        var p = JSON.parse(e.data);
+        if (p.event === 'Tally.FormSubmitted') {
+          window.dataLayer.push({
+            event: 'lead_submit',
+            page: 'divorcio',
+            service: 'Divórcio em cartório',
+            form_id: p.payload && p.payload.formId
+          });
+        }
+      } catch (err) {}
+    });
+  }
+</script>
+
+</body>
+</html>
+
+========PAGE_DIVORCIO_END========
+
+========PAGE_INVENTARIO_START_LEN_46946========
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ========== SEO ========== -->
+  <title>Inventário em cartório em Campinas | Resolução 571 CNJ | Rumos Advocacia</title>
+  <meta name="description" content="Inventário extrajudicial em Campinas e região. Conclusão típica em 30 a 45 dias, sem audiência. Cálculo do ITCMD, escritura no cartório e transferência dos bens conduzidos pelo Dr. Rodrigo Moura, OAB/SP 188.004, especialista em Direito Notarial e Registral pelo Ibmec.">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <link rel="canonical" href="https://rumosadv.com.br/inventario">
+  <meta name="author" content="Dr. Rodrigo Moura Silva — OAB/SP 188.004">
+  <meta name="theme-color" content="#2d4d2d">
+
+  <!-- ========== Open Graph / Twitter ========== -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Rumos Advocacia">
+  <meta property="og:title" content="Inventário em cartório em Campinas | Rumos Advocacia">
+  <meta property="og:description" content="Inventário em cartório em 30 a 45 dias, sem audiência. ITCMD calculado, escritura conduzida e bens transferidos. Atendimento direto com o advogado.">
+  <meta property="og:url" content="https://rumosadv.com.br/inventario">
+  <meta property="og:image" content="https://rumosadv.com.br/assets/img/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Inventário em cartório em Campinas | Rumos Advocacia">
+  <meta name="twitter:description" content="Inventário em cartório em 30 a 45 dias, sem audiência. ITCMD calculado e bens transferidos pelo escritório.">
+  <meta name="twitter:image" content="https://rumosadv.com.br/assets/img/og-image.jpg">
+
+  <!-- ========== Favicon ========== -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232d4d2d'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' font-weight='700' text-anchor='middle' fill='%23fbfaf9'%3ER%3C/text%3E%3C/svg%3E">
+
+  <!-- ========== Preconnect ========== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <link rel="preconnect" href="https://www.clarity.ms">
+  <link rel="preconnect" href="https://tally.so">
+
+  <!-- ========== Fonts ========== -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap"></noscript>
+
+  <!-- ========== Schema.org JSON-LD ========== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LegalService",
+    "name": "Rumos Advocacia",
+    "description": "Advocacia extrajudicial em Campinas/SP. Inventário em cartório, divórcio extrajudicial e regularização registral.",
+    "url": "https://rumosadv.com.br/inventario",
+    "image": "https://rumosadv.com.br/assets/img/og-image.jpg",
+    "telephone": "+5519989119770",
+    "priceRange": "$$",
+    "areaServed": {
+      "@type": "City",
+      "name": "Campinas",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "São Paulo"
+      }
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Campinas",
+      "addressRegion": "SP",
+      "addressCountry": "BR"
+    },
+    "founder": {
+      "@type": "Person",
+      "name": "Dr. Rodrigo Moura Silva",
+      "jobTitle": "Advogado",
+      "alumniOf": "Ibmec — Especialização em Direito Notarial e Registral",
+      "identifier": "OAB/SP 188.004"
+    },
+    "serviceType": "Inventário extrajudicial em cartório",
+    "knowsAbout": ["Inventário extrajudicial", "Partilha de bens", "ITCMD", "Espólio", "Resolução 571 CNJ", "Lei 11.441/2007", "Direito Notarial e Registral"]
+  }
+  </script>
+
+  <!-- ========== Google Tag Manager ========== -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-NQTH2XWD');</script>
+
+  <!-- ========== Microsoft Clarity ========== -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wlk4llvctc");
+  </script>
+
+  <!-- ========== Critical CSS ========== -->
+  <style>
+    :root {
+      --bg: #fbfaf9;
+      --bg-alt: #f4f1ee;
+      --fg: #223a23;
+      --fg-soft: #4a5d4a;
+      --muted: #6b7565;
+      --primary: #2d4d2d;
+      --primary-hover: #1f3a20;
+      --secondary: #8b6f47;        /* cobre quente — patrimônio */
+      --secondary-hover: #6e5235;
+      --accent: #f4ede2;            /* bege cremoso */
+      --border: #e5e0d9;
+      --whatsapp: #25d366;
+      --whatsapp-hover: #1ebe5d;
+      --max: 1120px;
+      --serif: "Playfair Display", Georgia, serif;
+      --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --shadow-sm: 0 1px 2px rgba(34,58,35,.05);
+      --shadow-md: 0 4px 16px rgba(34,58,35,.08);
+      --shadow-lg: 0 12px 32px rgba(34,58,35,.12);
+      --radius: 8px;
+      --radius-lg: 14px;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--fg);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    h1, h2, h3 { font-family: var(--serif); font-weight: 700; line-height: 1.2; margin: 0 0 .5em; color: var(--fg); }
+    h1 { font-size: clamp(1.9rem, 4.5vw, 2.85rem); letter-spacing: -.01em; }
+    h2 { font-size: clamp(1.5rem, 3.2vw, 2.1rem); letter-spacing: -.005em; }
+    h3 { font-size: 1.2rem; }
+    p { margin: 0 0 1em; color: var(--fg-soft); }
+    .container { max-width: var(--max); margin: 0 auto; padding: 0 1.25rem; }
+
+    /* Header */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(251, 250, 249, .92);
+      backdrop-filter: saturate(180%) blur(10px);
+      -webkit-backdrop-filter: saturate(180%) blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .site-header__inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: .85rem 1.25rem; max-width: var(--max); margin: 0 auto;
+    }
+    .logo { font-family: var(--serif); font-weight: 700; font-size: 1.35rem; color: var(--primary); letter-spacing: -.01em; }
+    .logo a { color: inherit; }
+    .nav-cta {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: var(--whatsapp); color: #fff;
+      padding: .55rem 1rem; border-radius: 999px;
+      font-weight: 600; font-size: .9rem;
+      transition: background .15s ease;
+    }
+    .nav-cta:hover { background: var(--whatsapp-hover); text-decoration: none; color: #fff; }
+    .nav-cta svg { width: 16px; height: 16px; }
+
+    /* Hero */
+    .hero { padding: 3rem 0 2.5rem; }
+    .hero__grid {
+      display: grid; gap: 2.5rem;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 860px) {
+      .hero__grid { grid-template-columns: 1.1fr .9fr; align-items: start; }
+      .hero { padding: 4.5rem 0 4rem; }
+    }
+    .hero__eyebrow {
+      display: inline-block;
+      font-size: .82rem; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--secondary); font-weight: 600; margin-bottom: .8rem;
+    }
+    .hero__title { margin-bottom: 1rem; }
+    .hero__sub { font-size: 1.1rem; color: var(--fg-soft); max-width: 540px; }
+    .hero__bullets { list-style: none; padding: 0; margin: 1.5rem 0 0; display: grid; gap: .6rem; max-width: 500px; }
+    .hero__bullets li { padding-left: 1.6rem; position: relative; color: var(--fg-soft); }
+    .hero__bullets li::before {
+      content: ""; position: absolute; left: 0; top: .5em;
+      width: 14px; height: 8px; border-left: 2px solid var(--primary); border-bottom: 2px solid var(--primary);
+      transform: rotate(-45deg);
+    }
+    .hero__cta-row { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.8rem; }
+    .btn {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .85rem 1.4rem;
+      font: 600 .98rem var(--sans);
+      border-radius: 999px;
+      cursor: pointer; border: none;
+      transition: all .15s ease;
+    }
+    .btn--primary { background: var(--primary); color: #fff; }
+    .btn--primary:hover { background: var(--primary-hover); text-decoration: none; color: #fff; transform: translateY(-1px); box-shadow: var(--shadow-md); }
+    .btn--whatsapp { background: var(--whatsapp); color: #fff; }
+    .btn--whatsapp:hover { background: var(--whatsapp-hover); text-decoration: none; color: #fff; transform: translateY(-1px); box-shadow: var(--shadow-md); }
+    .btn--outline { background: transparent; color: var(--primary); border: 1.5px solid var(--primary); }
+    .btn--outline:hover { background: var(--primary); color: #fff; text-decoration: none; }
+
+    /* Form card */
+    .form-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-md);
+    }
+    .form-card__title { font-family: var(--serif); font-size: 1.35rem; margin-bottom: .25rem; color: var(--fg); }
+    .form-card__sub { font-size: .92rem; color: var(--muted); margin-bottom: 1.2rem; }
+    .tally-frame { position: relative; }
+    .tally-frame iframe { width: 100%; border: 0; min-height: 580px; display: block; }
+    .tally-frame::after {
+      content: ''; position: absolute; bottom: 0; right: 0;
+      width: 150px; height: 42px; background: #fff; pointer-events: none;
+      border-bottom-right-radius: var(--radius-lg);
+    }
+
+    /* Sections */
+    section { padding: 3.5rem 0; }
+    .section--alt { background: var(--bg-alt); }
+    .section__head { text-align: center; max-width: 720px; margin: 0 auto 2.5rem; }
+    .section__eyebrow { display: inline-block; font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; color: var(--secondary); font-weight: 600; margin-bottom: .6rem; }
+
+    /* Steps */
+    .steps {
+      display: grid; gap: 1.25rem;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 720px) { .steps { grid-template-columns: repeat(3, 1fr); } }
+    .step {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 1.5rem;
+    }
+    .step__num {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--accent); color: var(--secondary);
+      display: inline-flex; align-items: center; justify-content: center;
+      font: 700 1rem var(--serif); margin-bottom: .8rem;
+    }
+    .step h3 { color: var(--primary); margin-bottom: .4rem; font-size: 1.1rem; }
+    .step p { font-size: .95rem; margin: 0; }
+
+    /* Resolução / Cabimento box */
+    .res-box {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--secondary);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.75rem;
+      margin: 0 auto;
+      max-width: 760px;
+    }
+    .res-box h3 { color: var(--secondary); margin-bottom: .6rem; }
+    .checklist { list-style: none; padding: 0; margin: 1rem 0 0; display: grid; gap: .55rem; }
+    .checklist li { padding-left: 1.6rem; position: relative; color: var(--fg-soft); font-size: .95rem; }
+    .checklist li::before {
+      content: ""; position: absolute; left: 0; top: .45em;
+      width: 12px; height: 7px; border-left: 2px solid var(--secondary); border-bottom: 2px solid var(--secondary);
+      transform: rotate(-45deg);
+    }
+
+    /* Planejamento card grid */
+    .plan-grid {
+      display: grid; gap: 1.25rem; grid-template-columns: 1fr;
+      max-width: 980px; margin: 0 auto;
+    }
+    @media (min-width: 720px) { .plan-grid { grid-template-columns: repeat(3, 1fr); } }
+    .plan-card {
+      background: #fff; border: 1px solid var(--border); border-radius: var(--radius-lg);
+      padding: 1.5rem; box-shadow: var(--shadow-sm);
+    }
+    .plan-card h3 { color: var(--secondary); font-size: 1.05rem; margin-bottom: .4rem; }
+    .plan-card p { font-size: .94rem; margin: 0; }
+
+    /* Author block */
+    .author {
+      display: grid; gap: 1.5rem;
+      grid-template-columns: 1fr;
+      align-items: center;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      max-width: 860px; margin: 0 auto;
+      box-shadow: var(--shadow-sm);
+    }
+    @media (min-width: 720px) { .author { grid-template-columns: 200px 1fr; gap: 2rem; } }
+    .author__photo {
+      width: 160px; height: 160px; border-radius: 50%;
+      object-fit: cover; border: 4px solid var(--accent);
+      margin: 0 auto;
+    }
+    @media (min-width: 720px) { .author__photo { width: 200px; height: 200px; margin: 0; } }
+    .author__name { font-family: var(--serif); font-size: 1.35rem; color: var(--fg); margin-bottom: .15rem; }
+    .author__role { font-size: .9rem; color: var(--secondary); font-weight: 600; margin-bottom: .8rem; letter-spacing: .02em; }
+    .author p { font-size: .96rem; }
+
+    /* FAQ */
+    .faq { max-width: 760px; margin: 0 auto; }
+    .faq__item {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: .75rem;
+      overflow: hidden;
+    }
+    .faq__item summary {
+      cursor: pointer;
+      padding: 1.1rem 1.4rem;
+      font-weight: 600;
+      color: var(--fg);
+      list-style: none;
+      display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+    }
+    .faq__item summary::-webkit-details-marker { display: none; }
+    .faq__item summary::after {
+      content: "+"; font-size: 1.5rem; color: var(--primary); font-weight: 400;
+      transition: transform .2s ease;
+    }
+    .faq__item[open] summary::after { content: "−"; }
+    .faq__answer { padding: 0 1.4rem 1.2rem; font-size: .95rem; color: var(--fg-soft); }
+
+    /* Final CTA */
+    .cta-final {
+      background: var(--primary); color: #fff;
+      text-align: center;
+      padding: 4rem 1.25rem;
+    }
+    .cta-final h2, .cta-final p { color: #fff; }
+    .cta-final h2 { margin-bottom: .8rem; }
+    .cta-final p { opacity: .92; max-width: 580px; margin: 0 auto 1.8rem; }
+    .cta-final .btn--whatsapp { background: #fff; color: var(--primary); }
+    .cta-final .btn--whatsapp:hover { background: var(--accent); color: var(--primary); }
+
+    /* Simulador de custos */
+    .sim {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem 1.75rem;
+      max-width: 760px;
+      margin: 0 auto;
+      box-shadow: var(--shadow-md);
+    }
+    .sim__label {
+      display: flex; justify-content: space-between; align-items: baseline;
+      flex-wrap: wrap; gap: .5rem;
+      font-weight: 600; color: var(--fg);
+      font-size: 1rem;
+      margin-bottom: .85rem;
+    }
+    .sim__monte {
+      font-family: var(--serif); font-size: 1.6rem; color: var(--secondary);
+      font-weight: 700; line-height: 1;
+    }
+    .sim__range {
+      width: 100%; height: 6px;
+      appearance: none; -webkit-appearance: none;
+      background: var(--accent); border-radius: 3px; outline: none;
+      margin: 0 0 .4rem;
+    }
+    .sim__range::-webkit-slider-thumb {
+      appearance: none; -webkit-appearance: none;
+      width: 24px; height: 24px; background: var(--secondary);
+      border-radius: 50%; cursor: pointer;
+      border: 3px solid #fff; box-shadow: 0 2px 8px rgba(34,58,35,.25);
+      transition: transform .12s ease;
+    }
+    .sim__range::-webkit-slider-thumb:hover { transform: scale(1.1); }
+    .sim__range::-webkit-slider-thumb:active { transform: scale(1.15); }
+    .sim__range::-moz-range-thumb {
+      width: 24px; height: 24px; background: var(--secondary);
+      border-radius: 50%; cursor: pointer;
+      border: 3px solid #fff; box-shadow: 0 2px 8px rgba(34,58,35,.25);
+    }
+    .sim__scale {
+      display: flex; justify-content: space-between;
+      font-size: .8rem; color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+    .sim__results {
+      display: grid; gap: 1rem;
+      grid-template-columns: 1fr;
+      margin-bottom: 1rem;
+    }
+    @media (min-width: 540px) { .sim__results { grid-template-columns: 1fr 1fr; } }
+    .sim__result {
+      background: var(--bg-alt);
+      padding: 1rem 1.25rem;
+      border-radius: var(--radius);
+      border-left: 3px solid var(--secondary);
+    }
+    .sim__result-label {
+      display: block;
+      font-size: .78rem; color: var(--muted);
+      letter-spacing: .04em; text-transform: uppercase;
+      margin-bottom: .35rem;
+      font-weight: 600;
+    }
+    .sim__result-value {
+      font-family: var(--serif); font-size: 1.4rem;
+      color: var(--primary); font-weight: 700;
+      line-height: 1.1;
+    }
+    .sim__note {
+      font-size: .95rem; color: var(--fg-soft);
+      margin: 1rem 0 0;
+      padding: .9rem 1rem;
+      background: var(--accent); border-radius: var(--radius);
+      border-left: 3px solid var(--primary);
+      line-height: 1.5;
+    }
+    .sim__note strong { color: var(--primary); }
+    .sim__disclaimer {
+      font-size: .8rem; color: var(--muted); line-height: 1.55;
+      margin: 1.25rem 0 0;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+    .sim__multa {
+      margin-top: 1.25rem;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .sim__multa summary {
+      cursor: pointer;
+      padding: 1rem 1.25rem;
+      font-weight: 600;
+      color: var(--primary);
+      list-style: none;
+      display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+      font-size: .98rem;
+    }
+    .sim__multa summary::-webkit-details-marker { display: none; }
+    .sim__multa summary::after {
+      content: "+"; font-size: 1.4rem; color: var(--secondary); font-weight: 400;
+      flex-shrink: 0;
+    }
+    .sim__multa[open] summary::after { content: "−"; }
+    .sim__multa-answer {
+      padding: 0 1.25rem 1.1rem;
+      color: var(--fg-soft);
+      font-size: .94rem;
+      line-height: 1.6;
+    }
+    .sim__multa-answer p { margin: .6rem 0 0; }
+    .sim__multa-answer p:first-child { margin-top: 0; }
+    .sim__multa-list {
+      list-style: none; padding: 0;
+      margin: .9rem 0;
+      display: grid; gap: .5rem;
+    }
+    .sim__multa-list li {
+      padding: .5rem .85rem;
+      background: #fff;
+      border-radius: var(--radius);
+      border-left: 3px solid var(--secondary);
+      font-size: .94rem;
+    }
+    .sim__multa-source {
+      font-size: .78rem !important;
+      color: var(--muted);
+      margin-top: .9rem !important;
+      font-style: italic;
+    }
+
+    /* Floating WhatsApp */
+    .float-wa {
+      position: fixed; bottom: 1.25rem; right: 1.25rem; z-index: 100;
+      width: 56px; height: 56px; border-radius: 50%;
+      background: var(--whatsapp); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 6px 20px rgba(37,211,102,.45);
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .float-wa:hover { transform: scale(1.06); box-shadow: 0 8px 28px rgba(37,211,102,.55); text-decoration: none; color: #fff; }
+    .float-wa svg { width: 28px; height: 28px; }
+
+    /* Footer */
+    .site-footer {
+      background: var(--primary); color: #d8dcd0;
+      padding: 3rem 1.25rem 1.5rem;
+      font-size: .9rem;
+    }
+    .site-footer a { color: #fff; }
+    .site-footer__grid {
+      max-width: var(--max); margin: 0 auto;
+      display: grid; gap: 2rem;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 720px) { .site-footer__grid { grid-template-columns: 1.4fr 1fr 1fr; } }
+    .site-footer h4 { color: #fff; font: 600 .92rem var(--sans); letter-spacing: .04em; text-transform: uppercase; margin: 0 0 .8rem; }
+    .site-footer__brand { font-family: var(--serif); font-size: 1.5rem; color: #fff; margin-bottom: .8rem; }
+    .site-footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: .45rem; }
+    .site-footer__bottom {
+      max-width: var(--max); margin: 2rem auto 0;
+      padding-top: 1.25rem; border-top: 1px solid rgba(255,255,255,.12);
+      font-size: .82rem; color: #c4cab8;
+      display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between;
+    }
+
+    /* Skip link */
+    .skip { position: absolute; left: -9999px; }
+    .skip:focus { position: static; padding: .5rem 1rem; background: var(--primary); color: #fff; }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+      html { scroll-behavior: auto; }
+    }
+
+    /* Focus visible */
+    *:focus-visible { outline: 2px solid var(--secondary); outline-offset: 3px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+
+<!-- GTM noscript -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NQTH2XWD" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<a href="#main" class="skip">Pular para conteúdo</a>
+
+<!-- ========== HEADER ========== -->
+<header class="site-header">
+  <div class="site-header__inner">
+    <div class="logo"><a href="/">RUMOS<span style="color:var(--secondary)">.</span></a></div>
+    <a href="https://wa.me/5519989119770?text=Ol%C3%A1%2C%20gostaria%20de%20uma%20orienta%C3%A7%C3%A3o%20sobre%20invent%C3%A1rio%20em%20cart%C3%B3rio."
+       class="nav-cta"
+       data-wa-source="header"
+       rel="noopener"
+       target="_blank">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7 0-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.4.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5 0 1.5 1.1 2.9 1.3 3.1.2.2 2.2 3.3 5.3 4.6 1.9.7 2.6.8 3.5.7.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.2-.6-.4zM12 .9C5.9.9.9 5.9.9 12c0 2 .5 3.9 1.5 5.6L.7 23.3l5.9-1.5c1.6.9 3.5 1.4 5.4 1.4 6.1 0 11.1-5 11.1-11.1S18.1.9 12 .9z"/></svg>
+      WhatsApp
+    </a>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ========== HERO ========== -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero__grid">
+        <div>
+          <span class="hero__eyebrow">Inventário extrajudicial · Campinas</span>
+          <h1 class="hero__title">Entregar a cada um a sua devida parcela de bens, com transparência e agilidade.</h1>
+          <p class="hero__sub">Ao inventariante cabe a responsabilidade de proteger os interesses de todos os herdeiros. Contar com o advogado certo significa ter um inventário conduzido com transparência, segurança jurídica e a precisão técnica que a sua família espera e merece.</p>
+          <ul class="hero__bullets">
+            <li>Conclusão normalmente em poucos dias, sem audiência e sem juiz, com prioridade máxima quando a família precisa de rapidez</li>
+            <li>Monitoramos cada etapa do ITCMD com máximo zelo, reduzindo o risco de multas</li>
+            <li>Acompanhamento até a transferência de imóveis, contas e veículos</li>
+            <li>Atendimento direto com o advogado responsável, com sigilo</li>
+          </ul>
+          <div class="hero__cta-row">
+            <a href="https://wa.me/5519989119770?text=Ol%C3%A1%2C%20gostaria%20de%20uma%20orienta%C3%A7%C3%A3o%20sobre%20invent%C3%A1rio%20em%20cart%C3%B3rio."
+               class="btn btn--whatsapp"
+               data-wa-source="hero"
+               rel="noopener"
+               target="_blank">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width:18px;height:18px"><path d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7 0-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.4.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5 0 1.5 1.1 2.9 1.3 3.1.2.2 2.2 3.3 5.3 4.6 1.9.7 2.6.8 3.5.7.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.2-.6-.4zM12 .9C5.9.9.9 5.9.9 12c0 2 .5 3.9 1.5 5.6L.7 23.3l5.9-1.5c1.6.9 3.5 1.4 5.4 1.4 6.1 0 11.1-5 11.1-11.1S18.1.9 12 .9z"/></svg>
+              Falar agora no WhatsApp
+            </a>
+            <a href="#consulta" class="btn btn--outline">Pedir análise por formulário</a>
+          </div>
+        </div>
+
+        <!-- Form card -->
+        <aside id="consulta" class="form-card">
+          <h2 class="form-card__title">Solicite a análise do seu caso</h2>
+          <p class="form-card__sub">Sigilo profissional. Resposta direta com o advogado em até 24h.</p>
+          <div class="tally-frame">
+            <iframe data-tally-src="https://tally.so/embed/A7AJLW?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1&page=inventario&source=lp"
+                    loading="lazy"
+                    width="100%"
+                    height="580"
+                    frameborder="0"
+                    marginheight="0"
+                    marginwidth="0"
+                    title="Formulário de análise — Inventário extrajudicial"></iframe>
+          </div>
+          <script>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}</script>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== COMO FUNCIONA ========== -->
+  <section class="section--alt" id="como-funciona">
+    <div class="container">
+      <div class="section__head">
+        <span class="section__eyebrow">Como funciona</span>
+        <h2>O caminho do inventário em cartório</h2>
+        <p>Três etapas claras. Você sabe exatamente o que vem em cada uma e quanto tempo leva.</p>
+      </div>
+      <div class="steps">
+        <article class="step">
+          <span class="step__num">1</span>
+          <h3>Conversa inicial e diagnóstico</h3>
+          <p>Mapeamos juntos quem são os herdeiros, se há testamento, quais bens compõem o espólio e a situação tributária. Você sai com um diagnóstico claro de cabimento, prazo e custos — antes de qualquer compromisso.</p>
+        </article>
+        <article class="step">
+          <span class="step__num">2</span>
+          <h3>Documentação, ITCMD e minuta</h3>
+          <p>Reunimos os documentos necessários, calculamos o ITCMD (alíquota de 4% em SP), emitimos a guia para recolhimento e planejamos toda a estrutura da escritura pública de inventário e partilha.</p>
+
+        </article>
+        <article class="step">
+          <span class="step__num">3</span>
+          <h3>Assinatura no cartório</h3>
+          <p>Acompanhamos a assinatura no Tabelionato de Notas. A escritura tem efeito imediato, equivale à formal de partilha judicial e já permite a transferência dos bens em nome dos herdeiros.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CABIMENTO ========== -->
+  <section>
+    <div class="container">
+      <div class="section__head">
+        <span class="section__eyebrow">Quando é possível</span>
+        <h2 id="cabimento">Cabimento do inventário extrajudicial</h2>
+      </div>
+      <div class="res-box">
+        <h3>Fundamento legal</h3>
+        <p>O inventário em cartório é regulado pela Lei 11.441/2007 e pela Resolução 571/2024 do CNJ, que atualizou e modernizou as regras do extrajudicial.</p>
+        <p style="margin-top: 1rem; font-weight: 600; color: var(--fg);">Casos típicos em que cabe o inventário em cartório:</p>
+        <ul class="checklist">
+          <li>Herdeiros, ainda que menores, em consenso sobre a partilha</li>
+          <li>Inexistência de litígio entre os herdeiros</li>
+          <li>Bens devidamente documentados (imóveis, veículos, contas e investimentos)</li>
+          <li>Testamento, em algumas situações, mediante prévia confirmação judicial</li>
+          <li>Possibilidade de inclusão da partilha de imóveis em outras comarcas, quando aplicável</li>
+        </ul>
+        <p style="margin-top: 1rem; font-size: .9rem; color: var(--muted);">Casos com litígio entre herdeiros ou divergência sobre os bens podem precisar da via judicial — total ou parcialmente. Avaliamos isso na conversa inicial, sem compromisso.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== POR QUE AGORA ========== -->
+  <section class="section--alt" id="por-que-agora">
+    <div class="container">
+      <div class="section__head">
+        <span class="section__eyebrow">Por que tratar agora</span>
+        <h2>O que está em jogo enquanto o inventário não anda</h2>
+        <p>Cada mês de espera tem custo concreto — financeiro, jurídico e familiar. Tratar o inventário com prioridade evita boa parte deles.</p>
+      </div>
+      <div class="plan-grid">
+        <article class="plan-card">
+          <h3>Bens travados</h3>
+          <p>Contas bancárias bloqueadas, imóveis sem possibilidade de venda ou financiamento, veículos sem transferência. O patrimônio existe, mas a família não pode usá-lo.</p>
+        </article>
+        <article class="plan-card">
+          <h3>Multa do ITCMD</h3>
+          <p>Em São Paulo, o prazo legal para protocolo do inventário é de 60 dias da abertura da sucessão. Após isso, incide multa progressiva sobre o imposto — corroendo o patrimônio que será partilhado.</p>
+        </article>
+        <article class="plan-card">
+          <h3>Família parada</h3>
+          <p>Boletos de IPTU, condomínio e taxas continuam correndo. Decisões importantes — vender, alugar, dividir — ficam suspensas. O conflito entre herdeiros tende a crescer com o tempo.</p>
+        </article>
+      </div>
+      <p style="text-align: center; margin: 1.8rem auto 0; max-width: 660px; font-size: .9rem; color: var(--muted);">A boa notícia: quando há consenso entre os herdeiros e os documentos podem ser reunidos, o inventário em cartório tira a família dessa zona de espera em poucas semanas.</p>
+    </div>
+  </section>
+
+  <!-- ========== SIMULADOR DE CUSTOS ========== -->
+  <section id="simulador">
+    <div class="container">
+      <div class="section__head">
+        <span class="section__eyebrow">Estimativa de custos</span>
+        <h2>Quanto custa o inventário em cartório</h2>
+        <p>Use a calculadora abaixo para ter, em poucos segundos, uma estimativa do ITCMD e dos emolumentos do tabelionato sobre o valor total dos bens envolvidos no inventário.</p>
+      </div>
+
+      <div class="sim">
+        <label class="sim__label" for="sim-monte">
+          <span>Monte-mor</span>
+          <output class="sim__monte" id="sim-monte-out">R$ 500.000</output>
+        </label>
+        <input type="range" id="sim-monte" class="sim__range" min="100000" max="5000000" step="10000" value="500000" aria-label="Monte-mor (soma dos bens em reais)">
+        <div class="sim__scale">
+          <span>R$ 100 mil</span>
+          <span>R$ 5 milhões</span>
+        </div>
+
+        <div class="sim__results">
+          <div class="sim__result">
+            <span class="sim__result-label">ITCMD (SP, 4%)</span>
+            <span class="sim__result-value" id="sim-itcmd">R$ 20.000</span>
+          </div>
+          <div class="sim__result">
+            <span class="sim__result-label">Emolumentos do tabelionato</span>
+            <span class="sim__result-value" id="sim-emol">R$ 5.520</span>
+          </div>
+        </div>
+
+        <p class="sim__note"><strong>O inventário em cartório dispensa custas judiciais e taxa de fiscalização do Tribunal.</strong> O custo total tende a ser mais previsível que o da via judicial e o prazo costuma ser bem menor.</p>
+
+        <p class="sim__disclaimer">Estimativa para fins informativos. Não substitui orçamento personalizado. Não inclui honorários advocatícios, emolumentos do Registro de Imóveis (em caso de transferência), certidões nem ITBI eventualmente devido sobre meação ou cessão. ITCMD calculado pela alíquota de 4% vigente em São Paulo. Emolumentos conforme tabela do Tabelionato de Notas (CGJ/TJSP) vigente desde 8 de janeiro de 2026, já considerando o ISS de 5% praticado em Campinas.</p>
+
+        <details class="sim__multa" id="multa-itcmd">
+          <summary><span>Mais de 60 dias do falecimento? Qual o valor da multa?</span></summary>
+          <div class="sim__multa-answer">
+            <p>O receio em torno da multa costuma ser maior do que a realidade. Em São Paulo, ela incide sobre o <strong>valor do ITCMD</strong> — <u>não</u> sobre <u>o patrimônio</u> inteiro:</p>
+            <ul class="sim__multa-list">
+              <li>Dentro de 60 dias da abertura da sucessão — sem multa por atraso</li>
+              <li>De 61 a 180 dias — 10% sobre o <u>ITCMD</u></li>
+              <li>Acima de 180 dias — 20% sobre o <u>ITCMD</u> (teto legal)</li>
+            </ul>
+            <p>Em números concretos: para um espólio com ITCMD de R$ 20 mil (monte-mor de R$ 500 mil), a multa <em>máxima</em> é de R$ 4 mil. Significativa, mas longe da percepção de “valor absurdo” que faz muitas famílias adiarem a decisão. E o desbloqueio dos bens travados normalmente compensa esse ajuste em pouco tempo.</p>
+            <p class="sim__multa-source">Base legal: art. 21 da Lei Estadual SP 10.705/2000.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== AUTOR ========== -->
+  <section>
+    <div class="container">
+      <div class="section__head">
+        <span class="section__eyebrow">Quem conduz seu caso</span>
+        <h2>Atendimento direto com o advogado</h2>
+      </div>
+      <article class="author">
+        <picture>
+          <source type="image/webp" srcset="/assets/img/rodrigo-moura-400.webp 1x, /assets/img/rodrigo-moura-800.webp 2x">
+          <img class="author__photo"
+               src="/assets/img/rodrigo-moura-400.jpg"
+               srcset="/assets/img/rodrigo-moura-400.jpg 1x, /assets/img/rodrigo-moura-800.jpg 2x"
+               width="200" height="200"
+               alt="Dr. Rodrigo Moura Silva, advogado responsável"
+               loading="lazy">
+        </picture>
+        <div>
+          <div class="author__name">Dr. Rodrigo Moura Silva</div>
+          <div class="author__role">OAB/SP 188.004 · Especialista em Direito Notarial e Registral pelo Ibmec</div>
+          <p>Advogado com prática consultiva voltada à atuação extrajudicial — inventários em cartório, divórcios extrajudiciais e regularização registral. Conduz cada caso pessoalmente, com atenção ao momento da família e foco em soluções claras, técnicas e com sigilo profissional.</p>
+          <p style="margin: 0; font-size: .88rem; color: var(--muted);">Atendimento em Campinas/SP e região. Reuniões presenciais ou online conforme sua preferência.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ========== FAQ ========== -->
+  <section class="section--alt" id="faq">
+    <div class="container">
+      <div class="section__head">
+        <span class="section__eyebrow">Perguntas frequentes</span>
+        <h2>Dúvidas comuns sobre inventário em cartório</h2>
+      </div>
+      <div class="faq">
+        <details class="faq__item">
+          <summary>Quanto tempo leva o inventário extrajudicial?</summary>
+          <div class="faq__answer">Em casos consensuais, com toda a documentação em ordem, o inventário extrajudicial pode ser concluído em poucos dias, desde o início do atendimento até a assinatura da escritura no cartório. O prazo final vai depender, sobretudo, da rapidez na reunião dos documentos, da emissão da guia de ITCMD pela Sefaz/SP e da disponibilidade de agenda do tabelionato — fatores que o nosso escritório acompanha de perto para imprimir o máximo de agilidade possível.</div>
+        </details>
+        <details class="faq__item">
+          <summary>Posso fazer inventário em cartório se houver herdeiro menor de idade?</summary>
+          <div class="faq__answer">Sim. Hoje o inventário extrajudicial é possível mesmo com herdeiro menor, desde que haja consenso entre os herdeiros e seja garantida ao menor a parte ideal que lhe cabe em cada bem. Em caso de dúvida sobre a proteção do menor, o Ministério Público é acionado para analisar a partilha, e nós avaliamos tudo na conversa inicial para indicar o caminho mais seguro para a família.</div>
+        </details>
+        <details class="faq__item">
+          <summary>Quais documentos preciso reunir?</summary>
+          <div class="faq__answer">Em linhas gerais: certidão de óbito; documentos pessoais do falecido e dos herdeiros; certidões de casamento e nascimento; documentos dos bens (matrículas de imóveis, CRLV de veículos, extratos bancários e de investimentos); declaração de IR do falecido; e certidões negativas. Enviamos uma lista personalizada após a conversa inicial.</div>
+        </details>
+        <details class="faq__item">
+          <summary>O ITCMD é cobrado mesmo no inventário extrajudicial?</summary>
+          <div class="faq__answer">Sim. O ITCMD é um imposto estadual devido em qualquer modalidade de inventário, judicial ou extrajudicial. Em São Paulo, a alíquota é de 4% sobre o valor dos bens transmitidos. O escritório calcula, emite a guia e acompanha o recolhimento — sem surpresas para a família. Importante: o prazo legal para protocolo do inventário é de 60 dias da abertura da sucessão; após esse prazo, incide multa progressiva sobre o imposto.</div>
+        </details>
+        <details class="faq__item">
+          <summary>Já passou dos 60 dias da abertura da sucessão. E agora?</summary>
+          <div class="faq__answer">A perda do prazo gera multa sobre o ITCMD, mas não impede o inventário em cartório. A via extrajudicial continua disponível, desde que o caso se enquadre nos demais requisitos (consenso entre herdeiros, documentos, ausência de litígio). Em São Paulo, a multa é progressiva: <strong>10% sobre o ITCMD</strong> entre 61 e 180 dias e <strong>20%</strong> acima de 180 dias (teto legal — art. 21 da Lei 10.705/2000). A multa incide sobre o imposto, não sobre o patrimônio. Quanto antes for protocolado, menor o impacto.</div>
+        </details>
+        <details class="faq__item">
+          <summary>Quanto custa um inventário extrajudicial?</summary>
+          <div class="faq__answer">Os custos têm três componentes: ITCMD (4% em SP, sobre o valor dos bens), emolumentos do cartório (tabela oficial, varia conforme o valor) e honorários advocatícios. Apresentamos o orçamento completo por escrito na conversa inicial, com tudo discriminado.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CTA FINAL ========== -->
+  <section class="cta-final">
+    <h2>Pronto para resolver com cuidado?</h2>
+    <p>Mande uma mensagem e converse com o advogado responsável. Atendimento sigiloso, sem compromisso na primeira orientação.</p>
+    <a href="https://wa.me/5519989119770?text=Ol%C3%A1%2C%20gostaria%20de%20uma%20orienta%C3%A7%C3%A3o%20sobre%20invent%C3%A1rio%20em%20cart%C3%B3rio."
+       class="btn btn--whatsapp"
+       data-wa-source="cta-final"
+       rel="noopener"
+       target="_blank">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width:18px;height:18px"><path d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7 0-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.4.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5 0 1.5 1.1 2.9 1.3 3.1.2.2 2.2 3.3 5.3 4.6 1.9.7 2.6.8 3.5.7.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.2-.6-.4zM12 .9C5.9.9.9 5.9.9 12c0 2 .5 3.9 1.5 5.6L.7 23.3l5.9-1.5c1.6.9 3.5 1.4 5.4 1.4 6.1 0 11.1-5 11.1-11.1S18.1.9 12 .9z"/></svg>
+      Falar no WhatsApp
+    </a>
+  </section>
+
+</main>
+
+<!-- ========== FOOTER ========== -->
+<footer class="site-footer">
+  <div class="site-footer__grid">
+    <div>
+      <div class="site-footer__brand">RUMOS<span style="color:#c9a373">.</span></div>
+      <p style="margin: 0;">Advocacia extrajudicial em Campinas/SP.<br>Inventário em cartório · Divórcio em cartório · Regularização registral.</p>
+      <p style="margin: .8rem 0 0; font-size: .85rem;">Dr. Rodrigo Moura Silva — OAB/SP 188.004<br>Especialista em Direito Notarial e Registral pelo Ibmec</p>
+    </div>
+    <div>
+      <h4>Contato</h4>
+      <ul>
+        <li><a href="https://wa.me/5519989119770?text=Ol%C3%A1%2C%20gostaria%20de%20uma%20orienta%C3%A7%C3%A3o%20sobre%20invent%C3%A1rio%20em%20cart%C3%B3rio." data-wa-source="footer" target="_blank" rel="noopener">WhatsApp: (19) 98911-9770</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#1a68757e68737d755a686f7775697b7e6c34797577347868"><span class="__cf_email__" data-cfemail="b1c3ded5c3d8d6def1c3c4dcdec2d0d5c79fd2dedc9fd3c3">[email&#160;protected]</span></a></li>
+        <li><a href="https://www.google.com/maps/place/Condom%C3%ADnio+Alpha+Park+Tower/@-22.889377,-47.0213503,17z" target="_blank" rel="noopener">Condomínio Alphapark Tower</a><br>Campinas/SP</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Institucional</h4>
+      <ul>
+        <li><a href="/">Página inicial</a></li>
+        <li><a href="/divorcio">Divórcio em cartório</a></li>
+        <li><a href="/politica-de-privacidade">Política de Privacidade</a></li>
+        <li><a href="/lgpd">LGPD</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="site-footer__bottom">
+    <span>© 2026 Rumos Advocacia · OAB/SP 188.004</span>
+    <span>Conteúdo informativo. Provimento 205/2021 OAB.</span>
+  </div>
+</footer>
+
+<!-- Floating WhatsApp -->
+<a href="https://wa.me/5519989119770?text=Ol%C3%A1%2C%20gostaria%20de%20uma%20orienta%C3%A7%C3%A3o%20sobre%20invent%C3%A1rio%20em%20cart%C3%B3rio."
+   class="float-wa"
+   data-wa-source="float"
+   aria-label="Conversar pelo WhatsApp"
+   rel="noopener"
+   target="_blank">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7 0-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.4.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5 0 1.5 1.1 2.9 1.3 3.1.2.2 2.2 3.3 5.3 4.6 1.9.7 2.6.8 3.5.7.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.2-.6-.4zM12 .9C5.9.9.9 5.9.9 12c0 2 .5 3.9 1.5 5.6L.7 23.3l5.9-1.5c1.6.9 3.5 1.4 5.4 1.4 6.1 0 11.1-5 11.1-11.1S18.1.9 12 .9z"/></svg>
+</a>
+
+<!-- ========== Tracking & dataLayer ========== -->
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // dataLayer já inicializado pelo GTM acima.
+  window.dataLayer = window.dataLayer || [];
+
+  // Page view enriquecido
+  window.dataLayer.push({
+    event: 'page_view_lp',
+    page: 'inventario',
+    service: 'Inventário em cartório'
+  });
+
+  // WhatsApp click tracking
+  document.querySelectorAll('[data-wa-source]').forEach(function(el){
+    el.addEventListener('click', function(){
+      window.dataLayer.push({
+        event: 'whatsapp_click',
+        source: el.getAttribute('data-wa-source'),
+        page: 'inventario',
+        service: 'Inventário em cartório'
+      });
+    });
+  });
+
+  // Tally form submit tracking
+  // Tally form submit tracking
+  window.addEventListener('message', function(e) {
+    if (e.data && typeof e.data === 'string' && e.data.indexOf('Tally.FormSubmitted') !== -1) {
+      try {
+        var p = JSON.parse(e.data);
+        if (p.event === 'Tally.FormSubmitted') {
+          window.dataLayer.push({
+            event: 'lead_submit',
+            page: 'inventario',
+            service: 'Inventário em cartório',
+            form_id: p.payload && p.payload.formId
+          });
+        }
+      } catch (err) {}
+    }
+  });
+
+  // Simulador de custos
+  (function(){
+    var slider = document.getElementById('sim-monte');
+    if (!slider) return;
+
+    // Tabela do Tabelionato de Notas — vigente desde 8/jan/2026 (TJSP),
+    // já com ISS de 5% praticado em Campinas.
+    // Formato: [valorMáximoDaFaixa, valorTotalEmolumentos]
+    var FAIXAS_EMOL = [
+      [    1524,    362.98],
+      [    5761,    542.43],
+      [    9603,    846.96],
+      [   19210,   1209.95],
+      [   38420,   1635.48],
+      [   76840,   1940.10],
+      [  115260,   2303.08],
+      [  153680,   2728.61],
+      [  192100,   3091.68],
+      [  230520,   3458.80],
+      [  268940,   3880.19],
+      [  307360,   4247.39],
+      [  330146,   4672.93],
+      [  384200,   4973.32],
+      [  768400,   5519.90],
+      [ 1152600,   6129.04],
+      [ 1536800,   6796.60],
+      [ 2345066,   7510.07],
+      [ 3908444,  10430.69],
+      [ 5862665,  13559.85]
+    ];
+    var TETO_EMOL = 13559.85;
+
+    var monteOut = document.getElementById('sim-monte-out');
+    var itcmdOut = document.getElementById('sim-itcmd');
+    var emolOut  = document.getElementById('sim-emol');
+
+    function fmt(n) {
+      return 'R$ ' + Math.round(n).toLocaleString('pt-BR');
+    }
+    function calcITCMD(monte) {
+      return monte * 0.04;
+    }
+    function calcEmol(monte) {
+      for (var i = 0; i < FAIXAS_EMOL.length; i++) {
+        if (monte <= FAIXAS_EMOL[i][0]) return FAIXAS_EMOL[i][1];
+      }
+      return TETO_EMOL;
+    }
+    function update() {
+      var monte = parseFloat(slider.value);
+      monteOut.textContent = fmt(monte);
+      itcmdOut.textContent = fmt(calcITCMD(monte));
+      emolOut.textContent  = fmt(calcEmol(monte));
+    }
+
+    slider.addEventListener('input', update);
+    update();
+  })();
+</script>
+
+</body>
+</html>
+
+========PAGE_INVENTARIO_END========
+
+========PAGE_LGPD_START_LEN_5328========
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LGPD — Direitos do Titular | Rumos Advocacia</title>
+  <meta name="description" content="Como exercer seus direitos como titular de dados pessoais junto à Rumos Advocacia.">
+  <meta name="robots" content="noindex, follow">
+  <link rel="canonical" href="https://rumosadv.com.br/lgpd">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap">
+  <style>
+    :root { --bg:#fbfaf9; --fg:#223a23; --primary:#2d4d2d; --secondary:#3a2752; --muted:#6b7565; --border:#e5e0d9; --serif:"Playfair Display",Georgia,serif; --sans:"Inter",sans-serif; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font: 16px/1.65 var(--sans); color: var(--fg); background: var(--bg); }
+    .container { max-width: 760px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+    h1 { font: 700 clamp(1.6rem,4vw,2.2rem) var(--serif); margin: 0 0 .5rem; }
+    h2 { font: 700 1.2rem var(--serif); color: var(--primary); margin-top: 2rem; margin-bottom: .5rem; }
+    p { color: #4a5d4a; margin: 0 0 1em; }
+    a { color: var(--primary); }
+    .header { padding: .85rem 1.25rem; border-bottom: 1px solid var(--border); }
+    .logo { font: 700 1.35rem var(--serif); color: var(--primary); }
+    .logo a { text-decoration: none; color: inherit; }
+    .meta { color: var(--muted); font-size: .9rem; margin-bottom: 2rem; }
+    ul { padding-left: 1.4rem; }
+    li { margin-bottom: .5rem; }
+    .footer { background: var(--primary); color: #d8dcd0; padding: 2rem 1.25rem; text-align: center; font-size: .88rem; }
+    .footer a { color: #fff; }
+    .right-card { background: #fff; border: 1px solid var(--border); border-left: 4px solid var(--secondary); border-radius: 8px; padding: 1.25rem; margin-bottom: .75rem; }
+    .right-card h3 { font: 600 1.05rem var(--sans); color: var(--secondary); margin: 0 0 .35rem; }
+    .right-card p { font-size: .94rem; margin: 0; }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="logo"><a href="/">RUMOS<span style="color:#3a2752">.</span></a></div>
+</header>
+
+<main class="container">
+  <h1>LGPD — Direitos do Titular</h1>
+  <p class="meta">Lei 13.709/2018 · Última atualização: 03 de maio de 2026.</p>
+
+  <p>A Lei Geral de Proteção de Dados garante a você, titular dos dados, uma série de direitos sobre as informações que tratamos. Esta página explica como exercê-los junto à Rumos Advocacia.</p>
+
+  <h2>Seus direitos</h2>
+
+  <article class="right-card">
+    <h3>Confirmar o tratamento</h3>
+    <p>Saber se tratamos dados pessoais seus.</p>
+  </article>
+
+  <article class="right-card">
+    <h3>Acessar seus dados</h3>
+    <p>Receber cópia das informações que mantemos sobre você.</p>
+  </article>
+
+  <article class="right-card">
+    <h3>Corrigir dados</h3>
+    <p>Pedir a correção de dados incompletos, inexatos ou desatualizados.</p>
+  </article>
+
+  <article class="right-card">
+    <h3>Anonimizar, bloquear ou excluir</h3>
+    <p>Solicitar que dados desnecessários, excessivos ou tratados em desconformidade com a LGPD sejam anonimizados, bloqueados ou eliminados.</p>
+  </article>
+
+  <article class="right-card">
+    <h3>Portabilidade</h3>
+    <p>Receber seus dados em formato estruturado para transferi-los a outro fornecedor.</p>
+  </article>
+
+  <article class="right-card">
+    <h3>Revogar consentimento</h3>
+    <p>Retirar a qualquer momento o consentimento previamente dado, ressalvadas as bases legais que dispensem consentimento (ex: cumprimento de obrigação legal).</p>
+  </article>
+
+  <article class="right-card">
+    <h3>Reclamar à ANPD</h3>
+    <p>Apresentar reclamação à Autoridade Nacional de Proteção de Dados se entender que seus direitos foram violados.</p>
+  </article>
+
+  <h2>Como exercer</h2>
+  <p>Envie um e-mail para <a href="/cdn-cgi/l/email-protection#85f7eae1f7ece2eac5f7f0e8eaf6e4e1f3abe6eae8abe7f7"><span class="__cf_email__" data-cfemail="9deff2f9eff4faf2ddefe8f0f2eefcf9ebb3fef2f0b3ffef">[email&#160;protected]</span></a> identificando-se e descrevendo o direito que deseja exercer. Responderemos em até <strong>15 dias úteis</strong>.</p>
+
+  <h2>Sigilo profissional × LGPD</h2>
+  <p>Quando os dados estão protegidos por sigilo profissional do advogado, alguns direitos podem encontrar limites legítimos — por exemplo, dados produzidos no curso de mandato podem precisar ser preservados nos termos do Estatuto da OAB. Sempre que houver tensão entre os direitos da LGPD e o sigilo profissional, explicamos com clareza ao titular.</p>
+
+  <h2>Encarregado pelo Tratamento (DPO)</h2>
+  <p>Dr. Rodrigo Moura Silva — OAB/SP 188.004<br>
+  E-mail: <a href="/cdn-cgi/l/email-protection#71031e150318161e3103041c1e021015075f121e1c5f1303"><span class="__cf_email__" data-cfemail="ddafb2b9afb4bab29dafa8b0b2aebcb9abf3beb2b0f3bfaf">[email&#160;protected]</span></a></p>
+
+  <p style="margin-top: 2.5rem;"><a href="/">← Voltar para a página inicial</a> · <a href="/politica-de-privacidade">Política de Privacidade completa</a></p>
+</main>
+
+<footer class="footer">
+  © 2026 Rumos Advocacia · OAB/SP 188.004
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>
+                 
+========PAGE_LGPD_END========
+
+========PAGE_POLPRIV_START_LEN_5598========
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Política de Privacidade | Rumos Advocacia</title>
+  <meta name="description" content="Política de Privacidade da Rumos Advocacia em conformidade com a LGPD.">
+  <meta name="robots" content="noindex, follow">
+  <link rel="canonical" href="https://rumosadv.com.br/politica-de-privacidade">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap">
+  <style>
+    :root { --bg:#fbfaf9; --fg:#223a23; --primary:#2d4d2d; --muted:#6b7565; --border:#e5e0d9; --serif:"Playfair Display",Georgia,serif; --sans:"Inter",sans-serif; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font: 16px/1.65 var(--sans); color: var(--fg); background: var(--bg); }
+    .container { max-width: 760px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+    h1 { font: 700 clamp(1.6rem,4vw,2.2rem) var(--serif); margin: 0 0 .5rem; }
+    h2 { font: 700 1.2rem var(--serif); color: var(--primary); margin-top: 2rem; margin-bottom: .5rem; }
+    p { color: #4a5d4a; margin: 0 0 1em; }
+    a { color: var(--primary); }
+    .header { padding: .85rem 1.25rem; border-bottom: 1px solid var(--border); }
+    .logo { font: 700 1.35rem var(--serif); color: var(--primary); }
+    .logo a { text-decoration: none; color: inherit; }
+    .meta { color: var(--muted); font-size: .9rem; margin-bottom: 2rem; }
+    ul { padding-left: 1.4rem; }
+    li { margin-bottom: .35rem; }
+    .footer { background: var(--primary); color: #d8dcd0; padding: 2rem 1.25rem; text-align: center; font-size: .88rem; }
+    .footer a { color: #fff; }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="logo"><a href="/">RUMOS<span style="color:#3a2752">.</span></a></div>
+</header>
+
+<main class="container">
+  <h1>Política de Privacidade</h1>
+  <p class="meta">Última atualização: 03 de maio de 2026.</p>
+
+  <p>A Rumos Advocacia respeita sua privacidade e protege seus dados pessoais em conformidade com a Lei Geral de Proteção de Dados (Lei 13.709/2018 — LGPD) e com o sigilo profissional do advogado.</p>
+
+  <h2>1. Quem somos</h2>
+  <p>Esta política descreve o tratamento de dados realizado por <strong>Rumos Advocacia</strong>, sob responsabilidade de Dr. Rodrigo Moura Silva (OAB/SP 188.004), com sede em Campinas/SP.</p>
+
+  <h2>2. Quais dados coletamos</h2>
+  <ul>
+    <li><strong>Dados de identificação</strong>: nome, e-mail, telefone — quando você preenche formulários de contato.</li>
+    <li><strong>Dados sobre o caso</strong>: informações que você compartilha voluntariamente para que possamos avaliar seu caso (ex: situação familiar, bens, documentos).</li>
+    <li><strong>Dados de navegação</strong>: cookies e identificadores anônimos para análise de uso do site (Google Tag Manager, Microsoft Clarity, Google Ads).</li>
+  </ul>
+
+  <h2>3. Como usamos seus dados</h2>
+  <p>Tratamos seus dados exclusivamente para: (i) responder sua solicitação de orientação jurídica; (ii) executar serviços advocatícios contratados; (iii) cumprir obrigações legais; (iv) melhorar a experiência no site mediante análise agregada. Nunca vendemos ou cedemos seus dados a terceiros para fins comerciais.</p>
+
+  <h2>4. Sigilo profissional</h2>
+  <p>Toda informação compartilhada por você no contexto de orientação ou serviços advocatícios é protegida pelo sigilo profissional, nos termos do art. 7º, II do Estatuto da OAB. Esse sigilo é independente da formalização do mandato.</p>
+
+  <h2>5. Compartilhamento</h2>
+  <p>Compartilhamos dados apenas com: (i) provedores essenciais à operação (hospedagem, análise de tráfego); (ii) autoridades, mediante ordem judicial ou exigência legal; (iii) contrapartes processuais, exclusivamente quando necessário à execução do mandato.</p>
+
+  <h2>6. Seus direitos (LGPD)</h2>
+  <p>Você pode, a qualquer momento: confirmar a existência de tratamento; acessar seus dados; corrigir dados incompletos ou inexatos; solicitar anonimização ou exclusão; revogar consentimento. Para exercer esses direitos, escreva para <a href="/cdn-cgi/l/email-protection#c4b6aba0b6ada3ab84b6b1a9abb7a5a0b2eaa7aba9eaa6b6"><span class="__cf_email__" data-cfemail="b2c0ddd6c0dbd5ddf2c0c7dfddc1d3d6c49cd1dddf9cd0c0">[email&#160;protected]</span></a>.</p>
+
+  <h2>7. Retenção</h2>
+  <p>Mantemos seus dados pelo período necessário ao cumprimento das finalidades descritas e às obrigações legais (ex: prazo prescricional, prazos da legislação tributária e da OAB).</p>
+
+  <h2>8. Cookies</h2>
+  <p>Utilizamos cookies essenciais (funcionamento do site) e cookies analíticos (Google Analytics, Microsoft Clarity). Você pode bloqueá-los nas configurações do seu navegador, embora isso possa afetar funcionalidades.</p>
+
+  <h2>9. Encarregado (DPO)</h2>
+  <p>Encarregado pelo Tratamento de Dados: Dr. Rodrigo Moura Silva — <a href="/cdn-cgi/l/email-protection#56243932243f31391624233b39253732207835393b783424"><span class="__cf_email__" data-cfemail="a5d7cac1d7ccc2cae5d7d0c8cad6c4c1d38bc6cac88bc7d7">[email&#160;protected]</span></a>.</p>
+
+  <h2>10. Alterações</h2>
+  <p>Esta política pode ser atualizada. Recomendamos revisão periódica. A data da última atualização consta no topo desta página.</p>
+
+  <p style="margin-top: 2.5rem;"><a href="/">← Voltar para a página inicial</a></p>
+</main>
+
+<footer class="footer">
+  © 2026 Rumos Advocacia · OAB/SP 188.004
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>
+                 
+========PAGE_POLPRIV_END========
