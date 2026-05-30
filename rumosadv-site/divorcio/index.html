@@ -441,98 +441,6 @@
 
     /* Focus visible */
     *:focus-visible { outline: 2px solid var(--secondary); outline-offset: 3px; border-radius: 4px; }
-
-    /* ========== DEPOIMENTOS ========== */
-    .testimonials__grid {
-      display: grid; gap: 1.5rem; grid-template-columns: 1fr;
-      margin-top: 2.5rem;
-    }
-    @media (min-width: 760px) {
-      .testimonials__grid { grid-template-columns: repeat(3, 1fr); gap: 1.75rem; }
-    }
-    .testimonial-card {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 1.75rem 1.4rem 1.25rem;
-      box-shadow: var(--shadow-sm);
-      display: flex; flex-direction: column; align-items: center; text-align: center;
-      transition: box-shadow .2s ease, transform .2s ease;
-    }
-    .testimonial-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
-    .testimonial-card__avatar {
-      width: 112px; height: 112px; border-radius: 50%; object-fit: cover;
-      border: 3px solid #fff;
-      box-shadow: 0 0 0 1px var(--border), var(--shadow-sm);
-      margin-bottom: 1rem;
-    }
-    .testimonial-card__name {
-      font-family: var(--serif); font-weight: 700;
-      font-size: 1.1rem; color: var(--fg); margin-bottom: .15rem;
-    }
-    .testimonial-card__case {
-      font-size: .72rem; color: var(--secondary);
-      letter-spacing: .08em; text-transform: uppercase;
-      font-weight: 600; margin-bottom: 1.1rem;
-    }
-    .testimonial-card__text {
-      margin: 0 0 1.1rem; font-style: italic;
-      color: var(--fg-soft); line-height: 1.55;
-      font-size: .96rem; flex: 1; padding: 0 .25rem;
-    }
-    .testimonial-card__text::before {
-      content: "\201C";
-      font-family: var(--serif);
-      font-size: 2.4rem; line-height: 0;
-      color: var(--primary); opacity: .35;
-      vertical-align: -.35em; margin-right: .1em;
-    }
-    .testimonial-card__auth {
-      font-size: .7rem; color: var(--muted);
-      text-transform: uppercase; letter-spacing: .08em;
-      border-top: 1px solid var(--border);
-      padding-top: .7rem; width: 100%;
-      margin-top: auto;
-    }
-    /* Bolha de audio estilo WhatsApp */
-    .audio-bubble {
-      display: flex; align-items: center; gap: .65rem;
-      background: #e8f0e6; border-radius: 22px;
-      padding: .45rem .85rem .45rem .45rem;
-      margin: 0 0 1.1rem; width: 100%; max-width: 280px;
-      flex: 1; box-shadow: inset 0 0 0 1px rgba(45,77,45,.06);
-    }
-    .audio-bubble__play {
-      flex: 0 0 auto; width: 38px; height: 38px;
-      border-radius: 50%; background: var(--whatsapp); color: #fff;
-      border: none; cursor: pointer; padding: 0;
-      display: flex; align-items: center; justify-content: center;
-      transition: background .15s ease, transform .15s ease;
-    }
-    .audio-bubble__play:hover { background: var(--whatsapp-hover); transform: scale(1.05); }
-    .audio-bubble__play:active { transform: scale(.96); }
-    .audio-bubble__icon { width: 18px; height: 18px; fill: currentColor; }
-    .audio-bubble__icon--pause { display: none; }
-    .audio-bubble.is-playing .audio-bubble__icon--play { display: none; }
-    .audio-bubble.is-playing .audio-bubble__icon--pause { display: inline-block; }
-    .audio-bubble__wave {
-      flex: 1; height: 28px; position: relative; min-width: 80px;
-    }
-    .audio-bubble__wave-bg, .audio-bubble__wave-fg {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      object-fit: contain; pointer-events: none;
-    }
-    .audio-bubble__wave-bg { opacity: .35; }
-    .audio-bubble__wave-fg {
-      clip-path: inset(0 100% 0 0);
-      transition: clip-path .12s linear;
-    }
-    .audio-bubble__time {
-      font-size: .82rem; color: var(--fg-soft);
-      font-variant-numeric: tabular-nums;
-      flex: 0 0 auto; min-width: 32px; text-align: right;
-    }
   </style>
 </head>
 <body>
@@ -566,7 +474,7 @@
         <div>
           <span class="hero__eyebrow">Divórcio extrajudicial · Campinas</span>
           <h1 class="hero__title">Divórcio em cartório com clareza, sigilo e segurança jurídica.</h1>
-          <p class="hero__sub">A participação de advogado é indispensável mesmo no cartório. Já que você vai precisar, vale escolher quem é especializado e conduz com todo o cuidado necessário: humanização e primor técnico combinados.</p>
+          <p class="hero__sub">A participação de advogado é indispensável. Já que você vai precisar, vale escolher quem é especializado e conduz com todo o cuidado necessário: humanização e primor técnico combinados.</p>
           <ul class="hero__bullets">
             <li>
               <details>
@@ -751,80 +659,6 @@
     </div>
   </section>
 
-    <!-- ========== DEPOIMENTOS ========== -->
-  <section id="depoimentos">
-    <div class="container">
-      <div class="section__head">
-        <span class="section__eyebrow">Vozes de quem passou pelo cartório</span>
-        <h2>O que dizem clientes que escolheram a porta extrajudicial</h2>
-      </div>
-
-      <div class="testimonials__grid">
-
-        <!-- Card 1: Alexandre -->
-        <article class="testimonial-card">
-          <picture>
-            <source type="image/webp" srcset="/assets/img/depoimentos/alexandre.webp">
-            <img class="testimonial-card__avatar"
-                 src="/assets/img/depoimentos/alexandre.png"
-                 alt="Alexandre, cliente do escritório"
-                 width="112" height="112" loading="lazy">
-          </picture>
-          <div class="testimonial-card__name">Alexandre B.</div>
-          <div class="testimonial-card__case">Divórcio com partilha</div>
-          <blockquote class="testimonial-card__text">
-            Cheguei esperando burocracia e desgaste. Foi o oposto. A partilha foi conduzida com objetividade técnica, sem audiência, dentro do prazo combinado. Saí do cartório com a sensação de que tinha resolvido — não de que tinha sobrevivido.
-          </blockquote>
-          <div class="testimonial-card__auth">Compartilhado com autorização</div>
-        </article>
-
-        <!-- Card 2: Juliana -->
-        <article class="testimonial-card">
-          <picture>
-            <source type="image/webp" srcset="/assets/img/depoimentos/juliana.webp">
-            <img class="testimonial-card__avatar"
-                 src="/assets/img/depoimentos/juliana.png"
-                 alt="Juliana, cliente do escritório"
-                 width="112" height="112" loading="lazy">
-          </picture>
-          <div class="testimonial-card__name">Juliana M.</div>
-          <div class="testimonial-card__case">Divórcio com partilha e filho</div>
-          <blockquote class="testimonial-card__text">
-            O que mais me marcou foi a paciência. Cheguei cheia de dúvidas sobre como ficaria meu filho e o que fazer com a casa. Fui ouvida sem pressa, entendi cada passo, e construímos juntos um acordo que respeitou o bem-estar dele. Um divórcio conduzido com cuidado.
-          </blockquote>
-          <div class="testimonial-card__auth">Compartilhado com autorização</div>
-        </article>
-
-        <!-- Card 3: Maria Lúcia (áudio) -->
-        <article class="testimonial-card">
-          <picture>
-            <source type="image/webp" srcset="/assets/img/depoimentos/maria-lucia.webp">
-            <img class="testimonial-card__avatar"
-                 src="/assets/img/depoimentos/maria-lucia.png"
-                 alt="Maria Lúcia, cliente do escritório"
-                 width="112" height="112" loading="lazy">
-          </picture>
-          <div class="testimonial-card__name">Maria Lúcia P.</div>
-          <div class="testimonial-card__case">Depoimento em áudio</div>
-          <div class="audio-bubble" data-duration="34">
-            <button class="audio-bubble__play" type="button" aria-label="Tocar depoimento em áudio de Maria Lúcia">
-              <svg class="audio-bubble__icon audio-bubble__icon--play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-              <svg class="audio-bubble__icon audio-bubble__icon--pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5h4v14H6V5zm8 0h4v14h-4V5z"/></svg>
-            </button>
-            <div class="audio-bubble__wave">
-              <img class="audio-bubble__wave-bg" src="/assets/img/depoimentos/waveform-maria-lucia.png" alt="" aria-hidden="true">
-              <img class="audio-bubble__wave-fg" src="/assets/img/depoimentos/waveform-maria-lucia.png" alt="" aria-hidden="true">
-            </div>
-            <span class="audio-bubble__time">0:34</span>
-          </div>
-          <audio class="testimonial-audio" preload="none" src="/assets/audio/maria-lucia-depoimento.mp3"></audio>
-          <div class="testimonial-card__auth">Áudio enviado por WhatsApp · Com autorização</div>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
   <!-- UE movida para a posição da antiga Resolução 571 -->
 
   <!-- ========== FAQ ========== -->
@@ -857,7 +691,7 @@
         </details>
         <details class="faq__item">
           <summary>Quanto custa o divórcio em cartório?</summary>
-          <div class="faq__answer">O custo tem duas variáveis: emolumentos do cartório e honorários advocatícios. Por lei, os emolumentos variam conforme as peculiaridades do caso — a lei até garante isenção dos emolumentos para quem não tem condições financeiras de arcar com eles. Já os honorários são ajustados conforme o trabalho técnico envolvido. A consulta inicial não tem custo, então vale a conversa antes de qualquer decisão.</div>
+          <div class="faq__answer">O custo tem dois componentes: emolumentos do cartório (tabela oficial, definida por lei) e honorários advocatícios. Apresentamos o orçamento completo quando for possível entender as peculiaridades do caso. Entregamos alto valor nos serviços: atendimento de qualidade até a entrega final.</div>
         </details>
       </div>
     </div>
@@ -884,14 +718,14 @@
   <div class="site-footer__grid">
     <div>
       <div class="site-footer__brand">RUMOS<span style="color:#a087c0">.</span></div>
-      <p style="margin: 0;">Advocacia extrajudicial em Campinas/SP.<br>Divórcio em cartório · Inventário · Regularização registral.</p>
+      <p style="margin: 0;">Advocacia extrajudicial em Campinas/SP.<br>Divórcio em cartório · Inventário em cartório · Regularização de imóveis.</p>
       <p style="margin: .8rem 0 0; font-size: .85rem;">Dr. Rodrigo Moura Silva — OAB/SP 188.004<br>Especialista em Direito Notarial e Registral pelo Ibmec</p>
     </div>
     <div>
       <h4>Contato</h4>
       <ul>
         <li><a href="https://wa.me/5519989119770?text=Ol%C3%A1%2C%20gostaria%20de%20uma%20orienta%C3%A7%C3%A3o%20sobre%20div%C3%B3rcio%20em%20cart%C3%B3rio." data-wa-source="footer" target="_blank" rel="noopener">WhatsApp: (19) 98911-9770</a></li>
-        <li><a href="/cdn-cgi/l/email-protection#6f1d000b1d0608002f1d1a02001c0e0b19410c0002410d1d"><span class="__cf_email__" data-cfemail="c4b6aba0b6ada3ab84b6b1a9abb7a5a0b2eaa7aba9eaa6b6">[email&#160;protected]</span></a></li>
+        <li><a href="mailto:rodrigo@rumosadv.com.br">rodrigo@rumosadv.com.br</a></li>
         <li><a href="https://www.google.com/maps/place/Condom%C3%ADnio+Alpha+Park+Tower/@-22.889377,-47.0213503,17z" target="_blank" rel="noopener">Condomínio Alphapark Tower</a><br>Campinas/SP</li>
       </ul>
     </div>
@@ -899,6 +733,8 @@
       <h4>Institucional</h4>
       <ul>
         <li><a href="/">Página inicial</a></li>
+        <li><a href="/inventario">Inventário em cartório</a></li>
+        <li><a href="/imoveis">Regularização de imóveis</a></li>
         <li><a href="/politica-de-privacidade">Política de Privacidade</a></li>
         <li><a href="/lgpd">LGPD</a></li>
       </ul>
@@ -921,7 +757,7 @@
 </a>
 
 <!-- ========== Tracking & dataLayer ========== -->
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
   // dataLayer já inicializado pelo GTM acima.
 
   // Page view enriquecido
@@ -964,56 +800,6 @@
       } catch (err) {}
     });
   }
-</script>
-
-<script>
-  /* Player de áudio das bolhas de depoimento */
-  (function() {
-    const bubbles = document.querySelectorAll('.audio-bubble');
-    const pad = (n) => n.toString().padStart(2, '0');
-    const fmt = (s) => Math.floor(s / 60) + ':' + pad(Math.floor(s % 60));
-
-    bubbles.forEach(bubble => {
-      const card = bubble.closest('.testimonial-card');
-      const audio = card && card.querySelector('.testimonial-audio');
-      if (!audio) return;
-      const btn = bubble.querySelector('.audio-bubble__play');
-      const fg = bubble.querySelector('.audio-bubble__wave-fg');
-      const time = bubble.querySelector('.audio-bubble__time');
-      const totalFallback = parseInt(bubble.dataset.duration || '0', 10);
-
-      const setTime = (sec) => { time.textContent = fmt(Math.max(0, sec)); };
-      const totalText = () => setTime(isFinite(audio.duration) ? audio.duration : totalFallback);
-      totalText();
-
-      btn.addEventListener('click', () => {
-        if (audio.paused) {
-          document.querySelectorAll('.testimonial-audio').forEach(a => { if (a !== audio) a.pause(); });
-          audio.play();
-        } else {
-          audio.pause();
-        }
-      });
-
-      audio.addEventListener('play', () => {
-        bubble.classList.add('is-playing');
-        if (window.dataLayer) window.dataLayer.push({event: 'depoimento_audio_play', cliente: 'maria_lucia'});
-      });
-      audio.addEventListener('pause', () => bubble.classList.remove('is-playing'));
-      audio.addEventListener('ended', () => {
-        bubble.classList.remove('is-playing');
-        fg.style.clipPath = 'inset(0 100% 0 0)';
-        totalText();
-      });
-      audio.addEventListener('timeupdate', () => {
-        const dur = isFinite(audio.duration) && audio.duration > 0 ? audio.duration : totalFallback;
-        const pct = Math.min(100, (audio.currentTime / dur) * 100);
-        fg.style.clipPath = 'inset(0 ' + (100 - pct).toFixed(2) + '% 0 0)';
-        setTime(dur - audio.currentTime);
-      });
-      audio.addEventListener('loadedmetadata', totalText);
-    });
-  })();
 </script>
 
 </body>
