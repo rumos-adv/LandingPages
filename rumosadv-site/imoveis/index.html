@@ -157,6 +157,24 @@
     .hero__badge svg { width: 14px; height: 14px; flex-shrink: 0; stroke: currentColor; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
     .hero__cta-row { display: flex; flex-wrap: wrap; gap: .75rem; justify-content: center; margin-top: 1.5rem; }
 
+    /* Hero como banner-imagem */
+    .hero--image { padding: 0; background: #0a0f0a; }
+    .hero--image > .container { padding-left: 0; padding-right: 0; max-width: 100%; }
+    .hero__visual { display: block; line-height: 0; outline: none; transition: opacity .15s ease; }
+    .hero__visual:hover { opacity: .96; text-decoration: none; }
+    .hero__visual:focus-visible { outline: 3px solid #a087c0; outline-offset: -3px; }
+    .hero__image { width: 100%; height: auto; display: block; }
+    .hero__post { display: flex; justify-content: center; padding: 1.25rem 1.25rem 1.5rem; background: #0a0f0a; }
+    .sr-only { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+    /* Banner Usucapião */
+    .banner-usucapiao { padding: 0; background: #0a0f0a; }
+    .banner-usucapiao > .container { padding-left: 0; padding-right: 0; max-width: 100%; }
+    .banner-usucapiao__visual { display: block; line-height: 0; outline: none; transition: opacity .15s ease; }
+    .banner-usucapiao__visual:hover { opacity: .96; text-decoration: none; }
+    .banner-usucapiao__visual:focus-visible { outline: 3px solid #a087c0; outline-offset: -3px; }
+    .banner-usucapiao__image { width: 100%; height: auto; display: block; }
+
     /* Sections */
     section { padding: 3.5rem 0; }
     .section--alt { background: var(--bg-alt); }
@@ -348,27 +366,24 @@
 
 <main id="main">
 
-  <!-- ========== HERO (direto, solution-aware) ========== -->
-  <section class="hero">
+  <!-- ========== HERO (banner-imagem) ========== -->
+  <section class="hero hero--image">
     <div class="container">
-      <div class="hero__head">
-        <span class="hero__eyebrow">Regularização de imóveis · Campinas</span>
-        <h1>Proteja o que mais importa direto no cartório, sem ir à Justiça.</h1>
-        <p class="hero__lead">A trinca que derruba um prédio é visível. Já a falta do registro em cartório não é tão evidente — e é ela que ameaça o seu <em>maior patrimônio</em>.</p>
-        <p class="hero__lead">Proteja a conquista da sua vida com soluções conduzidas por advogado especialista diretamente no cartório.</p>
-        <span class="hero__badge" aria-label="Compromisso de análise em 48 horas, sem custo na primeira conversa">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-          Análise documental em 48h · Sem custo na primeira conversa
-        </span>
-        <div class="hero__cta-row">
-          <a href="https://wa.me/5519989119770?text=Ol%C3%A1%2C%20gostaria%20de%20uma%20orienta%C3%A7%C3%A3o%20sobre%20regulariza%C3%A7%C3%A3o%20do%20meu%20im%C3%B3vel."
-             class="btn btn--whatsapp" data-wa-source="hero" rel="noopener" target="_blank">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width:18px;height:18px"><path d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7 0-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.4.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5 0 1.5 1.1 2.9 1.3 3.1.2.2 2.2 3.3 5.3 4.6 1.9.7 2.6.8 3.5.7.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.2-.6-.4zM12 .9C5.9.9.9 5.9.9 12c0 2 .5 3.9 1.5 5.6L.7 23.3l5.9-1.5c1.6.9 3.5 1.4 5.4 1.4 6.1 0 11.1-5 11.1-11.1S18.1.9 12 .9z"/></svg>
-            Falar com o advogado
-          </a>
-          <a href="#consulta" class="btn btn--outline">Mandar por escrito</a>
-        </div>
-      </div>
+      <a href="#consulta" class="hero__visual" data-wa-source="hero" aria-label="Regularização de imóveis em cartório — Avaliar meu caso">
+        <h1 class="sr-only">Comprou, herdou ou construiu — mas o imóvel não está no seu nome? Escritura, registro e regularização documental conduzidos em cartório, com acompanhamento jurídico completo. Dr. Rodrigo Moura Silva, OAB/SP 188.004. Rumos Advocacia, Campinas.</h1>
+        <img src="/assets/img/hero-imoveis-rod.png"
+             alt="Regularização de imóveis — Comprou, herdou ou construiu, mas o imóvel não está no seu nome? Dr. Rodrigo Moura Silva, OAB/SP 188.004 — Rumos Advocacia, Campinas."
+             class="hero__image"
+             width="2600" height="1360"
+             loading="eager"
+             fetchpriority="high">
+      </a>
+    </div>
+    <div class="hero__post">
+      <span class="hero__badge" aria-label="Compromisso de análise em 48 horas, sem custo na primeira conversa">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+        Análise documental em 48h · Sem custo na primeira conversa
+      </span>
     </div>
   </section>
 
@@ -458,6 +473,19 @@
       </div>
 
       <p class="nota-jurisprudencial">Composição baseada em situações recorrentes na prática extrajudicial, refletindo o art. 1.245, §1º do Código Civil — o efeito constitutivo do registro é reiteradamente reconhecido pelo STJ.</p>
+    </div>
+  </section>
+
+  <!-- ========== BANNER USUCAPIÃO ========== -->
+  <section class="banner-usucapiao" id="usucapiao">
+    <div class="container">
+      <a href="#consulta" class="banner-usucapiao__visual" data-wa-source="banner-usucapiao" aria-label="Usucapião extrajudicial — Avaliar meu caso">
+        <img src="/assets/img/banner-usucapiao.png"
+             alt="Usucapião extrajudicial — O imóvel é seu. Falta o documento dizer isso. A regularização pode ser feita direto no cartório, sem ação judicial. Rumos Advocacia, OAB/SP 188.004."
+             class="banner-usucapiao__image"
+             width="2600" height="1360"
+             loading="lazy">
+      </a>
     </div>
   </section>
 
