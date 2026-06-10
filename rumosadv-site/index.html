@@ -8,7 +8,7 @@
   <meta name="description" content="Pensão alimentícia, divórcio, inventário e regularização de imóveis em Campinas/SP. Atendimento direto com advogado, com plano por escrito antes de qualquer compromisso.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://rumosadv.com.br/">
-  <meta name="theme-color" content="#2d4d2d">
+  <meta name="theme-color" content="#22391f">
 
   <meta property="og:type" content="website">
   <meta property="og:locale" content="pt_BR">
@@ -21,13 +21,13 @@
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
 
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232d4d2d'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' font-weight='700' text-anchor='middle' fill='%23fbfaf9'%3ER%3C/text%3E%3C/svg%3E">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2322391f'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' font-weight='700' text-anchor='middle' fill='%23fbfaf9'%3ER%3C/text%3E%3C/svg%3E">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://www.googletagmanager.com">
   <link rel="preconnect" href="https://www.clarity.ms">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Archivo:wght@400;500;600;700&display=swap">
 
   <script type="application/ld+json">
   {
@@ -62,72 +62,122 @@
 
   <style>
     :root {
+      --verde: #3d6420; --verde-escuro: #22391f; --verde-hover: #2e4c18;
+      --roxo: #3f2b56; --roxo-claro: #a087c0; --lavanda: #eee9f3;
       --bg: #fbfaf9; --bg-alt: #f4f1ee;
       --fg: #223a23; --fg-soft: #4a5d4a; --muted: #6b7565;
-      --primary: #2d4d2d; --primary-hover: #1f3a20;
-      --secondary: #3a2752; --accent: #eee9f3;
       --border: #e5e0d9; --whatsapp: #25d366; --whatsapp-hover: #1ebe5d;
-      --max: 1120px;
-      --serif: "Playfair Display", Georgia, serif;
-      --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --max: 1180px;
+      --serif: "Cormorant Garamond", Garamond, Georgia, serif;
+      --serif-body: "EB Garamond", Garamond, Georgia, serif;
+      --sans: "Archivo", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
     *, *::before, *::after { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body { margin: 0; font: 16px/1.6 var(--sans); color: var(--fg); background: var(--bg); -webkit-font-smoothing: antialiased; }
+    body { margin: 0; font: 16px/1.6 var(--sans); color: var(--fg); background: #fff; -webkit-font-smoothing: antialiased; }
     img { max-width: 100%; height: auto; display: block; }
-    a { color: var(--primary); text-decoration: none; }
+    a { color: var(--verde); text-decoration: none; }
     a:hover { text-decoration: underline; }
-    h1, h2, h3 { font-family: var(--serif); font-weight: 700; line-height: 1.2; margin: 0 0 .5em; color: var(--fg); }
-    h1 { font-size: clamp(2rem, 5vw, 3rem); letter-spacing: -.01em; }
-    h2 { font-size: clamp(1.5rem, 3.2vw, 2.1rem); }
+    h1, h2, h3 { font-family: var(--serif); font-weight: 600; line-height: 1.15; margin: 0 0 .5em; color: var(--fg); }
     p { margin: 0 0 1em; color: var(--fg-soft); }
     .container { max-width: var(--max); margin: 0 auto; padding: 0 1.25rem; }
 
-    .site-header { position: sticky; top: 0; z-index: 50; background: rgba(251,250,249,.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
-    .site-header__inner { display: flex; align-items: center; justify-content: space-between; padding: .85rem 1.25rem; max-width: var(--max); margin: 0 auto; }
-    .logo { font-family: var(--serif); font-weight: 700; font-size: 1.35rem; color: var(--primary); letter-spacing: -.01em; }
-    .nav-cta { display: inline-flex; align-items: center; gap: .5rem; background: var(--whatsapp); color: #fff; padding: .55rem 1rem; border-radius: 999px; font-weight: 600; font-size: .9rem; }
-    .nav-cta:hover { background: var(--whatsapp-hover); text-decoration: none; color: #fff; }
-
-    .hero { padding: 4.5rem 0 3rem; text-align: center; }
-    .hero__eyebrow { display: inline-block; font-size: .82rem; letter-spacing: .08em; text-transform: uppercase; color: var(--secondary); font-weight: 600; margin-bottom: 1rem; }
-    .hero h1 { max-width: 820px; margin: 0 auto .8rem; }
-    .hero__sub { font-size: 1.15rem; color: var(--fg-soft); max-width: 640px; margin: 0 auto 2rem; }
-
-    .services { padding: 1rem 0 4rem; }
-    .services__grid { display: grid; gap: 1.5rem; grid-template-columns: 1fr; }
-    @media (min-width: 720px) { .services__grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (min-width: 1024px) { .services__grid { grid-template-columns: repeat(4, 1fr); } }
-    .service {
-      background: #fff; border: 1px solid var(--border); border-radius: 14px;
-      padding: 2rem 1.75rem; transition: transform .2s ease, box-shadow .2s ease;
-      display: flex; flex-direction: column;
+    /* ---------- Botão WhatsApp ---------- */
+    .btn-wa {
+      display: inline-flex; align-items: center; gap: .6rem;
+      background: var(--whatsapp); color: #fff; font-weight: 600;
+      padding: .6rem 1.25rem; border-radius: 999px; font-size: .9rem;
+      box-shadow: 0 4px 14px rgba(0,0,0,.14); white-space: nowrap;
     }
-    .service:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(34,58,35,.1); }
-    .service__icon { width: 44px; height: 44px; border-radius: 10px; background: var(--accent); color: var(--secondary); display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; font: 700 1.1rem var(--serif); }
-    .service h3 { color: var(--primary); margin-bottom: .5rem; }
-    .service p { font-size: .95rem; flex: 1; }
-    .service__link { margin-top: 1rem; font-weight: 600; color: var(--primary); display: inline-flex; align-items: center; gap: .35rem; }
-    .service__link:hover { gap: .55rem; transition: gap .15s ease; }
-    .service__link[aria-disabled="true"] { color: var(--muted); pointer-events: none; font-size: .9rem; }
+    .btn-wa:hover { background: var(--whatsapp-hover); color: #fff; text-decoration: none; }
+    .btn-wa--lg { padding: .95rem 1.8rem; font-size: 1.02rem; }
+    .btn-wa svg { width: 18px; height: 18px; flex-shrink: 0; }
 
-    .author-section { background: var(--bg-alt); padding: 4rem 0; }
-    .author { display: grid; gap: 1.5rem; grid-template-columns: 1fr; align-items: center; background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 1.75rem; max-width: 860px; margin: 0 auto; }
-    @media (min-width: 720px) { .author { grid-template-columns: 200px 1fr; gap: 2rem; } }
-    .author__photo { width: 160px; height: 160px; border-radius: 50%; object-fit: cover; border: 4px solid var(--accent); margin: 0 auto; }
-    @media (min-width: 720px) { .author__photo { width: 200px; height: 200px; margin: 0; } }
-    .author__name { font-family: var(--serif); font-size: 1.4rem; color: var(--fg); margin-bottom: .15rem; }
-    .author__role { font-size: .9rem; color: var(--secondary); font-weight: 600; margin-bottom: .8rem; }
+    /* ---------- Header + Hero (faixa escura) ---------- */
+    .top { background: var(--verde-escuro); color: #fff; }
+    .site-header { border-bottom: 1px solid rgba(255,255,255,.10); }
+    .site-header__inner { display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 1.25rem; max-width: var(--max); margin: 0 auto; }
+    .logo { display: flex; align-items: baseline; gap: .55rem; }
+    .logo:hover { text-decoration: none; }
+    .logo__rumos { font-family: var(--serif); font-weight: 600; font-size: 1.4rem; letter-spacing: .14em; color: #fff; line-height: 1; }
+    .logo__adv { font-family: var(--serif); font-weight: 500; font-size: .82rem; letter-spacing: .3em; color: var(--roxo-claro); }
+    .site-nav { display: flex; align-items: center; gap: 1.8rem; }
+    .site-nav__link { font-size: .88rem; font-weight: 500; color: rgba(255,255,255,.78); }
+    .site-nav__link:hover { color: #fff; text-decoration: none; }
+    @media (max-width: 860px) { .site-nav__link { display: none; } }
 
-    .site-footer { background: var(--primary); color: #d8dcd0; padding: 3rem 1.25rem 1.5rem; font-size: .9rem; }
-    .site-footer a { color: #fff; }
-    .site-footer__grid { max-width: var(--max); margin: 0 auto; display: grid; gap: 2rem; grid-template-columns: 1fr; }
-    @media (min-width: 720px) { .site-footer__grid { grid-template-columns: 1.4fr 1fr 1fr; } }
-    .site-footer h4 { color: #fff; font: 600 .92rem var(--sans); letter-spacing: .04em; text-transform: uppercase; margin: 0 0 .8rem; }
-    .site-footer__brand { font-family: var(--serif); font-size: 1.5rem; color: #fff; margin-bottom: .8rem; }
-    .site-footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: .45rem; }
-    .site-footer__bottom { max-width: var(--max); margin: 2rem auto 0; padding-top: 1.25rem; border-top: 1px solid rgba(255,255,255,.12); font-size: .82rem; color: #c4cab8; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; }
+    .hero { display: grid; grid-template-columns: 1fr; gap: 2.5rem; align-items: end; max-width: var(--max); margin: 0 auto; padding: 3.5rem 1.25rem 0; }
+    @media (min-width: 960px) { .hero { grid-template-columns: 1fr 380px; gap: 4.5rem; padding-top: 4.5rem; } }
+    .hero__text { padding-bottom: 3.5rem; }
+    @media (min-width: 960px) { .hero__text { padding-bottom: 4.5rem; } }
+    .hero__eyebrow { font-size: .8rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--roxo-claro); margin-bottom: 1.3rem; }
+    .hero h1 { font-size: clamp(2.3rem, 4.5vw, 3.6rem); color: #fff; margin-bottom: 1.3rem; max-width: 15em; }
+    .hero__sub { font-family: var(--serif-body); font-size: clamp(1.08rem, 1.6vw, 1.22rem); line-height: 1.6; color: rgba(255,255,255,.72); max-width: 560px; margin-bottom: 2.2rem; }
+    .hero__cta { display: flex; align-items: center; flex-wrap: wrap; gap: 1.2rem; margin-bottom: 2rem; }
+    .hero__fone { font-size: .95rem; color: rgba(255,255,255,.65); }
+    .hero__creds { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1.1rem; font-size: .84rem; color: rgba(255,255,255,.55); }
+    .hero__creds .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--roxo-claro); }
 
+    .hero__photo { position: relative; justify-self: center; width: min(380px, 80vw); }
+    .hero__photo::before { content: ""; position: absolute; top: 26px; left: -26px; right: 26px; bottom: 0; background: var(--roxo); opacity: .55; border-radius: 14px 14px 0 0; }
+    .hero__photo img { position: relative; width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 14px 14px 0 0; }
+
+    /* ---------- Barra de confiança ---------- */
+    .trust { border-bottom: 1px solid var(--border); }
+    .trust__grid { max-width: var(--max); margin: 0 auto; padding: 1.8rem 1.25rem; display: grid; gap: 1.2rem; grid-template-columns: 1fr; }
+    @media (min-width: 860px) { .trust__grid { grid-template-columns: repeat(3, 1fr); gap: 2.5rem; } }
+    .trust__item { display: flex; align-items: center; gap: .9rem; }
+    .trust__num { font-family: var(--serif); font-size: 1.6rem; font-weight: 600; color: var(--verde); line-height: 1; }
+    .trust__item span:last-child { font-size: .9rem; line-height: 1.45; color: var(--fg-soft); }
+
+    /* ---------- Serviços ---------- */
+    .services { padding: 5rem 0; }
+    .services__head { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem; margin-bottom: 2.8rem; }
+    .services__head h2 { font-size: clamp(1.8rem, 3vw, 2.6rem); margin: 0; }
+    .services__grid { display: grid; gap: 1.6rem; grid-template-columns: 1fr; }
+    @media (min-width: 760px) { .services__grid { grid-template-columns: 1fr 1fr; } }
+    .service {
+      border: 1px solid var(--border); border-radius: 4px; background: #fff;
+      padding: 2.2rem 2.2rem 2rem; display: flex; flex-direction: column;
+      transition: box-shadow .2s ease, transform .2s ease;
+    }
+    .service:nth-child(odd) { border-top: 3px solid var(--verde); }
+    .service:nth-child(even) { border-top: 3px solid var(--roxo); }
+    .service:hover { transform: translateY(-3px); box-shadow: 0 14px 36px rgba(34,58,35,.1); }
+    .service h3 { font-size: 1.65rem; margin-bottom: .6rem; }
+    .service p { font-size: .96rem; line-height: 1.65; flex: 1; margin-bottom: 1.3rem; }
+    .service__link { font-size: .84rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+    .service:nth-child(odd) .service__link { color: var(--verde); }
+    .service:nth-child(even) .service__link { color: var(--roxo); }
+
+    /* ---------- Autor ---------- */
+    .author-section { background: var(--lavanda); padding: 4.5rem 0; }
+    .author { max-width: 1000px; margin: 0 auto; display: grid; gap: 2rem; grid-template-columns: 1fr; align-items: center; padding: 0 1.25rem; }
+    @media (min-width: 760px) { .author { grid-template-columns: 190px 1fr; gap: 3.2rem; } }
+    .author__photo { width: 170px; height: 170px; border-radius: 50%; object-fit: cover; border: 4px solid #fff; margin: 0 auto; }
+    @media (min-width: 760px) { .author__photo { width: 190px; height: 190px; margin: 0; } }
+    .author__name { font-family: var(--serif); font-weight: 600; font-size: 1.85rem; color: var(--roxo); margin-bottom: .2rem; }
+    .author__role { font-size: .8rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--roxo); opacity: .7; margin-bottom: 1rem; }
+    .author__bio { font-family: var(--serif-body); font-size: 1.1rem; line-height: 1.7; color: #42355a; margin-bottom: .7rem; }
+    .author__meta { font-size: .88rem; color: #6b5e85; margin: 0; }
+
+    /* ---------- CTA final ---------- */
+    .cta-final { padding: 5rem 1.25rem; text-align: center; }
+    .cta-final h2 { font-size: clamp(1.7rem, 3vw, 2.5rem); margin-bottom: .8rem; }
+    .cta-final p { font-size: 1.05rem; max-width: 560px; margin: 0 auto 2.2rem; }
+
+    /* ---------- Footer ---------- */
+    .site-footer { background: var(--verde-escuro); color: rgba(255,255,255,.72); padding: 4rem 1.25rem 2rem; font-size: .9rem; }
+    .site-footer a { color: rgba(255,255,255,.72); }
+    .site-footer a:hover { color: #fff; }
+    .site-footer__grid { max-width: var(--max); margin: 0 auto; display: grid; gap: 2.5rem; grid-template-columns: 1fr; padding-bottom: 2.5rem; }
+    @media (min-width: 760px) { .site-footer__grid { grid-template-columns: 1.4fr 1fr 1fr; gap: 3rem; } }
+    .site-footer h4 { color: #fff; font: 600 .76rem var(--sans); letter-spacing: .12em; text-transform: uppercase; margin: 0 0 1rem; }
+    .site-footer p { color: rgba(255,255,255,.72); }
+    .site-footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: .55rem; }
+    .site-footer__bottom { max-width: var(--max); margin: 0 auto; padding-top: 1.4rem; border-top: 1px solid rgba(255,255,255,.12); font-size: .78rem; opacity: .65; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; }
+
+    /* ---------- Flutuante ---------- */
     .float-wa { position: fixed; bottom: 1.25rem; right: 1.25rem; z-index: 100; width: 56px; height: 56px; border-radius: 50%; background: var(--whatsapp); color: #fff; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 20px rgba(37,211,102,.45); }
     .float-wa:hover { transform: scale(1.06); text-decoration: none; color: #fff; }
     .float-wa svg { width: 28px; height: 28px; }
@@ -137,53 +187,95 @@
 
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NQTH2XWD" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
-<header class="site-header">
-  <div class="site-header__inner">
-    <div class="logo"><a href="/">RUMOS<span style="color:var(--secondary)">.</span></a></div>
-    <a href="https://wa.me/5519989119770?text=Ol%C3%A1%2C%20Dr.%20Rodrigo!%20Gostaria%20de%20uma%20orienta%C3%A7%C3%A3o%20jur%C3%ADdica." class="nav-cta" data-wa-source="header" rel="noopener" target="_blank">
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width:16px;height:16px"><path d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7 0-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.4.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5 0 1.5 1.1 2.9 1.3 3.1.2.2 2.2 3.3 5.3 4.6 1.9.7 2.6.8 3.5.7.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.2-.6-.4zM12 .9C5.9.9.9 5.9.9 12c0 2 .5 3.9 1.5 5.6L.7 23.3l5.9-1.5c1.6.9 3.5 1.4 5.4 1.4 6.1 0 11.1-5 11.1-11.1S18.1.9 12 .9z"/></svg>
-      WhatsApp
-    </a>
-  </div>
-</header>
+<div class="top">
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo" aria-label="Rumos Advocacia">
+        <span class="logo__rumos">RUMOS</span>
+        <span class="logo__adv">ADVOCACIA</span>
+      </a>
+      <nav class="site-nav" aria-label="Principal">
+        <a href="/alimentos" class="site-nav__link">Pensão alimentícia</a>
+        <a href="/divorcio" class="site-nav__link">Divórcio</a>
+        <a href="/inventario" class="site-nav__link">Inventário</a>
+        <a href="/imoveis" class="site-nav__link">Imóveis</a>
+        <a href="https://wa.me/5519989119770?text=Ol%C3%A1%2C%20Dr.%20Rodrigo!%20Gostaria%20de%20uma%20orienta%C3%A7%C3%A3o%20jur%C3%ADdica." class="btn-wa" data-wa-source="header" rel="noopener" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7 0-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.4.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5 0 1.5 1.1 2.9 1.3 3.1.2.2 2.2 3.3 5.3 4.6 1.9.7 2.6.8 3.5.7.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.2-.6-.4zM12 .9C5.9.9.9 5.9.9 12c0 2 .5 3.9 1.5 5.6L.7 23.3l5.9-1.5c1.6.9 3.5 1.4 5.4 1.4 6.1 0 11.1-5 11.1-11.1S18.1.9 12 .9z"/></svg>
+          WhatsApp
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero__text">
+      <div class="hero__eyebrow">Advocacia extrajudicial · Campinas/SP</div>
+      <h1>Resolva no cartório o que não precisa virar processo.</h1>
+      <p class="hero__sub">Direito de família — pensão alimentícia, divórcio — e atuação extrajudicial em inventário e regularização de imóveis. Soluções claras, técnicas e com sigilo profissional, em Campinas e região.</p>
+      <div class="hero__cta">
+        <a href="https://wa.me/5519989119770?text=Ol%C3%A1%2C%20Dr.%20Rodrigo!%20Gostaria%20de%20uma%20orienta%C3%A7%C3%A3o%20jur%C3%ADdica." class="btn-wa btn-wa--lg" data-wa-source="hero" rel="noopener" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7 0-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.4.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5 0 1.5 1.1 2.9 1.3 3.1.2.2 2.2 3.3 5.3 4.6 1.9.7 2.6.8 3.5.7.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.2-.6-.4zM12 .9C5.9.9.9 5.9.9 12c0 2 .5 3.9 1.5 5.6L.7 23.3l5.9-1.5c1.6.9 3.5 1.4 5.4 1.4 6.1 0 11.1-5 11.1-11.1S18.1.9 12 .9z"/></svg>
+          Falar com o advogado agora
+        </a>
+        <span class="hero__fone">(19) 98911-9770</span>
+      </div>
+      <div class="hero__creds">
+        <span>OAB/SP 188.004</span>
+        <span class="dot"></span>
+        <span>Especialista pelo Ibmec</span>
+        <span class="dot"></span>
+        <span>Sigilo profissional</span>
+      </div>
+    </div>
+    <div class="hero__photo">
+      <picture>
+        <source type="image/webp" srcset="https://rumosadv.com.br/assets/img/rodrigo-moura-400.webp 1x, https://rumosadv.com.br/assets/img/rodrigo-moura-800.webp 2x">
+        <img src="https://rumosadv.com.br/assets/img/rodrigo-moura-400.jpg"
+             srcset="https://rumosadv.com.br/assets/img/rodrigo-moura-400.jpg 1x, https://rumosadv.com.br/assets/img/rodrigo-moura-800.jpg 2x"
+             width="380" height="380"
+             alt="Dr. Rodrigo Moura Silva, advogado responsável"
+             fetchpriority="high">
+      </picture>
+    </div>
+  </section>
+</div>
 
 <main>
 
-  <section class="hero">
-    <div class="container">
-      <span class="hero__eyebrow">Advocacia extrajudicial · Campinas/SP</span>
-      <h1>Resolva no cartório o que não precisa virar processo.</h1>
-      <p class="hero__sub">Direito de família — pensão alimentícia, divórcio — e atuação extrajudicial em inventário e regularização de imóveis. Soluções claras, técnicas e com sigilo profissional, em Campinas e região.</p>
+  <section class="trust" aria-label="Compromissos do escritório">
+    <div class="trust__grid">
+      <div class="trust__item"><span class="trust__num">01</span><span>Atendimento direto com o advogado, sem intermediários</span></div>
+      <div class="trust__item"><span class="trust__num">02</span><span>Plano por escrito antes de qualquer compromisso</span></div>
+      <div class="trust__item"><span class="trust__num">03</span><span>Soluções claras, técnicas e com sigilo profissional</span></div>
     </div>
   </section>
 
-  <section class="services">
+  <section class="services" id="areas">
     <div class="container">
+      <div class="services__head">
+        <h2>Como podemos ajudar</h2>
+      </div>
       <div class="services__grid">
 
         <article class="service">
-          <div class="service__icon">A</div>
           <h3>Pensão alimentícia</h3>
           <p>Execução de pensão atrasada, ação inicial e revisão. Medidas legais firmes para garantir o sustento do filho — bloqueio, penhora e prisão civil quando cabível.</p>
           <a href="/alimentos" class="service__link">Saiba mais →</a>
         </article>
 
         <article class="service">
-          <div class="service__icon">D</div>
           <h3>Divórcio em cartório</h3>
           <p>Para casais consensuais. Possível mesmo com filhos menores, conforme Resolução 571/2024 do CNJ. Resolvido em poucas semanas, sem audiência.</p>
           <a href="/divorcio" class="service__link">Saiba mais →</a>
         </article>
 
         <article class="service">
-          <div class="service__icon">I</div>
           <h3>Inventário extrajudicial</h3>
           <p>Para herdeiros maiores e capazes em consenso. Conduzimos com cuidado pela escritura pública, da reunião dos documentos à partilha final.</p>
           <a href="/inventario" class="service__link">Saiba mais →</a>
         </article>
 
         <article class="service">
-          <div class="service__icon">R</div>
           <h3>Regularização de imóveis</h3>
           <p>Adjudicação compulsória e usucapião extrajudicial — para imóveis sem escritura no seu nome, contratos de gaveta, posse antiga sem registro. Análise documental em 48h.</p>
           <a href="/imoveis" class="service__link">Saiba mais →</a>
@@ -194,25 +286,32 @@
   </section>
 
   <section class="author-section">
-    <div class="container">
-      <article class="author">
-        <picture>
-          <source type="image/webp" srcset="/assets/img/rodrigo-moura-400.webp 1x, /assets/img/rodrigo-moura-800.webp 2x">
-          <img class="author__photo"
-               src="/assets/img/rodrigo-moura-400.jpg"
-               srcset="/assets/img/rodrigo-moura-400.jpg 1x, /assets/img/rodrigo-moura-800.jpg 2x"
-               width="200" height="200"
-               alt="Dr. Rodrigo Moura Silva, advogado responsável"
-               loading="lazy">
-        </picture>
-        <div>
-          <div class="author__name">Dr. Rodrigo Moura Silva</div>
-          <div class="author__role">OAB/SP 188.004 · Especialista em Direito Notarial e Registral pelo Ibmec</div>
-          <p>Advogado com prática consultiva e contenciosa em direito de família — pensão alimentícia, divórcio, partilha — e atuação extrajudicial em inventário e regularização imobiliária. Conduz cada caso pessoalmente, com atenção ao momento da família e foco em soluções claras, técnicas e com sigilo profissional.</p>
-          <p style="margin: 0; font-size: .88rem; color: var(--muted);">Atendimento em Campinas/SP e região. Reuniões presenciais ou online.</p>
-        </div>
-      </article>
-    </div>
+    <article class="author">
+      <picture>
+        <source type="image/webp" srcset="https://rumosadv.com.br/assets/img/rodrigo-moura-400.webp 1x, https://rumosadv.com.br/assets/img/rodrigo-moura-800.webp 2x">
+        <img class="author__photo"
+             src="https://rumosadv.com.br/assets/img/rodrigo-moura-400.jpg"
+             srcset="https://rumosadv.com.br/assets/img/rodrigo-moura-400.jpg 1x, https://rumosadv.com.br/assets/img/rodrigo-moura-800.jpg 2x"
+             width="190" height="190"
+             alt="Dr. Rodrigo Moura Silva, advogado responsável"
+             loading="lazy">
+      </picture>
+      <div>
+        <div class="author__name">Dr. Rodrigo Moura Silva</div>
+        <div class="author__role">OAB/SP 188.004 · Especialista em Direito Notarial e Registral pelo Ibmec</div>
+        <p class="author__bio">Advogado com prática consultiva e contenciosa em direito de família — pensão alimentícia, divórcio, partilha — e atuação extrajudicial em inventário e regularização imobiliária. Conduz cada caso pessoalmente, com atenção ao momento da família e foco em soluções claras, técnicas e com sigilo profissional.</p>
+        <p class="author__meta">Atendimento em Campinas/SP e região. Reuniões presenciais ou online.</p>
+      </div>
+    </article>
+  </section>
+
+  <section class="cta-final">
+    <h2>Seu caso merece uma resposta clara.</h2>
+    <p>Conte sua situação pelo WhatsApp e receba a orientação inicial direto do Dr. Rodrigo.</p>
+    <a href="https://wa.me/5519989119770?text=Ol%C3%A1%2C%20Dr.%20Rodrigo!%20Gostaria%20de%20uma%20orienta%C3%A7%C3%A3o%20jur%C3%ADdica." class="btn-wa btn-wa--lg" data-wa-source="cta-final" rel="noopener" target="_blank">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7 0-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.4.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5 0 1.5 1.1 2.9 1.3 3.1.2.2 2.2 3.3 5.3 4.6 1.9.7 2.6.8 3.5.7.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.2-.6-.4zM12 .9C5.9.9.9 5.9.9 12c0 2 .5 3.9 1.5 5.6L.7 23.3l5.9-1.5c1.6.9 3.5 1.4 5.4 1.4 6.1 0 11.1-5 11.1-11.1S18.1.9 12 .9z"/></svg>
+      Conversar pelo WhatsApp
+    </a>
   </section>
 
 </main>
@@ -220,9 +319,12 @@
 <footer class="site-footer">
   <div class="site-footer__grid">
     <div>
-      <div class="site-footer__brand">RUMOS<span style="color:#a087c0">.</span></div>
+      <a href="/" class="logo" aria-label="Rumos Advocacia" style="margin-bottom: 1rem; display: inline-flex;">
+        <span class="logo__rumos" style="font-size: 1.25rem;">RUMOS</span>
+        <span class="logo__adv" style="font-size: .74rem;">ADVOCACIA</span>
+      </a>
       <p style="margin: 0;">Advocacia em Campinas/SP.<br>Pensão alimentícia · Divórcio · Inventário · Regularização de imóveis.</p>
-      <p style="margin: .8rem 0 0; font-size: .85rem;">Dr. Rodrigo Moura Silva — OAB/SP 188.004<br>Especialista em Direito Notarial e Registral pelo Ibmec</p>
+      <p style="margin: .8rem 0 0; font-size: .82rem; opacity: .8;">Dr. Rodrigo Moura Silva — OAB/SP 188.004<br>Especialista em Direito Notarial e Registral pelo Ibmec</p>
     </div>
     <div>
       <h4>Contato</h4>
@@ -257,5 +359,7 @@
 <script>
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({ event: 'page_view_lp', page: 'home', service: 'Institucional' });
+</script>
 
- 
+</body>
+</html>
