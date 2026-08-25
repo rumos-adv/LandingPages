@@ -52,7 +52,7 @@ export async function onRequestPost(context) {
       },
       items: [{
         externalReference: 'analise-viabilidade-rumos',
-        name: 'Análise de Viabilidade de Marca',
+        name: 'Análise de Marca',
         description: `Análise de viabilidade jurídica da marca ${aceite.marca}`,
         quantity: 1,
         value: 390
