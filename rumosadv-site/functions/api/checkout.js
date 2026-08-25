@@ -70,7 +70,8 @@ export async function onRequestPost(context) {
       headers: {
         'accept': 'application/json',
         'content-type': 'application/json',
-        'access_token': context.env.ASAAS_API_KEY
+        'access_token': context.env.ASAAS_API_KEY,
+        'user-agent': 'RumosAdvocacia-Checkout/1.0 (+https://rumosadv.com.br)'
       },
       body: JSON.stringify(payload)
     });
