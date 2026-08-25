@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pagamento · Rumos Marcas &amp; Negócios</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#22391f">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=EB+Garamond:wght@400;500&family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{--deep:#071b12;--ivory:#f4efe4;--gold:#d6b165;--bg:#f4f1ee;--fg:#223a23;--soft:#4a5d4a;--serif:"Cormorant Garamond",Georgia,serif;--body:"EB Garamond",Georgia,serif;--sans:"Archivo",sans-serif}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans)}
+    header{background:var(--deep);padding:1.1rem 1.25rem;border-bottom:1px solid rgba(255,255,255,.1)}
+    .brand{max-width:760px;margin:0 auto;font-family:var(--serif);color:var(--ivory);letter-spacing:.14em}.brand span{color:var(--gold);font-size:.72rem;margin-left:.5rem;letter-spacing:.24em}
+    main{min-height:70vh;display:grid;place-items:center;padding:2rem 1.25rem}.card{width:min(680px,100%);background:#fff;border:1px solid #e5e0d9;border-top:3px solid var(--gold);padding:clamp(1.5rem,5vw,2.6rem);text-align:center}
+    h1{font-family:var(--serif);font-size:clamp(2rem,5vw,3rem);margin:.2rem 0 .8rem}p{font-family:var(--body);font-size:1.1rem;line-height:1.65;color:var(--soft)}
+    .eyebrow{font-size:.75rem;text-transform:uppercase;letter-spacing:.18em;color:#8f6f32;font-weight:600}.btn{display:inline-block;margin-top:1rem;padding:.95rem 1.4rem;background:var(--gold);color:var(--deep);text-decoration:none;text-transform:uppercase;letter-spacing:.08em;font-size:.82rem;font-weight:600}
+  </style>
+</head>
+<body>
+<header><div class="brand">RUMOS <span>MARCAS &amp; NEGÓCIOS</span></div></header>
+<main><section class="card"><div class="eyebrow" id="eyebrow">Pagamento</div><h1 id="title">Retorno do pagamento</h1><p id="message">Estamos processando o retorno da sua contratação.</p><a class="btn" href="/marcas/" id="action">Voltar para Marcas</a></section></main>
+<script>
+(function(){
+ const p=new URLSearchParams(location.search),s=p.get('status');
+ const e=document.getElementById('eyebrow'),t=document.getElementById('title'),m=document.getElementById('message'),a=document.getElementById('action');
+ if(s==='sucesso'){e.textContent='Etapa concluída';t.textContent='Pagamento enviado';m.textContent='Recebemos o retorno do checkout. A confirmação financeira é validada automaticamente pelo Asaas e registrada pela Rumos. Assim que confirmada, seguimos para o briefing da análise.';a.textContent='Voltar para Rumos Marcas & Negócios';}
+ else if(s==='cancelado'){e.textContent='Pagamento interrompido';t.textContent='Checkout cancelado';m.textContent='Seu aceite permanece registrado, mas o pagamento não foi concluído. Você poderá retomar a contratação quando desejar.';a.href='/marcas/aceite/';a.textContent='Voltar ao aceite';}
+ else if(s==='expirado'){e.textContent='Link expirado';t.textContent='O checkout expirou';m.textContent='Seu aceite permanece registrado. Para concluir a contratação, retorne à página de aceite e gere uma nova etapa de pagamento.';a.href='/marcas/aceite/';a.textContent='Voltar ao aceite';}
+ window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'asaas_checkout_return',status:s||'desconhecido'});
+})();
+</script>
+</body></html>
