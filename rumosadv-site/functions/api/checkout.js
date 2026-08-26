@@ -56,13 +56,7 @@ export async function onRequestPost(context) {
         description: `Análise de viabilidade jurídica da marca ${aceite.marca}`,
         quantity: 1,
         value: 390
-      }],
-      customerData: {
-        name: aceite.nome,
-        cpfCnpj,
-        email: aceite.email,
-        phone
-      }
+      }]
     };
 
     const response = await fetch(`${apiBase(context.env)}/checkouts`, {
