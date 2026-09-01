@@ -83,3 +83,13 @@ export function buildReportDraft(caseData, results, review = {}) {
   };
 }
 
+export function buildOperationalMessages(caseData = {}) {
+  const name = String(caseData.client || '').trim().split(/\s+/)[0] || 'Olá';
+  const mark = String(caseData.mark || 'sua marca').trim();
+  return {
+    payment_confirmed: `${name}, confirmamos o pagamento da análise de viabilidade da marca ${mark}. Vou enviar agora um link seguro para o briefing. O prazo de até 1 dia útil começa após recebermos todas as informações necessárias e o logotipo, quando aplicável.`,
+    briefing_reminder: `${name}, o briefing da análise da marca ${mark} ainda está pendente. Assim que ele for concluído, consigo iniciar a pesquisa e confirmar o prazo de entrega.`,
+    delivery: `${name}, a análise de viabilidade da marca ${mark} foi concluída. Estou enviando o relatório em PDF e um resumo dos principais achados. A pesquisa reflete as bases consultadas na data de corte e não garante a concessão pelo INPI.`,
+    registration_offer: `${name}, se você decidir prosseguir com o pedido de registro da marca ${mark}, os R$ 390 pagos pela análise serão abatidos integralmente dos honorários se a contratação ocorrer em até 30 dias da entrega. Posso lhe enviar a proposta com classes, taxas oficiais e etapas do acompanhamento.`
+  };
+}

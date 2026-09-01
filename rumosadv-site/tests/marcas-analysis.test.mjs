@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { generateQueries, normalizeMark, phoneticKey, scoreResult, buildReportDraft } from '../functions/_lib/marcas-analysis.js';
+import { generateQueries, normalizeMark, phoneticKey, scoreResult, buildReportDraft, buildOperationalMessages } from '../functions/_lib/marcas-analysis.js';
 
 test('normaliza acentos e pontuação', () => assert.equal(normalizeMark(' Montanha Cafés® '), 'montanha cafes'));
 test('gera busca exata, aglutinada, invertida e termos dominantes', () => {
@@ -19,4 +19,9 @@ test('minuta exige revisão jurídica', () => {
   assert.equal(draft.legal_review_required, true);
   assert.equal(draft.risk_level, null);
 });
-
+test('mensagens operacionais preservam prazo e crédito comercial', () => {
+  const messages = buildOperationalMessages({ client: 'Rodrigo Moura', mark: 'Montanha Cafés' });
+  assert.match(messages.payment_confirmed, /1 dia útil/);
+  assert.match(messages.registration_offer, /R\$ 390/);
+  assert.match(messages.registration_offer, /30 dias/);
+});

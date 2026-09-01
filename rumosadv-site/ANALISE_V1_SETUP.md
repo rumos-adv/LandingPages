@@ -9,6 +9,9 @@
 5. resultados exportados ou copiados do INPI são importados em JSON;
 6. o sistema calcula uma triagem de relevância textual, fonética e de afinidade;
 7. o advogado revisa os achados e aprova a minuta estruturada.
+8. o painel abre a versão A4 para impressão ou salvamento em PDF;
+9. após a aprovação jurídica, o advogado registra a entrega e o sistema calcula o crédito de 30 dias;
+10. a contratação posterior do pedido pode ser registrada no mesmo caso.
 
 A pontuação não é parecer jurídico e nunca substitui a revisão profissional.
 
@@ -40,3 +43,10 @@ O painel recebe uma lista JSON com até 250 itens. Exemplo:
 
 `class_affinity` é informado pelo advogado entre 0 e 1. A V1 não presume afinidade apenas pelo número da classe.
 
+## Entrega e conversão
+
+- `Abrir relatório para PDF` exige uma minuta previamente salva;
+- `Marcar como entregue` exige revisão marcada como aprovada;
+- a entrega preenche `delivered_at`, muda `analysis_status` para `entregue` e calcula `credit_expires_at` em 30 dias;
+- `Registrar contratação do pedido` preenche `registration_converted_at`;
+- o painel oferece mensagens prontas para confirmação de pagamento, lembrete de briefing, entrega e oferta do registro.
