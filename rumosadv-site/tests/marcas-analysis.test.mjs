@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { generateQueries, normalizeMark, phoneticKey, scoreResult, buildReportDraft, buildOperationalMessages } from '../functions/_lib/marcas-analysis.js';
+import { generateQueries, normalizeMark, phoneticKey, scoreResult, tokenSetSimilarity, buildReportDraft, buildOperationalMessages } from '../functions/_lib/marcas-analysis.js';
 
 test('normaliza acentos e pontuação', () => assert.equal(normalizeMark(' Montanha Cafés® '), 'montanha cafes'));
 test('gera busca exata, aglutinada, invertida e termos dominantes', () => {
@@ -9,6 +9,10 @@ test('gera busca exata, aglutinada, invertida e termos dominantes', () => {
   assert.ok(plan.some(item => item.type === 'ordem_invertida'));
 });
 test('aproxima grafias foneticamente equivalentes', () => assert.equal(phoneticKey('Pharma'), phoneticKey('Farma')));
+test('reconhece os mesmos elementos em ordem invertida, com conectivo e singular/plural', () => {
+  assert.equal(tokenSetSimilarity('Montanha Cafés', 'Café da Montanha'), 1);
+  assert.equal(scoreResult('Montanha Cafés', 'Café da Montanha', .9).relevance_level, 'alta');
+});
 test('classifica identidade com afinidade como alta relevância', () => {
   const result = scoreResult('Montanha Cafés', 'Montanha Cafes', 1);
   assert.equal(result.relevance_level, 'alta');

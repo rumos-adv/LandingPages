@@ -1,4 +1,4 @@
-export const ENGINE_VERSION = 'rumos-marcas-v1';
+export const ENGINE_VERSION = 'rumos-marcas-v1.1';
 
 export function normalizeMark(value) {
   return String(value || '')
@@ -46,6 +46,20 @@ export function textSimilarity(a, b) {
   return Number((1 - levenshtein(x, y) / Math.max(x.length, y.length)).toFixed(3));
 }
 
+const connectiveWords = new Set(['a', 'as', 'da', 'das', 'de', 'do', 'dos', 'e', 'o', 'os']);
+
+function comparisonTokens(value) {
+  return normalizeMark(value).split(' ').filter(Boolean).filter(word => !connectiveWords.has(word))
+    .map(word => word.length > 4 && word.endsWith('s') ? word.slice(0, -1) : word);
+}
+
+export function tokenSetSimilarity(a, b) {
+  const x = new Set(comparisonTokens(a)), y = new Set(comparisonTokens(b));
+  if (!x.size || !y.size) return 0;
+  const intersection = [...x].filter(token => y.has(token)).length;
+  return Number((intersection / new Set([...x, ...y]).size).toFixed(3));
+}
+
 export function phoneticKey(value) {
   return normalizeMark(value).replace(/ph/g, 'f').replace(/[ckq]/g, 'k')
     .replace(/[szx]/g, 's').replace(/g(?=[ei])/g, 'j').replace(/h/g, '')
@@ -53,10 +67,13 @@ export function phoneticKey(value) {
 }
 
 export function scoreResult(targetMark, candidateMark, classAffinity = 0) {
-  const text = textSimilarity(targetMark, candidateMark);
+  const structural = tokenSetSimilarity(targetMark, candidateMark);
+  const text = Math.max(textSimilarity(targetMark, candidateMark), structural);
   const phonetic = textSimilarity(phoneticKey(targetMark), phoneticKey(candidateMark));
   const affinity = Math.max(0, Math.min(1, Number(classAffinity) || 0));
-  const score = Number((text * .5 + phonetic * .3 + affinity * .2).toFixed(3));
+  const sequentialScore = text * .5 + phonetic * .3 + affinity * .2;
+  const structuralScore = structural * .8 + affinity * .2;
+  const score = Number(Math.max(sequentialScore, structuralScore).toFixed(3));
   return {
     text_similarity: text,
     phonetic_similarity: phonetic,
