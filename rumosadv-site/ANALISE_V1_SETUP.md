@@ -46,7 +46,9 @@ O painel recebe uma lista JSON com até 250 itens. Exemplo:
 ## Entrega e conversão
 
 - `Abrir relatório para PDF` exige uma minuta previamente salva;
+- antes de `Marcar como entregue`, o operador informa a referência do PDF efetivamente salvo e enviado; a V1 registra a referência, mas não armazena o arquivo;
 - `Marcar como entregue` exige revisão marcada como aprovada;
-- a entrega preenche `delivered_at`, muda `analysis_status` para `entregue` e calcula `credit_expires_at` em 30 dias;
-- `Registrar contratação do pedido` preenche `registration_converted_at`;
+- a entrega preenche `delivered_at` e `report_file`, muda `analysis_status` para `entregue` e calcula `credit_expires_at` em 30 dias;
+- entrega e conversão são idempotentes: cliques repetidos preservam as datas originais;
+- `Registrar contratação do pedido` preenche `registration_converted_at` somente depois da entrega;
 - o painel oferece mensagens prontas para confirmação de pagamento, lembrete de briefing, entrega e oferta do registro.

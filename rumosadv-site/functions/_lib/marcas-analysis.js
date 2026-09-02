@@ -110,3 +110,36 @@ export function buildOperationalMessages(caseData = {}) {
     registration_offer: `${name}, se você decidir prosseguir com o pedido de registro da marca ${mark}, os R$ 390 pagos pela análise serão abatidos integralmente dos honorários se a contratação ocorrer em até 30 dias da entrega. Posso lhe enviar a proposta com classes, taxas oficiais e etapas do acompanhamento.`
   };
 }
+
+export function buildDeliveryRecord(current = {}, reportFile = '', now = new Date()) {
+  if (current.delivered_at) {
+    return {
+      already_delivered: true,
+      delivered_at: current.delivered_at,
+      credit_expires_at: current.credit_expires_at || null,
+      report_file: current.report_file || null
+    };
+  }
+  const deliveredAt = new Date(now);
+  if (Number.isNaN(deliveredAt.getTime())) throw new TypeError('Data de entrega inválida.');
+  const reference = String(reportFile || '').trim();
+  if (!reference || reference.length > 240 || /[\u0000-\u001f]/.test(reference)) {
+    throw new TypeError('Informe uma referência válida para o PDF entregue.');
+  }
+  return {
+    already_delivered: false,
+    delivered_at: deliveredAt.toISOString(),
+    credit_expires_at: new Date(deliveredAt.getTime() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+    report_file: reference
+  };
+}
+
+export function buildConversionRecord(current = {}, now = new Date()) {
+  if (!current.delivered_at) throw new TypeError('Registre a entrega antes da conversão para o pedido.');
+  if (current.registration_converted_at) {
+    return { already_converted: true, registration_converted_at: current.registration_converted_at };
+  }
+  const convertedAt = new Date(now);
+  if (Number.isNaN(convertedAt.getTime())) throw new TypeError('Data de conversão inválida.');
+  return { already_converted: false, registration_converted_at: convertedAt.toISOString() };
+}

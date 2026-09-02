@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { generateQueries, normalizeMark, phoneticKey, scoreResult, tokenSetSimilarity, buildReportDraft, buildOperationalMessages } from '../functions/_lib/marcas-analysis.js';
+import { generateQueries, normalizeMark, phoneticKey, scoreResult, tokenSetSimilarity, buildReportDraft, buildOperationalMessages, buildDeliveryRecord, buildConversionRecord } from '../functions/_lib/marcas-analysis.js';
 
 test('normaliza acentos e pontuação', () => assert.equal(normalizeMark(' Montanha Cafés® '), 'montanha cafes'));
 test('gera busca exata, aglutinada, invertida e termos dominantes', () => {
@@ -28,4 +28,21 @@ test('mensagens operacionais preservam prazo e crédito comercial', () => {
   assert.match(messages.payment_confirmed, /1 dia útil/);
   assert.match(messages.registration_offer, /R\$ 390/);
   assert.match(messages.registration_offer, /30 dias/);
+});
+test('entrega exige referência do PDF e calcula crédito de 30 dias', () => {
+  const delivery = buildDeliveryRecord({}, 'relatorio-montanha-cafes-2026-09-01.pdf', new Date('2026-09-01T15:00:00.000Z'));
+  assert.equal(delivery.delivered_at, '2026-09-01T15:00:00.000Z');
+  assert.equal(delivery.credit_expires_at, '2026-10-01T15:00:00.000Z');
+  assert.equal(delivery.report_file, 'relatorio-montanha-cafes-2026-09-01.pdf');
+  assert.throws(() => buildDeliveryRecord({}, ''), /referência válida/);
+});
+test('entrega repetida preserva as datas e a referência originais', () => {
+  const current = { delivered_at: '2026-09-01T15:00:00.000Z', credit_expires_at: '2026-10-01T15:00:00.000Z', report_file: 'original.pdf' };
+  assert.deepEqual(buildDeliveryRecord(current, 'novo.pdf', new Date('2026-09-10T15:00:00.000Z')), { already_delivered: true, ...current });
+});
+test('conversão exige entrega e é idempotente', () => {
+  assert.throws(() => buildConversionRecord({}), /Registre a entrega/);
+  const first = buildConversionRecord({ delivered_at: '2026-09-01T15:00:00.000Z' }, new Date('2026-09-02T15:00:00.000Z'));
+  assert.equal(first.registration_converted_at, '2026-09-02T15:00:00.000Z');
+  assert.deepEqual(buildConversionRecord({ delivered_at: '2026-09-01T15:00:00.000Z', registration_converted_at: first.registration_converted_at }, new Date('2026-09-12T15:00:00.000Z')), { already_converted: true, registration_converted_at: first.registration_converted_at });
 });

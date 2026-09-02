@@ -1,4 +1,4 @@
-import { buildOperationalMessages, buildReportDraft, scoreResult } from '../../_lib/marcas-analysis.js';
+import { buildConversionRecord, buildDeliveryRecord, buildOperationalMessages, buildReportDraft, scoreResult } from '../../_lib/marcas-analysis.js';
 import { createBriefingToken, isAdmin } from '../../_lib/marcas-auth.js';
 
 const json = (body, status = 200) => Response.json(body, { status, headers: { 'cache-control': 'no-store' } });
@@ -35,7 +35,7 @@ export async function onRequestPost(context) {
     const denied = requireAdmin(context); if (denied) return denied;
     const body = await context.request.json(), action = String(body.action || ''), id = String(body.aceite_id || '');
     if (!id) return json({ error: 'Caso não informado.' }, 400);
-    const aceite = await context.env.ACEITES_DB.prepare(`SELECT id, marca, nome, payment_status FROM aceites WHERE id=? LIMIT 1`).bind(id).first();
+    const aceite = await context.env.ACEITES_DB.prepare(`SELECT id, marca, nome, payment_status, delivered_at, credit_expires_at, registration_converted_at, report_file FROM aceites WHERE id=? LIMIT 1`).bind(id).first();
     if (!aceite) return json({ error: 'Caso não encontrado.' }, 404);
 
     if (action === 'create_briefing_link') {
@@ -76,19 +76,23 @@ export async function onRequestPost(context) {
       return json({ ok: true, report });
     }
     if (action === 'mark_delivered') {
+      if (aceite.delivered_at) return json({ ok: true, ...buildDeliveryRecord(aceite) });
       const review = await context.env.ACEITES_DB.prepare(`SELECT approved FROM marca_reviews WHERE aceite_id=? LIMIT 1`).bind(id).first();
       if (!review?.approved) return json({ error: 'A minuta precisa ser revisada e aprovada antes da entrega.' }, 409);
-      const deliveredAt = new Date();
-      const creditExpiresAt = new Date(deliveredAt.getTime() + 30 * 24 * 60 * 60 * 1000);
-      await context.env.ACEITES_DB.prepare(`UPDATE aceites SET analysis_status='entregue', delivered_at=?, credit_expires_at=? WHERE id=?`).bind(deliveredAt.toISOString(), creditExpiresAt.toISOString(), id).run();
-      return json({ ok: true, delivered_at: deliveredAt.toISOString(), credit_expires_at: creditExpiresAt.toISOString() });
+      let delivery;
+      try { delivery = buildDeliveryRecord(aceite, body.report_file); }
+      catch (error) { return json({ error: error.message }, 400); }
+      await context.env.ACEITES_DB.prepare(`UPDATE aceites SET analysis_status='entregue', delivered_at=?, credit_expires_at=?, report_file=? WHERE id=?`).bind(delivery.delivered_at, delivery.credit_expires_at, delivery.report_file, id).run();
+      return json({ ok: true, ...delivery });
     }
     if (action === 'mark_converted') {
-      const current = await context.env.ACEITES_DB.prepare(`SELECT delivered_at FROM aceites WHERE id=? LIMIT 1`).bind(id).first();
-      if (!current?.delivered_at) return json({ error: 'Registre a entrega antes da conversão para o pedido.' }, 409);
-      const convertedAt = new Date().toISOString();
-      await context.env.ACEITES_DB.prepare(`UPDATE aceites SET registration_converted_at=? WHERE id=?`).bind(convertedAt, id).run();
-      return json({ ok: true, registration_converted_at: convertedAt });
+      let conversion;
+      try { conversion = buildConversionRecord(aceite); }
+      catch (error) { return json({ error: error.message }, 409); }
+      if (!conversion.already_converted) {
+        await context.env.ACEITES_DB.prepare(`UPDATE aceites SET registration_converted_at=? WHERE id=?`).bind(conversion.registration_converted_at, id).run();
+      }
+      return json({ ok: true, ...conversion });
     }
     return json({ error: 'Ação inválida.' }, 400);
   } catch (error) { console.error('analysis_admin_post_error', error); return json({ error: 'Não foi possível executar a ação.' }, 500); }
