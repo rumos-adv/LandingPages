@@ -15,7 +15,7 @@ export async function onRequestGet(context) {
     const denied = requireAdmin(context); if (denied) return denied;
     const id = new URL(context.request.url).searchParams.get('id');
     if (!id) {
-      const list = await context.env.ACEITES_DB.prepare(`SELECT id, created_at, nome, email, whatsapp, marca, payment_status, paid_at, briefing_status, analysis_status, analysis_due_at, risk_level, delivered_at FROM aceites WHERE payment_status='PAID' ORDER BY paid_at DESC LIMIT 100`).all();
+      const list = await context.env.ACEITES_DB.prepare(`SELECT id, created_at, nome, email, whatsapp, marca, payment_status, paid_at, briefing_status, briefing_completed_at, analysis_status, analysis_due_at, risk_level, report_file, delivered_at, credit_expires_at, registration_converted_at FROM aceites WHERE payment_status='PAID' ORDER BY paid_at DESC LIMIT 100`).all();
       return json({ ok: true, cases: list.results || [] });
     }
     const [aceite, briefing, plan, results, review] = await Promise.all([
