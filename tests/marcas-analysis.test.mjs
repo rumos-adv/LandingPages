@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { generateQueries, normalizeMark, phoneticKey, scoreResult, tokenSetSimilarity, buildReportDraft, buildOperationalMessages, buildPostSaleMessages, buildDeliveryRecord, buildConversionRecord } from '../functions/_lib/marcas-analysis.js';
+import { generateQueries, normalizeMark, phoneticKey, scoreResult, tokenSetSimilarity, buildReportDraft, buildOperationalMessages, buildPostSaleMessages, buildDeliveryRecord, buildConversionRecord } from '../rumosadv-site/functions/_lib/marcas-analysis.js';
 
 test('normaliza acentos e pontuação', () => assert.equal(normalizeMark(' Montanha Cafés® '), 'montanha cafes'));
 test('gera busca exata, aglutinada, invertida e termos dominantes', () => {

@@ -6,9 +6,6 @@
   <title>Pagamento · Rumos Marcas &amp; Negócios</title>
   <meta name="robots" content="noindex, nofollow">
   <meta name="theme-color" content="#22391f">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=EB+Garamond:wght@400;500&family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root{--deep:#071b12;--ivory:#f4efe4;--gold:#d6b165;--bg:#f4f1ee;--fg:#223a23;--soft:#4a5d4a;--serif:"Cormorant Garamond",Georgia,serif;--body:"EB Garamond",Georgia,serif;--sans:"Archivo",sans-serif}
     *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans)}
@@ -25,11 +22,11 @@
 <script>
 (function(){
  const p=new URLSearchParams(location.search),s=p.get('status');
+ history.replaceState(null,'',location.pathname);
  const e=document.getElementById('eyebrow'),t=document.getElementById('title'),m=document.getElementById('message'),a=document.getElementById('action');
  if(s==='sucesso'){e.textContent='Etapa concluída';t.textContent='Pagamento enviado';m.textContent='Recebemos o retorno do checkout. A confirmação financeira é validada automaticamente pelo Asaas e registrada pela Rumos. Assim que confirmada, seguimos para o briefing da análise.';a.textContent='Voltar para Rumos Marcas & Negócios';}
  else if(s==='cancelado'){e.textContent='Pagamento interrompido';t.textContent='Checkout cancelado';m.textContent='Seu aceite permanece registrado, mas o pagamento não foi concluído. Você poderá retomar a contratação quando desejar.';a.href='/marcas/aceite/';a.textContent='Voltar ao aceite';}
  else if(s==='expirado'){e.textContent='Link expirado';t.textContent='O checkout expirou';m.textContent='Seu aceite permanece registrado. Para concluir a contratação, retorne à página de aceite e gere uma nova etapa de pagamento.';a.href='/marcas/aceite/';a.textContent='Voltar ao aceite';}
- window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'asaas_checkout_return',status:s||'desconhecido'});
 })();
 </script>
 </body></html>

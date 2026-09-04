@@ -1,10 +1,111 @@
 <!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Briefing da marca | Rumos</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=EB+Garamond:wght@400;500&family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
-<style>:root{--deep:#071b12;--ivory:#f4efe4;--gold:#d6b165;--bg:#f4f1ee;--fg:#223a23;--soft:#4a5d4a;--border:#e5e0d9;--green:#3d6420;--warn:#8a3a2a;--serif:"Cormorant Garamond",Georgia,serif;--body:"EB Garamond",Georgia,serif;--sans:"Archivo",sans-serif}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans)}header{background:var(--deep);padding:1.1rem 1.25rem}.brand{max-width:820px;margin:auto;color:var(--ivory);font:600 1.25rem var(--serif);letter-spacing:.14em}.brand span{color:var(--gold);font-size:.72rem;margin-left:.5rem;letter-spacing:.2em}main{max-width:820px;margin:auto;padding:2.5rem 1.25rem 4rem}.intro,.card{background:#fff;border:1px solid var(--border);padding:clamp(1.25rem,4vw,2rem);margin-bottom:1rem}.intro{border-top:3px solid var(--gold)}h1,h2{font-family:var(--serif);margin:.1rem 0 .5rem}h1{font-size:clamp(2rem,5vw,3rem)}h2{font-size:1.55rem}p{font-family:var(--body);font-size:1.08rem;line-height:1.55;color:var(--soft)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}.full{grid-column:1/-1}label{display:block;font-size:.82rem;font-weight:600;margin-bottom:.35rem}input,select,textarea{width:100%;border:1px solid var(--border);background:#fbfaf9;color:var(--fg);padding:.75rem;font:1rem var(--sans)}textarea{min-height:105px;resize:vertical}.check{display:flex;gap:.65rem;align-items:flex-start;padding:.7rem;background:var(--bg);margin:.6rem 0}.check input{width:auto;margin-top:.25rem}.btn{width:100%;border:0;background:var(--gold);color:var(--deep);padding:1rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;cursor:pointer}.btn:disabled{opacity:.55}.status{display:none;padding:1rem;margin-bottom:1rem}.status.show{display:block}.status.error{background:#faeee9;color:var(--warn)}.status.ok{background:#e9f5ec;color:var(--fg)}@media(max-width:650px){.grid{grid-template-columns:1fr}.full{grid-column:auto}}</style></head>
+<script>
+(function(){
+  const url=new URL(location.href);
+  const fragmentToken=new URLSearchParams(url.hash.slice(1)).get('token');
+  const legacyToken=url.searchParams.get('token');
+  window.__rumosBriefingToken=fragmentToken||legacyToken||'';
+  if(url.hash||url.searchParams.has('token')) history.replaceState(null,'',url.pathname);
+})();
+</script>
+<style>:root{--deep:#071b12;--ivory:#f4efe4;--gold:#d6b165;--bg:#f4f1ee;--fg:#223a23;--soft:#4a5d4a;--border:#e5e0d9;--green:#3d6420;--warn:#8a3a2a;--serif:"Cormorant Garamond",Georgia,serif;--body:"EB Garamond",Georgia,serif;--sans:"Archivo",sans-serif}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans)}header{background:var(--deep);padding:1.1rem 1.25rem}.brand{max-width:820px;margin:auto;color:var(--ivory);font:600 1.25rem var(--serif);letter-spacing:.14em}.brand span{color:var(--gold);font-size:.72rem;margin-left:.5rem;letter-spacing:.2em}main{max-width:820px;margin:auto;padding:2.5rem 1.25rem 4rem}.intro,.card{background:#fff;border:1px solid var(--border);padding:clamp(1.25rem,4vw,2rem);margin-bottom:1rem}.intro{border-top:3px solid var(--gold)}h1,h2{font-family:var(--serif);margin:.1rem 0 .5rem}h1{font-size:clamp(2rem,5vw,3rem)}h2{font-size:1.55rem}p{font-family:var(--body);font-size:1.08rem;line-height:1.55;color:var(--soft)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}.full{grid-column:1/-1}label{display:block;font-size:.82rem;font-weight:600;margin-bottom:.35rem}.hint{display:block;margin:.35rem 0 0;color:var(--soft);font-size:.78rem;line-height:1.4}input,select,textarea{width:100%;border:1px solid var(--border);background:#fbfaf9;color:var(--fg);padding:.75rem;font:1rem var(--sans)}textarea{min-height:105px;resize:vertical}.check{display:flex;gap:.65rem;align-items:flex-start;padding:.7rem;background:var(--bg);margin:.6rem 0}.check input{width:auto;margin-top:.25rem}.btn{width:100%;border:0;background:var(--gold);color:var(--deep);padding:1rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;cursor:pointer}.btn:disabled{opacity:.55}.status{display:none;padding:1rem;margin-bottom:1rem}.status.show{display:block}.status.error{background:#faeee9;color:var(--warn)}.status.ok{background:#e9f5ec;color:var(--fg)}@media(max-width:650px){.grid{grid-template-columns:1fr}.full{grid-column:auto}}</style></head>
 <body><header><div class="brand">RUMOS <span>MARCAS &amp; NEGÓCIOS</span></div></header><main><section class="intro"><small>ETAPA PÓS-PAGAMENTO</small><h1>Informações para a análise</h1><p>Este briefing delimita o que será pesquisado. O prazo de até 1 dia útil começa quando recebermos todas as informações necessárias.</p><p id="case-summary">Validando seu link seguro…</p></section><div id="status" class="status" role="status"></div>
-<form id="form" hidden><section class="card"><h2>1. A marca</h2><div class="grid"><div class="full"><label for="exact_mark">Grafia exata</label><input id="exact_mark" name="exact_mark" required></div><div><label for="pronunciation">Pronúncia, se não for evidente</label><input id="pronunciation" name="pronunciation"></div><div><label for="presentation_type">Forma pretendida</label><select id="presentation_type" name="presentation_type" required><option value="">Selecione</option><option value="nominativa">Apenas o nome</option><option value="mista">Nome com logotipo</option><option value="figurativa">Apenas elemento figurativo</option><option value="indefinida">Ainda não definido</option></select></div><label class="check full"><input type="checkbox" name="mark_confirmed"><span>A marca já foi escolhida definitivamente.</span></label><label class="check"><input type="checkbox" name="in_use"><span>A marca já está em uso.</span></label><div><label for="first_use_date">Início aproximado do uso</label><input type="date" id="first_use_date" name="first_use_date"></div><div class="full"><label for="logo_url">Link do logotipo ou arquivo compartilhado, se houver</label><input type="url" id="logo_url" name="logo_url"></div></div></section>
-<section class="card"><h2>2. Atividade e alcance</h2><div class="grid"><div class="full"><label for="current_goods_services">Produtos ou serviços oferecidos hoje</label><textarea id="current_goods_services" name="current_goods_services" required></textarea></div><div class="full"><label for="planned_goods_services">O que pretende oferecer nos próximos 2 a 3 anos?</label><textarea id="planned_goods_services" name="planned_goods_services"></textarea></div><div><label for="market_scope">Abrangência</label><select id="market_scope" name="market_scope" required><option value="">Selecione</option><option value="local">Local</option><option value="regional">Regional</option><option value="brasil">Todo o Brasil</option><option value="internet">Principalmente pela internet</option></select></div><div><label for="website_socials">Site, redes sociais ou loja</label><input id="website_socials" name="website_socials"></div><div class="full"><label for="known_conflicts">Marcas concorrentes ou anteriores que preocupam</label><textarea id="known_conflicts" name="known_conflicts"></textarea></div></div></section>
-<section class="card"><h2>3. Titular pretendido</h2><div class="grid"><div><label for="intended_owner_type">Titular</label><select id="intended_owner_type" name="intended_owner_type" required><option value="">Selecione</option><option value="pessoa_fisica">Pessoa física</option><option value="pessoa_juridica">Pessoa jurídica</option><option value="indefinido">Ainda não definido</option></select></div><div><label for="intended_owner_document">CPF ou CNPJ pretendido</label><input id="intended_owner_document" name="intended_owner_document"></div><label class="check"><input type="checkbox" name="company_exists"><span>O CNPJ já existe.</span></label><div><label for="company_main_activity">Atividade principal da empresa</label><input id="company_main_activity" name="company_main_activity"></div></div></section>
+<form id="form" hidden><section class="card"><h2>1. A marca</h2><div class="grid"><div class="full"><label for="exact_mark">Grafia exata</label><input id="exact_mark" name="exact_mark" maxlength="180" required></div><div><label for="pronunciation">Pronúncia, se não for evidente</label><input id="pronunciation" name="pronunciation" maxlength="240"></div><div><label for="presentation_type">Forma pretendida</label><select id="presentation_type" name="presentation_type" required><option value="">Selecione</option><option value="nominativa">Apenas o nome</option><option value="mista">Nome com logotipo</option><option value="figurativa">Apenas elemento figurativo</option><option value="indefinida">Ainda não definido</option></select></div><label class="check full"><input type="checkbox" name="mark_confirmed"><span>A marca já foi escolhida definitivamente.</span></label><label class="check"><input type="checkbox" name="in_use"><span>A marca já está em uso.</span></label><div><label for="first_use_date">Início aproximado do uso</label><input type="date" id="first_use_date" name="first_use_date"></div><div class="full"><label for="logo_url" id="logo_label">Link do logotipo ou arquivo compartilhado, se houver</label><input type="url" id="logo_url" name="logo_url" maxlength="2048" aria-describedby="logo_hint"><small class="hint" id="logo_hint">Obrigatório quando a proteção incluir logotipo ou elemento figurativo. O prazo começa após esse material ser recebido.</small></div></div></section>
+<section class="card"><h2>2. Atividade e alcance</h2><div class="grid"><div class="full"><label for="current_goods_services">Produtos ou serviços oferecidos hoje</label><textarea id="current_goods_services" name="current_goods_services" maxlength="4000" required></textarea></div><div class="full"><label for="planned_goods_services">O que pretende oferecer nos próximos 2 a 3 anos?</label><textarea id="planned_goods_services" name="planned_goods_services" maxlength="4000"></textarea></div><div><label for="market_scope">Abrangência</label><select id="market_scope" name="market_scope" required><option value="">Selecione</option><option value="local">Local</option><option value="regional">Regional</option><option value="brasil">Todo o Brasil</option><option value="internet">Principalmente pela internet</option></select></div><div><label for="website_socials">Site, redes sociais ou loja</label><input id="website_socials" name="website_socials" maxlength="2000"></div><div class="full"><label for="known_conflicts">Marcas concorrentes ou anteriores que preocupam</label><textarea id="known_conflicts" name="known_conflicts" maxlength="4000"></textarea></div></div></section>
+<section class="card"><h2>3. Titular pretendido</h2><div class="grid"><div><label for="intended_owner_type">Titular</label><select id="intended_owner_type" name="intended_owner_type" required><option value="">Selecione</option><option value="pessoa_fisica">Pessoa física</option><option value="pessoa_juridica">Pessoa jurídica</option><option value="indefinido">Ainda não definido</option></select></div><div><label for="intended_owner_document">CPF ou CNPJ pretendido</label><input id="intended_owner_document" name="intended_owner_document" maxlength="32"></div><label class="check"><input type="checkbox" name="company_exists"><span>O CNPJ já existe.</span></label><div><label for="company_main_activity">Atividade principal da empresa</label><input id="company_main_activity" name="company_main_activity" maxlength="500"></div></div></section>
 <section class="card"><h2>4. Confirmações</h2><label class="check"><input type="checkbox" name="information_confirmed" required><span>Confirmo que as informações são completas e verdadeiras.</span></label><label class="check"><input type="checkbox" name="temporal_search_ack" required><span>Estou ciente de que a busca reflete as bases consultadas na data de corte e não garante concessão.</span></label><label class="check"><input type="checkbox" name="data_use_authorized" required><span>Autorizo o uso desses dados exclusivamente para execução do serviço.</span></label><button class="btn" type="submit">Enviar briefing</button></section></form></main>
-<script>(function(){const token=new URLSearchParams(location.search).get('token'),form=document.getElementById('form'),status=document.getElementById('status'),summary=document.getElementById('case-summary');function show(message,type){status.textContent=message;status.className='status show '+type}async function load(){if(!token){show('O link de briefing está incompleto. Solicite um novo link à Rumos.','error');return}const r=await fetch('/api/briefing?token='+encodeURIComponent(token)),d=await r.json();if(!r.ok){show(d.error||'Não foi possível abrir o briefing.','error');return}summary.textContent='Contratação de '+d.case.nome+' · marca informada: '+d.case.marca;form.exact_mark.value=d.briefing?.exact_mark||d.case.marca;form.hidden=false}form.addEventListener('submit',async e=>{e.preventDefault();const button=form.querySelector('button');button.disabled=true;const fd=new FormData(form),body=Object.fromEntries(fd);['mark_confirmed','in_use','company_exists','information_confirmed','temporal_search_ack','data_use_authorized'].forEach(k=>body[k]=fd.has(k));const r=await fetch('/api/briefing?token='+encodeURIComponent(token),{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)}),d=await r.json();if(!r.ok){show(d.error||'Não foi possível enviar.','error');button.disabled=false;return}show(d.message,'ok');form.hidden=true;window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'marca_briefing_concluido'})});load().catch(()=>show('Não foi possível abrir o briefing.','error'))})();</script></body></html>
+<script>
+(function(){
+  const token=String(window.__rumosBriefingToken||'');
+  try{delete window.__rumosBriefingToken;}catch{window.__rumosBriefingToken='';}
+  const form=document.getElementById('form');
+  const status=document.getElementById('status');
+  const summary=document.getElementById('case-summary');
+  const presentation=form.elements.presentation_type;
+  const logo=form.elements.logo_url;
+  const logoLabel=document.getElementById('logo_label');
+
+  function show(message,type){
+    status.textContent=message;
+    status.className='status show '+type;
+  }
+
+  function syncLogo(){
+    const required=['mista','figurativa'].includes(presentation.value);
+    logo.required=required;
+    logo.setAttribute('aria-required',String(required));
+    logoLabel.textContent=required
+      ?'Link do logotipo ou arquivo compartilhado (obrigatório)'
+      :'Link do logotipo ou arquivo compartilhado, se houver';
+  }
+
+  async function readJson(response){
+    try{return await response.json();}catch{return {};}
+  }
+
+  async function load(){
+    if(!token){
+      show('O link de briefing está incompleto. Solicite um novo link à Rumos.','error');
+      return;
+    }
+    const response=await fetch('/api/briefing',{
+      headers:{'x-briefing-token':token},
+      referrerPolicy:'no-referrer'
+    });
+    const data=await readJson(response);
+    if(!response.ok){
+      show(data.error||'Não foi possível abrir o briefing.','error');
+      return;
+    }
+    if(data.case.briefing_status==='concluido'){
+      summary.textContent='Briefing concluído.';
+      show('Este briefing já foi concluído. Se precisar corrigir alguma informação, fale com a Rumos.','ok');
+      return;
+    }
+    summary.textContent='Contratação de '+data.case.nome+' · marca informada: '+data.case.marca;
+    form.exact_mark.value=data.briefing?.exact_mark||data.case.marca;
+    syncLogo();
+    form.hidden=false;
+  }
+
+  presentation.addEventListener('change',syncLogo);
+  form.addEventListener('submit',async function(event){
+    event.preventDefault();
+    syncLogo();
+    if(!form.reportValidity())return;
+    const button=form.querySelector('button');
+    const originalLabel=button.textContent;
+    button.disabled=true;
+    button.textContent='Enviando…';
+    const formData=new FormData(form);
+    const body=Object.fromEntries(formData);
+    ['mark_confirmed','in_use','company_exists','information_confirmed','temporal_search_ack','data_use_authorized']
+      .forEach(key=>body[key]=formData.has(key));
+    try{
+      const response=await fetch('/api/briefing',{
+        method:'POST',
+        headers:{'content-type':'application/json','x-briefing-token':token},
+        referrerPolicy:'no-referrer',
+        body:JSON.stringify(body)
+      });
+      const data=await readJson(response);
+      if(!response.ok)throw new Error(data.error||'Não foi possível enviar.');
+      show(data.message||'Briefing recebido.','ok');
+      form.hidden=true;
+    }catch(error){
+      const message=error&&error.name==='TypeError'
+        ?'Não foi possível enviar. Verifique sua conexão e tente novamente.'
+        :error instanceof Error&&error.message?error.message:'Não foi possível enviar. Tente novamente.';
+      show(message,'error');
+    }finally{
+      button.disabled=false;
+      button.textContent=originalLabel;
+    }
+  });
+
+  // O link contém um token de acesso; esta página deliberadamente não carrega
+  // GTM/Pixel para não transmitir esse token a serviços de terceiros.
+  load().catch(()=>show('Não foi possível abrir o briefing. Tente novamente.','error'));
+})();
+</script><script>document.getElementById('logo_hint').textContent='Obrigatório quando a proteção incluir logotipo ou elemento figurativo. O prazo começa após o material ser recebido e conferido pelo advogado.';</script></body></html>
 

@@ -32,16 +32,6 @@
   <link rel="preconnect" href="https://tally.so">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <!-- Google Tag Manager — mesmo container de /imoveis, /divorcio e /inventario.
-       GA4 (G-SM1QE14GF3), Google Ads (AW-18041270448), Clarity e Meta são
-       disparados pelo próprio container; a página não carrega nada além disto. -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-NQTH2XWD');</script>
-  <!-- End Google Tag Manager -->
-
   <style>
     :root {
       --bg: #fbfaf9;
@@ -339,11 +329,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </head>
 <body>
 
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NQTH2XWD"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-
 <a href="#main" class="skip">Pular para conteúdo</a>
 
 <header class="site-header">
@@ -590,14 +575,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7 0-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.4.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5 0 1.5 1.1 2.9 1.3 3.1.2.2 2.2 3.3 5.3 4.6 1.9.7 2.6.8 3.5.7.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.2-.6-.4zM12 .9C5.9.9.9 5.9.9 12c0 2 .5 3.9 1.5 5.6L.7 23.3l5.9-1.5c1.6.9 3.5 1.4 5.4 1.4 6.1 0 11.1-5 11.1-11.1S18.1.9 12 .9z"/></svg>
 </a>
 
+<script src="/assets/js/marketing-consent.v1.js"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-
-  window.dataLayer.push({ event: 'page_view_lp', page: 'marcas', service: 'Registro de marca no INPI' });
+  const marketing=window.RumosMarketing&&typeof window.RumosMarketing.track==='function'
+    ?window.RumosMarketing
+    :{track:function(){return false;}};
+  function trackPageView(){
+    marketing.track({ event: 'page_view_lp', page: 'marcas', service: 'Registro de marca no INPI' });
+  }
+  trackPageView();
+  window.addEventListener('rumos:marketing-consent',function(event){
+    if(event.detail&&event.detail.choice==='granted') trackPageView();
+  });
 
   document.querySelectorAll('[data-wa-source]').forEach(function(el){
     el.addEventListener('click', function(){
-      window.dataLayer.push({
+      marketing.track({
         event: 'whatsapp_click',
         source: el.getAttribute('data-wa-source'),
         page: 'marcas',
@@ -608,13 +601,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   if (!window.__tallyListenerInstalled) {
     window.__tallyListenerInstalled = true;
+    var tallyFrame = document.querySelector('iframe[data-tally-src]');
     window.addEventListener('message', function(e) {
+      if (e.origin !== 'https://tally.so' || !tallyFrame || e.source !== tallyFrame.contentWindow) return;
       if (!e.data || typeof e.data !== 'string') return;
       if (e.data.indexOf('Tally.FormSubmitted') === -1) return;
       try {
         var p = JSON.parse(e.data);
         if (p.event === 'Tally.FormSubmitted') {
-          window.dataLayer.push({
+          marketing.track({
             event: 'lead_submit',
             page: 'marcas',
             service: 'Registro de marca no INPI',
