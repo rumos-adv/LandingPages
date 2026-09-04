@@ -81,7 +81,8 @@ test('Siteverify recebe token, IP e UUID próprio sem expor segredo na URL', asy
   assertSafeMetadata(result, { attempts: 1, httpStatus: 200 });
   assert.equal(captured.url, 'https://challenges.cloudflare.com/turnstile/v0/siteverify');
   assert.equal(captured.options.method, 'POST');
-  assert.equal(captured.options.redirect, 'error');
+  assert.equal(captured.options.redirect, undefined);
+  assert.equal(captured.options.headers['Content-Type'], 'application/x-www-form-urlencoded');
   assert.equal(captured.url.includes(env.TURNSTILE_SECRET_KEY), false);
   assert.equal(captured.options.body.get('secret'), env.TURNSTILE_SECRET_KEY);
   assert.equal(captured.options.body.get('response'), 'token-efemero');

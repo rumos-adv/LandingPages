@@ -72,7 +72,7 @@ function verified(startedAt, attempts, httpStatus) {
 }
 
 function siteverifyBody(configuration, token, remoteIp, idempotencyKey) {
-  const body = new FormData();
+  const body = new URLSearchParams();
   body.set('secret', configuration.secret);
   body.set('response', token);
   body.set('idempotency_key', idempotencyKey);
@@ -107,9 +107,9 @@ async function fetchSiteverify({ fetchImpl, body, timeoutMs }) {
     const response = await Promise.race([
       fetchImpl(SITEVERIFY_URL, {
         method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body,
-        signal: controller.signal,
-        redirect: 'error'
+        signal: controller.signal
       }),
       timeout
     ]);
