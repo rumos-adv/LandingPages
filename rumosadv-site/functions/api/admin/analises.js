@@ -26,7 +26,7 @@ export async function onRequestGet(context) {
       context.env.ACEITES_DB.prepare(`SELECT * FROM marca_reviews WHERE aceite_id=? LIMIT 1`).bind(id).first()
     ]);
     if (!aceite) return json({ error: 'Caso não encontrado.' }, 404);
-    return json({ ok: true, aceite, briefing, plan: plan ? { ...plan, queries: JSON.parse(plan.queries_json || '[]'), suggested_classes: JSON.parse(plan.suggested_classes_json || '[]'), related_classes: JSON.parse(plan.related_classes_json || '[]') } : null, results: results.results || [], review, messages: buildOperationalMessages({ client: aceite.nome, mark: aceite.marca }) });
+    return json({ ok: true, aceite, briefing, plan: plan ? { ...plan, queries: JSON.parse(plan.queries_json || '[]'), suggested_classes: JSON.parse(plan.suggested_classes_json || '[]'), related_classes: JSON.parse(plan.related_classes_json || '[]') } : null, results: results.results || [], review, messages: buildOperationalMessages({ client: aceite.nome, mark: aceite.marca, risk_level: review?.risk_level || aceite.risk_level, credit_expires_at: aceite.credit_expires_at }) });
   } catch (error) { console.error('analysis_admin_get_error', error); return json({ error: 'Não foi possível carregar os casos.' }, 500); }
 }
 
@@ -66,8 +66,22 @@ export async function onRequestPost(context) {
 
     if (action === 'save_review') {
       if (!riskLevels.has(body.risk_level)) return json({ error: 'Faixa de conclusão inválida.' }, 400);
-      const results = await context.env.ACEITES_DB.prepare(`SELECT * FROM marca_search_results WHERE aceite_id=? ORDER BY relevance_score DESC`).bind(id).all();
-      const report = buildReportDraft({ aceite_id: id, client: aceite.nome, mark: aceite.marca, cutoff_at: body.cutoff_at || null }, results.results || [], body);
+      const [results, briefing, plan] = await Promise.all([
+        context.env.ACEITES_DB.prepare(`SELECT * FROM marca_search_results WHERE aceite_id=? ORDER BY relevance_score DESC`).bind(id).all(),
+        context.env.ACEITES_DB.prepare(`SELECT presentation_type, current_goods_services, planned_goods_services, market_scope, intended_owner_type, in_use, first_use_date FROM marca_briefings WHERE aceite_id=? LIMIT 1`).bind(id).first(),
+        context.env.ACEITES_DB.prepare(`SELECT queries_json, suggested_classes_json, related_classes_json, lawyer_notes FROM marca_search_plans WHERE aceite_id=? LIMIT 1`).bind(id).first()
+      ]);
+      const report = buildReportDraft({
+        aceite_id: id,
+        client: aceite.nome,
+        mark: aceite.marca,
+        cutoff_at: body.cutoff_at || null,
+        ...(briefing || {}),
+        queries: JSON.parse(plan?.queries_json || '[]'),
+        suggested_classes: JSON.parse(plan?.suggested_classes_json || '[]'),
+        related_classes: JSON.parse(plan?.related_classes_json || '[]'),
+        lawyer_notes: plan?.lawyer_notes || ''
+      }, results.results || [], body);
       const now = new Date().toISOString();
       await context.env.ACEITES_DB.batch([
         context.env.ACEITES_DB.prepare(`INSERT INTO marca_reviews (id, aceite_id, created_at, updated_at, cutoff_at, risk_level, executive_summary, recommendation, caveats, report_json, approved, reviewed_by, reviewed_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT(aceite_id) DO UPDATE SET updated_at=excluded.updated_at, cutoff_at=excluded.cutoff_at, risk_level=excluded.risk_level, executive_summary=excluded.executive_summary, recommendation=excluded.recommendation, caveats=excluded.caveats, report_json=excluded.report_json, approved=excluded.approved, reviewed_by=excluded.reviewed_by, reviewed_at=excluded.reviewed_at`).bind(crypto.randomUUID(), id, now, now, body.cutoff_at || null, body.risk_level, body.executive_summary || '', body.recommendation || '', body.caveats || '', JSON.stringify(report), body.approved ? 1 : 0, body.reviewed_by || null, body.approved ? now : null),

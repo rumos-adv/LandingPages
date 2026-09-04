@@ -52,3 +52,19 @@ O painel recebe uma lista JSON com até 250 itens. Exemplo:
 - entrega e conversão são idempotentes: cliques repetidos preservam as datas originais;
 - `Registrar contratação do pedido` preenche `registration_converted_at` somente depois da entrega;
 - o painel oferece mensagens prontas para confirmação de pagamento, lembrete de briefing, entrega e oferta do registro.
+
+## Relatório definitivo
+
+- a minuta agora incorpora contexto do negócio, apresentação, classes principais e afins, consultas e resultados relevantes;
+- `Abrir relatório para PDF` aplica a estrutura definitiva de identificação, conclusão, estratégia de proteção, metodologia, anterioridades, análise, limitações e próximos passos;
+- o arquivo `MODELO_RELATORIO_DEFINITIVO.md` contém a regra editorial e o checklist de qualidade;
+- `output/pdf/MODELO_DEFINITIVO_RELATORIO_VIABILIDADE_MARCA.pdf` é a amostra visual com dados fictícios;
+- a amostra nunca deve ser usada para orientar um caso real.
+
+## Pós-venda assistido
+
+- o painel oferece mensagens manuais D0, D3, D7, D15 e D25, além de encerramento;
+- as mensagens variam conforme `risk_level` e usam a data real de `credit_expires_at` quando disponível;
+- a cadência é condicional e deve parar em caso de resposta, recusa, contratação ou pedido para não contatar;
+- casos de risco elevado ou desaconselhados não recebem indução para depósito contrário à recomendação;
+- consulte `ROTEIRO_POS_VENDA_MARCAS.md` antes de enviar as mensagens.
