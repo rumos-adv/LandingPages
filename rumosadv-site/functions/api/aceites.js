@@ -144,10 +144,20 @@ export async function onRequestPost(context) {
         };
         if (Number.isInteger(challenge.http_status)) warning.http_status = challenge.http_status;
         console.warn(JSON.stringify(warning));
-        return json({
+        const responseBody = {
           error: 'A verificação de segurança está temporariamente indisponível. Tente novamente.',
           code: 'TURNSTILE_UNAVAILABLE'
-        }, 503);
+        };
+        if (String(context.env.ASAAS_ENV || '').trim().toLowerCase() === 'sandbox') {
+          responseBody.diagnostic = {
+            reason: challenge.reason,
+            attempts: challenge.attempts
+          };
+          if (Number.isInteger(challenge.http_status)) {
+            responseBody.diagnostic.http_status = challenge.http_status;
+          }
+        }
+        return json(responseBody, 503);
       }
       return json({
         error: 'Não foi possível confirmar a verificação de segurança. Faça uma nova verificação.',

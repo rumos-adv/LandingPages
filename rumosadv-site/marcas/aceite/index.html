@@ -517,6 +517,15 @@
     retryButton.focus();
   }
 
+  function previewDiagnostic(data){
+    const diagnostic=data&&data.diagnostic;
+    if(!diagnostic||typeof diagnostic.reason!=='string') return '';
+    const parts=['motivo '+diagnostic.reason];
+    if(Number.isInteger(diagnostic.attempts)) parts.push('tentativas '+diagnostic.attempts);
+    if(Number.isInteger(diagnostic.http_status)) parts.push('HTTP '+diagnostic.http_status);
+    return ' [diagnóstico Preview: '+parts.join(', ')+']';
+  }
+
   function unlockAttempt(message){
     setFormLocked(false);
     retryButton.hidden=true;
@@ -687,7 +696,8 @@
     }
 
     if(response.status>=500||(response.status>=200&&response.status<300)){
-      showAttemptRetry(idempotencyKey,typeof data.error==='string'?data.error:'Não foi possível confirmar a resposta do registro.');
+      const diagnostic=data.code==='TURNSTILE_UNAVAILABLE'?previewDiagnostic(data):'';
+      showAttemptRetry(idempotencyKey,(typeof data.error==='string'?data.error:'Não foi possível confirmar a resposta do registro.')+diagnostic);
       return;
     }
 

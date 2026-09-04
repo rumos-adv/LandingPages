@@ -210,10 +210,13 @@ test('exige Turnstile em aceite novo e falha fechado sem configuração', async 
 
     const unconfiguredDb = new MockD1();
     const unconfiguredContext = context(unconfiguredDb, validAcceptance());
+    unconfiguredContext.env.ASAAS_ENV = 'sandbox';
     delete unconfiguredContext.env.TURNSTILE_SECRET_KEY;
     const unavailable = await onRequestPost(unconfiguredContext);
     assert.equal(unavailable.status, 503);
-    assert.equal((await unavailable.json()).code, 'TURNSTILE_UNAVAILABLE');
+    const unavailableBody = await unavailable.json();
+    assert.equal(unavailableBody.code, 'TURNSTILE_UNAVAILABLE');
+    assert.deepEqual(unavailableBody.diagnostic, { reason: 'not_configured', attempts: 0 });
     assert.equal(unconfiguredDb.writeCalls, 0);
   } finally {
     console.warn = originalWarn;
