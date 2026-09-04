@@ -195,21 +195,40 @@ test('mantém compatibilidade com cliente legado sem chave', async () => {
 });
 
 test('exige Turnstile em aceite novo e falha fechado sem configuração', async () => {
-  const missingTokenDb = new MockD1();
-  const missingToken = validAcceptance();
-  delete missingToken.turnstile_token;
-  const missingResponse = await onRequestPost(context(missingTokenDb, missingToken));
-  assert.equal(missingResponse.status, 400);
-  assert.equal((await missingResponse.json()).code, 'TURNSTILE_INVALID');
-  assert.equal(missingTokenDb.writeCalls, 0);
+  const warnings = [];
+  const originalWarn = console.warn;
+  console.warn = message => warnings.push(message);
+  try {
+    const missingTokenDb = new MockD1();
+    const missingToken = validAcceptance();
+    delete missingToken.turnstile_token;
+    const missingResponse = await onRequestPost(context(missingTokenDb, missingToken));
+    assert.equal(missingResponse.status, 400);
+    assert.equal((await missingResponse.json()).code, 'TURNSTILE_INVALID');
+    assert.equal(missingTokenDb.writeCalls, 0);
+    assert.equal(warnings.length, 0);
 
-  const unconfiguredDb = new MockD1();
-  const unconfiguredContext = context(unconfiguredDb, validAcceptance());
-  delete unconfiguredContext.env.TURNSTILE_SECRET_KEY;
-  const unavailable = await onRequestPost(unconfiguredContext);
-  assert.equal(unavailable.status, 503);
-  assert.equal((await unavailable.json()).code, 'TURNSTILE_UNAVAILABLE');
-  assert.equal(unconfiguredDb.writeCalls, 0);
+    const unconfiguredDb = new MockD1();
+    const unconfiguredContext = context(unconfiguredDb, validAcceptance());
+    delete unconfiguredContext.env.TURNSTILE_SECRET_KEY;
+    const unavailable = await onRequestPost(unconfiguredContext);
+    assert.equal(unavailable.status, 503);
+    assert.equal((await unavailable.json()).code, 'TURNSTILE_UNAVAILABLE');
+    assert.equal(unconfiguredDb.writeCalls, 0);
+  } finally {
+    console.warn = originalWarn;
+  }
+
+  assert.equal(warnings.length, 1);
+  const warning = JSON.parse(warnings[0]);
+  assert.deepEqual(Object.keys(warning).sort(), ['attempts', 'duration_ms', 'event', 'reason']);
+  assert.equal(warning.event, 'turnstile_validation_unavailable');
+  assert.equal(warning.reason, 'not_configured');
+  assert.equal(warning.attempts, 0);
+  assert.equal(Number.isSafeInteger(warning.duration_ms), true);
+  for (const sensitive of ['secret-key-test', 'turnstile-token-valido', '192.0.2.1', 'Cliente Teste']) {
+    assert.equal(warnings[0].includes(sensitive), false);
+  }
 });
 
 test('não persiste nem devolve o token Turnstile', async () => {

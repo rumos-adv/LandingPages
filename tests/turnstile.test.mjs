@@ -23,6 +23,18 @@ function siteverifyResponse(overrides = {}, status = 200) {
   }), { status, headers: { 'content-type': 'application/json' } });
 }
 
+function assertSafeMetadata(result, { attempts, httpStatus }) {
+  assert.equal(result.attempts, attempts);
+  assert.equal(Number.isSafeInteger(result.duration_ms), true);
+  assert.ok(result.duration_ms >= 0);
+  if (httpStatus === undefined) assert.equal('http_status' in result, false);
+  else assert.equal(result.http_status, httpStatus);
+  const serialized = JSON.stringify(result);
+  assert.equal(serialized.includes(env.TURNSTILE_SECRET_KEY), false);
+  assert.equal(serialized.includes('token-efemero'), false);
+  assert.equal(serialized.includes('192.0.2.9'), false);
+}
+
 test('configuração pública expõe apenas sitekey e action e nunca é cacheada', async () => {
   const response = getConfig({ env });
   const body = await response.json();
@@ -64,7 +76,9 @@ test('Siteverify recebe token, IP e UUID próprio sem expor segredo na URL', asy
     }
   });
 
-  assert.deepEqual(result, { ok: true });
+  assert.equal(result.ok, true);
+  assert.equal(result.reason, 'verified');
+  assertSafeMetadata(result, { attempts: 1, httpStatus: 200 });
   assert.equal(captured.url, 'https://challenges.cloudflare.com/turnstile/v0/siteverify');
   assert.equal(captured.options.method, 'POST');
   assert.equal(captured.options.redirect, 'error');
@@ -93,7 +107,7 @@ test('tokens distintos nunca reutilizam a chave idempotente do Siteverify', asyn
 });
 
 test('recusa token ausente ou acima de 2048 caracteres antes de chamar a rede', async () => {
-  for (const token of ['', 'x'.repeat(2049)]) {
+  for (const [token, reason] of [['', 'missing_token'], ['x'.repeat(2049), 'token_too_long']]) {
     let calls = 0;
     const result = await verifyTurnstile({
       env,
@@ -102,14 +116,16 @@ test('recusa token ausente ou acima de 2048 caracteres antes de chamar a rede', 
     });
     assert.equal(result.ok, false);
     assert.equal(result.unavailable, false);
+    assert.equal(result.reason, reason);
+    assertSafeMetadata(result, { attempts: 0 });
     assert.equal(calls, 0);
   }
 });
 
 test('recusa sucesso criptográfico com action ou hostname divergentes', async () => {
-  for (const response of [
-    siteverifyResponse({ action: 'outra_acao' }),
-    siteverifyResponse({ hostname: 'rumosadv.com.br.evil.test' })
+  for (const [response, reason] of [
+    [siteverifyResponse({ action: 'outra_acao' }), 'action_mismatch'],
+    [siteverifyResponse({ hostname: 'rumosadv.com.br.evil.test' }), 'hostname_mismatch']
   ]) {
     const result = await verifyTurnstile({
       env,
@@ -118,27 +134,122 @@ test('recusa sucesso criptográfico com action ou hostname divergentes', async (
     });
     assert.equal(result.ok, false);
     assert.equal(result.unavailable, false);
+    assert.equal(result.reason, reason);
+    assertSafeMetadata(result, { attempts: 1, httpStatus: 200 });
   }
 });
 
-test('falha fechado em rejeição, resposta inválida, erro HTTP e timeout', async () => {
+test('não repete rejeições permanentes nem respostas malformadas', async () => {
   const cases = [
-    async () => siteverifyResponse({ success: false, 'error-codes': ['invalid-input-response'] }),
-    async () => new Response('{', { status: 200 }),
-    async () => siteverifyResponse({}, 502),
-    async (_url, options) => new Promise((resolve, reject) => {
-      options.signal.addEventListener('abort', () => reject(new Error('abortado')), { once: true });
-    })
+    {
+      fetch: async () => siteverifyResponse({ success: false, 'error-codes': ['invalid-input-response'] }),
+      unavailable: false,
+      reason: 'challenge_rejected',
+      httpStatus: 200
+    },
+    {
+      fetch: async () => new Response('{', { status: 200 }),
+      unavailable: true,
+      reason: 'siteverify_invalid_response',
+      httpStatus: 200
+    },
+    {
+      fetch: async () => siteverifyResponse({}, 400),
+      unavailable: true,
+      reason: 'siteverify_http_error',
+      httpStatus: 400
+    }
   ];
 
-  for (let index = 0; index < cases.length; index += 1) {
+  for (const scenario of cases) {
+    let calls = 0;
     const result = await verifyTurnstile({
       env,
       token: 'token-valido',
-      fetchImpl: cases[index],
-      timeoutMs: index === cases.length - 1 ? 5 : 100
+      fetchImpl: async (...args) => {
+        calls += 1;
+        return scenario.fetch(...args);
+      },
+      retryDelayMs: 0
     });
     assert.equal(result.ok, false);
-    if (index > 0) assert.equal(result.unavailable, true);
+    assert.equal(result.unavailable, scenario.unavailable);
+    assert.equal(result.reason, scenario.reason);
+    assertSafeMetadata(result, { attempts: 1, httpStatus: scenario.httpStatus });
+    assert.equal(calls, 1);
   }
+});
+
+test('repete uma única vez causas transitórias e reutiliza a idempotency_key do Siteverify', async t => {
+  const scenarios = [
+    {
+      name: 'HTTP 502',
+      first: async () => siteverifyResponse({}, 502),
+      timeoutMs: 100
+    },
+    {
+      name: 'internal-error',
+      first: async () => siteverifyResponse({ success: false, 'error-codes': ['internal-error'] }),
+      timeoutMs: 100
+    },
+    {
+      name: 'erro de rede',
+      first: async () => { throw new Error('rede indisponível'); },
+      timeoutMs: 100
+    },
+    {
+      name: 'timeout',
+      first: async (_url, options) => new Promise((resolve, reject) => {
+        options.signal.addEventListener('abort', () => reject(new Error('abortado')), { once: true });
+      }),
+      timeoutMs: 5
+    }
+  ];
+
+  for (const scenario of scenarios) {
+    await t.test(scenario.name, async () => {
+      const verificationKeys = [];
+      let calls = 0;
+      const result = await verifyTurnstile({
+        env,
+        token: 'token-valido',
+        fetchImpl: async (url, options) => {
+          calls += 1;
+          verificationKeys.push(options.body.get('idempotency_key'));
+          if (calls === 1) return scenario.first(url, options);
+          return siteverifyResponse();
+        },
+        timeoutMs: scenario.timeoutMs,
+        retryDelayMs: 0
+      });
+
+      assert.equal(result.ok, true);
+      assert.equal(result.reason, 'verified');
+      assertSafeMetadata(result, { attempts: 2, httpStatus: 200 });
+      assert.equal(calls, 2);
+      assert.equal(verificationKeys.length, 2);
+      assert.equal(verificationKeys[0], verificationKeys[1]);
+    });
+  }
+});
+
+test('encerra após uma única repetição transitória e expõe apenas metadados seguros', async () => {
+  const verificationKeys = [];
+  const result = await verifyTurnstile({
+    env,
+    token: 'token-efemero-que-nao-pode-vazar',
+    remoteIp: '192.0.2.9',
+    fetchImpl: async (_url, options) => {
+      verificationKeys.push(options.body.get('idempotency_key'));
+      return siteverifyResponse({}, 503);
+    },
+    retryDelayMs: 0
+  });
+
+  assert.equal(result.ok, false);
+  assert.equal(result.unavailable, true);
+  assert.equal(result.reason, 'siteverify_http_error');
+  assertSafeMetadata(result, { attempts: 2, httpStatus: 503 });
+  assert.equal(verificationKeys.length, 2);
+  assert.equal(verificationKeys[0], verificationKeys[1]);
 });

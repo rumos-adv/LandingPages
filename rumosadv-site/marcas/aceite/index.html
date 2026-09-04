@@ -657,9 +657,8 @@
       return;
     }
 
-    resetChallenge('Faça uma nova verificação de segurança para tentar novamente.');
-
     if(response.status===409&&data.code==='TERM_UPDATED'){
+      resetChallenge('Faça uma nova verificação de segurança para tentar novamente.');
       clearState();
       attemptPayload=null;
       setFormLocked(true);
@@ -672,6 +671,7 @@
     }
 
     if(response.status===409&&data.code==='IDEMPOTENCY_CONFLICT'){
+      resetChallenge('Faça uma nova verificação de segurança para tentar novamente.');
       setFormLocked(true);
       retryButton.hidden=true;
       retryButton.disabled=false;
@@ -691,6 +691,7 @@
       return;
     }
 
+    resetChallenge('Faça uma nova verificação de segurança para tentar novamente.');
     unlockAttempt((typeof data.error==='string'?data.error:'Não foi possível registrar o aceite.')+' Revise os dados e tente novamente; a mesma identificação será reutilizada.');
   }
 

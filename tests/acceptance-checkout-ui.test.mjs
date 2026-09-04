@@ -497,7 +497,7 @@ test('falha do aceite reseta o desafio e retenta com nova prova e a mesma chave 
 
   page.solve('token-primeiro');
   await page.form.handlers.submit({ preventDefault() {} });
-  assert.equal(page.resetCount >= 1, true);
+  assert.equal(page.resetCount, 1);
   assert.equal(page.submitButton.disabled, true);
 
   page.solve('token-segundo');
@@ -505,6 +505,34 @@ test('falha do aceite reseta o desafio e retenta com nova prova e a mesma chave 
   assert.equal(acceptanceBodies.length, 2);
   assert.equal(acceptanceBodies[0].idempotency_key, acceptanceBodies[1].idempotency_key);
   assert.notEqual(acceptanceBodies[0].turnstile_token, acceptanceBodies[1].turnstile_token);
+  assert.equal(page.resetCount, 1);
+});
+
+test('indisponibilidade transitória preserva a tentativa e reseta o desafio exatamente uma vez', async () => {
+  const acceptanceBodies = [];
+  const page = await pageHarness({
+    turnstile: 'manual',
+    async fetch(url, options) {
+      assert.equal(url, '/api/aceites');
+      acceptanceBodies.push(JSON.parse(options.body));
+      return jsonResponse({
+        error: 'A verificação de segurança está temporariamente indisponível. Tente novamente.',
+        code: 'TURNSTILE_UNAVAILABLE'
+      }, 503);
+    }
+  });
+
+  page.solve('token-transitorio');
+  await page.form.handlers.submit({ preventDefault() {} });
+
+  assert.equal(acceptanceBodies.length, 1);
+  assert.equal(page.resetCount, 1);
+  assert.equal(page.retryButton.hidden, false);
+  assert.equal(page.retryButton.disabled, true);
+  assert.match(page.status.textContent, /tentativa foi preservada/i);
+  const pending = JSON.parse(page.localStorage.getItem(stateKey));
+  assert.equal(pending.state, 'attempt');
+  assert.equal(pending.id, acceptanceBodies[0].idempotency_key);
 });
 
 test('expiração do desafio limpa o token e volta a bloquear a contratação', async () => {

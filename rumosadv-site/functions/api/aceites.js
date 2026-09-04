@@ -136,6 +136,14 @@ export async function onRequestPost(context) {
       const recoveredResponse = reusedOrConflict(existingAfterChallenge, values);
       if (recoveredResponse) return recoveredResponse;
       if (challenge.unavailable) {
+        const warning = {
+          event: 'turnstile_validation_unavailable',
+          reason: challenge.reason,
+          attempts: challenge.attempts,
+          duration_ms: challenge.duration_ms
+        };
+        if (Number.isInteger(challenge.http_status)) warning.http_status = challenge.http_status;
+        console.warn(JSON.stringify(warning));
         return json({
           error: 'A verificação de segurança está temporariamente indisponível. Tente novamente.',
           code: 'TURNSTILE_UNAVAILABLE'
