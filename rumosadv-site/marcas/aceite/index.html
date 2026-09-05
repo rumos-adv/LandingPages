@@ -523,6 +523,8 @@
     const parts=['motivo '+diagnostic.reason];
     if(Number.isInteger(diagnostic.attempts)) parts.push('tentativas '+diagnostic.attempts);
     if(Number.isInteger(diagnostic.http_status)) parts.push('HTTP '+diagnostic.http_status);
+    if(typeof diagnostic.error_name==='string'&&diagnostic.error_name) parts.push('erro '+diagnostic.error_name);
+    if(typeof diagnostic.error_message==='string'&&diagnostic.error_message) parts.push('detalhe '+diagnostic.error_message);
     return ' [diagnóstico Preview: '+parts.join(', ')+']';
   }
 

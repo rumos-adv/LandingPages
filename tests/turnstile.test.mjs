@@ -255,3 +255,22 @@ test('encerra após uma única repetição transitória e expõe apenas metadado
   assert.equal(verificationKeys.length, 2);
   assert.equal(verificationKeys[0], verificationKeys[1]);
 });
+
+test('diagnóstico de transporte remove segredo, token, IP e UUID da mensagem', async () => {
+  const result = await verifyTurnstile({
+    env,
+    token: 'token-efemero',
+    remoteIp: '192.0.2.9',
+    fetchImpl: async (_url, options) => {
+      const sent = JSON.parse(options.body);
+      throw new TypeError(`falha ${sent.secret} ${sent.response} ${sent.remoteip} ${sent.idempotency_key}`);
+    },
+    retryDelayMs: 0
+  });
+
+  assert.equal(result.ok, false);
+  assert.equal(result.reason, 'siteverify_network_error');
+  assert.equal(result.error_name, 'TypeError');
+  assert.equal(result.error_message, 'falha [redacted] [redacted] [redacted] [redacted]');
+  assertSafeMetadata(result, { attempts: 2 });
+});

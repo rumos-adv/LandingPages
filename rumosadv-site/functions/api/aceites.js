@@ -143,6 +143,8 @@ export async function onRequestPost(context) {
           duration_ms: challenge.duration_ms
         };
         if (Number.isInteger(challenge.http_status)) warning.http_status = challenge.http_status;
+        if (typeof challenge.error_name === 'string') warning.error_name = challenge.error_name;
+        if (typeof challenge.error_message === 'string') warning.error_message = challenge.error_message;
         console.warn(JSON.stringify(warning));
         const responseBody = {
           error: 'A verificação de segurança está temporariamente indisponível. Tente novamente.',
@@ -155,6 +157,12 @@ export async function onRequestPost(context) {
           };
           if (Number.isInteger(challenge.http_status)) {
             responseBody.diagnostic.http_status = challenge.http_status;
+          }
+          if (typeof challenge.error_name === 'string') {
+            responseBody.diagnostic.error_name = challenge.error_name;
+          }
+          if (typeof challenge.error_message === 'string') {
+            responseBody.diagnostic.error_message = challenge.error_message;
           }
         }
         return json(responseBody, 503);

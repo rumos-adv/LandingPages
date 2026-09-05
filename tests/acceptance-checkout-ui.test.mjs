@@ -518,7 +518,13 @@ test('indisponibilidade transitória preserva a tentativa e reseta o desafio exa
       return jsonResponse({
         error: 'A verificação de segurança está temporariamente indisponível. Tente novamente.',
         code: 'TURNSTILE_UNAVAILABLE',
-        diagnostic: { reason: 'siteverify_http_error', attempts: 1, http_status: 400 }
+        diagnostic: {
+          reason: 'siteverify_http_error',
+          attempts: 1,
+          http_status: 400,
+          error_name: 'TypeError',
+          error_message: 'Falha de conexão'
+        }
       }, 503);
     }
   });
@@ -532,6 +538,7 @@ test('indisponibilidade transitória preserva a tentativa e reseta o desafio exa
   assert.equal(page.retryButton.disabled, true);
   assert.match(page.status.textContent, /tentativa foi preservada/i);
   assert.match(page.status.textContent, /diagnóstico Preview: motivo siteverify_http_error, tentativas 1, HTTP 400/i);
+  assert.match(page.status.textContent, /erro TypeError, detalhe Falha de conexão/i);
   const pending = JSON.parse(page.localStorage.getItem(stateKey));
   assert.equal(pending.state, 'attempt');
   assert.equal(pending.id, acceptanceBodies[0].idempotency_key);

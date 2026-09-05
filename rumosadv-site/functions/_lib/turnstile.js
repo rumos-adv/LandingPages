@@ -45,13 +45,16 @@ function safeResultMetadata(startedAt, attempts, httpStatus) {
   return metadata;
 }
 
-function unavailable(reason, startedAt, attempts, httpStatus) {
-  return {
+function unavailable(reason, startedAt, attempts, httpStatus, errorDetails) {
+  const result = {
     ok: false,
     unavailable: true,
     reason,
     ...safeResultMetadata(startedAt, attempts, httpStatus)
   };
+  if (errorDetails?.name) result.error_name = errorDetails.name;
+  if (errorDetails?.message) result.error_message = errorDetails.message;
+  return result;
 }
 
 function invalid(reason, startedAt, attempts, httpStatus) {
@@ -93,6 +96,19 @@ function wait(milliseconds) {
   return new Promise(resolve => setTimeout(resolve, milliseconds));
 }
 
+function safeFetchError(error, body) {
+  const name = typeof error?.name === 'string' ? error.name.slice(0, 40) : 'Error';
+  let message = typeof error?.message === 'string' ? error.message : '';
+  try {
+    const sensitiveBody = JSON.parse(body);
+    for (const value of Object.values(sensitiveBody)) {
+      if (typeof value === 'string' && value) message = message.split(value).join('[redacted]');
+    }
+  } catch {}
+  message = message.replace(/[\r\n\t]+/g, ' ').trim().slice(0, 180);
+  return { name, message };
+}
+
 async function fetchSiteverify({ fetchImpl, body, timeoutMs }) {
   const controller = new AbortController();
   let timeoutId;
@@ -115,8 +131,11 @@ async function fetchSiteverify({ fetchImpl, body, timeoutMs }) {
       timeout
     ]);
     return { response };
-  } catch {
-    return { error: timedOut ? 'siteverify_timeout' : 'siteverify_network_error' };
+  } catch (error) {
+    return {
+      error: timedOut ? 'siteverify_timeout' : 'siteverify_network_error',
+      errorDetails: safeFetchError(error, body)
+    };
   } finally {
     if (timeoutId) clearTimeout(timeoutId);
   }
@@ -154,7 +173,7 @@ export async function verifyTurnstile({
         await wait(retryDelayMs);
         continue;
       }
-      return unavailable(outcome.error, startedAt, attempts);
+      return unavailable(outcome.error, startedAt, attempts, undefined, outcome.errorDetails);
     }
 
     const response = outcome.response;
