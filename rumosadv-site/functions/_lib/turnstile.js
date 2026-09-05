@@ -72,12 +72,13 @@ function verified(startedAt, attempts, httpStatus) {
 }
 
 function siteverifyBody(configuration, token, remoteIp, idempotencyKey) {
-  const body = new URLSearchParams();
-  body.set('secret', configuration.secret);
-  body.set('response', token);
-  body.set('idempotency_key', idempotencyKey);
-  if (typeof remoteIp === 'string' && remoteIp.trim()) body.set('remoteip', remoteIp.trim().slice(0, 64));
-  return body;
+  const body = {
+    secret: configuration.secret,
+    response: token,
+    idempotency_key: idempotencyKey
+  };
+  if (typeof remoteIp === 'string' && remoteIp.trim()) body.remoteip = remoteIp.trim().slice(0, 64);
+  return JSON.stringify(body);
 }
 
 function retryableHttpStatus(status) {
@@ -107,7 +108,7 @@ async function fetchSiteverify({ fetchImpl, body, timeoutMs }) {
     const response = await Promise.race([
       fetchImpl(SITEVERIFY_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        headers: { 'Content-Type': 'application/json' },
         body,
         signal: controller.signal
       }),

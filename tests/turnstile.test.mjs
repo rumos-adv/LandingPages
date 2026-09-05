@@ -82,12 +82,13 @@ test('Siteverify recebe token, IP e UUID próprio sem expor segredo na URL', asy
   assert.equal(captured.url, 'https://challenges.cloudflare.com/turnstile/v0/siteverify');
   assert.equal(captured.options.method, 'POST');
   assert.equal(captured.options.redirect, undefined);
-  assert.equal(captured.options.headers['Content-Type'], 'application/x-www-form-urlencoded');
+  assert.equal(captured.options.headers['Content-Type'], 'application/json');
   assert.equal(captured.url.includes(env.TURNSTILE_SECRET_KEY), false);
-  assert.equal(captured.options.body.get('secret'), env.TURNSTILE_SECRET_KEY);
-  assert.equal(captured.options.body.get('response'), 'token-efemero');
-  assert.equal(captured.options.body.get('remoteip'), '192.0.2.9');
-  assert.match(captured.options.body.get('idempotency_key'), /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i);
+  const sentBody = JSON.parse(captured.options.body);
+  assert.equal(sentBody.secret, env.TURNSTILE_SECRET_KEY);
+  assert.equal(sentBody.response, 'token-efemero');
+  assert.equal(sentBody.remoteip, '192.0.2.9');
+  assert.match(sentBody.idempotency_key, /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i);
 });
 
 test('tokens distintos nunca reutilizam a chave idempotente do Siteverify', async () => {
@@ -97,7 +98,7 @@ test('tokens distintos nunca reutilizam a chave idempotente do Siteverify', asyn
       env,
       token,
       fetchImpl: async (_url, options) => {
-        verificationKeys.push(options.body.get('idempotency_key'));
+        verificationKeys.push(JSON.parse(options.body).idempotency_key);
         return siteverifyResponse();
       }
     });
@@ -216,7 +217,7 @@ test('repete uma única vez causas transitórias e reutiliza a idempotency_key d
         token: 'token-valido',
         fetchImpl: async (url, options) => {
           calls += 1;
-          verificationKeys.push(options.body.get('idempotency_key'));
+          verificationKeys.push(JSON.parse(options.body).idempotency_key);
           if (calls === 1) return scenario.first(url, options);
           return siteverifyResponse();
         },
@@ -241,7 +242,7 @@ test('encerra após uma única repetição transitória e expõe apenas metadado
     token: 'token-efemero-que-nao-pode-vazar',
     remoteIp: '192.0.2.9',
     fetchImpl: async (_url, options) => {
-      verificationKeys.push(options.body.get('idempotency_key'));
+      verificationKeys.push(JSON.parse(options.body).idempotency_key);
       return siteverifyResponse({}, 503);
     },
     retryDelayMs: 0
