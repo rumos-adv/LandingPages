@@ -126,7 +126,7 @@ export async function verifyTurnstile({
   env,
   token,
   remoteIp,
-  fetchImpl = fetch,
+  fetchImpl,
   timeoutMs = SITEVERIFY_TIMEOUT_MS,
   retryDelayMs = SITEVERIFY_RETRY_DELAY_MS
 }) {
@@ -139,10 +139,15 @@ export async function verifyTurnstile({
   // Repetições da validação do mesmo token usam a mesma chave do Siteverify.
   // Outro token, inclusive após reset do widget, recebe uma chave nova.
   const siteverifyIdempotencyKey = crypto.randomUUID();
+  // Mantém a chamada nativa vinculada ao contexto da requisição do Worker.
+  // Os testes ainda podem injetar uma implementação controlada.
+  const requestFetch = typeof fetchImpl === 'function'
+    ? fetchImpl
+    : (input, init) => fetch(input, init);
 
   for (let attempts = 1; attempts <= SITEVERIFY_MAX_ATTEMPTS; attempts += 1) {
     const body = siteverifyBody(configuration, token, remoteIp, siteverifyIdempotencyKey);
-    const outcome = await fetchSiteverify({ fetchImpl, body, timeoutMs });
+    const outcome = await fetchSiteverify({ fetchImpl: requestFetch, body, timeoutMs });
 
     if (outcome.error) {
       if (attempts < SITEVERIFY_MAX_ATTEMPTS) {
