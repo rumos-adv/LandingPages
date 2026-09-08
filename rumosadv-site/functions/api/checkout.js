@@ -478,7 +478,9 @@ export async function onRequestPost(context) {
     try {
       response = await fetch(`${apiBase(environment)}/checkouts`, {
         method: 'POST',
-        redirect: 'error',
+        // Workers no edge aceita apenas follow/manual. Com manual, qualquer 3xx
+        // volta para a validação abaixo sem reenviar o access_token ao destino.
+        redirect: 'manual',
         headers: {
           'accept': 'application/json',
           'content-type': 'application/json',

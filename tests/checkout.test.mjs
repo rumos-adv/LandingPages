@@ -790,13 +790,13 @@ test('Preview do Pages expõe diagnóstico saneado de falha de rede sem revelar 
   assert.equal(JSON.stringify(body).includes(testContext.env.ASAAS_API_KEY), false);
 });
 
-test('não segue redirecionamento do Asaas com access_token e preserva o claim', async () => {
+test('usa redirecionamento manual para nunca reenviar o access_token', async () => {
   let fetchCalls = 0;
   let receivedRedirectMode;
   globalThis.fetch = async (_url, init) => {
     fetchCalls += 1;
     receivedRedirectMode = init.redirect;
-    throw new TypeError('redirect mode is set to error');
+    return new Response('', { status: 302, headers: { location: 'https://example.test/' } });
   };
   const db = new MockD1(acceptance());
 
@@ -804,7 +804,7 @@ test('não segue redirecionamento do Asaas com access_token e preserva o claim',
 
   assert.equal(response.status, 502);
   assert.equal(fetchCalls, 1);
-  assert.equal(receivedRedirectMode, 'error');
+  assert.equal(receivedRedirectMode, 'manual');
   assert.match(db.row.asaas_checkout_id, /^creating:/);
   assert.equal(db.row.payment_status, 'CREATING');
 });
