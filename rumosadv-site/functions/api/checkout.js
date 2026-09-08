@@ -75,6 +75,15 @@ function publicBase(request, env) {
   }
 }
 
+function previewDiagnosticEnabled(request, environment) {
+  if (environment !== 'sandbox') return false;
+  try {
+    return new URL(request.url).hostname.toLowerCase().endsWith('.pages.dev');
+  } catch {
+    return false;
+  }
+}
+
 function normalizedStatus(value) {
   return String(value || '').trim().toUpperCase();
 }
@@ -486,7 +495,16 @@ export async function onRequestPost(context) {
         aceite_id: aceite.id,
         ...errorFields(error)
       });
-      return json({ error: 'Não foi possível confirmar a criação do pagamento. Aguarde alguns instantes antes de tentar novamente.' }, 502);
+      const body = {
+        error: 'Não foi possível confirmar a criação do pagamento. Aguarde alguns instantes antes de tentar novamente.'
+      };
+      if (previewDiagnosticEnabled(context.request, environment)) {
+        body.diagnostic = {
+          reason: 'ASAAS_CHECKOUT_NETWORK_ERROR',
+          ...errorFields(error)
+        };
+      }
+      return json(body, 502);
     }
 
     const data = await response.json().catch(() => ({}));

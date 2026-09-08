@@ -768,6 +768,28 @@ test('falha ambígua de rede mantém o claim para reconciliação', async () => 
   assert.equal(retry.status, 409);
 });
 
+test('Preview do Pages expõe diagnóstico saneado de falha de rede sem revelar a chave', async () => {
+  globalThis.fetch = async () => { throw new TypeError('network unavailable'); };
+  const db = new MockD1(acceptance());
+  const testContext = context(db);
+  testContext.request = new Request('https://feat-marcas.example.pages.dev/api/checkout', {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ aceite_id: 'aceite-1' })
+  });
+
+  const response = await onRequestPost(testContext);
+  const body = await responseBody(response);
+
+  assert.equal(response.status, 502);
+  assert.deepEqual(body.diagnostic, {
+    reason: 'ASAAS_CHECKOUT_NETWORK_ERROR',
+    error_name: 'TypeError',
+    error_message: 'network unavailable'
+  });
+  assert.equal(JSON.stringify(body).includes(testContext.env.ASAAS_API_KEY), false);
+});
+
 test('não segue redirecionamento do Asaas com access_token e preserva o claim', async () => {
   let fetchCalls = 0;
   let receivedRedirectMode;
