@@ -18,6 +18,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Archivo:wght@400;500;600&display=swap">
+  <!-- Google Tag Manager: contêiner filtrado por eventos exclusivos da home LGPD -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-NQTH2XWD');</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"LegalService","name":"Rumos Advocacia","description":"Assessoria jurídica empresarial em LGPD.","url":"https://rumosadv.com.br/","telephone":"+5519994864268","areaServed":{"@type":"Country","name":"Brasil"},"founder":{"@type":"Person","name":"Dr. Rodrigo Moura Silva","jobTitle":"Advogado","identifier":"OAB/SP 188.004"},"serviceType":["Assessoria jurídica empresarial em LGPD","Análise de exigências de privacidade","Apoio jurídico em solicitações da ANPD"]}</script>
 
   <style>
@@ -451,6 +453,23 @@
 <footer class="site-footer"><div class="site-footer__grid"><div><div class="site-footer__brand">RUMOS ADVOCACIA</div><p>Assessoria jurídica empresarial em LGPD.<br>Atendimento remoto em todo o Brasil.</p><p style="font-size:.85rem">Dr. Rodrigo Moura Silva — OAB/SP 188.004</p></div><div><h4>Contato LGPD empresarial</h4><ul><li><a href="https://wa.me/5519994864268?text=Ol%C3%A1%2C%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20assessoria%20jur%C3%ADdica%20em%20LGPD%20para%20minha%20empresa." data-wa-source="footer" target="_blank" rel="noopener">WhatsApp: (19) 99486-4268</a></li><li><a href="mailto:rodrigo@rumosadv.com.br">rodrigo@rumosadv.com.br</a></li><li>Campinas/SP · atendimento digital nacional</li></ul></div><div><h4>Outros serviços</h4><ul><li><a href="/marcas/">Registro e proteção de marcas</a></li><li><a href="/imoveis/">Regularização de imóveis</a></li><li><a href="/inventario/">Inventário em cartório</a></li><li><a href="/divorcio/">Divórcio em cartório</a></li><li><a href="/lgpd/">Privacidade e direitos do titular</a></li></ul></div></div><div class="site-footer__bottom"><span>© 2026 Rumos Advocacia · OAB/SP 188.004</span><span>Conteúdo informativo. Provimento 205/2021 OAB.</span></div></footer>
 <a class="float-wa" href="https://wa.me/5519994864268?text=Ol%C3%A1%2C%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20assessoria%20jur%C3%ADdica%20em%20LGPD%20para%20minha%20empresa." data-wa-source="float" aria-label="Conversar pelo WhatsApp" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7 0-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.4.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5 0 1.5 1.1 2.9 1.3 3.1.2.2 2.2 3.3 5.3 4.6 1.9.7 2.6.8 3.5.7.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.2-.6-.4zM12 .9C5.9.9.9 5.9.9 12c0 2 .5 3.9 1.5 5.6L.7 23.3l5.9-1.5c1.6.9 3.5 1.4 5.4 1.4 6.1 0 11.1-5 11.1-11.1S18.1.9 12 .9z"/></svg></a>
 <script>
+  window.dataLayer=window.dataLayer||[];
+  (function(){
+    var allowedSources=['header','hero','situacao-1','situacao-2','situacao-3','situacao-outra','cta-final','footer','float'];
+    var allowedEvents=['lgpd_page_view','lgpd_whatsapp_intent','lgpd_handoff_intent'];
+    function measure(eventName,source,channel){
+      if(allowedEvents.indexOf(eventName)===-1) return;
+      var event={event:eventName,page:'home-lgpd',measurement_version:'1'};
+      if(source) event.source=allowedSources.indexOf(source)>-1?source:(source==='form'?'form':'other');
+      if(channel) event.channel=channel==='email'?'email':'whatsapp';
+      window.dataLayer.push(event);
+    }
+    measure('lgpd_page_view');
+    document.querySelectorAll('[data-wa-source]').forEach(function(link){
+      link.addEventListener('click',function(){ measure('lgpd_whatsapp_intent',link.getAttribute('data-wa-source'),'whatsapp'); });
+    });
+    window.rumosLgpdMeasure=measure;
+  })();
   (function(){
     var form=document.getElementById('lgpd-contact-form');
     var status=document.getElementById('form-status');
@@ -470,6 +489,7 @@
         'Contexto: '+String(data.get('contexto')||'').trim()
       ];
       var message=lines.join('\n');
+      window.rumosLgpdMeasure('lgpd_handoff_intent','form',clickedChannel);
       if(clickedChannel==='email'){
         status.textContent='Abrindo seu aplicativo de e-mail. Revise o conteúdo antes de enviar.';
         window.location.href='mailto:rodrigo@rumosadv.com.br?subject='+encodeURIComponent('Atendimento jurídico empresarial em LGPD')+'&body='+encodeURIComponent(message);
