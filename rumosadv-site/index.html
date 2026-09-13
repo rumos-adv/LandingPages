@@ -18,8 +18,46 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Archivo:wght@400;500;600&display=swap">
-  <!-- Google Tag Manager: contêiner filtrado por eventos exclusivos da home LGPD -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-NQTH2XWD');</script>
+  <!-- Mensuração exclusiva da home LGPD; não carrega o contêiner compartilhado. -->
+  <script id="rumos-lgpd-measurement-v2">
+    window.dataLayer=window.dataLayer||[];
+    function gtag(){window.dataLayer.push(arguments);}
+    // Política desta página: estatística, sem armazenamento/uso de dados publicitários.
+    // Não atribuir consentimento analítico em nome do visitante.
+    gtag('consent','default',{
+      ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied'
+    });
+    gtag('set',{
+      allow_google_signals:false,allow_ad_personalization_signals:false,
+      ads_data_redaction:true,url_passthrough:false,
+      page_location:'https://rumosadv.com.br/',page_referrer:''
+    });
+    gtag('js',new Date());
+    // Só rótulos fixos da campanha; nunca transportar a query ou identificadores de clique.
+    var lgpdQuery=new URLSearchParams(window.location.search);
+    if(lgpdQuery.get('utm_source')==='google'&&lgpdQuery.get('utm_medium')==='cpc'&&lgpdQuery.get('utm_campaign')==='RUM-LGPD-Search-BR-V1'){
+      gtag('set',{campaign_source:'google',campaign_medium:'cpc',campaign_name:'RUM-LGPD-Search-BR-V1'});
+    }
+    gtag('config','G-WT5T6CK5JC',{
+      send_page_view:false,allow_google_signals:false,
+      allow_ad_personalization_signals:false,
+      page_location:'https://rumosadv.com.br/',page_referrer:'',ignore_referrer:true,
+      cookie_prefix:'rumos_lgpd',cookie_expires:86400,cookie_update:false
+    });
+    window.rumosLgpdSend=function(event){
+      // Allowlist de campos e valores: nunca copiar objetos de formulário ou a URL atual.
+      var names=['lgpd_page_view','lgpd_whatsapp_intent','lgpd_handoff_intent'];
+      if(!event||names.indexOf(event.event)===-1) return;
+      var params={send_to:'G-WT5T6CK5JC',page:'home-lgpd',measurement_version:'2',
+        page_location:'https://rumosadv.com.br/',page_referrer:'',
+        allow_google_signals:false,allow_ad_personalization_signals:false};
+      var sources=['header','hero','situacao-1','situacao-2','situacao-3','situacao-outra','cta-final','footer','float','form','other'];
+      if(event.source) params.source=sources.indexOf(event.source)>-1?event.source:'other';
+      if(event.channel==='whatsapp'||event.channel==='email') params.channel=event.channel;
+      gtag('event',event.event,params);
+    };
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-WT5T6CK5JC"></script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"LegalService","name":"Rumos Advocacia","description":"Assessoria jurídica empresarial em LGPD.","url":"https://rumosadv.com.br/","telephone":"+5519994864268","areaServed":{"@type":"Country","name":"Brasil"},"founder":{"@type":"Person","name":"Dr. Rodrigo Moura Silva","jobTitle":"Advogado","identifier":"OAB/SP 188.004"},"serviceType":["Assessoria jurídica empresarial em LGPD","Análise de exigências de privacidade","Apoio jurídico em solicitações da ANPD"]}</script>
 
   <style>
@@ -427,7 +465,7 @@
           <button type="submit" class="btn btn--whatsapp" name="channel" value="whatsapp">Continuar no WhatsApp</button>
           <button type="submit" class="btn btn--outline" name="channel" value="email">Preparar e-mail</button>
         </div>
-        <p class="form-disclaimer">Os dados permanecem somente neste navegador até você escolher um canal. Ao continuar no WhatsApp, o texto será encaminhado ao WhatsApp/Meta; ao preparar e-mail, será aberto o aplicativo de e-mail configurado no seu dispositivo. A mensuração estatística desta página registra somente a visita e a intenção de contato, sem enviar o conteúdo informado e sem gravação de sessão ou uso para publicidade.</p>
+        <p class="form-disclaimer">Os dados permanecem somente neste navegador até você escolher um canal. Ao continuar no WhatsApp, o texto será encaminhado ao WhatsApp/Meta; ao preparar e-mail, será aberto o aplicativo de e-mail configurado no seu dispositivo. A mensuração estatística desta página registra somente a visita e a intenção de contato, sem enviar o conteúdo informado, sem gravação de sessão e sem publicidade personalizada ou remarketing.</p>
         <p id="form-status" class="form-disclaimer" role="status" aria-live="polite"></p>
       </form>
     </div></div>
@@ -459,10 +497,10 @@
     var allowedEvents=['lgpd_page_view','lgpd_whatsapp_intent','lgpd_handoff_intent'];
     function measure(eventName,source,channel){
       if(allowedEvents.indexOf(eventName)===-1) return;
-      var event={event:eventName,page:'home-lgpd',measurement_version:'1'};
+      var event={event:eventName,page:'home-lgpd',measurement_version:'2'};
       if(source) event.source=allowedSources.indexOf(source)>-1?source:(source==='form'?'form':'other');
       if(channel) event.channel=channel==='email'?'email':'whatsapp';
-      window.dataLayer.push(event);
+      if(typeof window.rumosLgpdSend==='function') window.rumosLgpdSend(event);
     }
     measure('lgpd_page_view');
     document.querySelectorAll('[data-wa-source]').forEach(function(link){
