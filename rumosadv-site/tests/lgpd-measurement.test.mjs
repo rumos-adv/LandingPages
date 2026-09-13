@@ -26,11 +26,19 @@ function boot(valid=true,search='?email=PESSOA-PRIVADA&gclid=IDENTIFICADOR-TESTE
  return {window,ctx,listeners,opened,status,commands,events};
 }
 
-test('home não carrega o contêiner compartilhado, Meta, Clarity ou tag Ads',()=>{
+test('home usa somente o GA4 próprio; scripts de hospedagem preexistentes são identificados',()=>{
  assert(!/GTM-NQTH2XWD|connect\.facebook|clarity\.ms|AW-\d+/.test(html));
  const remote=[...html.matchAll(/<script[^>]*src="([^\"]+)"/gi)].map(m=>m[1]);
- assert.equal(remote.length,1);
- assert.match(remote[0],/^https:\/\/www\.googletagmanager\.com\/gtag\/js\?id=G-[A-Z0-9]+$/);
+ const ga=remote.filter(url=>/^https:\/\/www\.googletagmanager\.com\/gtag\/js\?id=G-[A-Z0-9]+$/.test(url));
+ assert.equal(ga.length,1);
+ // Cloudflare injeta estes dois recursos na resposta, mas não no repositório.
+ // A política de rede deles deve ser conferida nos cabeçalhos publicados, à parte.
+ const edge=remote.filter(url=>url!==ga[0]);
+ assert(edge.length<=2);
+ for(const url of edge) assert(
+  /^\/cdn-cgi\/scripts\/[a-f0-9]+\/cloudflare-static\/email-decode\.min\.js$/.test(url)||
+  /^https:\/\/static\.cloudflareinsights\.com\/beacon\.min\.js\/v[a-f0-9]+$/.test(url),
+  'Script adicional inesperado: '+url);
 });
 test('restrições publicitárias são enfileiradas antes da configuração',()=>{
  const {commands}=boot();const c=commands();
