@@ -360,7 +360,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <section class="hero hero--image">
   <div class="container">
-    <a href="#consulta" class="hero__visual" data-wa-source="hero" aria-label="Registro de marcas no INPI — Avaliar minha marca">
+    <a href="https://wa.me/5519989119770?text=Ol%C3%A1%2C%20gostaria%20de%20avaliar%20o%20registro%20da%20minha%20marca%20no%20INPI." class="hero__visual" data-wa-source="hero" aria-label="Registro de marcas no INPI — conversar pelo WhatsApp" rel="noopener" target="_blank">
       <h1 class="sr-only">Seu nome constrói valor. O registro transforma isso em proteção. Assessoria jurídica para pesquisar, estruturar, depositar e acompanhar o pedido de registro da sua marca no INPI. Dr. Rodrigo Moura Silva, OAB/SP 188.004. Rumos Marcas &amp; Negócios, Campinas.</h1>
       <picture>
         <source type="image/webp" srcset="/assets/img/hero-marcas-rod.webp">
@@ -370,7 +370,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </a>
   </div>
   <div class="hero__post">
-    <span class="hero__badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Busca prévia em até 1 dia útil · Sem custo na primeira conversa</span>
+    <div class="hero__head">
+      <p class="hero__lead">Quer registrar a marca do seu negócio? Converse sobre as etapas, os honorários e as taxas do INPI antes de contratar.</p>
+      <div class="hero__cta-row">
+        <a href="https://wa.me/5519989119770?text=Ol%C3%A1%2C%20gostaria%20de%20avaliar%20o%20registro%20da%20minha%20marca%20no%20INPI." class="btn btn--whatsapp" data-wa-source="hero-conversa" rel="noopener" target="_blank">Conversar sobre o registro no WhatsApp</a>
+        <a href="#consulta" class="btn btn--outline" data-form-source="hero">Prefiro preencher o formulário</a>
+      </div>
+      <p class="hero__lead">O assistente do escritório recebe sua mensagem e adianta a triagem. Depois, o advogado continua o atendimento. A conversa inicial esclarece o serviço; a análise jurídica da marca é uma etapa contratada separadamente.</p>
+    </div>
   </div>
 </section>
 
@@ -453,7 +460,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <p>Cada marca exige uma leitura própria: nome, imagem, mercado, classes, anterioridades e estratégia de uso. Você sabe desde o primeiro contato o que será feito, em quanto tempo, e quanto custa.</p>
     </div>
     <div class="steps">
-      <article class="step"><span class="step__num">1</span><h3>Entendimento e busca em até 1 dia útil</h3><p>Identifico como a marca é usada, quais atividades ela distingue e qual proteção faz sentido. Em até 1 dia útil, contado do recebimento das informações necessárias, devolvo a busca de anterioridades com leitura jurídica dos riscos — não uma lista de resultados, mas um parecer sobre o que eles significam para o seu pedido.</p></article>
+      <article class="step"><span class="step__num">1</span><h3>Conversa inicial e análise de viabilidade</h3><p>Na conversa inicial, entendo o momento do negócio e explico como funciona a assessoria. A busca de anterioridades e a avaliação jurídica dos riscos são realizadas após a contratação da análise de viabilidade. O escopo, o prazo e os honorários são informados antes do aceite.</p></article>
       <article class="step"><span class="step__num">2</span><h3>Estratégia e plano por escrito</h3><p>Definimos a apresentação da marca (nominativa, figurativa ou mista), o titular do pedido e as classes relacionadas à atuação da empresa. O plano traz etapas, retribuições do INPI, honorários e prazos realistas. Sem letra miúda.</p></article>
       <article class="step"><span class="step__num">3</span><h3>Depósito e acompanhamento</h3><p>Organizo os documentos, emito a guia aplicável e protocolo o pedido com a especificação definida. Depois, monitoro a RPI, comunico movimentações e conduzo as providências — oposições, exigências, recursos — até a decisão.</p></article>
     </div>
@@ -597,6 +604,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   document.querySelectorAll('[data-wa-source]').forEach(function(el){
     el.addEventListener('click', function(){
+      // A navigation to the form is not a WhatsApp click.
+      var destination;
+      try { destination = new URL(el.getAttribute('href'), window.location.href); } catch (err) { return; }
+      if (destination.protocol !== 'https:' ||
+          !((destination.hostname === 'wa.me' && destination.pathname === '/5519989119770') ||
+            (destination.hostname === 'api.whatsapp.com' && destination.pathname.replace(/\/$/, '') === '/send' && destination.searchParams.get('phone') === '5519989119770'))) return;
       window.dataLayer.push({
         event: 'whatsapp_click',
         source: el.getAttribute('data-wa-source'),
@@ -606,14 +619,23 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     });
   });
 
+  document.querySelectorAll('a[href="#consulta"]').forEach(function(el){
+    el.addEventListener('click', function(){
+      window.dataLayer.push({ event: 'form_open', page: 'marcas', source: el.getAttribute('data-form-source') || 'page' });
+    });
+  });
+
   if (!window.__tallyListenerInstalled) {
     window.__tallyListenerInstalled = true;
     window.addEventListener('message', function(e) {
+      if (e.origin !== 'https://tally.so') return;
+      var tallyFrame = document.querySelector('iframe[title="Marcas — orientação inicial"]');
+      if (!tallyFrame || e.source !== tallyFrame.contentWindow) return;
       if (!e.data || typeof e.data !== 'string') return;
       if (e.data.indexOf('Tally.FormSubmitted') === -1) return;
       try {
         var p = JSON.parse(e.data);
-        if (p.event === 'Tally.FormSubmitted') {
+        if (p.event === 'Tally.FormSubmitted' && p.payload && p.payload.formId === 'BzRag7') {
           window.dataLayer.push({
             event: 'lead_submit',
             page: 'marcas',
