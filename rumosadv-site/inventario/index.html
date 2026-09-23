@@ -588,6 +588,57 @@
     .hero__bullets__detail p { color: rgba(255,255,255,.78); }
     .hero__bullets__detail strong { color: #fff; }
   </style>
+<style id="rumos-inventario-layout-v2">
+/* Composição recuperada de /marcas e enquadramento final v4 do retrato. */
+:root { --hero-forest:#06180f; --hero-cream:#eeeadd; --hero-gold:#d8b576; --hero-gold-hover:#e2c88e; }
+.site-header { border-bottom:1px solid var(--hero-gold); }
+.hero--inventario { padding:0; background:var(--hero-forest); }
+.hero-stage { display:grid; grid-template-columns:44% 56%; max-width:1600px; margin:0 auto; min-height:650px; }
+.hero-portrait { position:relative; min-width:0; overflow:hidden; }
+.hero-portrait img { width:100%; height:100%; position:absolute; inset:0; object-fit:cover; object-position:50% 38%; filter:brightness(.84) saturate(.8); }
+.hero-portrait::after { content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 60%,var(--hero-forest) 100%),linear-gradient(0deg,var(--hero-forest),transparent 14%); }
+.hero-copy { padding:48px clamp(30px,5.5vw,88px) 64px 24px;display:flex;flex-direction:column;align-items:flex-end;justify-content:space-between;gap:65px; }
+.hero-brand { font:500 2.6rem var(--serif);color:var(--hero-cream);letter-spacing:.2em;text-align:center;line-height:1.15; }
+.hero-brand span { display:block;border-top:1px solid var(--hero-gold);margin-top:.5rem;padding-top:.6rem;font:500 .72rem var(--sans);color:var(--hero-gold);letter-spacing:.32em; }
+.hero--inventario .hero__head { text-align:right;max-width:710px;margin:0; }
+.hero--inventario .hero__eyebrow { color:var(--hero-gold);font-size:.76rem;letter-spacing:.22em;line-height:1.7;margin-bottom:1.6rem; }
+.hero--inventario h1 { color:var(--hero-cream);font-size:clamp(2.6rem,4.3vw,4.4rem);line-height:1.08;font-weight:600;letter-spacing:-.015em; }
+.hero--inventario .hero__lead { font:400 1rem/1.8 var(--sans);color:var(--hero-cream);opacity:.83;margin:1.8rem 0 0; }
+.hero--inventario .hero__cta-row { justify-content:flex-end;align-items:center;gap:1.7rem;margin-top:2.4rem; }
+.hero-signature { color:var(--hero-cream);opacity:.65;font:400 .76rem var(--sans);letter-spacing:.08em; }
+.hero-gold-cta { background:var(--hero-gold);color:var(--hero-forest);border-radius:0;text-transform:uppercase;letter-spacing:.065em;font-size:.78rem;padding:1.15rem 1.45rem;justify-content:center; }
+.hero-gold-cta:hover { background:var(--hero-gold-hover);color:var(--hero-forest);text-decoration:none; }
+.hero--inventario .hero__post { background:var(--hero-forest);padding:1.1rem 1rem 1.5rem; }
+.hero--inventario .hero__badge { margin:0;font-size:.8rem; }
+.cta-final .btn--whatsapp { background:var(--hero-gold);color:var(--hero-forest);border-radius:0; }
+.cta-final .btn--whatsapp:hover { background:var(--hero-gold-hover);color:var(--hero-forest); }
+@media(min-width:1600px){.hero-stage{min-height:760px}}
+@media(max-width:900px){.hero-stage{grid-template-columns:42% 58%;min-height:610px}.hero-copy{padding:35px 26px 48px 8px;gap:40px}.hero--inventario h1{font-size:2.8rem}.hero--inventario .hero__cta-row{gap:1rem}}
+@media(max-width:719px){.hero-stage{display:flex;flex-direction:column;min-height:0}.hero-portrait{height:440px;min-height:440px}.hero-portrait img{position:static;height:100%;object-fit:contain;object-position:center top}.hero-portrait::after{background:linear-gradient(0deg,var(--hero-forest),transparent 22%)}.hero-copy{padding:0 1.4rem 2.3rem;gap:1.8rem;align-items:center}.hero-brand{display:none}.hero--inventario .hero__head{text-align:center}.hero--inventario h1{font-size:clamp(2.25rem,9.7vw,3.4rem)}.hero--inventario .hero__eyebrow{font-size:.7rem;margin-bottom:1rem}.hero--inventario .hero__lead{font-size:.95rem;line-height:1.7;margin-top:1.3rem}.hero--inventario .hero__cta-row{justify-content:center;flex-direction:column;margin-top:1.5rem}.hero-signature{order:2}.hero-gold-cta{width:100%;max-width:360px}.hero--inventario .hero__badge{text-align:center;font-size:.72rem}.hero--inventario .hero__post{padding-top:0}}
+
+/* Adaptação de inventário: formulário após a abertura e controles acessíveis. */
+.hero--inventario .hero__post { display:flex;justify-content:center; }
+.hero--inventario .hero__badge { display:inline-flex;border-radius:999px;padding:.4rem .9rem; }
+.hero-form-link { display:inline-block;color:var(--hero-cream);margin-top:1.2rem;font-size:.88rem;text-underline-offset:5px; }
+.hero-form-link:hover { color:var(--hero-gold); }
+.inventario-consulta { scroll-margin-top:90px; }
+.inventario-consulta .hero__grid { align-items:start;gap:clamp(2rem,5vw,5rem); }
+.inventario-consulta .hero__bullets li { color:var(--fg-soft); }
+.inventario-consulta .hero__bullets li::before { border-color:var(--primary); }
+.inventario-consulta .form-card { position:static;width:100%;min-width:0; }
+.inventario-consulta .hero__grid > * { min-width:0; }
+.site-header__inner { gap:1rem; }
+.nav-cta,.float-wa { color:var(--verde-escuro); }
+.nav-cta:hover,.float-wa:hover { color:var(--verde-escuro); }
+@media(max-width:420px){
+ .site-header__inner { padding:.8rem 1rem;gap:.5rem; }
+ .logo a { gap:.3rem; } .logo__rumos { font-size:1.05rem;letter-spacing:.1em; }
+ .logo__adv { font-size:.6rem;letter-spacing:.18em; }
+ .nav-cta { padding:.5rem .65rem;font-size:.78rem;gap:.35rem; }
+ .inventario-consulta .form-card { padding:1.25rem 1rem; }
+}
+
+</style>
 </head>
 <body>
 
@@ -614,36 +665,40 @@
 <main id="main">
 
   <!-- ========== HERO ========== -->
-  <section class="hero">
-    <div class="container">
-      <div class="hero__grid">
-        <div>
+  <section class="hero hero--inventario">
+    <div class="hero-stage">
+      <div class="hero-portrait"><img src="https://rumosadv.com.br/assets/img/hero-lgpd-rodrigo.webp" width="1000" height="1256" alt="Dr. Rodrigo Moura Silva, advogado da Rumos Advocacia" fetchpriority="high"></div>
+      <div class="hero-copy">
+        <div class="hero-brand" aria-hidden="true">RUMOS<span>ADVOCACIA</span></div>
+        <div class="hero__head">
           <span class="hero__eyebrow">Inventário extrajudicial · Campinas</span>
-          <h1 class="hero__title">Entregar a cada um a sua devida parcela de bens, com transparência e agilidade.</h1>
-          <p class="hero__sub">Ao inventariante cabe a responsabilidade de proteger os interesses de todos os herdeiros. Contar com o advogado certo significa ter um inventário conduzido com transparência, segurança jurídica e a precisão técnica que a sua família espera e merece.</p>
-          <ul class="hero__bullets">
-            <li>Conclusão normalmente em poucos dias, sem audiência e sem juiz, com prioridade máxima quando a família precisa de rapidez</li>
-            <li>Monitoramos cada etapa do ITCMD com máximo zelo, reduzindo o risco de multas</li>
-            <li>Acompanhamento até a transferência de imóveis, contas e veículos</li>
-            <li>Atendimento direto com o advogado responsável, com sigilo</li>
-          </ul>
-          <div class="hero__cta-row">
-            <a href="https://wa.me/5519989119770?text=Ol%C3%A1%2C%20gostaria%20de%20uma%20orienta%C3%A7%C3%A3o%20sobre%20invent%C3%A1rio%20em%20cart%C3%B3rio."
-               class="btn btn--whatsapp"
-               data-wa-source="hero"
-               rel="noopener"
-               target="_blank">
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width:18px;height:18px"><path d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7 0-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.4.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5 0 1.5 1.1 2.9 1.3 3.1.2.2 2.2 3.3 5.3 4.6 1.9.7 2.6.8 3.5.7.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.2-.6-.4zM12 .9C5.9.9.9 5.9.9 12c0 2 .5 3.9 1.5 5.6L.7 23.3l5.9-1.5c1.6.9 3.5 1.4 5.4 1.4 6.1 0 11.1-5 11.1-11.1S18.1.9 12 .9z"/></svg>
-              Falar agora no WhatsApp
-            </a>
-            <a href="#consulta" class="btn btn--outline">Pedir análise por formulário</a>
-          </div>
+          <h1>A cada herdeiro,<br>a sua devida parte.</h1>
+          <p class="hero__lead">Inventário em cartório com orientação clara para sua família. Acompanhamento dos documentos, do ITCMD e da partilha, diretamente com o advogado.</p>
+          <div class="hero__cta-row"><span class="hero-signature">OAB/SP 188.004</span><a href="https://wa.me/5519989119770?text=Ol%C3%A1%2C%20gostaria%20de%20uma%20orienta%C3%A7%C3%A3o%20sobre%20invent%C3%A1rio%20em%20cart%C3%B3rio." class="btn hero-gold-cta" data-wa-source="hero" rel="noopener" target="_blank">Conversar sobre o inventário</a></div>
+          <a href="#consulta" class="hero-form-link">Prefiro enviar pelo formulário</a>
         </div>
+      </div>
+    </div>
+    <div class="hero__post"><span class="hero__badge">Atendimento direto · Sigilo profissional</span></div>
+  </section>
 
-        <!-- Form card -->
-        <aside id="consulta" class="form-card">
+  <section class="inventario-consulta" id="consulta">
+    <div class="container"><div class="hero__grid">
+      <div>
+        <span class="section__eyebrow">Cuidado em cada etapa</span>
+        <h2>Transparência para cuidar<br>do patrimônio da família.</h2>
+        <p>Ao inventariante cabe a responsabilidade de proteger os interesses de todos os herdeiros. Contar com o advogado certo significa ter um inventário conduzido com transparência, segurança jurídica e a precisão técnica que a sua família espera e merece.</p>
+        <ul class="hero__bullets">
+          <li>Definição das etapas e dos prazos conforme os documentos e as particularidades da família</li>
+          <li>Monitoramos cada etapa do ITCMD com máximo zelo, reduzindo o risco de multas</li>
+          <li>Acompanhamento até a transferência de imóveis, contas e veículos</li>
+          <li>Atendimento direto com o advogado responsável, com sigilo</li>
+        </ul>
+      </div>
+      <aside class="form-card">
           <h2 class="form-card__title">Solicite a análise do seu caso</h2>
           <p class="form-card__sub">Sigilo profissional. Resposta direta com o advogado em até 24h.</p>
+          <p class="form-card__sub"><a href="https://tally.so/embed/A7AJLW?alignLeft=1&amp;hideTitle=1&amp;transparentBackground=1&amp;dynamicHeight=1&amp;page=inventario&amp;source=lp" target="_blank" rel="noopener">Se o formulário não carregar, abra por aqui.</a></p>
           <div class="tally-frame">
             <iframe data-tally-src="https://tally.so/embed/A7AJLW?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1&page=inventario&source=lp"
                     loading="lazy"
@@ -656,8 +711,7 @@
           </div>
           <script>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}</script>
         </aside>
-      </div>
-    </div>
+    </div></div>
   </section>
 
   <!-- ========== COMO FUNCIONA ========== -->
