@@ -344,6 +344,30 @@
     .hero__bullets__detail p { color: rgba(255,255,255,.78); }
     .hero__bullets__detail strong { color: #fff; }
   </style>
+  <style>
+    /* Hero mobile (Claude Design · Hero Execucao Mobile) — só abaixo de 720px */
+    .hero-m { display: none; }
+    @media (max-width: 719px) {
+      .hero--image > .container { display: none; }
+      .hero-m { display: block; position: relative; background: #081811; font-family: Archivo, sans-serif; overflow: hidden; }
+      .hero-m__photo { position: relative; aspect-ratio: 3 / 2; overflow: hidden; }
+      .hero-m__photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+      .hero-m__photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8,24,17,0) 0%, rgba(8,24,17,0) 55%, #081811 100%), linear-gradient(90deg, rgba(8,24,17,0) 0%, rgba(8,24,17,0) 70%, #081811 100%); }
+      .hero-m__rule { position: absolute; top: 0; left: 0; right: 0; height: 2px; z-index: 2; background: linear-gradient(90deg, #5d4d2b 0%, #ab8f52 28%, #c8a45e 55%, #8d763f 100%); }
+      .hero-m__logo { position: absolute; top: 5.5vw; right: 5.5vw; z-index: 2; text-align: center; }
+      .hero-m__logo-r { font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600; font-size: clamp(18px, 4.4vw, 24px); letter-spacing: .17em; color: #f4eedd; line-height: 1; padding-right: .17em; }
+      .hero-m__logo-line { height: 1px; background: #c8a45e; opacity: .85; margin: 6px 0 5px; }
+      .hero-m__logo-a { font-size: clamp(7px, 1.5vw, 8px); font-weight: 500; letter-spacing: .34em; color: #c8a45e; padding-right: .34em; }
+      .hero-m__body { position: relative; z-index: 2; margin-top: -7.8vw; padding: 0 6.3vw 8vw; }
+      .hero-m__eyebrow { font-size: clamp(10px, 2.1vw, 11px); font-weight: 600; letter-spacing: .26em; color: #c8a45e; }
+      .hero-m__t { margin: 16px 0 0; font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600; font-size: clamp(29px, 6.9vw, 37px); line-height: 1.12; letter-spacing: -.005em; color: #f4eedd; text-wrap: pretty; }
+      .hero-m__lead { margin: 16px 0 0; font-size: 14px; line-height: 1.55; color: #c9cabd; text-wrap: pretty; }
+      .hero-m__row { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 24px; }
+      .hero-m__cta { display: inline-block; background: #d9b676; color: #12291b; font-size: 13px; font-weight: 600; letter-spacing: .11em; padding: 15px 28px; text-decoration: none; }
+      .hero-m__cta:hover { text-decoration: none; color: #12291b; background: #e2c48c; }
+      .hero-m__oab { font-size: 11px; letter-spacing: .11em; color: #8d9188; }
+    }
+  </style>
 </head>
 <body>
 
@@ -378,6 +402,22 @@
              loading="eager"
              fetchpriority="high"></picture>
       </a>
+    </div>
+    <div class="hero-m">
+      <div class="hero-m__rule" aria-hidden="true"></div>
+      <div class="hero-m__photo">
+        <picture><source type="image/webp" srcset="/assets/img/hero-execucao-rod-mobile.webp"><img src="/assets/img/hero-execucao-rod-mobile.jpg" alt="Dr. Rodrigo Moura Silva, advogado da Rumos Advocacia" width="1080" height="720" loading="eager" fetchpriority="high"></picture>
+      </div>
+      <div class="hero-m__logo" aria-hidden="true"><div class="hero-m__logo-r">RUMOS</div><div class="hero-m__logo-line"></div><div class="hero-m__logo-a">ADVOCACIA</div></div>
+      <div class="hero-m__body">
+        <div class="hero-m__eyebrow">DEFESA EM EXECUÇÃO · EMPRESAS</div>
+        <div class="hero-m__t">Sua empresa foi citada em uma execução ou teve a conta bloqueada?</div>
+        <p class="hero-m__lead">Os prazos de defesa correm desde a citação e o bloqueio. Análise do processo e plano por escrito.</p>
+        <div class="hero-m__row">
+          <a class="hero-m__cta" href="#situacao" data-wa-source="hero-mobile">AVALIAR MEU CASO</a>
+          <span class="hero-m__oab">OAB/SP 188.004</span>
+        </div>
+      </div>
     </div>
     <div class="hero__post">
       <span class="hero__badge" aria-label="Primeira conversa sem custo, diagnóstico do processo em até 48 horas úteis">
