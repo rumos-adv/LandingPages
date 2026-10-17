@@ -44,39 +44,51 @@
 
   <!-- ========== Schema.org JSON-LD ========== -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LegalService",
-    "name": "Rumos Advocacia",
-    "description": "Advocacia extrajudicial em Campinas/SP especializada em divórcio em cartório, dissolução de união estável, inventário extrajudicial e regularização registral.",
-    "url": "https://rumosadv.com.br/divorcio/",
-    "image": "https://rumosadv.com.br/assets/img/og-image.jpg",
-    "telephone": "+5519989119770",
-    "priceRange": "$$",
-    "areaServed": {
-      "@type": "City",
-      "name": "Campinas",
-      "containedInPlace": {
-        "@type": "State",
-        "name": "São Paulo"
-      }
-    },
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Campinas",
-      "addressRegion": "SP",
-      "addressCountry": "BR"
-    },
-    "founder": {
-      "@type": "Person",
-      "name": "Dr. Rodrigo Moura Silva",
-      "jobTitle": "Advogado",
-      "alumniOf": "Ibmec — Especialização em Direito Notarial e Registral",
-      "identifier": "OAB/SP 188.004"
-    },
-    "serviceType": ["Divórcio extrajudicial (em cartório)", "Dissolução extrajudicial de união estável"],
-    "knowsAbout": ["Divórcio consensual", "Dissolução de união estável", "Reconhecimento de união estável", "Resolução 571 CNJ", "Lei 11.441/2007", "Direito Notarial e Registral"]
-  }
+{
+  "@id": "https://rumosadv.com.br/#escritorio",
+  "@context": "https://schema.org",
+  "@type": "LegalService",
+  "name": "Rumos Advocacia",
+  "description": "Advocacia extrajudicial em Campinas/SP especializada em divórcio em cartório, dissolução de união estável, inventário extrajudicial e regularização registral.",
+  "url": "https://rumosadv.com.br/divorcio/",
+  "image": "https://rumosadv.com.br/assets/img/og-image.jpg",
+  "telephone": "+5519989119770",
+  "priceRange": "$$",
+  "areaServed": {
+    "@type": "City",
+    "name": "Campinas",
+    "containedInPlace": {
+      "@type": "State",
+      "name": "São Paulo"
+    }
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Campinas",
+    "addressRegion": "SP",
+    "addressCountry": "BR"
+  },
+  "founder": {
+    "@id": "https://rumosadv.com.br/#rodrigo-moura",
+    "@type": "Person",
+    "name": "Dr. Rodrigo Moura Silva",
+    "jobTitle": "Advogado",
+    "alumniOf": "Ibmec — Especialização em Direito Notarial e Registral",
+    "identifier": "OAB/SP 188.004"
+  },
+  "serviceType": [
+    "Divórcio extrajudicial (em cartório)",
+    "Dissolução extrajudicial de união estável"
+  ],
+  "knowsAbout": [
+    "Divórcio consensual",
+    "Dissolução de união estável",
+    "Reconhecimento de união estável",
+    "Resolução 571 CNJ",
+    "Lei 11.441/2007",
+    "Direito Notarial e Registral"
+  ]
+}
   </script>
 
   <!-- ========== Google Tag Manager ========== -->

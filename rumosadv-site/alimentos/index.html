@@ -44,38 +44,51 @@
 
   <!-- ========== Schema.org JSON-LD ========== -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LegalService",
-    "name": "Rumos Advocacia",
-    "description": "Advocacia em Campinas/SP especializada em direito de família — pensão alimentícia (execução, ação inicial e revisão), atendimento direto com o advogado.",
-    "url": "https://rumosadv.com.br/alimentos/",
-    "image": "https://rumosadv.com.br/assets/img/og-image.jpg",
-    "telephone": "+5519989119770",
-    "priceRange": "$$",
-    "areaServed": {
-      "@type": "City",
-      "name": "Campinas",
-      "containedInPlace": {
-        "@type": "State",
-        "name": "São Paulo"
-      }
-    },
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Campinas",
-      "addressRegion": "SP",
-      "addressCountry": "BR"
-    },
-    "founder": {
-      "@type": "Person",
-      "name": "Dr. Rodrigo Moura Silva",
-      "jobTitle": "Advogado",
-      "identifier": "OAB/SP 188.004"
-    },
-    "serviceType": ["Execução de pensão alimentícia", "Ação de alimentos", "Revisão de pensão alimentícia"],
-    "knowsAbout": ["Pensão alimentícia", "Direito de família", "Execução de alimentos", "Súmula 309 STJ", "Lei 5.478/68", "CPC arts. 528-533"]
-  }
+{
+  "@id": "https://rumosadv.com.br/#escritorio",
+  "@context": "https://schema.org",
+  "@type": "LegalService",
+  "name": "Rumos Advocacia",
+  "description": "Advocacia em Campinas/SP especializada em direito de família — pensão alimentícia (execução, ação inicial e revisão), atendimento direto com o advogado.",
+  "url": "https://rumosadv.com.br/alimentos/",
+  "image": "https://rumosadv.com.br/assets/img/og-image.jpg",
+  "telephone": "+5519989119770",
+  "priceRange": "$$",
+  "areaServed": {
+    "@type": "City",
+    "name": "Campinas",
+    "containedInPlace": {
+      "@type": "State",
+      "name": "São Paulo"
+    }
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Campinas",
+    "addressRegion": "SP",
+    "addressCountry": "BR"
+  },
+  "founder": {
+    "@id": "https://rumosadv.com.br/#rodrigo-moura",
+    "@type": "Person",
+    "name": "Dr. Rodrigo Moura Silva",
+    "jobTitle": "Advogado",
+    "identifier": "OAB/SP 188.004"
+  },
+  "serviceType": [
+    "Execução de pensão alimentícia",
+    "Ação de alimentos",
+    "Revisão de pensão alimentícia"
+  ],
+  "knowsAbout": [
+    "Pensão alimentícia",
+    "Direito de família",
+    "Execução de alimentos",
+    "Súmula 309 STJ",
+    "Lei 5.478/68",
+    "CPC arts. 528-533"
+  ]
+}
   </script>
 
   <!-- ========== Google Tag Manager ========== -->
