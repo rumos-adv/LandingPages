@@ -208,6 +208,13 @@
     .form-wrap { max-width: 720px; margin: 0 auto; background: #fff; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.75rem; box-shadow: var(--shadow-md); }
     .form-wrap__title { font-family: var(--serif); font-size: 1.4rem; margin-bottom: .25rem; color: var(--fg); }
     .form-wrap__sub { font-size: .95rem; color: var(--muted); margin-bottom: 1.2rem; }
+    .form-direct { text-align: center; margin: 1rem 0 0; font-size: .9rem; color: var(--muted); }
+    .form-done { display: none; margin-top: 1.25rem; padding: 1.25rem 1.3rem; border-left: 4px solid var(--primary); background: var(--bg-alt); border-radius: var(--radius); }
+    .form-done.is-on { display: block; }
+    .form-done h3 { margin: 0 0 .5rem; font-size: 1.15rem; color: var(--primary); }
+    .form-done ol { margin: 0 0 .9rem; padding-left: 1.2rem; color: var(--fg-soft); font-size: .95rem; }
+    .form-done li { margin-bottom: .3rem; }
+    .form-done p { margin: 0 0 .8rem; font-size: .95rem; }
     .form-alt { text-align: center; padding: .5rem 0 0; }
     .form-alt__mail { margin: .9rem 0 0; font-size: .9rem; color: var(--muted); }
     .situacao--4 { max-width: 820px; }
@@ -494,21 +501,30 @@
 
       </div>
 
-      <p class="situacao__alt">Sua situação não está aqui? <a href="https://wa.me/5519989119770?text=Ol%C3%A1%2C%20vim%20da%20p%C3%A1gina%20de%20d%C3%ADvida%20ativa.%20Minha%20situa%C3%A7%C3%A3o%20com%20a%20Receita%2FPGFN%20%C3%A9%20diferente%20dessas.%20Gostaria%20de%20uma%20orienta%C3%A7%C3%A3o." data-wa-source="situacao-outra" rel="noopener" target="_blank">Conte aqui no WhatsApp</a> ou <a href="#consulta">mande por escrito</a>.</p>
+      <p class="situacao__alt">Sua situação não está aqui? <a href="https://wa.me/5519989119770?text=Ol%C3%A1%2C%20vim%20da%20p%C3%A1gina%20de%20d%C3%ADvida%20ativa.%20Minha%20situa%C3%A7%C3%A3o%20com%20a%20Receita%2FPGFN%20%C3%A9%20diferente%20dessas.%20Gostaria%20de%20uma%20orienta%C3%A7%C3%A3o." data-wa-source="situacao-outra" rel="noopener" target="_blank">Conte aqui no WhatsApp</a> ou <a href="#consulta">mande pelo formulário</a>.</p>
       <p class="situacao__link">A cobrança é de banco ou fornecedor? <a href="/execucao">Veja a página de defesa em execução para empresas</a>.</p>
     </div>
   </section>
 
-  <!-- ========== POR ESCRITO (WhatsApp/e-mail; Tally pode entrar aqui depois) ========== -->
+  <!-- ========== FORMULÁRIO (Tally) ========== -->
   <section class="form-section" id="consulta">
     <div class="container">
       <div class="form-wrap">
         <h2 class="form-wrap__title">Prefere mandar por escrito?</h2>
         <p class="form-wrap__sub">Informe o CNPJ, o valor aproximado da dívida e se já existe execução fiscal. Com o relatório de situação fiscal do e-CAC ou a consulta do Regularize, a análise fica mais rápida. Retorno em até 48h úteis, com sigilo profissional.</p>
-        <div class="form-alt">
-          <a href="https://wa.me/5519989119770?text=Ol%C3%A1%2C%20vim%20da%20p%C3%A1gina%20de%20d%C3%ADvida%20ativa%20da%20Rumos.%20Minha%20empresa%20tem%20d%C3%A9bitos%20com%20a%20Uni%C3%A3o%20%28Receita%20Federal%2FPGFN%29%20e%20gostaria%20de%20uma%20orienta%C3%A7%C3%A3o." class="btn btn--whatsapp" data-wa-source="form-whatsapp" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width:18px;height:18px"><path d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7 0-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.4.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5 0 1.5 1.1 2.9 1.3 3.1.2.2 2.2 3.3 5.3 4.6 1.9.7 2.6.8 3.5.7.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.2-.6-.4zM12 .9C5.9.9.9 5.9.9 12c0 2 .5 3.9 1.5 5.6L.7 23.3l5.9-1.5c1.6.9 3.5 1.4 5.4 1.4 6.1 0 11.1-5 11.1-11.1S18.1.9 12 .9z"/></svg> Enviar pelo WhatsApp</a>
-          <p class="form-alt__mail">ou por e-mail: <a href="mailto:rodrigo@rumosadv.com.br?subject=D%C3%ADvida%20ativa%20/%20PGFN%20-%20pedido%20de%20an%C3%A1lise">rodrigo@rumosadv.com.br</a></p>
+        <iframe data-tally-src="https://tally.so/embed/6DJPQO?alignLeft=1&amp;hideTitle=1&amp;transparentBackground=1&amp;dynamicHeight=1&amp;page=divida-ativa&amp;source=lp" loading="lazy" width="100%" height="620" frameborder="0" marginheight="0" marginwidth="0" title="Formulário de análise — Dívida ativa e PGFN"></iframe>
+        <script>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function(e){e.src=e.dataset.tallySrc})};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w;s.onload=v;s.onerror=v;d.body.appendChild(s);}</script>
+        <div class="form-done" id="form-done" role="status" aria-live="polite" tabindex="-1">
+          <h3>Recebi suas informações.</h3>
+          <ol>
+            <li>Eu leio pessoalmente o que você enviou.</li>
+            <li>Respondo pelo WhatsApp ou e-mail informado, com o próximo passo e o que mais precisar.</li>
+            <li>Se fizer sentido seguir, você recebe o plano por escrito antes de qualquer contratação.</li>
+          </ol>
+          <p>Se houver bloqueio de conta pela Fazenda ou execução fiscal com prazo correndo, me chame agora no WhatsApp.</p>
+          <a href="https://wa.me/5519989119770?text=Ol%C3%A1%2C%20acabei%20de%20enviar%20o%20formul%C3%A1rio%20da%20p%C3%A1gina%20de%20d%C3%ADvida%20ativa%20e%20%C3%A9%20urgente%20%28bloqueio%20ou%20prazo%20correndo%29." class="btn btn--whatsapp" data-wa-source="form-urgente" rel="noopener" target="_blank">Falar agora no WhatsApp</a>
         </div>
+        <p class="form-direct">Prefere falar direto? <a href="https://wa.me/5519989119770?text=Ol%C3%A1%2C%20vim%20da%20p%C3%A1gina%20de%20d%C3%ADvida%20ativa%20da%20Rumos.%20Minha%20empresa%20tem%20d%C3%A9bitos%20com%20a%20Uni%C3%A3o%20%28Receita%20Federal%2FPGFN%29%20e%20gostaria%20de%20uma%20orienta%C3%A7%C3%A3o." data-wa-source="form-whatsapp" rel="noopener" target="_blank">WhatsApp (19) 98911-9770</a> · <a href="mailto:rodrigo@rumosadv.com.br?subject=D%C3%ADvida%20ativa%20/%20PGFN%20-%20pedido%20de%20an%C3%A1lise">e-mail</a></p>
       </div>
     </div>
   </section>
@@ -738,6 +754,16 @@
       } catch (err) {}
     });
   }
+
+  window.addEventListener('message', function(e) {
+    if (!e.data || typeof e.data !== 'string' || e.data.indexOf('Tally.FormSubmitted') === -1) return;
+    try {
+      var p = JSON.parse(e.data);
+      if (p.event !== 'Tally.FormSubmitted' || !p.payload || p.payload.formId !== '6DJPQO') return;
+      var box = document.getElementById('form-done');
+      if (box) { box.classList.add('is-on'); box.scrollIntoView({behavior: 'smooth', block: 'center'}); box.focus({preventScroll: true}); }
+    } catch (err) {}
+  });
 </script>
 
 </body>
