@@ -6,7 +6,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 
 const here=path.dirname(fileURLToPath(import.meta.url));
-const html=fs.readFileSync(process.env.LGPD_TEST_HTML || path.join(here,'../index.html'),'utf8');
+const html=fs.readFileSync(process.env.LGPD_TEST_HTML || path.join(here,'../lgpd-empresas/index.html'),'utf8');
 const values={nome:'TESTE PESSOA FICTÍCIA',empresa:'TESTE EMPRESA SEM CLIENTE',motivo:'Exigência fictícia',prazo:'Somente ensaio',contexto:'TEXTO CONFIDENCIAL SINTÉTICO NÃO TRANSMITIR AO ANALYTICS'};
 function boot(valid=true,search='?email=PESSOA-PRIVADA&gclid=IDENTIFICADOR-TESTE'){
  const listeners={link:[],submit:[],button:[]};
@@ -71,7 +71,7 @@ test('handoff WhatsApp preserva mensagem e não inclui conteúdo na mensuração
  assert.equal(b.events()[1][1],'lgpd_handoff_intent');
  assert.equal(b.events()[1][2].source,'form');assert.equal(b.events()[1][2].channel,'whatsapp');
  const url=new URL(b.opened[0][0]);assert.equal(url.hostname,'wa.me');
- assert.equal(url.pathname,'/5519994864268');
+ assert.equal(url.pathname,'/5519989119770');
  assert(url.searchParams.get('text').includes(values.contexto));
  Object.values(values).forEach(v=>assert(!JSON.stringify(b.commands()).includes(v)));
 });
@@ -87,14 +87,14 @@ test('campos extras, origem arbitrária e evento não permitido não vazam',()=>
  b.window.rumosLgpdSend({event:'lgpd_whatsapp_intent',source:values.nome,channel:values.contexto,contexto:values.contexto,user_id:'ID-CLIENTE',page_location:'URL-PRIVADA'});
  const p=b.events()[1][2];assert.equal(p.source,'other');assert(!('channel' in p));
  assert(!('contexto' in p));assert(!('user_id' in p));
- assert.equal(p.page_location,'https://rumosadv.com.br/');
+ assert.equal(p.page_location,'https://rumosadv.com.br/lgpd-empresas/');
  Object.values(values).forEach(v=>assert(!JSON.stringify(b.commands()).includes(v)));
 });
 test('destino e URL da mensuração são limitados mesmo com query sensível',()=>{
  const b=boot();b.listeners.link[0]();const cfg=b.commands().find(x=>x[0]==='config');
  for(const e of b.events()){
   assert.equal(e[2].send_to,cfg[1]);assert.equal(e[2].page,'home-lgpd');
-  assert.equal(e[2].page_location,'https://rumosadv.com.br/');assert.equal(e[2].page_referrer,'');
+  assert.equal(e[2].page_location,'https://rumosadv.com.br/lgpd-empresas/');assert.equal(e[2].page_referrer,'');
  }
  assert(!/PESSOA-PRIVADA|IDENTIFICADOR-TESTE|#segredo|wa\.me|mailto:/.test(JSON.stringify(b.commands())));
 });
