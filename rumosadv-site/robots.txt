@@ -17,7 +17,9 @@ User-agent: CCBot
 Disallow: /
 
 User-agent: Google-Extended
-Disallow: /
+Allow: /
+Disallow: /admin/
+Disallow: /api/
 
 
 # Busca e consulta por assistentes; mesmas restrições de caminhos públicos.
