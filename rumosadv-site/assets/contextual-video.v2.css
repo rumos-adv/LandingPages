@@ -1,11 +1,11 @@
 /* Rumos: vídeo contextual. O CSS existente da página permanece intacto. */
 .rumos-video-host { display:block; margin:1.25rem 0 0; }
-.rumos-video-trigger { display:inline-flex; align-items:center; gap:.65rem; max-width:100%; min-height:48px; padding:.45rem 1rem .45rem .45rem; border:0; border-radius:999px; background:rgba(251,250,249,.94); color:var(--fg); box-shadow:inset 0 1px 0 #fff,0 5px 18px rgba(34,57,31,.13); backdrop-filter:blur(16px) saturate(140%); -webkit-backdrop-filter:blur(16px) saturate(140%); font:500 .8rem/1.4 var(--sans); cursor:pointer; text-align:left; transition:box-shadow .18s ease,transform .18s ease; }
-.rumos-video-trigger:hover { box-shadow:inset 0 1px 0 #fff,0 7px 24px rgba(34,57,31,.2); }
+.rumos-video-trigger { display:inline-flex; align-items:center; gap:.65rem; max-width:100%; min-height:48px; padding:.45rem 1rem .45rem .45rem; border:0; border-radius:999px; background:var(--hero-gold); color:var(--hero-forest); box-shadow:inset 0 1px 0 #fff,0 5px 18px rgba(34,57,31,.13); backdrop-filter:blur(16px) saturate(140%); -webkit-backdrop-filter:blur(16px) saturate(140%); font:500 .8rem/1.4 var(--sans); cursor:pointer; text-align:left; transition:box-shadow .18s ease,transform .18s ease; }
+.rumos-video-trigger:hover { background:var(--hero-gold-hover); box-shadow:inset 0 1px 0 #fff,0 7px 24px rgba(34,57,31,.2); }
 .rumos-video-trigger:active { transform:scale(.98); }
 .rumos-video-trigger__icon { display:grid; place-items:center; width:32px; height:32px; flex:none; border-radius:50%; background:var(--verde-escuro); color:#fff; }
 .rumos-video-trigger__icon svg { width:14px; height:14px; }
-.rumos-video-trigger__time { color:var(--fg-soft); font-weight:400; white-space:nowrap; }
+.rumos-video-trigger__time { color:var(--hero-forest); font-weight:400; white-space:nowrap; }
 .rumos-video-panel { position:fixed; z-index:200; width:360px; max-width:calc(100vw - 32px); padding:8px; border:0; border-radius:28px; background:var(--bg); box-shadow:0 18px 48px rgba(6,24,15,.24); color:var(--fg); text-align:left; }
 .rumos-video-panel[hidden],.rumos-video-panel [hidden],.rumos-video-host[hidden] { display:none!important; }
 .rumos-video-media { position:relative; aspect-ratio:1; border-radius:22px; overflow:hidden; isolation:isolate; background:var(--verde-escuro); }
@@ -42,7 +42,11 @@
 .rumos-video-panel[data-inline="true"] .rumos-video-review p,.rumos-video-panel[data-inline="true"] .rumos-video-message { color:var(--fg-soft); }
 @media(min-width:720px) { #consulta .rumos-video-panel[data-inline="true"] { margin-left:0; } }
 @media(max-width:719px) { .rumos-video-panel[data-inline="true"] { width:min(360px,100%); } .rumos-video-reviewbar { font-size:.75rem; } .rumos-video-reviewbar nav { gap:.3rem .85rem; } .rumos-video-reviewbar a { min-height:40px; } }
-@media(prefers-reduced-transparency:reduce) { .rumos-video-trigger,.rumos-video-close,.rumos-video-play { background:var(--bg); backdrop-filter:none; -webkit-backdrop-filter:none; } }
-@media(prefers-contrast:more) { .rumos-video-trigger { background:var(--bg); outline:1px solid var(--fg); } }
+@media(prefers-reduced-transparency:reduce) { .rumos-video-trigger,.rumos-video-close,.rumos-video-play { backdrop-filter:none; -webkit-backdrop-filter:none; } .rumos-video-close,.rumos-video-play { background:var(--bg); } }
+@media(prefers-contrast:more) { .rumos-video-trigger { outline:1px solid var(--fg); } }
 @media(prefers-reduced-motion:reduce) { .rumos-video-trigger { transition:none; } .rumos-video-trigger:active { transform:none; } }
-@supports not (backdrop-filter:blur(1px)) { .rumos-video-trigger,.rumos-video-close { background:var(--bg); } }
+@supports not (backdrop-filter:blur(1px)) { .rumos-video-close { background:var(--bg); } }
+
+/* Na abertura, a explicação em vídeo recebe o destaque dourado. */
+.hero--inventario .hero-gold-cta { background:#fff; color:var(--hero-forest); }
+.hero--inventario .hero-gold-cta:hover { background:var(--bg-alt); color:var(--hero-forest); }

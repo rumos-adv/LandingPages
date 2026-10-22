@@ -17,7 +17,7 @@ As durações são referências para gravação e devem ser atualizadas quando o
 
 1. Abra a URL de preview, no caminho `/inventario/`.
 2. Use os atalhos da faixa de revisão para localizar os quatro espaços.
-3. Clique em “Rodrigo explica” para manter o cartão aberto. No desktop, passar o mouse permite visualizar a capa.
+3. Clique em “Dr. Rodrigo explica” para manter o cartão aberto. No desktop, passar o mouse permite visualizar a capa.
 4. Na parte inferior do cartão, escolha um vídeo em “Testar uma gravação”.
 5. O arquivo é aberto por uma URL local do navegador (`blob:`), sem upload, armazenamento no servidor ou envio à medição da campanha. Ele deixa de estar disponível ao recarregar a página; escolha-o novamente se necessário.
 6. Cada espaço pode receber seu próprio arquivo de teste. Apenas um cartão fica aberto por vez e o fechamento pausa a reprodução.
