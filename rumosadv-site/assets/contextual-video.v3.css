@@ -1,0 +1,155 @@
+/* Rumos: vídeo contextual. O CSS existente da página permanece intacto. */
+.rumos-video-host { display:block; margin:1.25rem 0 0; }
+.rumos-video-trigger { display:inline-flex; align-items:center; gap:.65rem; max-width:100%; min-height:48px; padding:.45rem 1rem .45rem .45rem; border:0; border-radius:999px; background:var(--hero-gold); color:var(--hero-forest); box-shadow:inset 0 1px 0 #fff,0 5px 18px rgba(34,57,31,.13);  font:500 .8rem/1.4 var(--sans); cursor:pointer; text-align:left; transition:box-shadow .18s ease,transform .18s ease; }
+.rumos-video-trigger:hover { background:var(--hero-gold-hover); box-shadow:inset 0 1px 0 #fff,0 7px 24px rgba(34,57,31,.2); }
+.rumos-video-trigger:active { transform:scale(.98); }
+.rumos-video-trigger__icon { display:grid; place-items:center; width:32px; height:32px; flex:none; border-radius:50%; background:var(--verde-escuro); color:#fff; }
+.rumos-video-trigger__icon svg { width:14px; height:14px; }
+.rumos-video-trigger__time { color:var(--hero-forest); font-weight:400; white-space:nowrap; }
+.rumos-video-panel { position:fixed; z-index:200; width:360px; max-width:calc(100vw - 32px); padding:8px; border:0; border-radius:28px; background:var(--bg); box-shadow:0 18px 48px rgba(6,24,15,.24); color:var(--fg); text-align:left; }
+.rumos-video-panel[hidden],.rumos-video-panel [hidden],.rumos-video-host[hidden] { display:none!important; }
+.rumos-video-media { position:relative; aspect-ratio:1; border-radius:22px; overflow:hidden; isolation:isolate; background:var(--verde-escuro); }
+.rumos-video-cover { position:absolute; inset:0; }
+.rumos-video-cover img { width:100%; height:100%; object-fit:cover; object-position:50% 32%; }
+.rumos-video-cover::after { content:""; position:absolute; inset:28% 0 0; background:linear-gradient(0deg,rgba(6,24,15,.97),rgba(6,24,15,.05)); }
+.rumos-video-caption { position:absolute; z-index:1; left:19px; right:19px; bottom:19px; color:#fff; }
+.rumos-video-title { font:500 1.65rem/1.07 var(--serif); color:#fff; margin:0 0 .5rem; text-wrap:balance; }
+.rumos-video-byline { font:400 .7rem/1.5 var(--sans); color:rgba(255,255,255,.92); }
+.rumos-video-badge { position:absolute; z-index:2; left:12px; top:12px; max-width:calc(100% - 72px); padding:.4rem .65rem; border-radius:999px; background:rgba(6,24,15,.84); color:#fff; font:400 .69rem/1.4 var(--sans); }
+.rumos-video-close { position:absolute; z-index:3; right:8px; top:8px; display:grid; place-items:center; width:44px; height:44px; border:0; border-radius:50%; background:rgba(251,250,249,.95); color:var(--fg); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); cursor:pointer; }
+.rumos-video-close svg { width:17px; height:17px; }
+.rumos-video-player { display:block; width:100%; height:100%; aspect-ratio:1; object-fit:contain; background:var(--hero-forest,var(--verde-escuro)); }
+.rumos-video-play { position:absolute; z-index:2; top:41%; left:50%; transform:translate(-50%,-50%); display:grid; place-items:center; width:52px; height:52px; border:0; border-radius:50%; background:rgba(251,250,249,.95); color:var(--verde-escuro); box-shadow:0 5px 18px rgba(6,24,15,.18); cursor:pointer; }
+.rumos-video-play svg { width:19px; height:19px; }
+.rumos-video-review { padding:12px 10px 6px; }
+.rumos-video-review p { color:var(--fg-soft); font:400 .75rem/1.5 var(--sans); margin:0 0 .7rem; }
+.rumos-video-file { display:block; max-width:100%; color:var(--fg); font:400 .75rem var(--sans); }
+.rumos-video-file::file-selector-button { min-height:44px; padding:.55rem .8rem; margin-right:.5rem; border:1px solid var(--border); border-radius:9px; background:var(--bg-alt); color:var(--fg); font:500 .75rem var(--sans); cursor:pointer; }
+.rumos-video-file-label { display:block; margin-bottom:.35rem; font:500 .75rem/1.4 var(--sans); }
+.rumos-video-message { margin:8px 10px 4px; color:var(--fg-soft); font:400 .75rem/1.5 var(--sans); }
+.rumos-video-message:empty { display:none; }
+.rumos-video-message[data-error="true"] { color:var(--secondary); }
+.rumos-video-reviewbar { padding:.85rem 1.25rem; background:var(--accent); color:var(--secondary); font:400 .8rem/1.6 var(--sans); }
+.rumos-video-reviewbar__inner { max-width:var(--max); margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:.65rem 1.5rem; flex-wrap:wrap; }
+.rumos-video-reviewbar strong { font-weight:600; }
+.rumos-video-reviewbar nav { display:flex; flex-wrap:wrap; gap:.25rem .85rem; }
+.rumos-video-reviewbar a { color:var(--secondary); text-decoration:underline; text-underline-offset:4px; min-height:30px; display:inline-flex; align-items:center; }
+.rumos-video-trigger:focus-visible,.rumos-video-panel button:focus-visible,.rumos-video-file:focus-visible { outline:3px solid var(--secondary); outline-offset:4px; }
+.rumos-video-panel[data-inline="true"] { position:relative; inset:auto!important; width:min(360px,100%); max-width:100%; margin:1rem auto 0; z-index:1; }
+body.rumos-video-inline-open .float-wa { visibility:hidden; pointer-events:none; }
+.hero--inventario .rumos-video-panel[data-inline="true"] { text-align:left; }
+.rumos-video-panel[data-inline="true"] .rumos-video-title { color:#fff; font-size:1.65rem; line-height:1.07; }
+.rumos-video-panel[data-inline="true"] .rumos-video-review p,.rumos-video-panel[data-inline="true"] .rumos-video-message { color:var(--fg-soft); }
+@media(min-width:720px) { #consulta .rumos-video-panel[data-inline="true"] { margin-left:0; } }
+@media(max-width:719px) { .rumos-video-panel[data-inline="true"] { width:min(360px,100%); } .rumos-video-reviewbar { font-size:.75rem; } .rumos-video-reviewbar nav { gap:.3rem .85rem; } .rumos-video-reviewbar a { min-height:40px; } }
+/* Vidro apenas na camada de controle; conteúdo e cartões continuam opacos.
+   O preenchimento mínimo mantém contraste mesmo sobre o fundo mais escuro. */
+.rumos-video-trigger,
+.rumos-video-close,
+.rumos-video-play,
+.hero--inventario .hero-gold-cta,
+.site-header .nav-cta,
+body .float-wa {
+  --glass-solid:#fff;
+  --glass-fill:rgba(255,255,255,.92);
+  --glass-edge:rgba(255,255,255,.85);
+  position:relative;
+  isolation:isolate;
+  border:0;
+  border-radius:999px;
+  background:var(--glass-fill);
+  color:var(--hero-forest);
+  backdrop-filter:blur(18px) saturate(160%);
+  -webkit-backdrop-filter:blur(18px) saturate(160%);
+  box-shadow:inset 0 1px 1px var(--glass-edge),inset 0 -1px 1px rgba(6,24,15,.18),0 5px 16px rgba(6,24,15,.18);
+  transition:box-shadow .18s ease;
+}
+/* A luz se concentra na borda da lente, sem velar texto ou ícones. */
+.rumos-video-trigger::before,
+.rumos-video-close::before,
+.rumos-video-play::before,
+.hero--inventario .hero-gold-cta::before,
+.site-header .nav-cta::before,
+body .float-wa::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  padding:1px;
+  pointer-events:none;
+  background:linear-gradient(135deg,var(--glass-edge),rgba(255,255,255,.12) 35%,rgba(255,255,255,.45) 72%,rgba(6,24,15,.18));
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;
+  mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  mask-composite:exclude;
+}
+.rumos-video-trigger {
+  --glass-solid:var(--hero-gold);
+  --glass-fill:rgba(216,181,118,.90);
+  --glass-edge:rgba(255,241,211,.9);
+  font-weight:600;
+}
+.hero--inventario .rumos-video-trigger {
+  --glass-fill:rgba(226,192,134,.94);
+  --glass-edge:rgba(255,244,220,.96);
+}
+.rumos-video-trigger__icon { border-radius:50%; box-shadow:inset 0 1px 1px rgba(255,255,255,.22); }
+.rumos-video-trigger:hover,
+.hero--inventario .hero-gold-cta:hover,
+.site-header .nav-cta:hover,
+body .float-wa:hover,
+.rumos-video-close:hover,
+.rumos-video-play:hover {
+  background:var(--glass-fill);
+  color:var(--hero-forest);
+  box-shadow:inset 0 1px 2px var(--glass-edge),inset 0 -1px 1px rgba(6,24,15,.2),0 7px 22px rgba(6,24,15,.24);
+}
+.hero--inventario .hero-gold-cta { --glass-fill:rgba(255,255,255,.94); min-height:50px; }
+.site-header .nav-cta,body .float-wa { --glass-solid:#25d366; --glass-fill:rgba(37,211,102,.92); }
+body .float-wa { position:fixed; }
+body .float-wa[data-glass-tone="dark"] { --glass-fill:rgba(83,226,137,.96); --glass-edge:rgba(229,255,239,.95); }
+body .float-wa[data-glass-tone="light"] { --glass-fill:rgba(37,211,102,.90); --glass-edge:rgba(255,255,255,.78); }
+.rumos-video-close { position:absolute; }
+.rumos-video-play { position:absolute; }
+.rumos-video-close,.rumos-video-play { --glass-fill:rgba(255,255,255,.94); }
+.rumos-video-trigger:focus-visible,
+.rumos-video-close:focus-visible,
+.rumos-video-play:focus-visible,
+.hero--inventario .hero-gold-cta:focus-visible,
+.site-header .nav-cta:focus-visible,
+body .float-wa:focus-visible {
+  outline:3px solid var(--hero-forest);
+  outline-offset:3px;
+  box-shadow:0 0 0 6px #fff;
+}
+@media(prefers-reduced-transparency:reduce), (prefers-contrast:more) {
+  .rumos-video-trigger,.rumos-video-close,.rumos-video-play,
+  .hero--inventario .hero-gold-cta,.site-header .nav-cta,body .float-wa {
+    background:var(--glass-solid)!important;
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
+    box-shadow:none;
+    outline:1px solid currentColor;
+    outline-offset:-1px;
+  }
+  .rumos-video-trigger::before,.rumos-video-close::before,.rumos-video-play::before,
+  .hero--inventario .hero-gold-cta::before,.site-header .nav-cta::before,body .float-wa::before { display:none; }
+  .rumos-video-trigger:focus-visible,.rumos-video-close:focus-visible,.rumos-video-play:focus-visible,
+  .hero--inventario .hero-gold-cta:focus-visible,.site-header .nav-cta:focus-visible,body .float-wa:focus-visible { outline-width:3px; outline-offset:3px; box-shadow:0 0 0 6px #fff; }
+  body .site-header { background:var(--verde-escuro); backdrop-filter:none; -webkit-backdrop-filter:none; }
+}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))) {
+  .rumos-video-trigger,.rumos-video-close,.rumos-video-play,
+  .hero--inventario .hero-gold-cta,.site-header .nav-cta,body .float-wa { background:var(--glass-solid); }
+}
+@media(prefers-reduced-motion:reduce) {
+  .rumos-video-trigger,.rumos-video-close,.rumos-video-play,
+  .hero--inventario .hero-gold-cta,.site-header .nav-cta,body .float-wa { transition:none; }
+  .rumos-video-trigger:active { transform:none; }
+}
+@media(forced-colors:active) {
+  .rumos-video-trigger,.rumos-video-close,.rumos-video-play,
+  .hero--inventario .hero-gold-cta,.site-header .nav-cta,body .float-wa { background:ButtonFace!important; color:ButtonText; border:1px solid ButtonText; backdrop-filter:none; }
+  .rumos-video-trigger__time { color:inherit; }
+  .rumos-video-trigger__icon { background:ButtonFace; color:ButtonText; }
+}

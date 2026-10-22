@@ -252,16 +252,39 @@
   document.addEventListener('focusin',event => {
     if (active && !active.panel.contains(event.target) && event.target!==active.trigger) close();
   });
+  // A bolha flutuante recebe um tom mais claro sobre regiões escuras.
+  // A leitura é limitada ao DOM da página, sem capturar pixels ou enviar dados.
+  const floatingContact = document.querySelector('.float-wa');
+  function updateGlassTone() {
+    if (!floatingContact || getComputedStyle(floatingContact).visibility === 'hidden') return;
+    const box = floatingContact.getBoundingClientRect();
+    const surface = document.elementsFromPoint(box.left + box.width/2, box.top + box.height/2)
+      .find(el => el !== floatingContact && !floatingContact.contains(el) && !el.closest('.rumos-video-panel'));
+    let element = surface;
+    while (element) {
+      const channels = getComputedStyle(element).backgroundColor.match(/[\d.]+/g);
+      if (channels && (channels.length === 3 || Number(channels[3]) >= .85)) {
+        const rgb = channels.slice(0,3).map(Number).map(v => { v /= 255; return v <= .04045 ? v/12.92 : ((v+.055)/1.055)**2.4; });
+        const light = .2126*rgb[0] + .7152*rgb[1] + .0722*rgb[2];
+        floatingContact.dataset.glassTone = light < .25 ? 'dark' : 'light';
+        return;
+      }
+      element = element.parentElement;
+    }
+    floatingContact.dataset.glassTone = 'light';
+  }
   function queueLayout() {
     if (layoutFrame) cancelAnimationFrame(layoutFrame);
     layoutFrame = requestAnimationFrame(() => {
       layoutFrame = null;
+      updateGlassTone();
       if (!active) return;
       const anchor = active.trigger.getBoundingClientRect();
       if (!isInline() && (anchor.bottom<64 || anchor.top>innerHeight)) close();
       else position(active);
     });
   }
+  queueLayout();
   addEventListener('scroll',queueLayout,{passive:true});
   addEventListener('resize',queueLayout,{passive:true});
   addEventListener('pagehide',event => {

@@ -41,3 +41,9 @@ Manter arquivos de mídia ausentes até serem recebidos e revisados. Não acresc
 - O domínio de produção continua usando o código de medição existente. No preview, GTM e Clarity da página de inventário não são iniciados; o seletor de arquivos e a faixa de revisão ficam disponíveis apenas fora dos domínios de produção.
 - Em produção, o componente acrescenta eventos de reprodução e progresso (`context_video_start`, `context_video_progress`, `context_video_complete`). Esses eventos não são contatos nem conversões de contratação.
 - Textos jurídicos, calculadora, destinos dos contatos, formulário, artigos, Functions e configuração de campanhas não foram alterados.
+
+## Material dos controles
+
+A prévia aproxima Liquid Glass no navegador apenas nos quatro botões de vídeo, nos controles do player e nos botões de contato da abertura, cabeçalho e bolha flutuante. Conteúdo, formulário e cartão de vídeo permanecem opacos. O material usa desfoque, saturação e reflexos restritos às bordas, com formas concêntricas. O dourado identifica vídeo; o contato principal mantém a superfície branca.
+
+O botão flutuante adapta o preenchimento conforme a luminância do fundo DOM da região sob ele. Os demais controles usam preenchimentos de contraste seguro em suas regiões claras, escuras ou sobre imagem. Não se promete refração física nem equivalência às APIs nativas da Apple. Redução de transparência, contraste aumentado e ausência de suporte ao desfoque usam superfícies sólidas. Redução de movimento desliga transições e o efeito de pressão. O foco recebe dois contornos para se distinguir sobre fundos claros ou escuros.
