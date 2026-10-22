@@ -118,6 +118,7 @@ body .float-wa[data-glass-tone="light"] { --glass-fill:rgba(37,211,102,.90); --g
 .hero--inventario .hero-gold-cta:focus-visible,
 .site-header .nav-cta:focus-visible,
 body .float-wa:focus-visible {
+  border-radius:999px;
   outline:3px solid var(--hero-forest);
   outline-offset:3px;
   box-shadow:0 0 0 6px #fff;
