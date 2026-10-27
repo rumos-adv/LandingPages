@@ -50,6 +50,6 @@ test('local and preview pages never transmit measurement even after acceptance',
   for(const host of ['localhost','127.0.0.1','preview-inventario-videos.rumosadv-git.pages.dev']){const r=runtime(undefined,host);r.click('rumos-cookie-accept');assert.equal(r.scripts.length,0);}
 });
 test('public HTML has one consent bootstrap and no direct tracker or no-JS bypass',()=>{
-  function scan(dir){for(const item of readdirSync(dir,{withFileTypes:true})){const p=path.join(dir,item.name);if(item.isDirectory()){if(!['admin','aceite','briefing'].includes(item.name))scan(p);}else if(item.name.endsWith('.html')){const text=readFileSync(p,'utf8');assert.equal((text.match(/src="\/assets\/consent\.v1\.js"/g)||[]).length,1,p);assert.doesNotMatch(text, /googletagmanager\.com\/(gtm\.js|ns\.html)|clarity\.ms\/tag\//,p);}}}
+  function scan(dir){for(const item of readdirSync(dir,{withFileTypes:true})){const p=path.join(dir,item.name);if(item.isDirectory()){if(!['admin','aceite','briefing'].includes(item.name))scan(p);}else if(item.name.endsWith('.html')){const text=readFileSync(p,'utf8');assert.equal((text.match(/src="\/assets\/consent\.v1\.js\?v=20261027"/g)||[]).length,1,p);assert.doesNotMatch(text, /googletagmanager\.com\/(gtm\.js|ns\.html)|clarity\.ms\/tag\//,p);}}}
   scan(site);
 });
