@@ -1,0 +1,18 @@
+#rumos-consent[hidden]{display:none!important}
+#rumos-consent{position:fixed;z-index:2147480000;inset:auto 24px 24px;max-width:1040px;max-height:calc(100dvh - 48px);overflow:auto;margin-inline:auto;padding:24px;background:var(--bg,#fbfaf9);color:var(--fg,#223a23);box-shadow:0 8px 40px rgba(34,58,35,.2);border-radius:var(--radius-lg,14px);font:400 16px/1.55 var(--sans,Arial,sans-serif);text-align:left;color-scheme:light}
+#rumos-consent h2{font:600 25px/1.2 var(--serif,Georgia,serif);color:var(--fg,#223a23);margin:0 0 12px}
+#rumos-consent p{font:inherit;color:inherit;max-width:75ch;margin:0 0 16px}
+#rumos-consent a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+#rumos-consent-actions{display:flex;gap:12px;flex-wrap:wrap;margin:16px 0}
+#rumos-consent button{appearance:none;border:1px solid var(--fg,#223a23);border-radius:var(--radius,8px);background:var(--bg,#fbfaf9);color:var(--fg,#223a23);font:600 16px/1.4 var(--sans,Arial,sans-serif);padding:12px 18px;min-height:48px;cursor:pointer}
+#rumos-consent button:hover{background:var(--bg-alt,#f4f1ee)}
+#rumos-consent-actions button{flex:1;max-width:240px}
+#rumos-consent button:focus-visible,#rumos-consent a:focus-visible,#rumos-consent summary:focus-visible,#rumos-consent input:focus-visible,#rumos-cookie-settings:focus-visible{outline:3px solid var(--primary,#3d6420);outline-offset:4px}
+#rumos-consent summary{cursor:pointer;text-decoration:underline;text-underline-offset:4px;padding:6px 0;font-weight:600}
+#rumos-consent-preferences[open]{border-top:1px solid var(--border,#e5e0d9);padding-top:12px}
+#rumos-consent-preferences label{display:flex;align-items:flex-start;gap:10px;margin:16px 0;cursor:pointer}
+#rumos-consent input{appearance:auto;flex:none;width:20px;height:20px;margin-top:3px;accent-color:var(--primary,#3d6420)}
+#rumos-cookie-settings{display:block;appearance:none;margin:20px auto 12px;padding:10px 12px;border:0;border-radius:8px;background:transparent;color:inherit;font:inherit;font-size:14px;text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+#rumos-cookie-settings[data-floating]{position:fixed;inset:auto auto 12px 12px;background:var(--bg,#fbfaf9);color:var(--fg,#223a23);z-index:100}
+@media(max-width:600px){#rumos-consent{inset:auto 12px 12px;padding:20px;max-height:calc(100dvh - 24px)}#rumos-consent h2{font-size:23px}#rumos-consent-actions{gap:10px}#rumos-consent-actions button{padding:12px 10px;max-width:none}}
+@media(prefers-reduced-motion:reduce){#rumos-consent,#rumos-consent *{scroll-behavior:auto;transition:none;animation:none}}
