@@ -385,15 +385,37 @@
     }
   </style>
   <style>
-    /* bloqueio-judicial: hero de texto no desktop, hero-m (foto) abaixo de 720px */
-    @media (max-width: 719px) {
-      .hero--texto { padding: 0; }
-      .hero--texto > .container { padding: 0; }
-      .hero--texto .hero__head { margin: 0; }
-      .hero--texto .hero__head > :not(h1) { display: none; }
-      .hero--texto .hero__head > h1 { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    /* Bloqueio: composição do hero de Inventário com o retrato já aprovado. */
+    .hero--bloqueio { --hero-forest: #06180f; --hero-cream: #eeeadd; --hero-gold: #d8b576; --hero-gold-hover: #e2c88e; padding: 0; background: var(--hero-forest); }
+    .hero--bloqueio .hero-stage { display: grid; grid-template-columns: 44% 56%; max-width: 1600px; margin: 0 auto; min-height: 650px; }
+    .hero--bloqueio .hero-portrait { position: relative; min-width: 0; overflow: hidden; }
+    .hero--bloqueio .hero-portrait img { width: 100%; height: 100%; position: absolute; inset: 0; object-fit: cover; object-position: 50% 38%; filter: brightness(.84) saturate(.8); }
+    .hero--bloqueio .hero-portrait::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, transparent 60%, var(--hero-forest) 100%), linear-gradient(0deg, var(--hero-forest), transparent 14%); }
+    .hero--bloqueio .hero-copy { padding: 48px clamp(30px, 5.5vw, 88px) 64px 24px; display: flex; flex-direction: column; align-items: flex-end; justify-content: space-between; gap: 65px; }
+    .hero--bloqueio .hero-brand { font: 500 2.6rem var(--serif); color: var(--hero-cream); letter-spacing: .2em; text-align: center; line-height: 1.15; }
+    .hero--bloqueio .hero-brand span { display: block; border-top: 1px solid var(--hero-gold); margin-top: .5rem; padding-top: .6rem; font: 500 .72rem var(--sans); color: var(--hero-gold); letter-spacing: .32em; }
+    .hero--bloqueio .hero__head { text-align: right; max-width: 710px; margin: 0; }
+    .hero--bloqueio .hero__eyebrow { display: inline-block; color: var(--hero-gold); font-size: .76rem; text-transform: uppercase; letter-spacing: .22em; line-height: 1.7; margin-bottom: 1.6rem; }
+    .hero--bloqueio h1 { color: var(--hero-cream); font-size: clamp(2.6rem, 4.3vw, 4.4rem); line-height: 1.08; font-weight: 600; letter-spacing: -.015em; }
+    .hero--bloqueio .hero__lead { font: 400 1rem/1.8 var(--sans); color: var(--hero-cream); opacity: .83; margin: 1.8rem 0 0; }
+    .hero--bloqueio .hero__badge { margin-top: 1.4rem; text-align: right; font-size: .75rem; }
+    .hero--bloqueio .hero__cta-row { justify-content: flex-end; align-items: center; gap: 1rem; margin-top: 2rem; }
+    .hero--bloqueio .hero__cta-row .btn { min-height: 48px; border-radius: 0; font-size: .78rem; letter-spacing: .065em; text-transform: uppercase; }
+    .hero--bloqueio .hero__cta-row .btn--whatsapp { background: var(--hero-gold); color: var(--hero-forest); }
+    .hero--bloqueio .hero__cta-row .btn--whatsapp:hover { background: var(--hero-gold-hover); }
+    @media (min-width: 1600px) { .hero--bloqueio .hero-stage { min-height: 760px; } }
+    @media (max-width: 900px) {
+      .hero--bloqueio .hero-stage { grid-template-columns: 42% 58%; min-height: 610px; }
+      .hero--bloqueio .hero-copy { padding: 35px 26px 48px 8px; gap: 40px; }
+      .hero--bloqueio h1 { font-size: 2.8rem; }
     }
-    .hero--texto .hero__cta-row .btn { min-height: 48px; }
+    @media (max-width: 719px) {
+      .hero--bloqueio .hero-stage { display: block; min-height: 0; }
+      .hero--bloqueio .hero-portrait, .hero--bloqueio .hero-brand { display: none; }
+      .hero--bloqueio .hero-copy { padding: 0; gap: 0; }
+      .hero--bloqueio .hero__head > :not(h1) { display: none; }
+      .hero--bloqueio .hero__head > h1 { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    }
     .scard__note { font-size: .82rem; color: var(--muted); margin: -.4rem 0 1rem; }
   </style>
 </head>
@@ -418,8 +440,13 @@
 <main id="main">
 
   <!-- ========== HERO ========== -->
-  <section class="hero hero--texto">
-    <div class="container">
+  <section class="hero hero--bloqueio">
+    <div class="hero-stage">
+      <div class="hero-portrait">
+        <img src="/assets/img/hero-lgpd-rodrigo.webp" width="1000" height="1256" alt="Dr. Rodrigo Moura Silva, advogado da Rumos Advocacia" fetchpriority="high">
+      </div>
+      <div class="hero-copy">
+        <div class="hero-brand" aria-hidden="true">RUMOS<span>ADVOCACIA</span></div>
       <div class="hero__head">
         <span class="hero__eyebrow">Bloqueio judicial de conta</span>
         <h1>Sua conta foi bloqueada judicialmente?</h1>
@@ -433,6 +460,7 @@
           <a class="btn btn--outline" href="#situacao">Ver o que dá para fazer</a>
         </div>
         <p class="hero__lead" style="font-size:.9rem;margin-top:1rem;">OAB/SP 188.004</p>
+      </div>
       </div>
     </div>
     <div class="hero-m">
