@@ -8,7 +8,10 @@
   window.dataLayer = window.dataLayer || [];
   window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
   window.gtag('consent', 'default', { analytics_storage: 'granted', ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted', functionality_storage: 'granted', security_storage: 'granted', personalization_storage: 'denied' });
-  try { localStorage.removeItem('rumos_privacy_v1'); } catch (error) { /* sem armazenamento: nada a limpar */ }
+  // Mantém o registro no formato v1 como liberado, para scripts que o leem (ex.: rumos-bloqueio-pf-pj.v1.js).
+  try { localStorage.setItem('rumos_privacy_v1', JSON.stringify({ version: 1, at: Date.now(), analytics: true, marketing: true })); } catch (error) { /* sem armazenamento */ }
+  document.documentElement.dataset.consentAnalytics = 'granted';
+  document.documentElement.dataset.consentMarketing = 'granted';
   window.RumosConsent = Object.freeze({ version: 2 });
 
   function loadTags() {
