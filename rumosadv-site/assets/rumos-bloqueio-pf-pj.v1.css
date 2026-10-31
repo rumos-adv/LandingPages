@@ -1,0 +1,42 @@
+/* Functional PF/PJ extension only. Existing brand CSS is preserved. */
+#rumos-profile-nav{background:var(--bg,#fbfaf9);border-bottom:1px solid var(--border,#e5e0d9);padding:8px 0;color:var(--fg,#223a23)}
+#rumos-profile-nav>.container{display:flex;align-items:center;gap:10px 24px;flex-wrap:wrap}
+#rumos-profile-nav a,#rumos-profile-toggle{display:inline-flex;min-height:44px;align-items:center;padding:8px 0;font:500 .86rem var(--sans,Arial,sans-serif);color:var(--fg,#223a23)}
+#rumos-profile-nav a{text-decoration:underline;text-underline-offset:5px}
+#rumos-profile-nav a[aria-current=page]{font-weight:700;text-decoration-thickness:2px}
+#rumos-profile-toggle{margin-left:auto;border:0;background:transparent;text-decoration:underline;text-underline-offset:5px;cursor:pointer}
+#rumos-profile-choice{padding:27px 0 30px;border-bottom:1px solid var(--border,#e5e0d9);background:var(--bg-alt,#f4f1ee)}
+#rumos-profile-choice[hidden]{display:none!important}
+#rumos-profile-choice>.container{display:grid;grid-template-columns:1fr 1.1fr;align-items:center;gap:24px 40px}
+#rumos-profile-title{font-size:1.75rem;line-height:1.2;margin:0 0 10px;color:var(--fg,#223a23)}
+#rumos-profile-choice p{font-size:.88rem;line-height:1.7;margin:0;max-width:47ch;color:var(--fg-soft,#4a5d4a)}
+#rumos-profile-options{display:flex;flex-wrap:wrap;gap:10px}
+#rumos-profile-options a{display:flex;flex:1;flex-direction:column;justify-content:center;min-height:76px;min-width:150px;padding:14px 18px;border:1px solid var(--primary,#3d6420);border-radius:6px;color:var(--primary,#3d6420);font:600 .9rem/1.5 var(--sans,Arial,sans-serif)}
+#rumos-profile-options a:hover{background:var(--primary,#3d6420);color:var(--bg,#fbfaf9);text-decoration:none}
+#rumos-profile-options a span{font-size:.78rem;font-weight:400}
+#rumos-profile-skip{width:100%;min-height:44px;text-align:left;padding:8px 0;border:0;background:transparent;color:var(--fg-soft,#4a5d4a);font:400 .82rem var(--sans,Arial,sans-serif);text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+#rumos-profile-nav :focus-visible,#rumos-profile-choice :focus-visible{outline:3px solid var(--secondary,#3f2b56);outline-offset:4px}
+html[data-rumos-page-profile=pf] .hero__head{max-width:780px}
+html[data-rumos-page-profile=pf] .hero h1{max-width:17ch;margin-inline:auto;text-wrap:balance;font-size:clamp(2.5rem,4.5vw,3.7rem)}
+html[data-rumos-page-profile=pf] .hero__lead{font-family:var(--sans);font-size:1.05rem;line-height:1.85;color:var(--bg)}
+html[data-rumos-page-profile=pf] .btn--whatsapp{background:var(--primary);color:var(--bg)}
+html[data-rumos-page-profile=pf] .hero .btn--whatsapp,html[data-rumos-page-profile=pf] .cta-final .btn--whatsapp{background:var(--bg);color:var(--verde-escuro)}
+html[data-rumos-page-profile=pf] .hero .btn--whatsapp:hover,html[data-rumos-page-profile=pf] .cta-final .btn--whatsapp:hover{background:var(--accent);color:var(--verde-escuro)}
+html[data-rumos-page-profile=pf] .hero__cta-row{margin-top:28px}
+html[data-rumos-page-profile=pf] .situacao{max-width:none}
+html[data-rumos-page-profile=pf] .scard{box-shadow:none}
+html[data-rumos-page-profile=pf] .scard:hover{transform:none;box-shadow:none}
+html[data-rumos-page-profile=pf] .scard>p{font-size:.93rem;line-height:1.8}
+html[data-rumos-page-profile=pf] .btn{min-height:48px;border-radius:6px;font-size:.94rem;line-height:1.5;justify-content:center}
+html[data-rumos-page-profile=pf] .steps{list-style:decimal;padding-left:25px;gap:28px}
+html[data-rumos-page-profile=pf] .step{border:0;background:transparent;padding:0 20px 0 0}
+html[data-rumos-page-profile=pf] .step::marker{font:600 1.4rem var(--serif);color:var(--secondary)}
+html[data-rumos-page-profile=pf] .step p{line-height:1.8}
+html[data-rumos-page-profile=pf] .faq__answer{line-height:1.8}
+html[data-rumos-page-profile=pf] #rumos-pf-author{display:block;box-shadow:none;max-width:760px;border:0;background:transparent;padding:0}
+html[data-rumos-page-profile=pf] #rumos-pf-signature{font-size:.85rem;color:var(--bg);line-height:1.8;margin-top:28px}
+html[data-rumos-page-profile=pf] #rumos-pf-warning{margin:24px auto 0;max-width:65ch;font-size:.9rem;line-height:1.8}
+html[data-rumos-page-profile=pf] .site-footer a,html[data-rumos-page-profile=pf] .site-footer p,html[data-rumos-page-profile=pf] .site-footer__bottom{color:var(--bg)}
+html[data-rumos-page-profile=pf] .logo__adv{color:var(--bg)}
+@media(max-width:720px){#rumos-profile-nav>.container{gap:6px 20px}#rumos-profile-nav a,#rumos-profile-toggle{font-size:.8rem}#rumos-profile-toggle{margin-left:0}#rumos-profile-choice>.container{grid-template-columns:1fr;gap:20px}#rumos-profile-title{font-size:1.65rem;max-width:22ch}#rumos-profile-choice p{font-size:.84rem}#rumos-profile-options a{min-width:0;padding:13px 15px;font-size:.85rem}#rumos-profile-options a span{font-size:.75rem}html[data-rumos-page-profile=pf] .hero{padding:45px 0}html[data-rumos-page-profile=pf] .hero h1{font-size:2.8rem}html[data-rumos-page-profile=pf] .hero__lead{font-size:.98rem}html[data-rumos-page-profile=pf] .hero__head{margin-bottom:0}html[data-rumos-page-profile=pf] .hero__cta-row{gap:12px}html[data-rumos-page-profile=pf] .scard{padding:25px 22px}html[data-rumos-page-profile=pf] .steps{gap:28px}html[data-rumos-page-profile=pf] .step{padding-right:0}}
+@media(prefers-reduced-motion:reduce){#rumos-profile-nav,#rumos-profile-choice,#rumos-profile-nav *,#rumos-profile-choice *{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
