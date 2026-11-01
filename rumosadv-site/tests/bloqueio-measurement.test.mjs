@@ -80,12 +80,17 @@ test('bloqueio: envio esperado mantém o lead e a confirmação visual', () => {
   assert.deepEqual(h.shown, ['is-on']);
 });
 
-test('bloqueio: prazo é descrito em dias úteis com ressalva nos dois heroes e na meta', () => {
+test('bloqueio: metadados e abertura identificam PJ sem prometer resultado', () => {
   const description = html.match(/<meta name="description" content="([^"]+)"/)[1];
   assert(description.length <= 160);
-  assert.match(description, /Em regra, são 5 dias úteis após a intimação/);
-  assert.match(html, /empresa: em regra, há <strong>5 dias úteis<\/strong>/);
-  assert.match(html, /empresa: em regra, há 5 dias úteis/);
+  assert.match(description, /Conta da empresa bloqueada judicialmente/);
+  assert.match(html, /<title>Bloqueio judicial de conta PJ em SP \| Rumos Advocacia<\/title>/);
+  assert.match(html, /<h1>A conta da sua empresa foi bloqueada judicialmente\?<\/h1>/);
+  const opening = 'A análise começa pelo aviso do banco, pelo processo e pelos valores bloqueados.';
+  assert.equal(html.split(opening).length - 1, 2);
+  assert.equal(html.split('O resultado depende das circunstâncias do caso e da decisão judicial.').length - 1, 2);
+  assert.match(html, /data-wa-source="hero"[^>]*>Solicitar análise da conta PJ<\/a>/);
+  assert.match(html, /href="\/bloqueio-conta-pessoal\/" data-rumos-profile-link="pf"/);
   assert(!/\b5 dias(?! úteis)/.test(html));
 });
 
@@ -94,3 +99,4 @@ test('bloqueio: atendimento fora do horário comercial tem retorno no próximo d
   assert.match(html, /form-wrap__sub[^>]*>[^<]*Fora desse horário, retorno no próximo dia útil/);
   assert.match(html, /primeira resposta sai no mesmo dia útil para contatos em horário comercial\. Fora desse horário, retorno no próximo dia útil/);
 });
+
