@@ -44,55 +44,72 @@
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Archivo:wght@400;500;600;700&display=swap"></noscript>
 
   <!-- ========== Schema.org JSON-LD ========== -->
-  <script type="application/ld+json">
-{
-  "@id": "https://rumosadv.com.br/#escritorio",
+  <script type="application/ld+json">{
   "@context": "https://schema.org",
-  "@type": "LegalService",
-  "name": "Rumos Advocacia",
-  "description": "Análise de bloqueio judicial de contas de empresas, com conferência do processo, dos valores e dos documentos e orientação sobre os próximos passos.",
-  "url": "https://rumosadv.com.br/bloqueio-judicial/",
-  "image": "https://rumosadv.com.br/assets/img/og-image.jpg",
-  "telephone": "+5519989119770",
-  "priceRange": "$$",
-  "areaServed": {
-    "@type": "State",
-    "name": "São Paulo"
-  },
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Av. Dr. Nelson Noronha Gustavo Filho, 150, conj. 114C",
-    "addressLocality": "Campinas",
-    "addressRegion": "SP",
-    "postalCode": "13092-526",
-    "addressCountry": "BR"
-  },
-  "founder": {
-    "@id": "https://rumosadv.com.br/#rodrigo-moura",
-    "@type": "Person",
-    "name": "Dr. Rodrigo Moura Silva",
-    "jobTitle": "Advogado",
-    "alumniOf": "Ibmec — Especialização em Direito Notarial e Registral",
-    "identifier": "OAB/SP 188.004"
-  },
-  "serviceType": [
-    "Pedido de liberação de valores bloqueados (SISBAJUD)",
-    "Impenhorabilidade de salário e poupança",
-    "Impugnação de bloqueio excessivo",
-    "Substituição de penhora por seguro garantia ou fiança bancária"
-  ],
-  "knowsAbout": [
-    "SISBAJUD (bloqueio judicial de contas e reiteração automática)",
-    "Código de Processo Civil, arts. 833, 835, 848 e 854",
-    "Impenhorabilidade de salário e de reserva em poupança",
-    "Penhora e bloqueio de valores"
-  ],
-  "sameAs": [
-    "https://www.tiktok.com/@rodrigo.moura.adv",
-    "https://www.google.com/search?kgmid=/g/11nvgdfq06"
+  "@graph": [
+    {
+      "@id": "https://rumosadv.com.br/#escritorio",
+      "@context": "https://schema.org",
+      "@type": "LegalService",
+      "name": "Rumos Advocacia",
+      "description": "Análise de bloqueio judicial de contas de empresas, com conferência do processo, dos valores e dos documentos e orientação sobre os próximos passos.",
+      "url": "https://rumosadv.com.br/bloqueio-judicial/",
+      "image": "https://rumosadv.com.br/assets/img/og-image.jpg",
+      "telephone": "+5519989119770",
+      "priceRange": "$$",
+      "areaServed": {
+        "@type": "State",
+        "name": "São Paulo"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Av. Dr. Nelson Noronha Gustavo Filho, 150, conj. 114C",
+        "addressLocality": "Campinas",
+        "addressRegion": "SP",
+        "postalCode": "13092-526",
+        "addressCountry": "BR"
+      },
+      "founder": {
+        "@id": "https://rumosadv.com.br/#rodrigo-moura",
+        "@type": "Person",
+        "name": "Dr. Rodrigo Moura Silva",
+        "jobTitle": "Advogado",
+        "alumniOf": "Ibmec — Especialização em Direito Notarial e Registral",
+        "identifier": "OAB/SP 188.004"
+      },
+      "serviceType": [
+        "Pedido de liberação de valores bloqueados (SISBAJUD)",
+        "Impenhorabilidade de salário e poupança",
+        "Impugnação de bloqueio excessivo",
+        "Substituição de penhora por seguro garantia ou fiança bancária"
+      ],
+      "knowsAbout": [
+        "SISBAJUD (bloqueio judicial de contas e reiteração automática)",
+        "Código de Processo Civil, arts. 833, 835, 848 e 854",
+        "Impenhorabilidade de salário e de reserva em poupança",
+        "Penhora e bloqueio de valores"
+      ],
+      "sameAs": [
+        "https://www.tiktok.com/@rodrigo.moura.adv",
+        "https://www.google.com/search?kgmid=/g/11nvgdfq06"
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://rumosadv.com.br/bloqueio-judicial/#servico-pj",
+      "name": "Análise de bloqueio judicial de conta PJ",
+      "serviceType": "Análise de bloqueio judicial de conta empresarial",
+      "url": "https://rumosadv.com.br/bloqueio-judicial/",
+      "provider": {
+        "@id": "https://rumosadv.com.br/#escritorio"
+      },
+      "areaServed": {
+        "@type": "State",
+        "name": "São Paulo"
+      }
+    }
   ]
-}
-  </script>
+}</script>
 
   <!-- ========== Google Tag Manager ========== -->
   
@@ -569,17 +586,17 @@
       <div class="casos">
 
         <article class="caso">
-          <span class="caso__tag">Exemplo 1 · Salário bloqueado</span>
-          <h3 class="caso__title">O salário inteiro ficou retido por uma dívida antiga de cartão — e ela esperou o banco resolver</h3>
-          <p class="caso__body">Lúcia (nome fictício), auxiliar administrativa, recebeu o salário numa sexta-feira e na segunda o saldo estava zerado: um bloqueio judicial numa cobrança de cartão de crédito de anos atrás, que ela nem sabia ter virado processo. O gerente disse que "não podia fazer nada". Ela achou que, por ser salário, o dinheiro voltaria sozinho. Quando procurou ajuda, semanas depois, o valor já tinha saído da conta dela para uma conta judicial ligada ao processo, e o pedido de liberação passou a disputar com o credor algo que poderia ter sido pedido logo nos primeiros dias, com o holerite e o extrato na mão.</p>
-          <div class="caso__licao"><strong>Lição:</strong> salário é, em regra, impenhorável (CPC, art. 833, IV), mas o banco bloqueia sem saber de onde veio o dinheiro. Cabe ao devedor mostrar isso no processo, em 5 dias úteis contados da intimação (CPC, arts. 219 e 854, §3º).</div>
-        </article>
-
-        <article class="caso">
-          <span class="caso__tag">Exemplo 2 · Conta da empresa</span>
+          <span class="caso__tag">Exemplo 1 · Conta da empresa</span>
           <h3 class="caso__title">A transportadora teve bloqueado quase o dobro do que devia — às vésperas da folha</h3>
           <p class="caso__body">Marcos (nome fictício), sócio de uma pequena transportadora, respondia a uma execução de cerca de R$ 30 mil. A ordem de bloqueio alcançou duas contas da empresa ao mesmo tempo, e R$ 55 mil ficaram retidos. Ele preferiu esperar uma proposta de acordo antes de mexer no processo. Enquanto isso, o excesso continuou travado, a folha atrasou e dois fornecedores suspenderam o faturamento a prazo.</p>
           <div class="caso__licao"><strong>Lição:</strong> o bloqueio acima do valor cobrado deve ser cancelado pelo juiz (CPC, art. 854, §1º), e a empresa pode apontar o excesso no mesmo prazo de 5 dias úteis (art. 854, §3º, II). Negociar é legítimo, mas não suspende o prazo.</div>
+        </article>
+
+        <article class="caso">
+          <span class="caso__tag">Exemplo 2 · Salário bloqueado</span>
+          <h3 class="caso__title">O salário inteiro ficou retido por uma dívida antiga de cartão — e ela esperou o banco resolver</h3>
+          <p class="caso__body">Lúcia (nome fictício), auxiliar administrativa, recebeu o salário numa sexta-feira e na segunda o saldo estava zerado: um bloqueio judicial numa cobrança de cartão de crédito de anos atrás, que ela nem sabia ter virado processo. O gerente disse que "não podia fazer nada". Ela achou que, por ser salário, o dinheiro voltaria sozinho. Quando procurou ajuda, semanas depois, o valor já tinha saído da conta dela para uma conta judicial ligada ao processo, e o pedido de liberação passou a disputar com o credor algo que poderia ter sido pedido logo nos primeiros dias, com o holerite e o extrato na mão.</p>
+          <div class="caso__licao"><strong>Lição:</strong> salário é, em regra, impenhorável (CPC, art. 833, IV), mas o banco bloqueia sem saber de onde veio o dinheiro. Cabe ao devedor mostrar isso no processo, em 5 dias úteis contados da intimação (CPC, arts. 219 e 854, §3º).</div>
         </article>
 
       </div>
@@ -587,6 +604,15 @@
       <p class="nota-jurisprudencial">Composição baseada em situações recorrentes em bloqueios pelo SISBAJUD (o sistema que a Justiça usa para bloquear contas), refletindo os arts. 833 e 854 do Código de Processo Civil.</p>
     </div>
   </section>
+
+  <section id="documentos"><div class="container">
+    <h2>Quais documentos enviar para a análise do bloqueio?</h2>
+    <h3>Para começar</h3>
+    <p>Envie o aviso ou extrato do bloqueio, o banco, a data e a identificação da empresa. Informe o número do processo, se souber. Não é preciso esperar reunir todos os documentos para fazer o primeiro contato; a localização do processo é uma das primeiras providências.</p>
+    <h3>Para aprofundar</h3>
+    <p>Depois de identificar o processo, podem ser necessários a ordem e a intimação, extratos das instituições atingidas, demonstrativo do débito e provas do fundamento que se pretende alegar. Documentos contábeis e do caixa são pedidos quando pertinentes; valores destinados à folha não são automaticamente impenhoráveis por essa destinação.</p>
+    <p>Os prazos do CPC aqui descritos se referem à execução cível. Cobranças fiscais e trabalhistas exigem conferir o regime próprio e os atos do processo.</p>
+  </div></section>
 
   <!-- ========== COMO RESOLVEMOS ========== -->
   <section class="section--alt" id="como-funciona">
