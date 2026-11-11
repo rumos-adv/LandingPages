@@ -41,6 +41,18 @@ export async function onRequestPost(context) {
         SET status = ?, payment_status = ?, paid_at = COALESCE(?, paid_at)
         WHERE asaas_checkout_id = ?
       `).bind(status, paymentStatus, paidAt, checkoutId).run();
+
+      // Recuperação de contas: o mesmo checkout Asaas abre o caso quando o pagamento é confirmado.
+      // Isolado em try para não afetar o fluxo de Marcas.
+      try {
+        const contasStatus = { CHECKOUT_CREATED: 'aguardando_pagamento', CHECKOUT_CANCELED: 'pagamento_cancelado', CHECKOUT_EXPIRED: 'pagamento_expirado', CHECKOUT_PAID: 'caso_aberto' }[eventName];
+        await context.env.ACEITES_DB.prepare(`
+          UPDATE contas_contratacoes
+          SET status = CASE WHEN status = 'caso_aberto' THEN status ELSE ? END, payment_status = ?, paid_at = COALESCE(?, paid_at),
+              caso_aberto_at = COALESCE(caso_aberto_at, ?), updated_at = ?
+          WHERE asaas_checkout_id = ?
+        `).bind(contasStatus, paymentStatus, paidAt, paidAt, new Date().toISOString(), checkoutId).run();
+      } catch (error) { console.error('asaas_webhook_contas_error', error?.message); }
     }
 
     return json({ ok: true });

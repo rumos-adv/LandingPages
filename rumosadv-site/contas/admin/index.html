@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contratações · Recuperação de contas · Rumos</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="no-referrer">
+  <style>
+    *{box-sizing:border-box}body{margin:0;font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f4f1ee;color:#223a23}
+    header{background:#071b12;color:#f4efe4;padding:1rem 1.25rem;font-family:Georgia,serif;letter-spacing:.12em}
+    main{max-width:980px;margin:0 auto;padding:1.25rem}section{background:#fff;border:1px solid #e5e0d9;border-radius:10px;padding:1.2rem;margin-bottom:1rem}
+    h2{font-family:Georgia,serif;margin:.2rem 0 .8rem}label{display:block;font-size:.85rem;margin:.5rem 0 .2rem;color:#4a5d4a}
+    input,select{width:100%;padding:.6rem;border:1px solid #d9d3c9;border-radius:6px;font:inherit}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.2rem 1rem}
+    button{margin-top:.9rem;padding:.65rem 1.2rem;border:0;border-radius:999px;background:#22391f;color:#fff;font:600 .95rem inherit;cursor:pointer}button.sec{background:#eee9df;color:#223a23;margin:0 .3rem 0 0;padding:.35rem .8rem;font-size:.8rem}
+    table{width:100%;border-collapse:collapse;font-size:.88rem}th,td{text-align:left;padding:.45rem;border-bottom:1px solid #eee}
+    #out{white-space:pre-wrap;background:#f2f8f3;padding:.8rem;border-radius:8px;margin-top:.8rem}
+    small{color:#6b7565}
+  </style>
+</head>
+<body>
+<header>RUMOS · CONTRATAÇÕES — RECUPERAÇÃO DE CONTAS</header>
+<main>
+  <section id="login"><h2>Acesso</h2><label for="tok">Chave do painel (a mesma do painel de análises de Marcas)</label><input id="tok" type="password" autocomplete="current-password"><button id="enter">Entrar</button><p><small>A chave fica só nesta aba do navegador.</small></p></section>
+  <section id="novo" hidden><h2>Nova contratação</h2>
+    <p><small>Gere o PDF do contrato preenchido a partir da minuta e envie aqui. O sistema manda o contrato para assinatura na Autentique e devolve o link único do cliente: assinar → pagar → confirmação.</small></p>
+    <form id="f"><div class="grid">
+      <div><label>Nome completo</label><input name="nome" required></div>
+      <div><label>CPF ou CNPJ</label><input name="cpf_cnpj" inputmode="numeric" required></div>
+      <div><label>E-mail (recebe o contrato)</label><input name="email" type="email" required></div>
+      <div><label>WhatsApp com DDD</label><input name="whatsapp" inputmode="tel" required></div>
+      <div><label>Plataforma</label><select name="plataforma"><option>WhatsApp</option><option>WhatsApp Business</option><option>WhatsApp Business Platform (API)</option></select></div>
+      <div><label>Número da conta afetada</label><input name="conta_numero"></div>
+      <div><label>Ref. do lead (ex.: WAB12C)</label><input name="ref"></div>
+      <div><label>Proposta nº</label><input name="proposta_numero"></div>
+      <div><label>Parcelamento máximo no cartão</label><select name="max_parcelas"><option value="1">À vista</option><option value="2">Até 2x</option><option value="3" selected>Até 3x</option><option value="6">Até 6x</option></select></div>
+      <div><label>Contrato (PDF, até 5 MB)</label><input name="contrato" type="file" accept="application/pdf" required></div>
+    </div><button>Enviar para assinatura</button></form>
+    <div id="out" hidden></div>
+  </section>
+  <section id="lista" hidden><h2>Andamento</h2><table><thead><tr><th>Criada</th><th>Cliente</th><th>Ref.</th><th>Situação</th><th>Assinado</th><th>Pago</th><th></th></tr></thead><tbody id="rows"></tbody></table></section>
+</main>
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); }, key = sessionStorage.getItem('rumos_admin') || '';
+  var LABEL = { aguardando_assinatura: 'Aguardando assinatura', assinatura_recusada: 'Assinatura recusada', assinado: 'Assinado — falta pagar', aguardando_pagamento: 'Pagamento aberto', pagamento_cancelado: 'Pagamento cancelado', pagamento_expirado: 'Pagamento expirado', caso_aberto: 'Pago — caso aberto', cancelado: 'Cancelada' };
+  var api = function(method, body, isForm){ return fetch('/api/admin/contas/contratacoes', { method: method, headers: Object.assign({ authorization: 'Bearer ' + key }, isForm || !body ? {} : { 'content-type': 'application/json' }), body: isForm ? body : body ? JSON.stringify(body) : undefined }).then(function(r){ return r.json().then(function(d){ if (!r.ok) throw new Error(d.error || ('Erro ' + r.status)); return d; }); }); };
+  var esc = function(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){ return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+  var day = function(s){ return s ? new Date(s).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' }) : ''; };
+  function list(){
+    api('GET').then(function(d){
+      $('login').hidden = true; $('novo').hidden = false; $('lista').hidden = false;
+      $('rows').innerHTML = d.contratacoes.map(function(c){ return '<tr><td>' + day(c.created_at) + '</td><td>' + esc(c.nome) + '</td><td>' + esc(c.ref) + '</td><td>' + esc(LABEL[c.status] || c.status) + '</td><td>' + day(c.signed_at) + '</td><td>' + day(c.paid_at) + '</td><td>' +
+        '<button class="sec" data-a="link" data-id="' + c.id + '">Link do cliente</button>' + (c.status === 'aguardando_assinatura' ? '<button class="sec" data-a="marcar_assinado" data-id="' + c.id + '">Marcar assinado</button>' : '') + (c.status !== 'caso_aberto' && c.status !== 'cancelado' ? '<button class="sec" data-a="cancelar" data-id="' + c.id + '">Cancelar</button>' : '') + '</td></tr>'; }).join('') || '<tr><td colspan="7">Nenhuma contratação ainda.</td></tr>';
+    }).catch(function(e){ alert(e.message); $('login').hidden = false; });
+  }
+  $('enter').onclick = function(){ key = $('tok').value.trim(); sessionStorage.setItem('rumos_admin', key); list(); };
+  $('rows').onclick = function(ev){ var b = ev.target.closest('button[data-a]'); if (!b) return; if (b.dataset.a !== 'link' && !confirm('Confirmar: ' + b.textContent + '?')) return;
+    api('PATCH', { id: b.dataset.id, acao: b.dataset.a }).then(function(d){ if (b.dataset.a === 'link') { navigator.clipboard && navigator.clipboard.writeText(d.linkCliente); alert('Link do cliente copiado:\n' + d.linkCliente); } list(); }).catch(function(e){ alert(e.message); }); };
+  $('f').onsubmit = function(ev){ ev.preventDefault(); var btn = ev.target.querySelector('button'); btn.disabled = true; $('out').hidden = false; $('out').textContent = 'Enviando…';
+    api('POST', new FormData(ev.target), true).then(function(d){ $('out').textContent = 'Contrato enviado para assinatura.\n\nLink do cliente (envie pelo WhatsApp oficial):\n' + d.linkCliente + '\n\nLink direto de assinatura:\n' + (d.linkAssinatura || '—'); ev.target.reset(); list(); })
+      .catch(function(e){ $('out').textContent = e.message; }).finally(function(){ btn.disabled = false; }); };
+  if (key) list();
+})();
+</script>
+</body>
+</html>

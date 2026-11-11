@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contratação · Rumos Advocacia</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="no-referrer">
+  <meta name="theme-color" content="#22391f">
+  <style>
+    :root{--deep:#071b12;--ivory:#f4efe4;--gold:#d6b165;--bg:#f4f1ee;--fg:#223a23;--soft:#4a5d4a;--line:#e5e0d9;--ok:#2d7a3e;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Archivo,sans-serif;--serif:Georgia,"Times New Roman",serif}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans);line-height:1.55}
+    header{background:var(--deep);padding:1.1rem 1.25rem}.brand{max-width:680px;margin:0 auto;font-family:var(--serif);color:var(--ivory);letter-spacing:.14em}.brand span{color:var(--gold);font-size:.72rem;margin-left:.5rem;letter-spacing:.2em}
+    main{padding:1.5rem 1.1rem 3rem}.card{max-width:680px;margin:0 auto;background:#fff;border:1px solid var(--line);border-top:3px solid var(--gold);border-radius:10px;padding:1.5rem}
+    h1{font-family:var(--serif);font-weight:600;font-size:1.8rem;margin:.2rem 0 .6rem}p{margin:.4rem 0 .9rem;color:var(--soft)}
+    ol{list-style:none;padding:0;margin:1.2rem 0}li{border:1px solid var(--line);border-radius:10px;padding:1rem;margin-bottom:.8rem}li.done{border-color:#cfe5d3;background:#f2f8f3}li.current{border-color:var(--gold);box-shadow:0 0 0 2px rgba(214,177,101,.2)}
+    li strong{display:block;font-size:1.02rem}li small{color:var(--soft)}
+    .btn{display:inline-block;margin-top:.7rem;padding:.8rem 1.3rem;border-radius:999px;border:0;background:#22391f;color:#fff;font:600 1rem var(--sans);text-decoration:none;cursor:pointer}.btn[disabled]{opacity:.45;cursor:not-allowed}
+    .msg{padding:.8rem 1rem;border-radius:8px;background:#fff7e8;color:#694f1f;margin-top:1rem}.ok{background:#e9f5ec;color:var(--ok)}
+    footer{max-width:680px;margin:1.2rem auto 0;font-size:.85rem;color:var(--soft);text-align:center}
+  </style>
+</head>
+<body>
+<header><div class="brand">RUMOS <span>ADVOCACIA</span></div></header>
+<main><section class="card">
+  <h1 id="title">Contratação</h1>
+  <p id="lead">Carregando…</p>
+  <ol id="steps" hidden>
+    <li id="s1"><strong>1. Assinar o contrato</strong><small>Assinatura eletrônica pela Autentique. Leia o contrato antes de assinar.</small><br><a class="btn" id="sign" target="_blank" rel="noopener">Abrir o contrato para assinar</a></li>
+    <li id="s2"><strong>2. Pagar os honorários</strong><small id="paytext">Pix ou cartão de crédito, pela página segura do Asaas.</small><br><button class="btn" id="pay" disabled>Ir para o pagamento</button></li>
+    <li id="s3"><strong>3. Confirmação</strong><small>Confirmado o pagamento, o seu caso é aberto e o Dr. Rodrigo Moura Silva (OAB/SP 188.004) dá início aos trabalhos.</small></li>
+  </ol>
+  <div id="msg" class="msg" hidden role="status"></div>
+</section>
+<footer>Rumos Advocacia · WhatsApp oficial (19) 98911-9770 · Nunca pedimos senha ou código de verificação.</footer>
+</main>
+<script>
+(function(){
+  var q = new URLSearchParams(location.search), t = q.get('t'), $ = function(id){ return document.getElementById(id); };
+  var msg = function(text, ok){ $('msg').hidden = !text; $('msg').textContent = text || ''; $('msg').className = 'msg' + (ok ? ' ok' : ''); };
+  var brl = function(v){ return v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }); };
+  var timer;
+  function render(c){
+    $('steps').hidden = false;
+    $('title').textContent = 'Olá, ' + c.primeiroNome;
+    $('lead').textContent = 'Contratação da etapa administrativa — recuperação de conta de ' + c.plataforma + (c.ref ? ' (Ref. ' + c.ref + ')' : '') + '. Honorários fixos de ' + brl(c.valor) + '.';
+    $('paytext').textContent = 'Pix ou cartão de crédito' + (c.maxParcelas > 1 ? ' (à vista ou em até ' + c.maxParcelas + 'x)' : '') + ', pela página segura do Asaas.';
+    var signed = c.status !== 'aguardando_assinatura' && c.status !== 'assinatura_recusada';
+    $('s1').className = signed ? 'done' : 'current'; $('s2').className = c.pago ? 'done' : (c.podePagar ? 'current' : ''); $('s3').className = c.pago ? 'done' : '';
+    $('sign').hidden = !c.signUrl; if (c.signUrl) $('sign').href = c.signUrl;
+    $('pay').disabled = !c.podePagar; $('pay').hidden = c.pago;
+    if (c.pago) { msg('Pagamento confirmado. O seu caso foi aberto e você receberá o contato pelo WhatsApp oficial no horário de atendimento (segunda a sexta, das 9h às 18h).', true); clearInterval(timer); }
+    else if (c.status === 'assinatura_recusada') msg('A assinatura foi recusada. Se foi engano, fale conosco pelo WhatsApp oficial.');
+    else if (q.get('pagamento') === 'sucesso') msg('Recebemos o retorno do pagamento. A confirmação aparece aqui em instantes.');
+    else if (q.get('pagamento') === 'cancelado' || c.status === 'pagamento_cancelado') msg('O pagamento não foi concluído. Você pode tentar de novo pelo botão acima.');
+    else if (q.get('pagamento') === 'expirado' || c.status === 'pagamento_expirado') msg('O link de pagamento expirou. Clique de novo em "Ir para o pagamento".');
+    else if (!signed) msg('Depois de assinar, volte a esta página: o pagamento é liberado automaticamente.');
+    else msg('');
+  }
+  function load(){
+    if (!t) { $('lead').textContent = 'Link incompleto. Peça um novo link pelo WhatsApp oficial.'; return; }
+    fetch('/api/contas/contratacao?t=' + encodeURIComponent(t), { cache: 'no-store' }).then(function(r){ return r.json().then(function(d){ return { r: r, d: d }; }); })
+      .then(function(x){ if (!x.r.ok) { $('lead').textContent = x.d.error || 'Não foi possível carregar.'; clearInterval(timer); return; } render(x.d.contratacao); })
+      .catch(function(){ $('lead').textContent = 'Sem conexão. Tente de novo em instantes.'; });
+  }
+  $('pay').addEventListener('click', function(){
+    $('pay').disabled = true; msg('Abrindo o pagamento…');
+    fetch('/api/contas/contratacao', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ t: t }) })
+      .then(function(r){ return r.json().then(function(d){ return { r: r, d: d }; }); })
+      .then(function(x){ if (x.r.ok && x.d.checkoutUrl) location.href = x.d.checkoutUrl; else { msg(x.d.error || 'Não foi possível abrir o pagamento.'); $('pay').disabled = false; } })
+      .catch(function(){ msg('Sem conexão. Tente de novo.'); $('pay').disabled = false; });
+  });
+  load(); timer = setInterval(load, 15000);
+})();
+</script>
+</body>
+</html>
