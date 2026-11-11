@@ -1,5 +1,5 @@
 // Página do cliente: mostra o estado (assinar → pagar → confirmado) e cria o checkout só depois da assinatura.
-import { json, readClientToken, publicView, createAsaasCheckout, publicBase } from '../../_lib/contas-contratacao.js';
+import { json, readClientToken, publicView, createAsaasCheckout, publicBase, createSignatureLink } from '../../_lib/contas-contratacao.js';
 
 async function load(context, token) {
   if (!context.env.ACEITES_DB || !context.env.BRIEFING_SIGNING_SECRET) return { error: json({ error: 'Contratação indisponível no momento.' }, 503) };
@@ -13,6 +13,13 @@ async function load(context, token) {
 export async function onRequestGet(context) {
   const { row, error } = await load(context, new URL(context.request.url).searchParams.get('t'));
   if (error) return error;
+  // Link de assinatura ausente (não devolvido na criação): gera agora e guarda.
+  if (row.status === 'aguardando_assinatura' && !row.sign_url && row.client_signature_id && context.env.AUTENTIQUE_TOKEN) {
+    try {
+      row.sign_url = await createSignatureLink(row.client_signature_id, context.env);
+      await context.env.ACEITES_DB.prepare(`UPDATE contas_contratacoes SET sign_url=?, updated_at=? WHERE id=?`).bind(row.sign_url, new Date().toISOString(), row.id).run();
+    } catch (e) { console.error('contas_sign_link_error', e?.message, e?.detail); }
+  }
   return json({ ok: true, contratacao: publicView(row) });
 }
 

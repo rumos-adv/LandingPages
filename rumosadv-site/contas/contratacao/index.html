@@ -9,7 +9,7 @@
   <meta name="theme-color" content="#22391f">
   <style>
     :root{--deep:#071b12;--ivory:#f4efe4;--gold:#d6b165;--bg:#f4f1ee;--fg:#223a23;--soft:#4a5d4a;--line:#e5e0d9;--ok:#2d7a3e;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Archivo,sans-serif;--serif:Georgia,"Times New Roman",serif}
-    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans);line-height:1.55}
+    [hidden]{display:none!important}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans);line-height:1.55}
     header{background:var(--deep);padding:1.1rem 1.25rem}.brand{max-width:680px;margin:0 auto;font-family:var(--serif);color:var(--ivory);letter-spacing:.14em}.brand span{color:var(--gold);font-size:.72rem;margin-left:.5rem;letter-spacing:.2em}
     main{padding:1.5rem 1.1rem 3rem}.card{max-width:680px;margin:0 auto;background:#fff;border:1px solid var(--line);border-top:3px solid var(--gold);border-radius:10px;padding:1.5rem}
     h1{font-family:var(--serif);font-weight:600;font-size:1.8rem;margin:.2rem 0 .6rem}p{margin:.4rem 0 .9rem;color:var(--soft)}
@@ -54,6 +54,7 @@
     else if (q.get('pagamento') === 'sucesso') msg('Recebemos o retorno do pagamento. A confirmação aparece aqui em instantes.');
     else if (q.get('pagamento') === 'cancelado' || c.status === 'pagamento_cancelado') msg('O pagamento não foi concluído. Você pode tentar de novo pelo botão acima.');
     else if (q.get('pagamento') === 'expirado' || c.status === 'pagamento_expirado') msg('O link de pagamento expirou. Clique de novo em "Ir para o pagamento".');
+    else if (!signed && !c.signUrl) msg('O contrato foi enviado para o seu e-mail pela Autentique. Assine por lá e volte a esta página: o pagamento é liberado automaticamente.');
     else if (!signed) msg('Depois de assinar, volte a esta página: o pagamento é liberado automaticamente.');
     else msg('');
   }

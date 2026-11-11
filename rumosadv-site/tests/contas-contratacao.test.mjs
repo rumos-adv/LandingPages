@@ -55,7 +55,11 @@ test('fluxo completo: proposta → assinatura → pagamento → confirmação �
   const realFetch = globalThis.fetch; t.after(() => { globalThis.fetch = realFetch; });
   globalThis.fetch = async (url, init) => {
     calls.push(String(url));
-    if (String(url).includes('autentique')) return Response.json({ data: { createDocument: { id: 'doc1', signatures: [{ public_id: 'sigCliente', email: 'maria@example.com', action: { name: 'SIGN' }, link: { short_link: 'https://assina.ae/x' } }, { public_id: 'sigAdv', email: 'rodrigo@rumosadv.com.br', action: { name: 'SIGN' } }] } } });
+    if (String(url).includes('autentique')) {
+      if (init.body instanceof FormData) return Response.json({ data: { createDocument: { id: 'doc1', signatures: [{ public_id: 'sigCliente', email: 'maria@example.com', action: { name: 'SIGN' }, link: null }, { public_id: 'sigAdv', email: 'rodrigo@rumosadv.com.br', action: { name: 'SIGN' }, link: null }] } } });
+      const q = JSON.parse(init.body); assert.equal(q.variables.id, 'sigCliente');
+      return Response.json({ data: { createLinkToSignature: { short_link: 'https://assina.ae/x' } } });
+    }
     const body = JSON.parse(init.body);
     if (body.installment) return Response.json({ errors: [{ description: 'combinação não suportada' }] }, { status: 400 });
     return Response.json({ id: 'chk1', link: 'https://sandbox.asaas.com/c/chk1' });

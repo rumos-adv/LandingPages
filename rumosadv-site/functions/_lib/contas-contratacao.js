@@ -66,8 +66,21 @@ export async function createAutentiqueDocument(c, pdf, env, fetcher = fetch) {
   const data = await r.json().catch(() => ({}));
   const doc = data?.data?.createDocument;
   if (!r.ok || !doc?.id) throw Object.assign(new Error('autentique_failed'), { detail: data?.errors?.[0]?.message || r.status });
-  const sig = (doc.signatures || []).find(s => (s.email || '').toLowerCase() === c.email) || (doc.signatures || []).find(s => s.action?.name === 'SIGN' && (s.email || '').toLowerCase() !== String(env.AUTENTIQUE_OWNER_EMAIL || '').toLowerCase());
-  return { documentId: doc.id, signatureId: sig?.public_id || null, signUrl: sig?.link?.short_link || null };
+  const sig0 = (doc.signatures || []).find(s => (s.email || '').toLowerCase() === c.email) || (doc.signatures || []).find(s => s.action?.name === 'SIGN' && (s.email || '').toLowerCase() !== String(env.AUTENTIQUE_OWNER_EMAIL || '').toLowerCase());
+  const sig = sig0;
+  let signUrl = sig?.link?.short_link || null;
+  // A Autentique só devolve o link na criação em alguns envios; nos demais, ele é gerado à parte.
+  if (!signUrl && sig?.public_id) signUrl = await createSignatureLink(sig.public_id, env, fetcher).catch(() => null);
+  return { documentId: doc.id, signatureId: sig?.public_id || null, signUrl };
+}
+
+export async function createSignatureLink(publicId, env, fetcher = fetch) {
+  const r = await fetcher(AUTENTIQUE_URL, { method: 'POST', headers: { authorization: 'Bearer ' + env.AUTENTIQUE_TOKEN, 'content-type': 'application/json' },
+    body: JSON.stringify({ query: 'mutation CreateLink($id: ID!) { createLinkToSignature(public_id: $id) { short_link } }', variables: { id: publicId } }) });
+  const data = await r.json().catch(() => ({}));
+  const link = data?.data?.createLinkToSignature?.short_link;
+  if (!r.ok || !link) throw Object.assign(new Error('autentique_link_failed'), { detail: data?.errors?.[0]?.message || r.status });
+  return link;
 }
 
 export async function verifyHmacHex(rawBody, received, secret) {
