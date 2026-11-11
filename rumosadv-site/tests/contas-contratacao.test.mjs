@@ -57,7 +57,9 @@ test('fluxo completo: proposta → assinatura → pagamento → confirmação �
     calls.push(String(url));
     if (String(url).includes('autentique')) {
       if (init.body instanceof FormData) return Response.json({ data: { createDocument: { id: 'doc1', signatures: [{ public_id: 'sigCliente', email: 'maria@example.com', action: { name: 'SIGN' }, link: null }, { public_id: 'sigAdv', email: 'rodrigo@rumosadv.com.br', action: { name: 'SIGN' }, link: null }] } } });
-      const q = JSON.parse(init.body); assert.match(q.query, /public_id: "sigCliente"/);
+      const q = JSON.parse(init.body);
+      if (q.query.startsWith('query')) return Response.json({ data: { document: { signatures: [{ public_id: 'sigCliente', signed: null, rejected: null }] } } });
+      assert.match(q.query, /public_id: "sigCliente"/);
       return Response.json({ data: { createLinkToSignature: { short_link: 'https://assina.ae/x' } } });
     }
     const body = JSON.parse(init.body);
@@ -103,6 +105,17 @@ test('fluxo completo: proposta → assinatura → pagamento → confirmação �
 test('sem chave da Autentique o painel recusa criar e explica o que falta', async () => {
   const r = await admin.onRequestPost({ request: new Request('https://x', { method: 'POST', headers: { authorization: 'Bearer adm' }, body: adminForm() }), env: env(d1(), { AUTENTIQUE_TOKEN: '' }) });
   assert.equal(r.status, 503); assert.match((await r.json()).error, /AUTENTIQUE_TOKEN/);
+});
+test('sem webhook: a página consulta a Autentique e libera o pagamento quando o cliente assinou', async (t) => {
+  const db = d1(), E = env(db);
+  db.raw.prepare(`INSERT INTO contas_contratacoes (id, created_at, updated_at, nome, cpf_cnpj, email, whatsapp, plataforma, max_parcelas, status, autentique_document_id, client_signature_id, sign_url) VALUES ('c1','x','x','Rod Teste','12345678909','r@x.com','5519999991234','WhatsApp',3,'aguardando_assinatura','docX','sigX','https://assina.ae/y')`).run();
+  const realFetch = globalThis.fetch; t.after(() => { globalThis.fetch = realFetch; });
+  globalThis.fetch = async () => Response.json({ data: { document: { signatures: [{ public_id: 'sigX', signed: { created_at: '2026-11-11' }, rejected: null }] } } });
+  const { clientToken } = await import('../functions/_lib/contas-contratacao.js');
+  const tok = await clientToken('c1', E);
+  const v = (await (await cliente.onRequestGet({ request: new Request('https://x/api/contas/contratacao?t=' + encodeURIComponent(tok)), env: E })).json()).contratacao;
+  assert.equal(v.status, 'assinado'); assert.equal(v.podePagar, true);
+  assert.equal(db.raw.prepare(`SELECT status FROM contas_contratacoes WHERE id='c1'`).get().status, 'assinado');
 });
 test('link de cliente adulterado ou de Marcas não abre contratação', async () => {
   const E = env(d1());

@@ -84,6 +84,30 @@ export async function createSignatureLink(publicId, env, fetcher = fetch) {
   return link;
 }
 
+// Consulta direta à Autentique: 'signed', 'rejected' ou null. Garante o fluxo mesmo se o webhook não chegar.
+export async function fetchSignatureStatus(documentId, publicId, env, fetcher = fetch) {
+  const id = String(documentId).replace(/[^A-Za-z0-9_-]/g, '');
+  const r = await fetcher(AUTENTIQUE_URL, { method: 'POST', headers: { authorization: 'Bearer ' + env.AUTENTIQUE_TOKEN, 'content-type': 'application/json' },
+    body: JSON.stringify({ query: `query { document(id: "${id}") { signatures { public_id email signed { created_at } rejected { created_at } } } }` }) });
+  const data = await r.json().catch(() => ({}));
+  const sigs = data?.data?.document?.signatures;
+  if (!r.ok || !Array.isArray(sigs)) throw Object.assign(new Error('autentique_query_failed'), { detail: data?.errors?.[0]?.message || r.status });
+  const s = sigs.find(x => x.public_id === publicId);
+  if (!s) return null;
+  if (s.signed?.created_at) return 'signed';
+  if (s.rejected?.created_at) return 'rejected';
+  return null;
+}
+
+export async function syncSignature(row, env, db, fetcher = fetch) {
+  if (row.status !== 'aguardando_assinatura' || !row.autentique_document_id || !row.client_signature_id || !env.AUTENTIQUE_TOKEN) return row;
+  const st = await fetchSignatureStatus(row.autentique_document_id, row.client_signature_id, env, fetcher).catch(e => { console.error('contas_sign_status_error', e?.message, e?.detail); return null; });
+  const now = new Date().toISOString();
+  if (st === 'signed') { await db.prepare(`UPDATE contas_contratacoes SET status='assinado', signed_at=?, updated_at=? WHERE id=? AND status='aguardando_assinatura'`).bind(now, now, row.id).run(); return { ...row, status: 'assinado', signed_at: now }; }
+  if (st === 'rejected') { await db.prepare(`UPDATE contas_contratacoes SET status='assinatura_recusada', updated_at=? WHERE id=? AND status='aguardando_assinatura'`).bind(now, row.id).run(); return { ...row, status: 'assinatura_recusada' }; }
+  return row;
+}
+
 export async function verifyHmacHex(rawBody, received, secret) {
   if (!secret || !received) return false;
   const key = await crypto.subtle.importKey('raw', new TextEncoder().encode(secret), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);

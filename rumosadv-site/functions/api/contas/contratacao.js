@@ -1,5 +1,5 @@
 // Página do cliente: mostra o estado (assinar → pagar → confirmado) e cria o checkout só depois da assinatura.
-import { json, readClientToken, publicView, createAsaasCheckout, publicBase, createSignatureLink } from '../../_lib/contas-contratacao.js';
+import { json, readClientToken, publicView, createAsaasCheckout, publicBase, createSignatureLink, syncSignature } from '../../_lib/contas-contratacao.js';
 
 async function load(context, token) {
   if (!context.env.ACEITES_DB || !context.env.BRIEFING_SIGNING_SECRET) return { error: json({ error: 'Contratação indisponível no momento.' }, 503) };
@@ -7,7 +7,7 @@ async function load(context, token) {
   if (!id) return { error: json({ error: 'Link inválido ou expirado. Peça um novo link pelo WhatsApp.' }, 401) };
   const row = await context.env.ACEITES_DB.prepare(`SELECT * FROM contas_contratacoes WHERE id=?`).bind(id).first();
   if (!row || row.status === 'cancelado') return { error: json({ error: 'Contratação não encontrada.' }, 404) };
-  return { row };
+  return { row: await syncSignature(row, context.env, context.env.ACEITES_DB) };
 }
 
 export async function onRequestGet(context) {

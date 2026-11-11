@@ -9,10 +9,11 @@ export async function onRequestPost(context) {
   if (!ok) return json({ error: 'Não autorizado.' }, 401);
   let body; try { body = JSON.parse(raw); } catch { return json({ error: 'Evento inválido.' }, 400); }
   const ev = parseAutentiqueEvent(body);
-  if (!ev.type || !ev.documentId) return json({ ok: true, ignored: true });
   const now = new Date().toISOString();
-  const ins = await env.ACEITES_DB.prepare(`INSERT OR IGNORE INTO autentique_webhook_events (id, type, document_id, received_at) VALUES (?, ?, ?, ?)`).bind(ev.eventId, ev.type, ev.documentId, now).run();
+  // Todo evento autenticado fica registrado, inclusive os de formato inesperado, para diagnóstico.
+  const ins = await env.ACEITES_DB.prepare(`INSERT OR IGNORE INTO autentique_webhook_events (id, type, document_id, received_at) VALUES (?, ?, ?, ?)`).bind(ev.eventId || crypto.randomUUID(), ev.type || 'desconhecido', ev.documentId, now).run();
   if (!ins.meta?.changes) return json({ ok: true, duplicate: true });
+  if (!ev.type || !ev.documentId) return json({ ok: true, ignored: true });
   const row = await env.ACEITES_DB.prepare(`SELECT id, status, client_signature_id FROM contas_contratacoes WHERE autentique_document_id=?`).bind(ev.documentId).first();
   if (!row) return json({ ok: true, unknown: true });
   const clientSigned = (ev.type === 'signature.accepted' && (!row.client_signature_id || ev.signatureId === row.client_signature_id)) || ev.type === 'document.finished';
