@@ -427,12 +427,20 @@
     .c-sticky .c-cta { width: 100%; padding: .95rem 1rem; font-size: 1.1rem; }
     @media (min-width: 760px) { .c-sticky { display: none; } }
     @media (max-width: 759px) { .float-wa { display: none; } body { padding-bottom: 4.6rem; } }
+
+    .c-alt { margin-top: 1rem; max-width: 34rem; font-size: .95rem; }
+    .c-alt summary { cursor: pointer; color: inherit; opacity: .85; text-decoration: underline; text-underline-offset: 3px; list-style: none; }
+    .c-alt summary::-webkit-details-marker { display: none; }
+    .c-alt__box { color: #fff; margin-top: .7rem; padding: 1rem 1.1rem; border-radius: var(--radius); background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18); }
+    .c-alt__box p { margin: 0 0 .6rem; color: #fff; }
+    .c-alt__msg { display: block; width: 100%; box-sizing: border-box; padding: .7rem .8rem; border-radius: 8px; border: 1px solid rgba(255,255,255,.25); background: rgba(0,0,0,.18); color: inherit; font: inherit; resize: none; }
+    .c-alt__copy { margin-top: .6rem; padding: .6rem 1.1rem; border-radius: 999px; border: 0; background: #fff; color: var(--fg); font: 700 .95rem var(--sans); cursor: pointer; }
   </style>
 </head>
 <body>
 <a href="#main" class="skip">Pular para conteúdo</a>
 
-<div class="c-bar c-status" data-status data-open="true" data-on="Atendendo agora pelo WhatsApp" data-off="Fora do horário: deixe seu caso e eu respondo assim que abrir"><span class="c-dot"></span><span class="c-status__t">Atendendo agora pelo WhatsApp</span></div>
+<div class="c-bar c-status" data-status data-open="true" data-on="Atendendo agora pelo WhatsApp" data-off="Fora do horário (seg. a sex., das 9h às 18h): deixe seu caso e eu respondo no próximo período"><span class="c-dot"></span><span class="c-status__t">Atendendo agora pelo WhatsApp</span></div>
 
 <header class="site-header">
   <div class="site-header__inner">
@@ -452,9 +460,18 @@
         <h1 class="c-h1">WhatsApp banido? <em>Fale agora.</em></h1>
         <div class="c-promise">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>
-          <p>Seu número foi banido em segundos. Meu atendimento vai na mesma velocidade.</p>
+          <p>Seu número foi banido em segundos. O primeiro passo é contar o caso direto ao advogado, pelo WhatsApp.</p>
         </div>
         <a class="c-cta" href="https://wa.me/5519989119770?text=Oi%2C%20Dr.%20Rodrigo.%20Meu%20WhatsApp%20foi%20banido%20e%20preciso%20de%20ajuda." data-wa-source="hero" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7 0-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.4.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5 0 1.5 1.1 2.9 1.3 3.1.2.2 2.2 3.3 5.3 4.6 1.9.7 2.6.8 3.5.7.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.2-.6-.4zM12 .9C5.9.9.9 5.9.9 12c0 2 .5 3.9 1.5 5.6L.7 23.3l5.9-1.5c1.6.9 3.5 1.4 5.4 1.4 6.1 0 11.1-5 11.1-11.1S18.1.9 12 .9z"/></svg> Falar agora no WhatsApp</a>
+        <details class="c-alt" id="c-alt">
+          <summary>Está com o WhatsApp bloqueado neste celular?</summary>
+          <div class="c-alt__box">
+            <p>Use outro aparelho ou outro número com WhatsApp e envie a mensagem abaixo para <strong>(19) 98911-9770</strong>. O código no final liga a sua mensagem a esta página.</p>
+            <textarea class="c-alt__msg" id="c-alt-msg" rows="3" readonly aria-label="Mensagem para enviar de outro aparelho"></textarea>
+            <button type="button" class="c-alt__copy" id="c-alt-copy">Copiar mensagem</button>
+            <p id="c-alt-ok" role="status" style="margin:.5rem 0 0"></p>
+          </div>
+        </details>
         
       </div>
       <div><svg class="c-art" viewBox="0 0 440 480" role="img" aria-label="Celular com perfil suspenso e conversa com o advogado pelo WhatsApp">
@@ -598,7 +615,7 @@
   <div class="c-wrap">
     <div class="c-head"><h2>Dúvidas rápidas</h2></div>
     <div class="faq">
-      <details class="faq__item"><summary>Vocês garantem que vou recuperar a conta?</summary><div class="faq__answer">Não. Nenhum advogado pode garantir isso, porque a decisão final é da plataforma ou do juiz. O que eu garanto é a rapidez do meu atendimento e a clareza: mostro se há caminho, quais os riscos e quanto custa, por escrito, antes de você decidir.</div></details>
+      <details class="faq__item"><summary>Vocês garantem que vou recuperar a conta?</summary><div class="faq__answer">Não. Nenhum advogado pode garantir isso, porque a decisão final é da plataforma ou do juiz. O que faço é mostrar, por escrito e antes de você decidir, se há caminho, quais os riscos e quanto custa.</div></details>
       <details class="faq__item"><summary>Conversar pelo WhatsApp me obriga a contratar?</summary><div class="faq__answer">Não. A primeira conversa serve para eu entender o caso. Os honorários, quando houver contratação, são informados por escrito antes de qualquer compromisso.</div></details>
       <details class="faq__item"><summary>O que mando na primeira mensagem?</summary><div class="faq__answer">Só o básico: qual rede, o que aconteceu e quando. Se tiver, mande o print do aviso e os e-mails da plataforma. O resto a gente vê na conversa.</div></details>
       <details class="faq__item"><summary>Quanto tempo leva para resolver?</summary><div class="faq__answer">Depende do caso. Casos simples podem se resolver em dias ou semanas pela via administrativa; se for preciso ir à Justiça, costuma levar mais. Você saberá a estimativa antes de contratar.</div></details>
@@ -611,10 +628,10 @@
 <section class="cta-final">
   <div class="c-wrap">
     <h2>Seu número foi banido em segundos.<br><em>Seu atendimento começa agora.</em></h2>
-    <p>Conte o que aconteceu. Sem formulário, sem espera por agendamento.</p>
+    <p>Conte o que aconteceu direto no WhatsApp, sem precisar agendar.</p>
     <a class="c-cta" href="https://wa.me/5519989119770?text=Oi%2C%20Dr.%20Rodrigo.%20Meu%20WhatsApp%20foi%20banido%20e%20preciso%20de%20ajuda." data-wa-source="cta-final" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7 0-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.4.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5 0 1.5 1.1 2.9 1.3 3.1.2.2 2.2 3.3 5.3 4.6 1.9.7 2.6.8 3.5.7.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.2-.6-.4zM12 .9C5.9.9.9 5.9.9 12c0 2 .5 3.9 1.5 5.6L.7 23.3l5.9-1.5c1.6.9 3.5 1.4 5.4 1.4 6.1 0 11.1-5 11.1-11.1S18.1.9 12 .9z"/></svg> Falar agora no WhatsApp</a>
     
-    <p class="c-final-status c-status" data-status data-open="true" data-on="Atendendo agora" data-off="Fora do horário: sua mensagem fica registrada e eu respondo assim que abrir"><span class="c-dot"></span><span class="c-status__t">Atendendo agora</span></p>
+    <p class="c-final-status c-status" data-status data-open="true" data-on="Atendendo agora" data-off="Fora do horário (seg. a sex., das 9h às 18h): sua mensagem fica registrada e eu respondo no próximo período"><span class="c-dot"></span><span class="c-status__t">Atendendo agora</span></p>
   </div>
 </section>
 </main>
@@ -701,11 +718,31 @@
       }
     });
   });
+
+  (function(){
+    /* Atalho para quem está com o WhatsApp bloqueado no próprio aparelho: mostra a mensagem com o Ref. para enviar de outro. */
+    var hero = document.querySelector('[data-wa-source="hero"]'), box = document.getElementById('c-alt-msg'), btn = document.getElementById('c-alt-copy'), ok = document.getElementById('c-alt-ok');
+    if (!hero || !box || !btn) return;
+    try { box.value = new URL(hero.href).searchParams.get('text') || ''; } catch(e) {}
+    btn.addEventListener('click', function(){
+      var done = function(){ ok.textContent = 'Mensagem copiada. Cole no WhatsApp do outro aparelho e envie para (19) 98911-9770.'; };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(box.value).then(done, function(){ box.select(); ok.textContent = 'Selecione e copie o texto acima.'; });
+      else { box.select(); try { document.execCommand('copy'); done(); } catch(e) { ok.textContent = 'Selecione e copie o texto acima.'; } }
+      var ev = { event: 'whatsapp_copy', source: 'copiar', page: 'whatsapp-banido', lead_ref: lead.ref, gclid: lead.gclid || '', gbraid: lead.gbraid || '', wbraid: lead.wbraid || '', fbclid: lead.fbclid || '',
+        utm_source: lead.utm_source || '', utm_campaign: lead.utm_campaign || '', utm_term: lead.utm_term || '' };
+      window.dataLayer.push(ev);
+      try {
+        var c = window.RumosSiteConsent && window.RumosSiteConsent.getChoice ? window.RumosSiteConsent.getChoice() : null;
+        var body = Object.assign({}, ev); if (!c || !c.marketing) { body.gclid = body.gbraid = body.wbraid = body.fbclid = ''; }
+        if (navigator.sendBeacon) navigator.sendBeacon(RUMOS_LEAD_ENDPOINT, new Blob([JSON.stringify(body)], { type: 'application/json' }));
+      } catch(e) {}
+    });
+  })();
 </script>
 <script>
 (function(){
-  /* CONFIRMAR: horário em que o Dr. Rodrigo responde pelo WhatsApp (fuso de São Paulo). */
-  var HOURS = { days: [1,2,3,4,5], start: 9, end: 18 };
+  /* Horário do atendimento humano pelo WhatsApp (fuso de São Paulo). */
+  var HOURS = { days: [1,2,3,4,5], start: 9, end: 18 }; /* expediente confirmado pelo titular em 11/11/2026 */
   function isOpen(){
     try {
       var parts = new Intl.DateTimeFormat("en-US", {timeZone:"America/Sao_Paulo", weekday:"short", hour:"numeric", hour12:false}).formatToParts(new Date());

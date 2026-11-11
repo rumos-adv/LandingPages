@@ -3,7 +3,7 @@
 // Não grava telefone, nome nem texto da conversa. O vínculo com o contato é feito pelo código
 // "(Ref. XXXXX)" que segue na mensagem do WhatsApp e fica registrado pelo Worker de atendimento.
 const PAGES = new Set(['whatsapp-banido', 'whatsapp-business-banido']);
-const SOURCES = new Set(['hero', 'header', 'sticky', 'float', 'footer', 'cta-final', 'faca-ja', 'quem-pf', 'quem-pj']);
+const SOURCES = new Set(['copiar', 'hero', 'header', 'sticky', 'float', 'footer', 'cta-final', 'faca-ja', 'quem-pf', 'quem-pj']);
 const ORIGINS = new Set(['https://rumosadv.com.br', 'https://www.rumosadv.com.br']);
 const ID = /^[A-Za-z0-9_\-.~]{10,200}$/;
 const TEXT = /^[\p{L}\p{N} _\-.+{}]{1,120}$/u;

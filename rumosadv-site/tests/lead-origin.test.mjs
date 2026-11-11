@@ -48,6 +48,9 @@ test('lead-origin: sem banco responde 503 e GET responde 405', async () => {
   assert.equal((await onRequestPost({ request: req(ok), env: {} })).status, 503);
   assert.equal(onRequestGet().status, 405);
 });
+test('lead-origin: aceita o registro do atalho de cópia', () => {
+  assert.equal(parseLeadOrigin(JSON.stringify({ ...ok, source: 'copiar' })).source, 'copiar');
+});
 test('lead-origin: descarta identificador malformado sem descartar o lead', () => {
   const p = parseLeadOrigin(JSON.stringify({ ...ok, gclid: '<script>', utm_term: 'a'.repeat(500) }));
   assert.equal(p.gclid, null); assert.equal(p.utm_term, null); assert.equal(p.ref, 'WAB12C');
@@ -60,6 +63,9 @@ for (const slug of ['whatsapp-banido', 'whatsapp-business-banido']) {
     assert.match(html, /RUMOS_LEAD_ENDPOINT = '\/api\/lead-origin'/);
     assert.match(html, /rel="canonical" href="https:\/\/rumosadv\.com\.br\//);
     assert.match(html, /c\.marketing/);
+    assert.match(html, /id="c-alt-copy"/);
+    assert.match(html, /start: 9, end: 18/);
+    assert.doesNotMatch(html, /O que eu garanto|Sem formulário/);
     const consent = readFileSync(new URL('assets/rumos-site-consent.v1.2.js', site), 'utf8');
     assert.match(consent, new RegExp(`"/${slug}":"gtm"`));
   });
