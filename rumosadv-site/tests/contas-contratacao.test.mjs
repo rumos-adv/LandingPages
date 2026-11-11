@@ -57,7 +57,7 @@ test('fluxo completo: proposta → assinatura → pagamento → confirmação �
     calls.push(String(url));
     if (String(url).includes('autentique')) {
       if (init.body instanceof FormData) return Response.json({ data: { createDocument: { id: 'doc1', signatures: [{ public_id: 'sigCliente', email: 'maria@example.com', action: { name: 'SIGN' }, link: null }, { public_id: 'sigAdv', email: 'rodrigo@rumosadv.com.br', action: { name: 'SIGN' }, link: null }] } } });
-      const q = JSON.parse(init.body); assert.equal(q.variables.id, 'sigCliente');
+      const q = JSON.parse(init.body); assert.match(q.query, /public_id: "sigCliente"/);
       return Response.json({ data: { createLinkToSignature: { short_link: 'https://assina.ae/x' } } });
     }
     const body = JSON.parse(init.body);

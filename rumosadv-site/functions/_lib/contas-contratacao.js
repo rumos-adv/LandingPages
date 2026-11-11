@@ -76,7 +76,8 @@ export async function createAutentiqueDocument(c, pdf, env, fetcher = fetch) {
 
 export async function createSignatureLink(publicId, env, fetcher = fetch) {
   const r = await fetcher(AUTENTIQUE_URL, { method: 'POST', headers: { authorization: 'Bearer ' + env.AUTENTIQUE_TOKEN, 'content-type': 'application/json' },
-    body: JSON.stringify({ query: 'mutation CreateLink($id: ID!) { createLinkToSignature(public_id: $id) { short_link } }', variables: { id: publicId } }) });
+    // O tipo do argumento não é documentado; o valor vai literal (só hexadecimal), como no exemplo oficial.
+    body: JSON.stringify({ query: `mutation { createLinkToSignature(public_id: "${String(publicId).replace(/[^A-Za-z0-9_-]/g, '')}") { short_link } }` }) });
   const data = await r.json().catch(() => ({}));
   const link = data?.data?.createLinkToSignature?.short_link;
   if (!r.ok || !link) throw Object.assign(new Error('autentique_link_failed'), { detail: data?.errors?.[0]?.message || r.status });

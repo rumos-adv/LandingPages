@@ -1,6 +1,6 @@
 // Painel do advogado: cria a contratação (envia o contrato à Autentique) e lista o andamento.
 import { isAdmin } from '../../../_lib/marcas-auth.js';
-import { json, validateInput, createAutentiqueDocument, clientToken, publicBase } from '../../../_lib/contas-contratacao.js';
+import { json, validateInput, createAutentiqueDocument, clientToken, publicBase, createSignatureLink } from '../../../_lib/contas-contratacao.js';
 
 function guard(context, { needSign = false } = {}) {
   const env = context.env;
@@ -43,9 +43,17 @@ export async function onRequestPost(context) {
 export async function onRequestPatch(context) {
   const denied = guard(context); if (denied) return denied;
   const body = await context.request.json().catch(() => ({}));
-  const row = await context.env.ACEITES_DB.prepare(`SELECT id, status FROM contas_contratacoes WHERE id=?`).bind(String(body.id || '')).first();
+  const row = await context.env.ACEITES_DB.prepare(`SELECT id, status, client_signature_id FROM contas_contratacoes WHERE id=?`).bind(String(body.id || '')).first();
   if (!row) return json({ error: 'Contratação não encontrada.' }, 404);
   const now = new Date().toISOString();
+  if (body.acao === 'link_assinatura') {
+    // Diagnóstico para o advogado: gera o link de assinatura e mostra o erro da Autentique, se houver.
+    try {
+      const link = await createSignatureLink(row.client_signature_id, context.env);
+      await context.env.ACEITES_DB.prepare(`UPDATE contas_contratacoes SET sign_url=?, updated_at=? WHERE id=?`).bind(link, now, row.id).run();
+      return json({ ok: true, linkAssinatura: link });
+    } catch (e) { return json({ error: 'Autentique: ' + (e.detail || e.message) }, 502); }
+  }
   if (body.acao === 'marcar_assinado' && row.status === 'aguardando_assinatura') {
     await context.env.ACEITES_DB.prepare(`UPDATE contas_contratacoes SET status='assinado', signed_at=?, updated_at=? WHERE id=?`).bind(now, now, row.id).run();
   } else if (body.acao === 'cancelar' && row.status !== 'caso_aberto') {
