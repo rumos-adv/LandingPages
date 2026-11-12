@@ -24,24 +24,38 @@
 <main>
   <section id="login"><h2>Acesso</h2><label for="tok">Chave do painel (a mesma do painel de análises de Marcas)</label><input id="tok" type="password" autocomplete="current-password"><button id="enter">Entrar</button><p><small>A chave fica só nesta aba do navegador.</small></p></section>
   <section id="novo" hidden><h2>Nova contratação</h2>
-    <p><small>Gere o PDF do contrato preenchido a partir da minuta e envie aqui. O sistema manda o contrato para assinatura na Autentique e devolve o link único do cliente: assinar → pagar → confirmação.</small></p>
+    <p><small>Preencha os dados do cliente. O painel monta o contrato, envia para assinatura na Autentique e devolve o link único do cliente: assinar → pagar → confirmação.</small></p>
     <form id="f"><div class="grid">
-      <div><label>Nome completo</label><input name="nome" required></div>
-      <div><label>CPF ou CNPJ</label><input name="cpf_cnpj" inputmode="numeric" required></div>
+      <div><label>Cliente</label><select name="tipo" id="tipo"><option value="pf">Pessoa física</option><option value="pj">Pessoa jurídica</option></select></div>
+      <div><label id="lnome">Nome completo</label><input name="nome" required></div>
+      <div><label id="ldoc">CPF</label><input name="cpf_cnpj" inputmode="numeric" required></div>
+      <div class="pf"><label>Nacionalidade</label><input name="nacionalidade" value="brasileiro(a)"></div>
+      <div class="pf"><label>Estado civil</label><select name="estado_civil"><option value=""></option><option>solteiro(a)</option><option>casado(a)</option><option>divorciado(a)</option><option>viúvo(a)</option><option>em união estável</option></select></div>
+      <div class="pf"><label>Profissão</label><input name="profissao"></div>
+      <div class="pj" hidden><label>Representante (nome completo)</label><input name="rep_nome"></div>
+      <div class="pj" hidden><label>Cargo do representante</label><input name="rep_cargo" placeholder="sócio(a) administrador(a)"></div>
+      <div class="pj" hidden><label>CPF do representante</label><input name="rep_cpf" inputmode="numeric"></div>
+      <div style="grid-column:1/-1"><label id="lend">Endereço completo (rua, nº, bairro, cidade/UF, CEP)</label><input name="endereco"></div>
       <div><label>E-mail (recebe o contrato)</label><input name="email" type="email" required></div>
       <div><label>WhatsApp com DDD</label><input name="whatsapp" inputmode="tel" required></div>
       <div><label>Plataforma</label><select name="plataforma"><option>WhatsApp</option><option>WhatsApp Business</option><option>WhatsApp Business Platform (API)</option></select></div>
-      <div><label>Número da conta afetada</label><input name="conta_numero"></div>
+      <div><label>Número da conta afetada (com DDD)</label><input name="conta_numero" inputmode="tel"></div>
+      <div><label>O que ocorreu</label><select name="ocorrencia"><option>banimento</option><option>suspensão</option><option>restrição</option></select></div>
+      <div><label>Data em que percebeu</label><input name="data_fato" type="date"></div>
       <div><label>Ref. do lead (ex.: WAB12C)</label><input name="ref"></div>
-      <div><label>Proposta nº</label><input name="proposta_numero"></div>
+      <div><label>Proposta nº (automático; pode alterar)</label><input name="proposta_numero" id="propnum"></div>
       <div><label>Parcelamento máximo no cartão</label><select name="max_parcelas"><option value="1">À vista</option><option value="2">Até 2x</option><option value="3" selected>Até 3x</option><option value="6">Até 6x</option></select></div>
-      <div><label>Contrato (PDF, até 5 MB)</label><input name="contrato" type="file" accept="application/pdf" required></div>
-    </div><button>Enviar para assinatura</button></form>
+    </div>
+    <label style="display:flex;gap:.5rem;align-items:center;margin-top:.8rem"><input type="checkbox" name="opoe_medicao" style="width:auto"> O cliente se opôs à medição de publicidade (cláusula 8ª, § 4º)</label>
+    <details style="margin-top:.8rem"><summary>Usar um PDF próprio em vez do contrato automático</summary><label>Contrato (PDF, até 5 MB)</label><input name="contrato" type="file" accept="application/pdf"><small>Se escolher um arquivo aqui, ele é enviado no lugar do contrato gerado pelo painel.</small></details>
+    <button type="button" id="preview" class="sec" style="margin:.9rem .5rem 0 0;padding:.65rem 1.2rem;font-size:.95rem">Conferir o contrato</button><button>Enviar para assinatura</button></form>
     <div id="out" hidden></div>
   </section>
   <section id="linkbox" hidden><h2>Link do cliente</h2><p><small id="linkwho"></small></p><label for="linkurl">Link único (assinar → pagar → confirmação)</label><input id="linkurl" readonly><div class="row"><button type="button" id="copylink">Copiar link</button><button type="button" id="copymsg">Copiar mensagem pronta</button><a id="openlink" target="_blank" rel="noopener">Abrir neste navegador</a></div><p id="linkmsg" role="status"></p><p><small>Cole a mensagem na conversa do cliente, no painel de atendimento do WhatsApp oficial. O link vale por 30 dias.</small></p></section>
   <section id="lista" hidden><h2>Andamento</h2><table><thead><tr><th>Criada</th><th>Cliente</th><th>Ref.</th><th>Situação</th><th>Assinado</th><th>Pago</th><th></th></tr></thead><tbody id="rows"></tbody></table></section>
 </main>
+<script src="/assets/vendor/pdf-lib-1.17.1.min.js"></script>
+<script src="/contas/admin/contrato-gerador.v1.js"></script>
 <script>
 (function(){
   var $ = function(id){ return document.getElementById(id); }, key = sessionStorage.getItem('rumos_admin') || '';
@@ -58,6 +72,7 @@
   function list(){
     api('GET').then(function(d){
       $('login').hidden = true; $('novo').hidden = false; $('lista').hidden = false;
+      var pn = $('propnum'), sug = new Date().getFullYear() + '/' + String(d.contratacoes.length + 1).padStart(3, '0'); if (!pn.value || pn.dataset.auto === pn.value) { pn.value = sug; pn.dataset.auto = sug; }
       $('rows').innerHTML = d.contratacoes.map(function(c){ return '<tr><td>' + day(c.created_at) + '</td><td>' + esc(c.nome) + '</td><td>' + esc(c.ref) + '</td><td>' + esc(LABEL[c.status] || c.status) + '</td><td>' + day(c.signed_at) + '</td><td>' + day(c.paid_at) + '</td><td>' +
         '<button class="sec" data-a="link" data-id="' + c.id + '" data-nome="' + esc(c.nome) + '">Link do cliente</button>' + (c.status === 'aguardando_assinatura' ? '<button class="sec" data-a="link_assinatura" data-id="' + c.id + '">Link de assinatura</button><button class="sec" data-a="marcar_assinado" data-id="' + c.id + '">Marcar assinado</button>' : '') + (c.status !== 'caso_aberto' && c.status !== 'cancelado' ? '<button class="sec" data-a="cancelar" data-id="' + c.id + '">Cancelar</button>' : '') + '</td></tr>'; }).join('') || '<tr><td colspan="7">Nenhuma contratação ainda.</td></tr>';
     }).catch(function(e){ alert(e.message); $('login').hidden = false; });
@@ -65,8 +80,15 @@
   $('enter').onclick = function(){ key = $('tok').value.trim(); sessionStorage.setItem('rumos_admin', key); list(); };
   $('rows').onclick = function(ev){ var b = ev.target.closest('button[data-a]'); if (!b) return; if (b.dataset.a !== 'link' && b.dataset.a !== 'link_assinatura' && !confirm('Confirmar: ' + b.textContent + '?')) return;
     api('PATCH', { id: b.dataset.id, acao: b.dataset.a }).then(function(d){ if (b.dataset.a === 'link') { showLink(d.linkCliente, b.dataset.nome); } else if (b.dataset.a === 'link_assinatura') { alert('Link de assinatura:\n' + d.linkAssinatura); } list(); }).catch(function(e){ alert(e.message); }); };
-  $('f').onsubmit = function(ev){ ev.preventDefault(); var nomeNovo = ev.target.elements.nome.value; var btn = ev.target.querySelector('button'); btn.disabled = true; $('out').hidden = false; $('out').textContent = 'Enviando…';
-    api('POST', new FormData(ev.target), true).then(function(d){ $('out').textContent = 'Contrato enviado para assinatura. O link do cliente está no quadro abaixo.\n\nLink direto de assinatura (uso interno):\n' + (d.linkAssinatura || '—'); showLink(d.linkCliente, nomeNovo); ev.target.reset(); list(); })
+  var F = $('f').elements;
+  function tipoChange(){ var pj = F.tipo.value === 'pj'; document.querySelectorAll('#f .pf').forEach(function(e){ e.hidden = pj; }); document.querySelectorAll('#f .pj').forEach(function(e){ e.hidden = !pj; }); $('lnome').textContent = pj ? 'Razão social' : 'Nome completo'; $('ldoc').textContent = pj ? 'CNPJ' : 'CPF'; $('lend').textContent = pj ? 'Endereço da sede (rua, nº, bairro, cidade/UF, CEP)' : 'Endereço completo (rua, nº, bairro, cidade/UF, CEP)'; }
+  $('tipo').onchange = tipoChange;
+  function dados(){ var d = {}; ['tipo','nome','cpf_cnpj','nacionalidade','estado_civil','profissao','rep_nome','rep_cargo','rep_cpf','endereco','email','whatsapp','plataforma','conta_numero','ocorrencia','data_fato','proposta_numero'].forEach(function(k){ d[k] = F[k].value; }); d.opoe_medicao = F.opoe_medicao.checked; return d; }
+  function contratoPdf(){ if (!window.RumosContrato || !window.PDFLib) return Promise.reject(new Error('O gerador de contrato não carregou. Recarregue a página.')); return window.RumosContrato.gerar(dados()).then(function(bytes){ return new Blob([bytes], { type: 'application/pdf' }); }); }
+  $('preview').onclick = function(){ $('out').hidden = false; if (F.contrato.files.length) { window.open(URL.createObjectURL(F.contrato.files[0]), '_blank'); return; } var w = window.open('', '_blank'); contratoPdf().then(function(blob){ var u = URL.createObjectURL(blob); if (w) w.location = u; else location.href = u; $('out').textContent = 'Contrato aberto em outra aba para conferência. Nada foi enviado ainda.'; }).catch(function(e){ if (w) w.close(); $('out').textContent = e.message; }); };
+  $('f').onsubmit = function(ev){ ev.preventDefault(); var nomeNovo = ev.target.elements.nome.value; var btn = ev.target.querySelector('button:not([type=button])'); btn.disabled = true; $('out').hidden = false; $('out').textContent = 'Montando o contrato e enviando…';
+    var fd = new FormData(ev.target), own = F.contrato.files.length > 0;
+    (own ? Promise.resolve(null) : contratoPdf()).then(function(blob){ if (blob) fd.set('contrato', blob, 'contrato-etapa-administrativa.pdf'); return api('POST', fd, true); }).then(function(d){ $('out').textContent = 'Contrato enviado para assinatura. O link do cliente está no quadro abaixo.\n\nLink direto de assinatura (uso interno):\n' + (d.linkAssinatura || '—'); showLink(d.linkCliente, nomeNovo); ev.target.reset(); tipoChange(); list(); })
       .catch(function(e){ $('out').textContent = e.message; }).finally(function(){ btn.disabled = false; }); };
   if (key) list();
 })();
