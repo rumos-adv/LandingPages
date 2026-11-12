@@ -138,7 +138,7 @@ export function buildCheckoutPayload(c, base, token, { installments = true, cust
     minutesToExpire: 1440,
     externalReference: 'contas:' + c.id,
     callback: { successUrl: back + '&pagamento=sucesso', cancelUrl: back + '&pagamento=cancelado', expiredUrl: back + '&pagamento=expirado' },
-    items: [{ externalReference: 'contas-etapa-administrativa', name: 'Etapa administrativa', // limite do Asaas: 30 caracteres description: `Honorários fixos da etapa administrativa${c.ref ? ' (Ref. ' + c.ref + ')' : ''}`, quantity: 1, value: c.valor_centavos / 100 }]
+    items: [{ externalReference: 'contas-etapa-administrativa', name: 'Etapa administrativa' /* limite do Asaas: 30 caracteres */, description: `Honorários fixos da etapa administrativa${c.ref ? ' (Ref. ' + c.ref + ')' : ''}`, quantity: 1, value: c.valor_centavos / 100 }]
   };
   if (installments && c.max_parcelas > 1) p.installment = { maxInstallmentCount: c.max_parcelas };
   if (customer) p.customerData = { name: c.nome, cpfCnpj: c.cpf_cnpj, email: c.email, phone: c.whatsapp.replace(/^55/, '') };
