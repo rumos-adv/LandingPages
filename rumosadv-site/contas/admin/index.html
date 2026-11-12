@@ -16,6 +16,7 @@
     table{width:100%;border-collapse:collapse;font-size:.88rem}th,td{text-align:left;padding:.45rem;border-bottom:1px solid #eee}
     #out{white-space:pre-wrap;background:#f2f8f3;padding:.8rem;border-radius:8px;margin-top:.8rem}
     small{color:#6b7565}
+    #linkbox input{font-size:.8rem;background:#f7f5f1}#linkbox .row{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.6rem}#linkbox .row button,#linkbox .row a{margin:0;padding:.5rem 1rem;font-size:.85rem;border-radius:999px;text-decoration:none}#linkbox .row a{background:#eee9df;color:#223a23;font-weight:600}#linkmsg{color:#2d7a3e;font-size:.85rem;margin:.5rem 0 0;min-height:1.2em}
   </style>
 </head>
 <body>
@@ -38,6 +39,7 @@
     </div><button>Enviar para assinatura</button></form>
     <div id="out" hidden></div>
   </section>
+  <section id="linkbox" hidden><h2>Link do cliente</h2><p><small id="linkwho"></small></p><label for="linkurl">Link único (assinar → pagar → confirmação)</label><input id="linkurl" readonly><div class="row"><button type="button" id="copylink">Copiar link</button><button type="button" id="copymsg">Copiar mensagem pronta</button><a id="openlink" target="_blank" rel="noopener">Abrir neste navegador</a></div><p id="linkmsg" role="status"></p><p><small>Cole a mensagem na conversa do cliente, no painel de atendimento do WhatsApp oficial. O link vale por 30 dias.</small></p></section>
   <section id="lista" hidden><h2>Andamento</h2><table><thead><tr><th>Criada</th><th>Cliente</th><th>Ref.</th><th>Situação</th><th>Assinado</th><th>Pago</th><th></th></tr></thead><tbody id="rows"></tbody></table></section>
 </main>
 <script>
@@ -47,18 +49,24 @@
   var api = function(method, body, isForm){ return fetch('/api/admin/contas/contratacoes', { method: method, headers: Object.assign({ authorization: 'Bearer ' + key }, isForm || !body ? {} : { 'content-type': 'application/json' }), body: isForm ? body : body ? JSON.stringify(body) : undefined }).then(function(r){ return r.json().then(function(d){ if (!r.ok) throw new Error(d.error || ('Erro ' + r.status)); return d; }); }); };
   var esc = function(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){ return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
   var day = function(s){ return s ? new Date(s).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' }) : ''; };
+  function copy(text, done){ var ok = function(){ $('linkmsg').textContent = done; }, fb = function(){ $('linkurl').focus(); $('linkurl').select(); $('linkmsg').textContent = 'Não foi possível copiar automaticamente. O link está selecionado: use Ctrl+C.'; }; if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(ok, fb); else fb(); }
+  function showLink(url, nome){ var first = String(nome || '').trim().split(/\s+/)[0] || '';
+    $('linkbox').hidden = false; $('linkurl').value = url; $('openlink').href = url; $('linkwho').textContent = nome ? 'Cliente: ' + nome : ''; $('linkmsg').textContent = '';
+    $('copylink').onclick = function(){ copy(url, 'Link copiado.'); };
+    $('copymsg').onclick = function(){ copy('Olá' + (first ? ', ' + first : '') + '! Segue o link para a contratação. Por ele você assina o contrato e, em seguida, faz o pagamento (Pix ou cartão), tudo na mesma página:\n\n' + url + '\n\nQualquer dúvida, é só responder por aqui.', 'Mensagem copiada. Cole na conversa do cliente.'); };
+    $('linkbox').scrollIntoView({ behavior: 'smooth', block: 'center' }); }
   function list(){
     api('GET').then(function(d){
       $('login').hidden = true; $('novo').hidden = false; $('lista').hidden = false;
       $('rows').innerHTML = d.contratacoes.map(function(c){ return '<tr><td>' + day(c.created_at) + '</td><td>' + esc(c.nome) + '</td><td>' + esc(c.ref) + '</td><td>' + esc(LABEL[c.status] || c.status) + '</td><td>' + day(c.signed_at) + '</td><td>' + day(c.paid_at) + '</td><td>' +
-        '<button class="sec" data-a="link" data-id="' + c.id + '">Link do cliente</button>' + (c.status === 'aguardando_assinatura' ? '<button class="sec" data-a="link_assinatura" data-id="' + c.id + '">Link de assinatura</button><button class="sec" data-a="marcar_assinado" data-id="' + c.id + '">Marcar assinado</button>' : '') + (c.status !== 'caso_aberto' && c.status !== 'cancelado' ? '<button class="sec" data-a="cancelar" data-id="' + c.id + '">Cancelar</button>' : '') + '</td></tr>'; }).join('') || '<tr><td colspan="7">Nenhuma contratação ainda.</td></tr>';
+        '<button class="sec" data-a="link" data-id="' + c.id + '" data-nome="' + esc(c.nome) + '">Link do cliente</button>' + (c.status === 'aguardando_assinatura' ? '<button class="sec" data-a="link_assinatura" data-id="' + c.id + '">Link de assinatura</button><button class="sec" data-a="marcar_assinado" data-id="' + c.id + '">Marcar assinado</button>' : '') + (c.status !== 'caso_aberto' && c.status !== 'cancelado' ? '<button class="sec" data-a="cancelar" data-id="' + c.id + '">Cancelar</button>' : '') + '</td></tr>'; }).join('') || '<tr><td colspan="7">Nenhuma contratação ainda.</td></tr>';
     }).catch(function(e){ alert(e.message); $('login').hidden = false; });
   }
   $('enter').onclick = function(){ key = $('tok').value.trim(); sessionStorage.setItem('rumos_admin', key); list(); };
   $('rows').onclick = function(ev){ var b = ev.target.closest('button[data-a]'); if (!b) return; if (b.dataset.a !== 'link' && b.dataset.a !== 'link_assinatura' && !confirm('Confirmar: ' + b.textContent + '?')) return;
-    api('PATCH', { id: b.dataset.id, acao: b.dataset.a }).then(function(d){ if (b.dataset.a === 'link') { navigator.clipboard && navigator.clipboard.writeText(d.linkCliente); alert('Link do cliente copiado:\n' + d.linkCliente); } else if (b.dataset.a === 'link_assinatura') { alert('Link de assinatura:\n' + d.linkAssinatura); } list(); }).catch(function(e){ alert(e.message); }); };
-  $('f').onsubmit = function(ev){ ev.preventDefault(); var btn = ev.target.querySelector('button'); btn.disabled = true; $('out').hidden = false; $('out').textContent = 'Enviando…';
-    api('POST', new FormData(ev.target), true).then(function(d){ $('out').textContent = 'Contrato enviado para assinatura.\n\nLink do cliente (envie pelo WhatsApp oficial):\n' + d.linkCliente + '\n\nLink direto de assinatura:\n' + (d.linkAssinatura || '—'); ev.target.reset(); list(); })
+    api('PATCH', { id: b.dataset.id, acao: b.dataset.a }).then(function(d){ if (b.dataset.a === 'link') { showLink(d.linkCliente, b.dataset.nome); } else if (b.dataset.a === 'link_assinatura') { alert('Link de assinatura:\n' + d.linkAssinatura); } list(); }).catch(function(e){ alert(e.message); }); };
+  $('f').onsubmit = function(ev){ ev.preventDefault(); var nomeNovo = ev.target.elements.nome.value; var btn = ev.target.querySelector('button'); btn.disabled = true; $('out').hidden = false; $('out').textContent = 'Enviando…';
+    api('POST', new FormData(ev.target), true).then(function(d){ $('out').textContent = 'Contrato enviado para assinatura. O link do cliente está no quadro abaixo.\n\nLink direto de assinatura (uso interno):\n' + (d.linkAssinatura || '—'); showLink(d.linkCliente, nomeNovo); ev.target.reset(); list(); })
       .catch(function(e){ $('out').textContent = e.message; }).finally(function(){ btn.disabled = false; }); };
   if (key) list();
 })();
