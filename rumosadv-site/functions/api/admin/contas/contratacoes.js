@@ -35,7 +35,7 @@ export async function onRequestPost(context) {
     return json({ ok: true, id: c.id, linkCliente: `${publicBase(context.request, context.env)}/contas/contratacao/?t=${encodeURIComponent(token)}`, linkAssinatura: sign.signUrl }, 201);
   } catch (error) {
     console.error('contas_contratacao_create_error', error?.message, error?.detail);
-    return json({ error: error?.message === 'autentique_failed' ? 'A Autentique recusou o envio: ' + error.detail : 'Não foi possível criar a contratação.' }, 502);
+    return json({ error: error?.message === 'autentique_failed' ? 'A Autentique recusou o envio: ' + error.detail : 'Não foi possível criar a contratação.' }, 424);
   }
 }
 
@@ -52,7 +52,7 @@ export async function onRequestPatch(context) {
       const link = await createSignatureLink(row.client_signature_id, context.env);
       await context.env.ACEITES_DB.prepare(`UPDATE contas_contratacoes SET sign_url=?, updated_at=? WHERE id=?`).bind(link, now, row.id).run();
       return json({ ok: true, linkAssinatura: link });
-    } catch (e) { return json({ error: 'Autentique: ' + (e.detail || e.message) }, 502); }
+    } catch (e) { return json({ error: 'Autentique: ' + (e.detail || e.message) }, 424); }
   }
   if (body.acao === 'marcar_assinado' && row.status === 'aguardando_assinatura') {
     await context.env.ACEITES_DB.prepare(`UPDATE contas_contratacoes SET status='assinado', signed_at=?, updated_at=? WHERE id=?`).bind(now, now, row.id).run();

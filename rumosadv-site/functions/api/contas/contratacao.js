@@ -38,6 +38,7 @@ export async function onRequestPost(context) {
     return json({ ok: true, checkoutUrl: out.checkoutUrl }, 201);
   } catch (e) {
     console.error('contas_checkout_error', e?.message, e?.detail);
-    return json({ error: 'Não foi possível abrir o pagamento agora. Tente de novo em instantes ou avise pelo WhatsApp.' }, 502);
+    // 502/504 são substituídos pela página de erro do Cloudflare; 424 preserva a mensagem.
+    return json({ error: 'Não foi possível abrir o pagamento agora. Tente de novo em instantes ou avise pelo WhatsApp.', detalhe: String(e?.detail || e?.message || '').slice(0, 300) }, 424);
   }
 }
