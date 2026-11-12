@@ -47,6 +47,7 @@ test('checkout: Pix + cartão, parcelamento só quando > 1x, valor de R$ 500 e v
   const c = { ...validateInput(fields).value, id: 'abc' };
   const p = buildCheckoutPayload(c, 'https://rumosadv.com.br', 'T');
   assert.deepEqual(p.billingTypes, ['PIX', 'CREDIT_CARD']); assert.deepEqual(p.chargeTypes, ['DETACHED', 'INSTALLMENT']); assert.equal(p.installment.maxInstallmentCount, 3);
+  assert.ok(p.items[0].name.length <= 30, 'Asaas aceita no máximo 30 caracteres no nome do item');
   assert.equal(p.items[0].value, 500); assert.equal(p.externalReference, 'contas:abc'); assert.match(p.callback.successUrl, /\/contas\/contratacao\/\?t=T&pagamento=sucesso/);
   assert.deepEqual(buildCheckoutPayload({ ...c, max_parcelas: 1 }, 'x', 'T').chargeTypes, ['DETACHED']);
 });
