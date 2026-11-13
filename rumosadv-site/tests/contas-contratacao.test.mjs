@@ -122,3 +122,29 @@ test('link de cliente adulterado ou de Marcas não abre contratação', async ()
   const E = env(d1());
   assert.equal((await cliente.onRequestGet({ request: new Request('https://x/api/contas/contratacao?t=abc.def'), env: E })).status, 401);
 });
+
+test('andamento: registra, ordena, atualiza e remove etapas', async () => {
+  const lib = await import('../functions/_lib/contas-contratacao.js');
+  let list = lib.registrarEtapa(null, 'pedido_enviado', { data: '2026-11-20', nota: '  Protocolo   123 ', hoje: '2026-11-21' });
+  list = lib.registrarEtapa(JSON.stringify(list), 'info_recebidas', { hoje: '2026-11-21' });
+  assert.deepEqual(list.map(x => x.etapa), ['info_recebidas', 'pedido_enviado']);
+  assert.equal(list[1].nota, 'Protocolo 123');
+  assert.equal(list[0].em, '2026-11-21');
+  list = lib.registrarEtapa(JSON.stringify(list), 'pedido_enviado', { data: '2026-11-19', hoje: '2026-11-21' });
+  assert.equal(list.length, 2); assert.equal(list[1].em, '2026-11-19'); assert.equal(list[1].nota, null);
+  assert.throws(() => lib.registrarEtapa(null, 'inventada', {}), /desconhecida/);
+  assert.throws(() => lib.registrarEtapa(null, 'em_analise', { data: '2026-12-01', hoje: '2026-11-21' }), /futura/);
+  assert.throws(() => lib.registrarEtapa(null, 'em_analise', { data: '21/11/2026', hoje: '2026-11-21' }), /inválida/);
+  assert.deepEqual(lib.removerEtapa(JSON.stringify(list), 'info_recebidas').map(x => x.etapa), ['pedido_enviado']);
+  assert.deepEqual(lib.parseAndamento('lixo'), []);
+});
+
+test('andamento: o cliente só vê as etapas depois do pagamento', async () => {
+  const lib = await import('../functions/_lib/contas-contratacao.js');
+  const base = { nome: 'Maria Silva', plataforma: 'WhatsApp', valor_centavos: 50000, max_parcelas: 3, andamento: JSON.stringify([{ etapa: 'pedido_enviado', em: '2026-11-20', nota: 'x' }]) };
+  assert.equal(lib.publicView({ ...base, status: 'aguardando_pagamento' }).andamento, null);
+  const v = lib.publicView({ ...base, status: 'caso_aberto', caso_aberto_at: '2026-11-18T12:00:00Z' });
+  assert.equal(v.andamento.length, lib.ETAPAS.length);
+  assert.equal(v.andamento[1].em, '2026-11-20'); assert.equal(v.andamento[0].em, null);
+  assert.equal(JSON.stringify(v).includes('cpf'), false);
+});

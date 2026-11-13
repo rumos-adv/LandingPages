@@ -17,6 +17,11 @@
     li strong{display:block;font-size:1.02rem}li small{color:var(--soft)}
     .btn{display:inline-block;margin-top:.7rem;padding:.8rem 1.3rem;border-radius:999px;border:0;background:#22391f;color:#fff;font:600 1rem var(--sans);text-decoration:none;cursor:pointer}.btn[disabled]{opacity:.45;cursor:not-allowed}
     .msg{padding:.8rem 1rem;border-radius:8px;background:#fff7e8;color:#694f1f;margin-top:1rem}.ok{background:#e9f5ec;color:var(--ok)}
+    #track{margin-top:1.6rem;padding-top:1.3rem;border-top:1px solid #e5e0d9}#track h2{font-family:Georgia,serif;font-weight:400;font-size:1.35rem;margin:0 0 .3rem}
+    #tl{list-style:none;margin:1rem 0 0;padding:0}#tl li{position:relative;padding:0 0 1.15rem 2.1rem;color:#8a938a}#tl li:before{content:"";position:absolute;left:.3rem;top:.2rem;width:.85rem;height:.85rem;border-radius:50%;border:2px solid #c9c6bf;background:#fff}
+    #tl li:after{content:"";position:absolute;left:.72rem;top:1.25rem;bottom:.1rem;width:2px;background:#e5e0d9}#tl li:last-child:after{display:none}
+    #tl li.ok{color:inherit}#tl li.ok:before{background:#2d7a3e;border-color:#2d7a3e}#tl li.now{color:inherit}#tl li.now:before{border-color:#b19151;background:#fbf3df}
+    #tl strong{display:block;font-weight:600}#tl small{display:block;margin-top:.15rem}
     footer{max-width:680px;margin:1.2rem auto 0;font-size:.85rem;color:var(--soft);text-align:center}
   </style>
 </head>
@@ -31,6 +36,7 @@
     <li id="s3"><strong>3. Confirmação</strong><small>Confirmado o pagamento, o seu caso é aberto e o Dr. Rodrigo Moura Silva (OAB/SP 188.004) dá início aos trabalhos.</small></li>
   </ol>
   <div id="msg" class="msg" hidden role="status"></div>
+  <div id="track" hidden><h2>Andamento do seu pedido</h2><small>Atualizado pelo escritório a cada etapa. O prazo de resposta depende da plataforma; avisamos pelo WhatsApp oficial quando houver novidade.</small><ol id="tl"></ol></div>
 </section>
 <footer>Rumos Advocacia · WhatsApp oficial (19) 98911-9770 · Nunca pedimos senha ou código de verificação.</footer>
 </main>
@@ -49,7 +55,8 @@
     $('s1').className = signed ? 'done' : 'current'; $('s2').className = c.pago ? 'done' : (c.podePagar ? 'current' : ''); $('s3').className = c.pago ? 'done' : '';
     $('sign').hidden = !c.signUrl; if (c.signUrl) $('sign').href = c.signUrl;
     $('pay').disabled = !c.podePagar; $('pay').hidden = c.pago;
-    if (c.pago) { msg('Pagamento confirmado. O seu caso foi aberto e você receberá o contato pelo WhatsApp oficial no horário de atendimento (segunda a sexta, das 9h às 18h).', true); clearInterval(timer); }
+    track(c);
+    if (c.pago) { var started = (c.andamento || []).some(function(e){ return e.em; }); msg(started ? 'Pagamento confirmado e caso aberto. Acompanhe abaixo cada etapa do seu pedido.' : 'Pagamento confirmado. O seu caso foi aberto e você receberá o contato pelo WhatsApp oficial no horário de atendimento (segunda a sexta, das 9h às 18h).', true); clearInterval(timer); timer = setInterval(load, 300000); }
     else if (c.status === 'assinatura_recusada') msg('A assinatura foi recusada. Se foi engano, fale conosco pelo WhatsApp oficial.');
     else if (q.get('pagamento') === 'sucesso') msg('Recebemos o retorno do pagamento. A confirmação aparece aqui em instantes.');
     else if (q.get('pagamento') === 'cancelado' || c.status === 'pagamento_cancelado') msg('O pagamento não foi concluído. Você pode tentar de novo pelo botão acima.');
@@ -57,6 +64,15 @@
     else if (!signed && !c.signUrl) msg('O contrato foi enviado para o seu e-mail pela Autentique. Assine por lá e volte a esta página: o pagamento é liberado automaticamente.');
     else if (!signed) msg('Depois de assinar, volte a esta página: o pagamento é liberado automaticamente.');
     else msg('');
+  }
+  var day = function(s){ var m = String(s || '').match(/^(\d{4})-(\d{2})-(\d{2})/); return m ? m[3] + '/' + m[2] + '/' + m[1] : ''; };
+  function track(c){
+    var box = $('track'), tl = $('tl'); box.hidden = !(c.pago && c.andamento); if (box.hidden) return;
+    tl.textContent = ''; var nowSet = false;
+    var add = function(label, when, note, cls){ var li = document.createElement('li'); li.className = cls; var st = document.createElement('strong'); st.textContent = label; li.appendChild(st);
+      var sm = document.createElement('small'); sm.textContent = when; li.appendChild(sm); if (note) { var n = document.createElement('small'); n.textContent = note; li.appendChild(n); } tl.appendChild(li); };
+    add('Pagamento confirmado — caso aberto', day(c.casoAbertoEm), '', 'ok');
+    c.andamento.forEach(function(e){ var cls = e.em ? 'ok' : (nowSet ? '' : 'now'); if (!e.em) nowSet = true; add(e.label, e.em ? day(e.em) : (cls === 'now' ? 'Próxima etapa' : 'A seguir'), e.nota, cls); });
   }
   function load(){
     if (!t) { $('lead').textContent = 'Link incompleto. Peça um novo link pelo WhatsApp oficial.'; return; }

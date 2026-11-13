@@ -4,7 +4,7 @@ import { createBriefingToken, verifyBriefingToken } from './marcas-auth.js';
 
 export const json = (body, status = 200) => Response.json(body, { status, headers: { 'cache-control': 'no-store' } });
 export const STATUS = ['aguardando_assinatura', 'assinatura_recusada', 'assinado', 'aguardando_pagamento', 'pagamento_cancelado', 'pagamento_expirado', 'caso_aberto', 'cancelado'];
-const TOKEN_TTL = 30 * 24 * 3600;
+const TOKEN_TTL = 180 * 24 * 3600; // o mesmo link serve ao acompanhamento do pedido depois do pagamento
 
 export const clientToken = (id, env) => createBriefingToken('contas:' + id, env.BRIEFING_SIGNING_SECRET, TOKEN_TTL);
 export async function readClientToken(token, env) {
@@ -166,6 +166,42 @@ export function publicView(row) {
     status: row.status,
     signUrl: row.status === 'aguardando_assinatura' ? row.sign_url : null,
     podePagar: ['assinado', 'aguardando_pagamento', 'pagamento_cancelado', 'pagamento_expirado'].includes(row.status),
-    pago: row.status === 'caso_aberto'
+    pago: row.status === 'caso_aberto',
+    casoAbertoEm: row.status === 'caso_aberto' ? (row.caso_aberto_at || row.paid_at || null) : null,
+    andamento: row.status === 'caso_aberto' ? andamentoView(row.andamento) : null
   };
+}
+
+// ---------- Andamento do pedido (depois do pagamento) ----------
+export const ETAPAS = [
+  ['info_recebidas', 'Informações e provas recebidas'],
+  ['pedido_enviado', 'Pedido enviado à plataforma'],
+  ['recebimento_confirmado', 'Recebimento confirmado pela plataforma'],
+  ['em_analise', 'Em análise pela plataforma'],
+  ['resposta_recebida', 'Resposta da plataforma recebida'],
+  ['relatorio_entregue', 'Relatório final entregue']
+];
+const ETAPA_KEYS = ETAPAS.map(e => e[0]);
+const isDay = (s) => /^\d{4}-\d{2}-\d{2}$/.test(String(s || '')) && !Number.isNaN(Date.parse(s + 'T12:00:00Z'));
+export function parseAndamento(raw) {
+  let list; try { list = JSON.parse(raw || '[]'); } catch { list = []; }
+  if (!Array.isArray(list)) return [];
+  return list.filter(x => x && ETAPA_KEYS.includes(x.etapa) && isDay(x.em)).map(x => ({ etapa: x.etapa, em: x.em, nota: x.nota ? String(x.nota).slice(0, 240) : null }));
+}
+// Registra ou atualiza uma etapa. A nota é exibida ao cliente; a data não pode ser futura.
+export function registrarEtapa(raw, etapa, { data, nota, hoje } = {}) {
+  if (!ETAPA_KEYS.includes(etapa)) throw new Error('Etapa desconhecida.');
+  const today = hoje || new Date(Date.now() - 3 * 3600e3).toISOString().slice(0, 10); // dia em Brasília
+  const em = data ? String(data) : today;
+  if (!isDay(em)) throw new Error('Data inválida.');
+  if (em > today) throw new Error('A data da etapa não pode ser futura.');
+  const clean = String(nota || '').replace(/\s+/g, ' ').trim().slice(0, 240) || null;
+  const list = parseAndamento(raw).filter(x => x.etapa !== etapa);
+  list.push({ etapa, em, nota: clean });
+  return list.sort((a, b) => ETAPA_KEYS.indexOf(a.etapa) - ETAPA_KEYS.indexOf(b.etapa));
+}
+export const removerEtapa = (raw, etapa) => parseAndamento(raw).filter(x => x.etapa !== etapa);
+export function andamentoView(raw) {
+  const done = parseAndamento(raw);
+  return ETAPAS.map(([etapa, label]) => { const d = done.find(x => x.etapa === etapa); return { etapa, label, em: d ? d.em : null, nota: d ? d.nota : null }; });
 }

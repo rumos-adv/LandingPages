@@ -1,6 +1,6 @@
 // Painel do advogado: cria a contratação (envia o contrato à Autentique) e lista o andamento.
 import { isAdmin } from '../../../_lib/marcas-auth.js';
-import { json, validateInput, createAutentiqueDocument, clientToken, publicBase, createSignatureLink } from '../../../_lib/contas-contratacao.js';
+import { json, validateInput, createAutentiqueDocument, clientToken, publicBase, createSignatureLink, ETAPAS, parseAndamento, registrarEtapa, removerEtapa } from '../../../_lib/contas-contratacao.js';
 
 function guard(context, { needSign = false } = {}) {
   const env = context.env;
@@ -12,8 +12,8 @@ function guard(context, { needSign = false } = {}) {
 
 export async function onRequestGet(context) {
   const denied = guard(context); if (denied) return denied;
-  const rows = await context.env.ACEITES_DB.prepare(`SELECT id, created_at, updated_at, ref, proposta_numero, nome, plataforma, max_parcelas, status, signed_at, paid_at, caso_aberto_at, payment_status FROM contas_contratacoes ORDER BY created_at DESC LIMIT 200`).all();
-  return json({ ok: true, contratacoes: rows.results || [] });
+  const rows = await context.env.ACEITES_DB.prepare(`SELECT id, created_at, updated_at, ref, proposta_numero, nome, plataforma, max_parcelas, status, signed_at, paid_at, caso_aberto_at, payment_status, andamento FROM contas_contratacoes ORDER BY created_at DESC LIMIT 200`).all();
+  return json({ ok: true, etapas: ETAPAS, contratacoes: (rows.results || []).map(r => ({ ...r, andamento: parseAndamento(r.andamento) })) });
 }
 
 export async function onRequestPost(context) {
@@ -43,7 +43,7 @@ export async function onRequestPost(context) {
 export async function onRequestPatch(context) {
   const denied = guard(context); if (denied) return denied;
   const body = await context.request.json().catch(() => ({}));
-  const row = await context.env.ACEITES_DB.prepare(`SELECT id, status, client_signature_id FROM contas_contratacoes WHERE id=?`).bind(String(body.id || '')).first();
+  const row = await context.env.ACEITES_DB.prepare(`SELECT id, status, client_signature_id, andamento FROM contas_contratacoes WHERE id=?`).bind(String(body.id || '')).first();
   if (!row) return json({ error: 'Contratação não encontrada.' }, 404);
   const now = new Date().toISOString();
   if (body.acao === 'link_assinatura') {
@@ -54,7 +54,19 @@ export async function onRequestPatch(context) {
       return json({ ok: true, linkAssinatura: link });
     } catch (e) { return json({ error: 'Autentique: ' + (e.detail || e.message) }, 424); }
   }
-  if (body.acao === 'marcar_assinado' && row.status === 'aguardando_assinatura') {
+  if (body.acao === 'etapa' || body.acao === 'remover_etapa') {
+    // Andamento do pedido, visível ao cliente no link dele. Só depois do pagamento.
+    if (row.status !== 'caso_aberto') return json({ error: 'O andamento só pode ser registrado depois do pagamento confirmado.' }, 409);
+    let list;
+    try { list = body.acao === 'etapa' ? registrarEtapa(row.andamento, String(body.etapa || ''), { data: body.data, nota: body.nota }) : removerEtapa(row.andamento, String(body.etapa || '')); }
+    catch (e) { return json({ error: e.message }, 400); }
+    await context.env.ACEITES_DB.prepare(`UPDATE contas_contratacoes SET andamento=?, updated_at=? WHERE id=?`).bind(JSON.stringify(list), now, row.id).run();
+    return json({ ok: true, andamento: list });
+  }
+  if (body.acao === 'marcar_pago' && ['assinado', 'aguardando_pagamento', 'pagamento_cancelado', 'pagamento_expirado'].includes(row.status)) {
+    // Pagamento recebido fora do Asaas (Pix direto, previsto no contrato): abre o caso manualmente.
+    await context.env.ACEITES_DB.prepare(`UPDATE contas_contratacoes SET status='caso_aberto', payment_status='MANUAL', paid_at=?, caso_aberto_at=?, updated_at=? WHERE id=?`).bind(now, now, now, row.id).run();
+  } else if (body.acao === 'marcar_assinado' && row.status === 'aguardando_assinatura') {
     await context.env.ACEITES_DB.prepare(`UPDATE contas_contratacoes SET status='assinado', signed_at=?, updated_at=? WHERE id=?`).bind(now, now, row.id).run();
   } else if (body.acao === 'cancelar' && row.status !== 'caso_aberto') {
     await context.env.ACEITES_DB.prepare(`UPDATE contas_contratacoes SET status='cancelado', updated_at=? WHERE id=?`).bind(now, row.id).run();

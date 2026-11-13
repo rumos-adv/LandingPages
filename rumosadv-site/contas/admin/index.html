@@ -16,6 +16,7 @@
     table{width:100%;border-collapse:collapse;font-size:.88rem}th,td{text-align:left;padding:.45rem;border-bottom:1px solid #eee}
     #out{white-space:pre-wrap;background:#f2f8f3;padding:.8rem;border-radius:8px;margin-top:.8rem}
     small{color:#6b7565}
+    #androws .st{display:grid;grid-template-columns:minmax(180px,1.4fr) 150px minmax(160px,2fr) auto;gap:.5rem;align-items:center;padding:.5rem 0;border-bottom:1px solid #eee}#androws .st button{margin:0}#androws .st.done strong{color:#2d7a3e}@media(max-width:720px){#androws .st{grid-template-columns:1fr}}
     #linkbox input{font-size:.8rem;background:#f7f5f1}#linkbox .row{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.6rem}#linkbox .row button,#linkbox .row a{margin:0;padding:.5rem 1rem;font-size:.85rem;border-radius:999px;text-decoration:none}#linkbox .row a{background:#eee9df;color:#223a23;font-weight:600}#linkmsg{color:#2d7a3e;font-size:.85rem;margin:.5rem 0 0;min-height:1.2em}
   </style>
 </head>
@@ -52,6 +53,7 @@
     <div id="out" hidden></div>
   </section>
   <section id="linkbox" hidden><h2>Link do cliente</h2><p><small id="linkwho"></small></p><label for="linkurl">Link único (assinar → pagar → confirmação)</label><input id="linkurl" readonly><div class="row"><button type="button" id="copylink">Copiar link</button><button type="button" id="copymsg">Copiar mensagem pronta</button><a id="openlink" target="_blank" rel="noopener">Abrir neste navegador</a></div><p id="linkmsg" role="status"></p><p><small>Cole a mensagem na conversa do cliente, no painel de atendimento do WhatsApp oficial. O link vale por 30 dias.</small></p></section>
+  <section id="andbox" hidden><h2>Andamento do pedido</h2><p><small id="andwho"></small></p><p><small>Cada etapa registrada aparece para o cliente no link dele, com a data e a nota. Escreva a nota pensando que o cliente vai ler.</small></p><div id="androws"></div><p id="andmsg" role="status" style="color:#2d7a3e;font-size:.85rem;min-height:1.2em"></p></section>
   <section id="lista" hidden><h2>Andamento</h2><table><thead><tr><th>Criada</th><th>Cliente</th><th>Ref.</th><th>Situação</th><th>Assinado</th><th>Pago</th><th></th></tr></thead><tbody id="rows"></tbody></table></section>
 </main>
 <script src="/assets/vendor/pdf-lib-1.17.1.min.js"></script>
@@ -69,16 +71,26 @@
     $('copylink').onclick = function(){ copy(url, 'Link copiado.'); };
     $('copymsg').onclick = function(){ copy('Olá' + (first ? ', ' + first : '') + '! Segue o link para a contratação. Por ele você assina o contrato e, em seguida, faz o pagamento (Pix ou cartão), tudo na mesma página:\n\n' + url + '\n\nQualquer dúvida, é só responder por aqui.', 'Mensagem copiada. Cole na conversa do cliente.'); };
     $('linkbox').scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+  var ETAPAS = [], ROWS = {}, andOpen = null;
+  var today = function(){ var d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); };
+  function showAnd(id, keep){ var c = ROWS[id]; if (!c) return; andOpen = id; $('andbox').hidden = false; $('andwho').textContent = 'Cliente: ' + c.nome + (c.ref ? ' · Ref. ' + c.ref : ''); if (!keep) $('andmsg').textContent = '';
+    var done = {}; (c.andamento || []).forEach(function(e){ done[e.etapa] = e; });
+    $('androws').innerHTML = ETAPAS.map(function(e){ var d = done[e[0]]; return '<div class="st' + (d ? ' done' : '') + '"><strong>' + (d ? '✓ ' : '') + esc(e[1]) + '</strong><input type="date" max="' + today() + '" value="' + (d ? d.em : today()) + '" data-f="data"><input type="text" maxlength="240" placeholder="Nota visível ao cliente (opcional)" value="' + esc(d && d.nota || '') + '" data-f="nota"><span><button class="sec" data-e="' + e[0] + '" data-op="etapa">' + (d ? 'Atualizar' : 'Registrar') + '</button>' + (d ? '<button class="sec" data-e="' + e[0] + '" data-op="remover_etapa">Desfazer</button>' : '') + '</span></div>'; }).join('');
+    if (!keep) $('andbox').scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+  $('androws').onclick = function(ev){ var b = ev.target.closest('button[data-op]'); if (!b || !andOpen) return; var row = b.closest('.st'), body = { id: andOpen, acao: b.dataset.op, etapa: b.dataset.e };
+    if (b.dataset.op === 'etapa') { body.data = row.querySelector('[data-f=data]').value; body.nota = row.querySelector('[data-f=nota]').value; }
+    b.disabled = true; api('PATCH', body).then(function(){ $('andmsg').style.color = '#2d7a3e'; $('andmsg').textContent = b.dataset.op === 'etapa' ? 'Etapa registrada. O cliente já vê a atualização no link dele.' : 'Etapa desfeita.'; list(); }).catch(function(e){ $('andmsg').style.color = '#8a3a2a'; $('andmsg').textContent = e.message; b.disabled = false; }); };
   function list(){
     api('GET').then(function(d){
+      ETAPAS = d.etapas || []; ROWS = {}; d.contratacoes.forEach(function(c){ ROWS[c.id] = c; }); if (andOpen && ROWS[andOpen] && ROWS[andOpen].status === 'caso_aberto') showAnd(andOpen, true); else { $('andbox').hidden = true; andOpen = null; }
       $('login').hidden = true; $('novo').hidden = false; $('lista').hidden = false;
       var pn = $('propnum'), sug = new Date().getFullYear() + '/' + String(d.contratacoes.length + 1).padStart(3, '0'); if (!pn.value || pn.dataset.auto === pn.value) { pn.value = sug; pn.dataset.auto = sug; }
       $('rows').innerHTML = d.contratacoes.map(function(c){ return '<tr><td>' + day(c.created_at) + '</td><td>' + esc(c.nome) + '</td><td>' + esc(c.ref) + '</td><td>' + esc(LABEL[c.status] || c.status) + '</td><td>' + day(c.signed_at) + '</td><td>' + day(c.paid_at) + '</td><td>' +
-        '<button class="sec" data-a="link" data-id="' + c.id + '" data-nome="' + esc(c.nome) + '">Link do cliente</button>' + (c.status === 'aguardando_assinatura' ? '<button class="sec" data-a="link_assinatura" data-id="' + c.id + '">Link de assinatura</button><button class="sec" data-a="marcar_assinado" data-id="' + c.id + '">Marcar assinado</button>' : '') + (c.status !== 'caso_aberto' && c.status !== 'cancelado' ? '<button class="sec" data-a="cancelar" data-id="' + c.id + '">Cancelar</button>' : '') + '</td></tr>'; }).join('') || '<tr><td colspan="7">Nenhuma contratação ainda.</td></tr>';
+        '<button class="sec" data-a="link" data-id="' + c.id + '" data-nome="' + esc(c.nome) + '">Link do cliente</button>' + (c.status === 'aguardando_assinatura' ? '<button class="sec" data-a="link_assinatura" data-id="' + c.id + '">Link de assinatura</button><button class="sec" data-a="marcar_assinado" data-id="' + c.id + '">Marcar assinado</button>' : '') + (['assinado','aguardando_pagamento','pagamento_cancelado','pagamento_expirado'].indexOf(c.status) >= 0 ? '<button class="sec" data-a="marcar_pago" data-id="' + c.id + '">Marcar pago (Pix direto)</button>' : '') + (c.status === 'caso_aberto' ? '<button class="sec" data-a="andamento" data-id="' + c.id + '">Andamento (' + (c.andamento || []).length + '/' + ETAPAS.length + ')</button>' : '') + (c.status !== 'caso_aberto' && c.status !== 'cancelado' ? '<button class="sec" data-a="cancelar" data-id="' + c.id + '">Cancelar</button>' : '') + '</td></tr>'; }).join('') || '<tr><td colspan="7">Nenhuma contratação ainda.</td></tr>';
     }).catch(function(e){ alert(e.message); $('login').hidden = false; });
   }
   $('enter').onclick = function(){ key = $('tok').value.trim(); sessionStorage.setItem('rumos_admin', key); list(); };
-  $('rows').onclick = function(ev){ var b = ev.target.closest('button[data-a]'); if (!b) return; if (b.dataset.a !== 'link' && b.dataset.a !== 'link_assinatura' && !confirm('Confirmar: ' + b.textContent + '?')) return;
+  $('rows').onclick = function(ev){ var b = ev.target.closest('button[data-a]'); if (!b) return; if (b.dataset.a === 'andamento') { showAnd(b.dataset.id); return; } if (b.dataset.a !== 'link' && b.dataset.a !== 'link_assinatura' && !confirm('Confirmar: ' + b.textContent + '?')) return;
     api('PATCH', { id: b.dataset.id, acao: b.dataset.a }).then(function(d){ if (b.dataset.a === 'link') { showLink(d.linkCliente, b.dataset.nome); } else if (b.dataset.a === 'link_assinatura') { alert('Link de assinatura:\n' + d.linkAssinatura); } list(); }).catch(function(e){ alert(e.message); }); };
   var F = $('f').elements;
   function tipoChange(){ var pj = F.tipo.value === 'pj'; document.querySelectorAll('#f .pf').forEach(function(e){ e.hidden = pj; }); document.querySelectorAll('#f .pj').forEach(function(e){ e.hidden = !pj; }); $('lnome').textContent = pj ? 'Razão social' : 'Nome completo'; $('ldoc').textContent = pj ? 'CNPJ' : 'CPF'; $('lend').textContent = pj ? 'Endereço da sede (rua, nº, bairro, cidade/UF, CEP)' : 'Endereço completo (rua, nº, bairro, cidade/UF, CEP)'; }
