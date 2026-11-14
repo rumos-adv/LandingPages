@@ -17,6 +17,7 @@
     #out{white-space:pre-wrap;background:#f2f8f3;padding:.8rem;border-radius:8px;margin-top:.8rem}
     small{color:#6b7565}
     #androws .st{display:grid;grid-template-columns:minmax(180px,1.4fr) 150px minmax(160px,2fr) auto;gap:.5rem;align-items:center;padding:.5rem 0;border-bottom:1px solid #eee}#androws .st button{margin:0}#androws .st.done strong{color:#2d7a3e}@media(max-width:720px){#androws .st{grid-template-columns:1fr}}
+    #ctrows .ct{padding:.8rem 0;border-bottom:1px solid #eee}#ctrows .ct.old{opacity:.6}#ctrows .ct strong{font-size:1.02rem}#ctrows .ct p{margin:.25rem 0}#ctrows .ct a{color:#294d35;font-weight:600;margin-right:.8rem}#ctrows .ct button{margin:.4rem 0 0}
     #linkbox input{font-size:.8rem;background:#f7f5f1}#linkbox .row{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.6rem}#linkbox .row button,#linkbox .row a{margin:0;padding:.5rem 1rem;font-size:.85rem;border-radius:999px;text-decoration:none}#linkbox .row a{background:#eee9df;color:#223a23;font-weight:600}#linkmsg{color:#2d7a3e;font-size:.85rem;margin:.5rem 0 0;min-height:1.2em}
   </style>
 </head>
@@ -24,6 +25,7 @@
 <header>RUMOS · CONTRATAÇÕES — RECUPERAÇÃO DE CONTAS</header>
 <main>
   <section id="login"><h2>Acesso</h2><label for="tok">Chave do painel (a mesma do painel de análises de Marcas)</label><input id="tok" type="password" autocomplete="current-password"><button id="enter">Entrar</button><p><small>A chave fica só nesta aba do navegador.</small></p></section>
+  <section id="contatos" hidden><h2>Pedidos de retorno <span id="ctn" style="font:600 .8rem sans-serif;background:#8a3a2a;color:#fff;border-radius:999px;padding:.15rem .6rem;vertical-align:middle" hidden></span></h2><p><small>Deixados pelo formulário das páginas, por quem não consegue abrir o WhatsApp. Retorne pelo meio que a pessoa escolheu e marque como atendido.</small></p><div id="ctrows"></div></section>
   <section id="novo" hidden><h2>Nova contratação</h2>
     <p><small>Preencha os dados do cliente. O painel monta o contrato, envia para assinatura na Autentique e devolve o link único do cliente: assinar → pagar → confirmação.</small></p>
     <form id="f"><div class="grid">
@@ -71,6 +73,17 @@
     $('copylink').onclick = function(){ copy(url, 'Link copiado.'); };
     $('copymsg').onclick = function(){ copy('Olá' + (first ? ', ' + first : '') + '! Segue o link para a contratação. Por ele você assina o contrato e, em seguida, faz o pagamento (Pix ou cartão), tudo na mesma página:\n\n' + url + '\n\nQualquer dúvida, é só responder por aqui.', 'Mensagem copiada. Cole na conversa do cliente.'); };
     $('linkbox').scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+  var PREF = { ligacao: 'Ligação', whatsapp_outro: 'WhatsApp (outro número)', email: 'E-mail' };
+  var fone = function(d){ return d.length === 11 ? '(' + d.slice(0,2) + ') ' + d.slice(2,7) + '-' + d.slice(7) : d.length === 10 ? '(' + d.slice(0,2) + ') ' + d.slice(2,6) + '-' + d.slice(6) : d; };
+  function contatos(){ fetch('/api/admin/contas/contatos', { headers: { authorization: 'Bearer ' + key } }).then(function(r){ return r.ok ? r.json() : null; }).then(function(d){ if (!d) return;
+    $('contatos').hidden = false; $('ctn').hidden = !d.novos; $('ctn').textContent = d.novos + (d.novos === 1 ? ' novo' : ' novos');
+    $('ctrows').innerHTML = d.contatos.length ? d.contatos.map(function(c){ var novo = c.status === 'novo';
+      return '<div class="ct' + (novo ? '' : ' old') + '"><strong>' + esc(c.nome) + '</strong> · ' + esc(day(c.created_at)) + ' · ' + (c.page === 'whatsapp-business-banido' ? 'Business' : 'WhatsApp') + (c.ref ? ' · Ref. ' + esc(c.ref) : '') + (c.de_anuncio ? ' · veio de anúncio' : '') +
+        '<p>Retorno por <b>' + esc(PREF[c.preferencia] || c.preferencia) + '</b>: <a href="tel:+55' + esc(c.telefone) + '">' + esc(fone(c.telefone)) + '</a>' + (c.preferencia === 'whatsapp_outro' ? '<a href="https://wa.me/55' + esc(c.telefone) + '" target="_blank" rel="noopener">abrir WhatsApp</a>' : '') + (c.email ? '<a href="mailto:' + esc(c.email) + '">' + esc(c.email) + '</a>' : '') + '</p>' +
+        (c.numero_banido ? '<p>Número banido: ' + esc(fone(c.numero_banido)) + '</p>' : '') + (c.relato ? '<p>“' + esc(c.relato) + '”</p>' : '') +
+        '<button class="sec" data-c="' + c.id + '" data-op="' + (novo ? 'atender' : 'reabrir') + '">' + (novo ? 'Marcar atendido' : 'Reabrir') + '</button></div>'; }).join('') : '<p><small>Nenhum pedido ainda.</small></p>'; }).catch(function(){}); }
+  $('ctrows').onclick = function(ev){ var b = ev.target.closest('button[data-c]'); if (!b) return; b.disabled = true;
+    fetch('/api/admin/contas/contatos', { method: 'PATCH', headers: { authorization: 'Bearer ' + key, 'content-type': 'application/json' }, body: JSON.stringify({ id: b.dataset.c, acao: b.dataset.op }) }).then(contatos, contatos); };
   var ETAPAS = [], ROWS = {}, andOpen = null;
   var today = function(){ var d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); };
   function showAnd(id, keep){ var c = ROWS[id]; if (!c) return; andOpen = id; $('andbox').hidden = false; $('andwho').textContent = 'Cliente: ' + c.nome + (c.ref ? ' · Ref. ' + c.ref : ''); if (!keep) $('andmsg').textContent = '';
@@ -83,7 +96,7 @@
   function list(){
     api('GET').then(function(d){
       ETAPAS = d.etapas || []; ROWS = {}; d.contratacoes.forEach(function(c){ ROWS[c.id] = c; }); if (andOpen && ROWS[andOpen] && ROWS[andOpen].status === 'caso_aberto') showAnd(andOpen, true); else { $('andbox').hidden = true; andOpen = null; }
-      $('login').hidden = true; $('novo').hidden = false; $('lista').hidden = false;
+      $('login').hidden = true; $('novo').hidden = false; $('lista').hidden = false; contatos();
       var pn = $('propnum'), sug = new Date().getFullYear() + '/' + String(d.contratacoes.length + 1).padStart(3, '0'); if (!pn.value || pn.dataset.auto === pn.value) { pn.value = sug; pn.dataset.auto = sug; }
       $('rows').innerHTML = d.contratacoes.map(function(c){ return '<tr><td>' + day(c.created_at) + '</td><td>' + esc(c.nome) + '</td><td>' + esc(c.ref) + '</td><td>' + esc(LABEL[c.status] || c.status) + '</td><td>' + day(c.signed_at) + '</td><td>' + day(c.paid_at) + '</td><td>' +
         '<button class="sec" data-a="link" data-id="' + c.id + '" data-nome="' + esc(c.nome) + '">Link do cliente</button>' + (c.status === 'aguardando_assinatura' ? '<button class="sec" data-a="link_assinatura" data-id="' + c.id + '">Link de assinatura</button><button class="sec" data-a="marcar_assinado" data-id="' + c.id + '">Marcar assinado</button>' : '') + (['assinado','aguardando_pagamento','pagamento_cancelado','pagamento_expirado'].indexOf(c.status) >= 0 ? '<button class="sec" data-a="marcar_pago" data-id="' + c.id + '">Marcar pago (Pix direto)</button>' : '') + (c.status === 'caso_aberto' ? '<button class="sec" data-a="andamento" data-id="' + c.id + '">Andamento (' + (c.andamento || []).length + '/' + ETAPAS.length + ')</button>' : '') + (c.status !== 'caso_aberto' && c.status !== 'cancelado' ? '<button class="sec" data-a="cancelar" data-id="' + c.id + '">Cancelar</button>' : '') + '</td></tr>'; }).join('') || '<tr><td colspan="7">Nenhuma contratação ainda.</td></tr>';

@@ -428,6 +428,23 @@
     @media (min-width: 760px) { .c-sticky { display: none; } }
     @media (max-width: 759px) { .float-wa { display: none; } body { padding-bottom: 4.6rem; } }
 
+
+    #contato { scroll-margin-top: 5rem; }
+    .c-cta2 { display: inline-flex; align-items: center; gap: .5rem; margin-top: 1rem; padding: .8rem 1.3rem; border-radius: 999px; border: 2px solid rgba(255,255,255,.75); color: #fff; font: 700 1rem var(--sans); text-decoration: none; }
+    .c-cta2:hover { background: rgba(255,255,255,.12); color: #fff; text-decoration: none; }
+    .c-form { background: #fff; border: 1px solid var(--border, #e5e0d9); border-radius: var(--radius-lg); padding: 1.6rem; max-width: 40rem; margin: 0 auto; box-shadow: var(--shadow-md); }
+    .c-form h2 { margin: 0 0 .4rem; } .c-form > p { margin: 0 0 1rem; color: var(--fg-soft); }
+    .c-form label { display: block; font: 600 .92rem var(--sans); margin: .9rem 0 .3rem; color: var(--fg); }
+    .c-form input, .c-form select, .c-form textarea { display: block; width: 100%; box-sizing: border-box; padding: .8rem .9rem; font: 1rem var(--sans); color: var(--fg); background: #fff; border: 1px solid #c9c6bf; border-radius: 8px; }
+    .c-form input:focus, .c-form select:focus, .c-form textarea:focus { outline: 3px solid rgba(61,100,32,.3); border-color: var(--primary); }
+    .c-form small { display: block; margin-top: .25rem; color: var(--muted); font-size: .85rem; }
+    .c-form__hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+    .c-form button[type=submit] { margin-top: 1.2rem; width: 100%; padding: 1rem; border: 0; border-radius: 999px; background: var(--primary); color: #fff; font: 800 1.1rem var(--sans); cursor: pointer; }
+    .c-form button[type=submit]:hover { background: var(--primary-hover); } .c-form button[disabled] { opacity: .6; cursor: wait; }
+    .c-form__msg { margin: 1rem 0 0; padding: .9rem 1rem; border-radius: 8px; font-size: .98rem; }
+    .c-form__msg.ok { background: var(--ok-bg); color: var(--ok); } .c-form__msg.err { background: var(--warn-bg); color: var(--warn); }
+    .c-form .c-alt { max-width: none; margin-top: 1.2rem; color: var(--fg-soft); } .c-form .c-alt__box { background: var(--bg-alt); border-color: var(--border, #e5e0d9); color: var(--fg); } .c-form .c-alt__box p { color: var(--fg); }
+    .c-form .c-alt__msg { background: #fff; border-color: #c9c6bf; color: var(--fg); } .c-form .c-alt__copy { background: var(--fg); color: #fff; }
     .c-alt { margin-top: 1rem; max-width: 34rem; font-size: .95rem; }
     .c-alt summary { cursor: pointer; color: inherit; opacity: .85; text-decoration: underline; text-underline-offset: 3px; list-style: none; }
     .c-alt summary::-webkit-details-marker { display: none; }
@@ -463,15 +480,7 @@
           <p>Seu WhatsApp foi banido em segundos? Nossa resposta começa com um atendimento jurídico ágil e objetivo.</p>
         </div>
         <a class="c-cta" href="https://wa.me/5519989119770?text=Oi%2C%20Dr.%20Rodrigo.%20Meu%20WhatsApp%20foi%20banido%20e%20preciso%20de%20ajuda." data-wa-source="hero" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7 0-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.4.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5 0 1.5 1.1 2.9 1.3 3.1.2.2 2.2 3.3 5.3 4.6 1.9.7 2.6.8 3.5.7.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.2-.6-.4zM12 .9C5.9.9.9 5.9.9 12c0 2 .5 3.9 1.5 5.6L.7 23.3l5.9-1.5c1.6.9 3.5 1.4 5.4 1.4 6.1 0 11.1-5 11.1-11.1S18.1.9 12 .9z"/></svg> Falar agora no WhatsApp</a>
-        <details class="c-alt" id="c-alt">
-          <summary>Está com o WhatsApp bloqueado neste celular?</summary>
-          <div class="c-alt__box">
-            <p>Use outro aparelho ou outro número com WhatsApp e envie a mensagem abaixo para <strong>(19) 98911-9770</strong>. O código no final liga a sua mensagem a esta página.</p>
-            <textarea class="c-alt__msg" id="c-alt-msg" rows="3" readonly aria-label="Mensagem para enviar de outro aparelho"></textarea>
-            <button type="button" class="c-alt__copy" id="c-alt-copy">Copiar mensagem</button>
-            <p id="c-alt-ok" role="status" style="margin:.5rem 0 0"></p>
-          </div>
-        </details>
+        <br><a class="c-cta2" href="#contato" id="c-form-link">Não consegue abrir o WhatsApp? Deixe seu contato</a>
         
       </div>
       <div><svg class="c-art" viewBox="0 0 440 480" role="img" aria-label="Celular com perfil suspenso e conversa com o advogado pelo WhatsApp">
@@ -510,6 +519,41 @@
   </g>
 </svg></div>
     </div>
+  </div>
+</section>
+
+<section id="contato">
+  <div class="c-wrap">
+    <form class="c-form" id="c-form" novalidate>
+      <h2>WhatsApp bloqueado neste celular?</h2>
+      <p>Deixe um contato e o Dr. Rodrigo Moura Silva (OAB/SP 188.004) retorna por ligação, por outro número ou por e-mail. Atendimento de segunda a sexta, das 9h às 18h.</p>
+      <label for="cf-nome">Seu nome</label>
+      <input id="cf-nome" name="nome" autocomplete="name" maxlength="120" required>
+      <label for="cf-tel">Telefone para retorno, com DDD</label>
+      <input id="cf-tel" name="telefone" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="(11) 91234-5678" required>
+      <small>Pode ser o próprio número banido: a ligação comum continua funcionando.</small>
+      <label for="cf-pref">Como prefere o retorno?</label>
+      <select id="cf-pref" name="preferencia"><option value="ligacao">Ligação neste telefone</option><option value="whatsapp_outro">WhatsApp neste telefone (é outro número, que funciona)</option><option value="email">E-mail</option></select>
+      <label for="cf-email">E-mail <span style="font-weight:400">(opcional)</span></label>
+      <input id="cf-email" name="email" type="email" autocomplete="email" maxlength="160">
+      <label for="cf-nb">Número que foi banido <span style="font-weight:400">(se for outro)</span></label>
+      <input id="cf-nb" name="numero_banido" type="tel" inputmode="tel" maxlength="20">
+      <label for="cf-relato">O que aconteceu? <span style="font-weight:400">(opcional)</span></label>
+      <textarea id="cf-relato" name="relato" rows="3" maxlength="800" placeholder="Quando foi, que mensagem aparece, se já pediu revisão."></textarea>
+      <div class="c-form__hp" aria-hidden="true"><label for="cf-site">Não preencha</label><input id="cf-site" name="site" tabindex="-1" autocomplete="off"></div>
+      <button type="submit">Pedir retorno do advogado</button>
+      <small>Nunca pedimos senha ou código de verificação. Seus dados são usados só para este atendimento, conforme a <a href="/politica-de-privacidade/">Política de Privacidade</a>.</small>
+      <div class="c-form__msg" id="c-form-msg" role="status" hidden></div>
+      <details class="c-alt" id="c-alt">
+          <summary>Prefere escrever de outro aparelho que tenha WhatsApp?</summary>
+          <div class="c-alt__box">
+            <p>Use outro aparelho ou outro número com WhatsApp e envie a mensagem abaixo para <strong>(19) 98911-9770</strong>. O código no final liga a sua mensagem a esta página.</p>
+            <textarea class="c-alt__msg" id="c-alt-msg" rows="3" readonly aria-label="Mensagem para enviar de outro aparelho"></textarea>
+            <button type="button" class="c-alt__copy" id="c-alt-copy">Copiar mensagem</button>
+            <p id="c-alt-ok" role="status" style="margin:.5rem 0 0"></p>
+          </div>
+        </details>
+    </form>
   </div>
 </section>
 
@@ -718,6 +762,37 @@
       }
     });
   });
+
+  (function(){
+    /* Formulário para quem não consegue abrir o WhatsApp neste aparelho: grava o pedido de retorno e a origem. */
+    var f = document.getElementById('c-form'), msg = document.getElementById('c-form-msg'); if (!f) return;
+    var show = function(text, ok){ msg.hidden = false; msg.className = 'c-form__msg ' + (ok ? 'ok' : 'err'); msg.textContent = text; };
+    var link = document.getElementById('c-form-link'); if (link) link.addEventListener('click', function(){ window.dataLayer.push({ event: 'contas_form_abrir', page: 'whatsapp-banido', lead_ref: lead.ref }); });
+    f.addEventListener('submit', function(e){
+      e.preventDefault(); var el = f.elements, btn = f.querySelector('button[type=submit]');
+      if (!el.nome.value.trim()) { show('Informe seu nome.'); el.nome.focus(); return; }
+      if (el.telefone.value.replace(/\D/g, '').length < 10) { show('Informe um telefone com DDD.'); el.telefone.focus(); return; }
+      if (el.preferencia.value === 'email' && !el.email.value.trim()) { show('Informe o e-mail para o retorno.'); el.email.focus(); return; }
+      btn.disabled = true; show('Enviando…', true);
+      var body = { page: 'whatsapp-banido', lead_ref: lead.ref, nome: el.nome.value, telefone: el.telefone.value, preferencia: el.preferencia.value, email: el.email.value, numero_banido: el.numero_banido.value, relato: el.relato.value, site: el.site.value };
+      fetch('/api/contas/contato', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) })
+        .then(function(r){ return r.json().catch(function(){ return {}; }).then(function(d){ return { r: r, d: d }; }); })
+        .then(function(x){
+          if (!x.r.ok) { show(x.d.error || 'Não foi possível enviar. Tente de novo.'); btn.disabled = false; return; }
+          show('Recebemos o seu pedido' + (lead.ref ? ' (Ref. ' + lead.ref + ')' : '') + '. O Dr. Rodrigo retorna no horário de atendimento, de segunda a sexta, das 9h às 18h. Não envie senha nem código de verificação a ninguém.', true);
+          f.querySelectorAll('input, select, textarea, button[type=submit]').forEach(function(i){ i.disabled = true; });
+          var ev = { event: 'contas_form_enviado', source: 'form', page: 'whatsapp-banido', lead_ref: lead.ref, gclid: lead.gclid || '', gbraid: lead.gbraid || '', wbraid: lead.wbraid || '', fbclid: lead.fbclid || '',
+            utm_source: lead.utm_source || '', utm_campaign: lead.utm_campaign || '', utm_term: lead.utm_term || '' };
+          window.dataLayer.push(ev);
+          try {
+            var c = window.RumosSiteConsent && window.RumosSiteConsent.getChoice ? window.RumosSiteConsent.getChoice() : null;
+            var b = Object.assign({}, ev); if (!c || !c.marketing) { b.gclid = b.gbraid = b.wbraid = b.fbclid = ''; }
+            if (navigator.sendBeacon) navigator.sendBeacon(RUMOS_LEAD_ENDPOINT, new Blob([JSON.stringify(b)], { type: 'application/json' }));
+          } catch(e2) {}
+        })
+        .catch(function(){ show('Sem conexão. Tente de novo em instantes.'); btn.disabled = false; });
+    });
+  })();
 
   (function(){
     /* Atalho para quem está com o WhatsApp bloqueado no próprio aparelho: mostra a mensagem com o Ref. para enviar de outro. */
