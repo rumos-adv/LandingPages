@@ -429,6 +429,11 @@
     @media (max-width: 759px) { .float-wa { display: none; } body { padding-bottom: 4.6rem; } }
 
 
+    .c-back { position: fixed; left: .7rem; right: .7rem; bottom: 5.4rem; z-index: 95; max-width: 30rem; margin: 0 auto; padding: 1rem 1.1rem; background: #fff; color: var(--fg); border-radius: 12px; border: 2px solid var(--primary); box-shadow: 0 12px 40px rgba(0,0,0,.35); }
+    .c-back[hidden] { display: none; } .c-back strong { display: block; font: 800 1.08rem var(--sans); margin-bottom: .25rem; } .c-back p { margin: 0 0 .8rem; font-size: .96rem; color: var(--fg-soft); }
+    .c-back__row { display: flex; flex-wrap: wrap; gap: .5rem; } .c-back button { border: 0; border-radius: 999px; padding: .75rem 1.1rem; font: 700 .98rem var(--sans); cursor: pointer; }
+    .c-back__go { background: var(--primary); color: #fff; flex: 1 1 auto; } .c-back__no { background: var(--bg-alt); color: var(--fg); }
+    @media (min-width: 760px) { .c-back { bottom: 1.5rem; left: auto; right: 1.5rem; margin: 0; } }
     #contato { scroll-margin-top: 5rem; }
     .c-cta2 { display: inline-flex; align-items: center; gap: .5rem; margin-top: 1rem; padding: .8rem 1.3rem; border-radius: 999px; border: 2px solid rgba(255,255,255,.75); color: #fff; font: 700 1rem var(--sans); text-decoration: none; }
     .c-cta2:hover { background: rgba(255,255,255,.12); color: #fff; text-decoration: none; }
@@ -714,6 +719,11 @@
   </div>
 </footer>
 
+<div class="c-back" id="c-back" role="dialog" aria-labelledby="c-back-t" hidden>
+  <strong id="c-back-t">Não conseguiu enviar pelo WhatsApp?</strong>
+  <p>Com a conta banida, o aplicativo pode não abrir a conversa. Deixe seu telefone e o advogado retorna por ligação.</p>
+  <div class="c-back__row"><button type="button" class="c-back__go" id="c-back-go">Deixar meu contato</button><button type="button" class="c-back__no" id="c-back-no">Já enviei a mensagem</button></div>
+</div>
 <div class="c-sticky"><a class="c-cta" href="https://wa.me/5519989119770?text=Oi%2C%20Dr.%20Rodrigo.%20O%20WhatsApp%20Business%20da%20minha%20empresa%20foi%20banido%20e%20preciso%20de%20ajuda." data-wa-source="sticky" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7 0-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.4.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5 0 1.5 1.1 2.9 1.3 3.1.2.2 2.2 3.3 5.3 4.6 1.9.7 2.6.8 3.5.7.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.2-.6-.4zM12 .9C5.9.9.9 5.9.9 12c0 2 .5 3.9 1.5 5.6L.7 23.3l5.9-1.5c1.6.9 3.5 1.4 5.4 1.4 6.1 0 11.1-5 11.1-11.1S18.1.9 12 .9z"/></svg> Falar agora no WhatsApp</a></div>
 
 <a href="https://wa.me/5519989119770?text=Oi%2C%20Dr.%20Rodrigo.%20O%20WhatsApp%20Business%20da%20minha%20empresa%20foi%20banido%20e%20preciso%20de%20ajuda." class="float-wa" data-wa-source="float" aria-label="Conversar pelo WhatsApp" rel="noopener" target="_blank">
@@ -768,6 +778,21 @@
     /* Formulário para quem não consegue abrir o WhatsApp neste aparelho: grava o pedido de retorno e a origem. */
     var f = document.getElementById('c-form'), msg = document.getElementById('c-form-msg'); if (!f) return;
     var show = function(text, ok){ msg.hidden = false; msg.className = 'c-form__msg ' + (ok ? 'ok' : 'err'); msg.textContent = text; };
+    /* Quem tocou no WhatsApp e voltou sem enviar (conta banida não abre a conversa) recebe o convite para o formulário. Uma vez por visita. */
+    (function(){
+      var box = document.getElementById('c-back'); if (!box) return;
+      var tapped = 0, shown = false, sent = false, KEY = 'rumos_back_shown';
+      try { shown = sessionStorage.getItem(KEY) === '1'; } catch(e) {}
+      var track = function(name){ window.dataLayer.push({ event: name, page: 'whatsapp-business-banido', lead_ref: lead.ref }); };
+      var open = function(){ if (shown || sent || !tapped || Date.now() - tapped < 1500) return; shown = true; try { sessionStorage.setItem(KEY, '1'); } catch(e) {} box.hidden = false; track('contas_retorno_mostrar'); };
+      var close = function(){ box.hidden = true; };
+      document.querySelectorAll('[data-wa-source]').forEach(function(el){ el.addEventListener('click', function(){ tapped = Date.now(); setTimeout(function(){ if (document.visibilityState === 'visible') open(); }, 6000); }); });
+      document.addEventListener('visibilitychange', function(){ if (document.visibilityState === 'visible') open(); });
+      window.addEventListener('pageshow', open); window.addEventListener('focus', open);
+      f.addEventListener('submit', function(){ sent = true; close(); });
+      document.getElementById('c-back-go').addEventListener('click', function(){ close(); track('contas_retorno_abrir'); document.getElementById('contato').scrollIntoView({ behavior: 'smooth', block: 'start' }); setTimeout(function(){ try { f.elements.nome.focus({ preventScroll: true }); } catch(e) {} }, 500); });
+      document.getElementById('c-back-no').addEventListener('click', function(){ close(); track('contas_retorno_ja_enviei'); });
+    })();
     var link = document.getElementById('c-form-link'); if (link) link.addEventListener('click', function(){ window.dataLayer.push({ event: 'contas_form_abrir', page: 'whatsapp-business-banido', lead_ref: lead.ref }); });
     f.addEventListener('submit', function(e){
       e.preventDefault(); var el = f.elements, btn = f.querySelector('button[type=submit]');
