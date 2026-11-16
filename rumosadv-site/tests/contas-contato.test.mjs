@@ -41,3 +41,20 @@ test('grava, não duplica reenvio e recusa origem estranha', async () => {
 test('a origem do formulário é aceita no registro de origem', () => {
   assert.equal(parseLeadOrigin(JSON.stringify({ lead_ref: 'WAB12C', page: 'whatsapp-banido', source: 'form' })).source, 'form');
 });
+
+test('dinheiro retido grava os detalhes e não sobrescreve pedido de outro serviço', async () => {
+  const env = { ACEITES_DB: d1() };
+  await onRequestPost({ request: req(ok), env });
+  const novo = { ...ok, page: 'dinheiro-retido', lead_ref: 'CA1B2C3D4', numero_banido: '', relato: 'Plataforma: Mercado Livre\nValor retido informado: R$ 12.000', preferencia: 'whatsapp_outro' };
+  assert.equal((await onRequestPost({ request: req(novo), env })).status, 201);
+  await onRequestPost({ request: req({ ...novo, relato: 'Complemento sobre o saldo.' }), env });
+  const rows = env.ACEITES_DB.raw.prepare('SELECT * FROM contas_contatos ORDER BY page').all();
+  assert.equal(rows.length, 2);
+  assert.equal(rows[0].page, 'dinheiro-retido');
+  assert.equal(rows[0].ref, 'CA1B2C3D4');
+  assert.equal(rows[0].relato, 'Complemento sobre o saldo.');
+  assert.equal(rows[0].numero_banido, null);
+  assert.equal(rows[1].relato, ok.relato);
+  assert.equal(parseLeadOrigin(JSON.stringify({ page: novo.page, lead_ref: novo.lead_ref, source: 'form' })).page, novo.page);
+});
+

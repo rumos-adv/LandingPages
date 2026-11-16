@@ -2,7 +2,7 @@
 // Recebe o beacon do clique no WhatsApp e grava {ref, identificador do clique, campanha} no D1.
 // Não grava telefone, nome nem texto da conversa. O vínculo com o contato é feito pelo código
 // "(Ref. XXXXX)" que segue na mensagem do WhatsApp e fica registrado pelo Worker de atendimento.
-const PAGES = new Set(['whatsapp-banido', 'whatsapp-business-banido']);
+const PAGES = new Set(['whatsapp-banido', 'whatsapp-business-banido', 'dinheiro-retido']);
 const SOURCES = new Set(['form', 'copiar', 'hero', 'header', 'sticky', 'float', 'footer', 'cta-final', 'faca-ja', 'quem-pf', 'quem-pj']);
 const ORIGINS = new Set(['https://rumosadv.com.br', 'https://www.rumosadv.com.br']);
 const ID = /^[A-Za-z0-9_\-.~]{10,200}$/;
@@ -65,3 +65,4 @@ export async function onRequestPost({ request, env }) {
 }
 
 export function onRequestGet() { return reply(405, { error: 'method' }); }
+

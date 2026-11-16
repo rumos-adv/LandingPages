@@ -78,8 +78,8 @@
   function contatos(){ fetch('/api/admin/contas/contatos', { headers: { authorization: 'Bearer ' + key } }).then(function(r){ return r.ok ? r.json() : null; }).then(function(d){ if (!d) return;
     $('contatos').hidden = false; $('ctn').hidden = !d.novos; $('ctn').textContent = d.novos + (d.novos === 1 ? ' novo' : ' novos');
     $('ctrows').innerHTML = d.contatos.length ? d.contatos.map(function(c){ var novo = c.status === 'novo';
-      return '<div class="ct' + (novo ? '' : ' old') + '"><strong>' + esc(c.nome) + '</strong> · ' + esc(day(c.created_at)) + ' · ' + (c.page === 'whatsapp-business-banido' ? 'Business' : 'WhatsApp') + (c.ref ? ' · Ref. ' + esc(c.ref) : '') + (c.de_anuncio ? ' · veio de anúncio' : '') +
-        '<p>Retorno por <b>' + esc(PREF[c.preferencia] || c.preferencia) + '</b>: <a href="tel:+55' + esc(c.telefone) + '">' + esc(fone(c.telefone)) + '</a>' + (c.preferencia === 'whatsapp_outro' ? '<a href="https://wa.me/55' + esc(c.telefone) + '" target="_blank" rel="noopener">abrir WhatsApp</a>' : '') + (c.email ? '<a href="mailto:' + esc(c.email) + '">' + esc(c.email) + '</a>' : '') + '</p>' +
+      return '<div class="ct' + (novo ? '' : ' old') + '"><strong>' + esc(c.nome) + '</strong> · ' + esc(day(c.created_at)) + ' · ' + (c.page === 'dinheiro-retido' ? 'Dinheiro retido' : c.page === 'whatsapp-business-banido' ? 'Business' : 'WhatsApp') + (c.ref ? ' · Ref. ' + esc(c.ref) : '') + (c.de_anuncio ? ' · veio de anúncio' : '') +
+        '<p>Retorno por <b>' + esc(c.page === 'dinheiro-retido' && c.preferencia === 'whatsapp_outro' ? 'WhatsApp' : PREF[c.preferencia] || c.preferencia) + '</b>: <a href="tel:+55' + esc(c.telefone) + '">' + esc(fone(c.telefone)) + '</a>' + (c.preferencia === 'whatsapp_outro' ? '<a href="https://wa.me/55' + esc(c.telefone) + '" target="_blank" rel="noopener">abrir WhatsApp</a>' : '') + (c.email ? '<a href="mailto:' + esc(c.email) + '">' + esc(c.email) + '</a>' : '') + '</p>' +
         (c.numero_banido ? '<p>Número banido: ' + esc(fone(c.numero_banido)) + '</p>' : '') + (c.relato ? '<p>“' + esc(c.relato) + '”</p>' : '') +
         '<button class="sec" data-c="' + c.id + '" data-op="' + (novo ? 'atender' : 'reabrir') + '">' + (novo ? 'Marcar atendido' : 'Reabrir') + '</button></div>'; }).join('') : '<p><small>Nenhum pedido ainda.</small></p>'; }).catch(function(){}); }
   $('ctrows').onclick = function(ev){ var b = ev.target.closest('button[data-c]'); if (!b) return; b.disabled = true;
@@ -120,3 +120,4 @@
 </script>
 </body>
 </html>
+

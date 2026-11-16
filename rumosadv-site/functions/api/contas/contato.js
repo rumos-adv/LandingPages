@@ -1,7 +1,7 @@
 // POST /api/contas/contato — formulário das páginas /whatsapp-banido/ e /whatsapp-business-banido/,
 // para quem não consegue abrir o WhatsApp no próprio aparelho. Grava o pedido de retorno no D1;
 // o advogado vê e responde pelo painel /contas/admin/.
-const PAGES = new Set(['whatsapp-banido', 'whatsapp-business-banido']);
+const PAGES = new Set(['whatsapp-banido', 'whatsapp-business-banido', 'dinheiro-retido']);
 const PREFS = new Set(['ligacao', 'whatsapp_outro', 'email']);
 const ORIGINS = new Set(['https://rumosadv.com.br', 'https://www.rumosadv.com.br']);
 const LIMITE_HORA = 40; // teto global por hora, contra abuso do formulário
@@ -41,7 +41,7 @@ export async function onRequestPost({ request, env }) {
     const recent = await env.ACEITES_DB.prepare(`SELECT COUNT(*) n FROM contas_contatos WHERE created_at > ?`).bind(new Date(Date.now() - 3600e3).toISOString()).first();
     if ((recent?.n || 0) >= LIMITE_HORA) return json({ error: 'Muitos envios neste momento. Tente de novo em alguns minutos ou fale pelo WhatsApp (19) 98911-9770.' }, 429);
     // Reenvio do mesmo telefone em 10 minutos atualiza o pedido em vez de duplicar.
-    const dup = await env.ACEITES_DB.prepare(`SELECT id FROM contas_contatos WHERE telefone=? AND status='novo' AND created_at > ? ORDER BY created_at DESC LIMIT 1`).bind(c.telefone, new Date(Date.now() - 600e3).toISOString()).first();
+    const dup = await env.ACEITES_DB.prepare(`SELECT id FROM contas_contatos WHERE telefone=? AND page=? AND status='novo' AND created_at > ? ORDER BY created_at DESC LIMIT 1`).bind(c.telefone, c.page, new Date(Date.now() - 600e3).toISOString()).first();
     if (dup) {
       await env.ACEITES_DB.prepare(`UPDATE contas_contatos SET nome=?, email=?, preferencia=?, numero_banido=?, relato=?, ref=COALESCE(ref, ?) WHERE id=?`).bind(c.nome, c.email, c.preferencia, c.numero_banido, c.relato, c.ref, dup.id).run();
     } else {
@@ -54,3 +54,4 @@ export async function onRequestPost({ request, env }) {
     return json({ error: 'Não foi possível registrar agora. Tente de novo ou fale pelo WhatsApp (19) 98911-9770.' }, 500);
   }
 }
+
