@@ -101,7 +101,7 @@
       P('Parágrafo único. Alertas e resumos automáticos de sites de consulta processual podem conter erros. A informação válida sobre o processo é a prestada pela CONTRATADA.'),
       H('Cláusula 6ª — Encerramento'),
       P('§ 1º. O contrato se encerra com a conclusão dos serviços da Cláusula 1ª ou com a solução do caso por acordo ou cumprimento espontâneo.'),
-      P('§ 2º. Qualquer parte pode rescindir o contrato por escrito. Na rescisão por culpa da CONTRATADA, é restituída a parcela dos honorários iniciais correspondente às atividades não concluídas com proveito.' + (B ? ' Na revogação do mandato pelo(a) CONTRATANTE sem culpa da CONTRATADA, os honorários de êxito permanecem devidos sobre o proveito que vier a ser obtido em razão do trabalho já realizado, proporcionalmente a ele.' : '')),
+      P('§ 2º. Qualquer parte pode rescindir o contrato por escrito. Na rescisão por culpa da CONTRATADA, é restituída a parcela dos honorários iniciais correspondente às atividades não concluídas com proveito.'),
       H('Cláusula 7ª — Canal oficial e prevenção a fraudes'),
       P('§ 1º. O canal oficial escolhido pelo(a) CONTRATANTE é o WhatsApp nº ' + fone + ', com o e-mail ' + clean(d.email) + ' como alternativa. Os remetentes oficiais da CONTRATADA são o WhatsApp (19) 98911-9770 e o e-mail rodrigo@rumosadv.com.br.'),
       P('§ 2º. A CONTRATADA não pede depósito para liberar contas ou valores, nem envia cobrança por contato diferente dos indicados. Em caso de dúvida, o(a) CONTRATANTE deve confirmar pelo WhatsApp oficial antes de pagar ou informar dados.'),
