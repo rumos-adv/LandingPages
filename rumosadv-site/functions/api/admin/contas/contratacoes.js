@@ -1,6 +1,6 @@
 // Painel do advogado: cria a contratação (envia o contrato à Autentique) e lista o andamento.
 import { isAdmin } from '../../../_lib/marcas-auth.js';
-import { json, validateInput, createAutentiqueDocument, clientToken, publicBase, createSignatureLink, ETAPAS, parseAndamento, registrarEtapa, removerEtapa } from '../../../_lib/contas-contratacao.js';
+import { json, validateInput, createAutentiqueDocument, clientToken, publicBase, createSignatureLink, ETAPAS, ETAPAS_JUDICIAL, parseAndamento, registrarEtapa, removerEtapa } from '../../../_lib/contas-contratacao.js';
 
 function guard(context, { needSign = false } = {}) {
   const env = context.env;
@@ -12,8 +12,8 @@ function guard(context, { needSign = false } = {}) {
 
 export async function onRequestGet(context) {
   const denied = guard(context); if (denied) return denied;
-  const rows = await context.env.ACEITES_DB.prepare(`SELECT id, created_at, updated_at, ref, proposta_numero, nome, plataforma, max_parcelas, status, signed_at, paid_at, caso_aberto_at, payment_status, andamento FROM contas_contratacoes ORDER BY created_at DESC LIMIT 200`).all();
-  return json({ ok: true, etapas: ETAPAS, contratacoes: (rows.results || []).map(r => ({ ...r, andamento: parseAndamento(r.andamento) })) });
+  const rows = await context.env.ACEITES_DB.prepare(`SELECT id, created_at, updated_at, ref, proposta_numero, nome, plataforma, servico, rito, opcao, valor_centavos, max_parcelas, status, signed_at, paid_at, caso_aberto_at, payment_status, andamento FROM contas_contratacoes ORDER BY created_at DESC LIMIT 200`).all();
+  return json({ ok: true, etapas: ETAPAS, etapasPorServico: { whatsapp_adm: ETAPAS, dinheiro_retido: ETAPAS_JUDICIAL }, contratacoes: (rows.results || []).map(r => ({ ...r, andamento: parseAndamento(r.andamento) })) });
 }
 
 export async function onRequestPost(context) {
@@ -28,9 +28,9 @@ export async function onRequestPost(context) {
     c.id = crypto.randomUUID();
     const sign = await createAutentiqueDocument(c, pdf, context.env);
     const now = new Date().toISOString();
-    await context.env.ACEITES_DB.prepare(`INSERT INTO contas_contratacoes (id, created_at, updated_at, ref, proposta_numero, nome, cpf_cnpj, email, whatsapp, plataforma, conta_numero, valor_centavos, max_parcelas, status, autentique_document_id, client_signature_id, sign_url)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'aguardando_assinatura', ?, ?, ?)`)
-      .bind(c.id, now, now, c.ref, c.proposta_numero, c.nome, c.cpf_cnpj, c.email, c.whatsapp, c.plataforma, c.conta_numero, c.valor_centavos, c.max_parcelas, sign.documentId, sign.signatureId, sign.signUrl).run();
+    await context.env.ACEITES_DB.prepare(`INSERT INTO contas_contratacoes (id, created_at, updated_at, ref, proposta_numero, nome, cpf_cnpj, email, whatsapp, plataforma, conta_numero, valor_centavos, max_parcelas, servico, rito, opcao, status, autentique_document_id, client_signature_id, sign_url)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'aguardando_assinatura', ?, ?, ?)`)
+      .bind(c.id, now, now, c.ref, c.proposta_numero, c.nome, c.cpf_cnpj, c.email, c.whatsapp, c.plataforma, c.conta_numero, c.valor_centavos, c.max_parcelas, c.servico, c.rito, c.opcao, sign.documentId, sign.signatureId, sign.signUrl).run();
     const token = await clientToken(c.id, context.env);
     return json({ ok: true, id: c.id, linkCliente: `${publicBase(context.request, context.env)}/contas/contratacao/?t=${encodeURIComponent(token)}`, linkAssinatura: sign.signUrl }, 201);
   } catch (error) {
@@ -43,7 +43,7 @@ export async function onRequestPost(context) {
 export async function onRequestPatch(context) {
   const denied = guard(context); if (denied) return denied;
   const body = await context.request.json().catch(() => ({}));
-  const row = await context.env.ACEITES_DB.prepare(`SELECT id, status, client_signature_id, andamento FROM contas_contratacoes WHERE id=?`).bind(String(body.id || '')).first();
+  const row = await context.env.ACEITES_DB.prepare(`SELECT id, status, client_signature_id, andamento, servico FROM contas_contratacoes WHERE id=?`).bind(String(body.id || '')).first();
   if (!row) return json({ error: 'Contratação não encontrada.' }, 404);
   const now = new Date().toISOString();
   if (body.acao === 'link_assinatura') {
@@ -58,7 +58,7 @@ export async function onRequestPatch(context) {
     // Andamento do pedido, visível ao cliente no link dele. Só depois do pagamento.
     if (row.status !== 'caso_aberto') return json({ error: 'O andamento só pode ser registrado depois do pagamento confirmado.' }, 409);
     let list;
-    try { list = body.acao === 'etapa' ? registrarEtapa(row.andamento, String(body.etapa || ''), { data: body.data, nota: body.nota }) : removerEtapa(row.andamento, String(body.etapa || '')); }
+    try { list = body.acao === 'etapa' ? registrarEtapa(row.andamento, String(body.etapa || ''), { data: body.data, nota: body.nota, servico: row.servico }) : removerEtapa(row.andamento, String(body.etapa || '')); }
     catch (e) { return json({ error: e.message }, 400); }
     await context.env.ACEITES_DB.prepare(`UPDATE contas_contratacoes SET andamento=?, updated_at=? WHERE id=?`).bind(JSON.stringify(list), now, row.id).run();
     return json({ ok: true, andamento: list });

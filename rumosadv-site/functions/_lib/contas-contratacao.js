@@ -17,8 +17,20 @@ export function publicBase(request, env) {
 }
 export const digits = (v) => String(v || '').replace(/\D/g, '');
 
+// Honorários iniciais do serviço "dinheiro retido", em centavos. Opção A: valor fixo, sem êxito.
+// Opção B: entrada menor e 10% sobre a condenação. O valor nunca vem do formulário: é calculado aqui.
+export const HONORARIOS_DR = { A: { jec: 150000, comum: 250000 }, B: { jec: 100000, comum: 200000 } };
+export const SERVICOS = {
+  whatsapp_adm: { item: 'Etapa administrativa', descricao: 'Honorários fixos da etapa administrativa', documento: 'Contrato etapa administrativa', resumo: 'etapa administrativa' },
+  dinheiro_retido: { item: 'Honorários iniciais', descricao: 'Honorários iniciais da medida judicial', documento: 'Contrato medida judicial', resumo: 'medida judicial' }
+};
+
 export function validateInput(f) {
+  const servico = f.servico === 'dinheiro_retido' ? 'dinheiro_retido' : 'whatsapp_adm';
+  const rito = servico === 'dinheiro_retido' && ['jec', 'comum'].includes(f.rito) ? f.rito : null;
+  const opcao = servico === 'dinheiro_retido' && ['A', 'B'].includes(f.opcao) ? f.opcao : null;
   const out = {
+    servico, rito, opcao,
     ref: String(f.ref || '').trim().toUpperCase().slice(0, 12) || null,
     proposta_numero: String(f.proposta_numero || '').trim().slice(0, 40) || null,
     nome: String(f.nome || '').trim().slice(0, 160),
@@ -28,7 +40,7 @@ export function validateInput(f) {
     plataforma: String(f.plataforma || '').trim().slice(0, 60),
     conta_numero: String(f.conta_numero || '').trim().slice(0, 40) || null,
     max_parcelas: Math.min(Math.max(parseInt(f.max_parcelas || '1', 10) || 1, 1), 12),
-    valor_centavos: 50000
+    valor_centavos: servico === 'dinheiro_retido' ? (HONORARIOS_DR[opcao]?.[rito] || 0) : 50000
   };
   const errors = [];
   if (out.nome.length < 3) errors.push('nome');
@@ -36,6 +48,7 @@ export function validateInput(f) {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(out.email)) errors.push('email');
   if (out.whatsapp.length < 10 || out.whatsapp.length > 13) errors.push('whatsapp');
   if (!out.plataforma) errors.push('plataforma');
+  if (servico === 'dinheiro_retido' && (!rito || !opcao)) errors.push('rito_opcao');
   if (out.ref && !/^[CWB][A-Z0-9]{3,9}$/.test(out.ref)) errors.push('ref');
   return { value: out, errors };
 }
@@ -49,8 +62,8 @@ export function buildAutentiqueOperations(c, env, fileName) {
   if (env.AUTENTIQUE_WHATSAPP === 'true') { signers[0].phone = '+55' + c.whatsapp.replace(/^55/, ''); signers[0].delivery_method = 'DELIVERY_METHOD_WHATSAPP'; delete signers[0].email; }
   if (env.AUTENTIQUE_OWNER_EMAIL) signers.push({ email: env.AUTENTIQUE_OWNER_EMAIL, action: 'SIGN' });
   const document = {
-    name: `Contrato etapa administrativa${c.ref ? ' — Ref. ' + c.ref : ''} — ${c.nome}`.slice(0, 200),
-    message: 'Contrato de prestação de serviços advocatícios — etapa administrativa (Rumos Advocacia). Após assinar, volte ao link de contratação para o pagamento.',
+    name: `${(SERVICOS[c.servico] || SERVICOS.whatsapp_adm).documento}${c.ref ? ' — Ref. ' + c.ref : ''} — ${c.nome}`.slice(0, 200),
+    message: 'Contrato de prestação de serviços advocatícios — ' + (SERVICOS[c.servico] || SERVICOS.whatsapp_adm).resumo + ' (Rumos Advocacia). Após assinar, volte ao link de contratação para o pagamento.',
     refusable: true,
     new_signature_style: true
   };
@@ -138,7 +151,7 @@ export function buildCheckoutPayload(c, base, token, { installments = true, cust
     minutesToExpire: 1440,
     externalReference: 'contas:' + c.id,
     callback: { successUrl: back + '&pagamento=sucesso', cancelUrl: back + '&pagamento=cancelado', expiredUrl: back + '&pagamento=expirado' },
-    items: [{ externalReference: 'contas-etapa-administrativa', name: 'Etapa administrativa' /* limite do Asaas: 30 caracteres */, description: `Honorários fixos da etapa administrativa${c.ref ? ' (Ref. ' + c.ref + ')' : ''}`, quantity: 1, value: c.valor_centavos / 100 }]
+    items: [{ externalReference: 'contas-' + (c.servico || 'whatsapp_adm').replace(/_/g, '-'), name: (SERVICOS[c.servico] || SERVICOS.whatsapp_adm).item /* limite do Asaas: 30 caracteres */, description: `${(SERVICOS[c.servico] || SERVICOS.whatsapp_adm).descricao}${c.ref ? ' (Ref. ' + c.ref + ')' : ''}`, quantity: 1, value: c.valor_centavos / 100 }]
   };
   if (installments && c.max_parcelas > 1) p.installment = { maxInstallmentCount: c.max_parcelas };
   if (customer) p.customerData = { name: c.nome, cpfCnpj: c.cpf_cnpj, email: c.email, phone: c.whatsapp.replace(/^55/, '') };
@@ -162,13 +175,14 @@ export async function createAsaasCheckout(c, base, token, env, fetcher = fetch) 
 export function publicView(row) {
   return {
     primeiroNome: String(row.nome || '').split(/\s+/)[0],
+    servico: row.servico || 'whatsapp_adm', exito: row.opcao === 'B',
     plataforma: row.plataforma, ref: row.ref, valor: row.valor_centavos / 100, maxParcelas: row.max_parcelas,
     status: row.status,
     signUrl: row.status === 'aguardando_assinatura' ? row.sign_url : null,
     podePagar: ['assinado', 'aguardando_pagamento', 'pagamento_cancelado', 'pagamento_expirado'].includes(row.status),
     pago: row.status === 'caso_aberto',
     casoAbertoEm: row.status === 'caso_aberto' ? (row.caso_aberto_at || row.paid_at || null) : null,
-    andamento: row.status === 'caso_aberto' ? andamentoView(row.andamento) : null
+    andamento: row.status === 'caso_aberto' ? andamentoView(row.andamento, row.servico) : null
   };
 }
 
@@ -181,16 +195,30 @@ export const ETAPAS = [
   ['resposta_recebida', 'Resposta da plataforma recebida'],
   ['relatorio_entregue', 'Relatório final entregue']
 ];
-const ETAPA_KEYS = ETAPAS.map(e => e[0]);
+export const ETAPAS_JUDICIAL = [
+  ['documentos_recebidos', 'Documentos e provas recebidos'],
+  ['notificacao_enviada', 'Notificação à plataforma enviada'],
+  ['acao_protocolada', 'Ação protocolada'],
+  ['liminar_decidida', 'Pedido de urgência decidido'],
+  ['plataforma_citada', 'Plataforma citada'],
+  ['audiencia', 'Audiência realizada'],
+  ['sentenca', 'Sentença proferida'],
+  ['recurso', 'Fase de recurso'],
+  ['cumprimento', 'Cumprimento da decisão'],
+  ['encerrado', 'Caso encerrado']
+];
+export const etapasDe = (servico) => servico === 'dinheiro_retido' ? ETAPAS_JUDICIAL : ETAPAS;
+const ALL_KEYS = [...ETAPAS, ...ETAPAS_JUDICIAL].map(e => e[0]);
 const isDay = (s) => /^\d{4}-\d{2}-\d{2}$/.test(String(s || '')) && !Number.isNaN(Date.parse(s + 'T12:00:00Z'));
 export function parseAndamento(raw) {
   let list; try { list = JSON.parse(raw || '[]'); } catch { list = []; }
   if (!Array.isArray(list)) return [];
-  return list.filter(x => x && ETAPA_KEYS.includes(x.etapa) && isDay(x.em)).map(x => ({ etapa: x.etapa, em: x.em, nota: x.nota ? String(x.nota).slice(0, 240) : null }));
+  return list.filter(x => x && ALL_KEYS.includes(x.etapa) && isDay(x.em)).map(x => ({ etapa: x.etapa, em: x.em, nota: x.nota ? String(x.nota).slice(0, 240) : null }));
 }
 // Registra ou atualiza uma etapa. A nota é exibida ao cliente; a data não pode ser futura.
-export function registrarEtapa(raw, etapa, { data, nota, hoje } = {}) {
-  if (!ETAPA_KEYS.includes(etapa)) throw new Error('Etapa desconhecida.');
+export function registrarEtapa(raw, etapa, { data, nota, hoje, servico } = {}) {
+  const keys = etapasDe(servico).map(e => e[0]);
+  if (!keys.includes(etapa)) throw new Error('Etapa desconhecida.');
   const today = hoje || new Date(Date.now() - 3 * 3600e3).toISOString().slice(0, 10); // dia em Brasília
   const em = data ? String(data) : today;
   if (!isDay(em)) throw new Error('Data inválida.');
@@ -198,10 +226,10 @@ export function registrarEtapa(raw, etapa, { data, nota, hoje } = {}) {
   const clean = String(nota || '').replace(/\s+/g, ' ').trim().slice(0, 240) || null;
   const list = parseAndamento(raw).filter(x => x.etapa !== etapa);
   list.push({ etapa, em, nota: clean });
-  return list.sort((a, b) => ETAPA_KEYS.indexOf(a.etapa) - ETAPA_KEYS.indexOf(b.etapa));
+  return list.sort((a, b) => keys.indexOf(a.etapa) - keys.indexOf(b.etapa));
 }
 export const removerEtapa = (raw, etapa) => parseAndamento(raw).filter(x => x.etapa !== etapa);
-export function andamentoView(raw) {
+export function andamentoView(raw, servico) {
   const done = parseAndamento(raw);
-  return ETAPAS.map(([etapa, label]) => { const d = done.find(x => x.etapa === etapa); return { etapa, label, em: d ? d.em : null, nota: d ? d.nota : null }; });
+  return etapasDe(servico).map(([etapa, label]) => { const d = done.find(x => x.etapa === etapa); return { etapa, label, em: d ? d.em : null, nota: d ? d.nota : null }; });
 }

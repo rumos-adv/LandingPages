@@ -27,11 +27,101 @@
     if (pj) { need('rep_nome', 'Nome do representante'); need('rep_cargo', 'Cargo do representante'); if (digits(d.rep_cpf).length !== 11) f.push('CPF do representante'); }
     else { need('nacionalidade', 'Nacionalidade'); need('estado_civil', 'Estado civil'); need('profissao', 'Profissão'); }
     need('endereco', pj ? 'Endereço da sede' : 'Endereço completo'); need('email', 'E-mail'); need('whatsapp', 'WhatsApp');
-    need('plataforma', 'Plataforma'); need('conta_numero', 'Número da conta afetada'); need('ocorrencia', 'Tipo de ocorrência'); need('data_fato', 'Data em que percebeu'); need('proposta_numero', 'Número da proposta');
+    need('plataforma', 'Plataforma'); need('conta_numero', d.servico === 'dinheiro_retido' ? 'Identificação da conta na plataforma' : 'Número da conta afetada'); need('ocorrencia', 'Tipo de ocorrência'); need('data_fato', 'Data em que percebeu'); need('proposta_numero', 'Número da proposta');
+    if (d.servico === 'dinheiro_retido') { if (!HON[d.opcao] || !HON[d.opcao][d.rito]) f.push('Rito e opção de honorários'); }
     return f;
   }
 
+  // Honorários iniciais do serviço "dinheiro retido". Devem coincidir com HONORARIOS_DR no servidor.
+  var HON = { A: { jec: [1500, 'mil e quinhentos reais'], comum: [2500, 'dois mil e quinhentos reais'] }, B: { jec: [1000, 'mil reais'], comum: [2000, 'dois mil reais'] } };
+  var brl = function (n) { return 'R$ ' + String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ',00'; };
+
+  function qualificacao(d) {
+    var pj = d.tipo === 'pj', nome = clean(d.nome).toUpperCase(), doc = fmtDoc(d.cpf_cnpj), fone = fmtFone(d.whatsapp);
+    return pj
+      ? '**CONTRATANTE:** ' + nome + ', CNPJ nº ' + doc + ', com sede em ' + clean(d.endereco) + ', e-mail ' + clean(d.email) + ', telefone ' + fone + ', neste ato representada por ' + clean(d.rep_nome) + ', ' + clean(d.rep_cargo) + ', CPF nº ' + fmtDoc(d.rep_cpf) + '.'
+      : '**CONTRATANTE:** ' + nome + ', ' + clean(d.nacionalidade) + ', ' + clean(d.estado_civil) + ', ' + clean(d.profissao) + ', CPF nº ' + doc + ', residente e domiciliado(a) em ' + clean(d.endereco) + ', e-mail ' + clean(d.email) + ', telefone ' + fone + '.';
+  }
+  var CONTRATADA = '**CONTRATADA:** RODRIGO MOURA SILVA SOCIEDADE INDIVIDUAL DE ADVOCACIA (nome fantasia Rumos Advocacia), CNPJ nº 68.258.534/0001-56, registrada na OAB/SP em 24/04/2026, representada por seu sócio único e administrador, o advogado RODRIGO MOURA SILVA, OAB/SP nº 188.004, com endereço profissional no Condomínio Alphapark Tower, Campinas/SP, e-mail rodrigo@rumosadv.com.br.';
+
+  // Contrato da medida judicial por saldo retido, repasse bloqueado ou conta suspensa em plataforma. Texto-base: 16/11/2026.
+  function blocosDinheiroRetido(d) {
+    var pj = d.tipo === 'pj', nome = clean(d.nome).toUpperCase(), doc = fmtDoc(d.cpf_cnpj), fone = fmtFone(d.whatsapp);
+    var jec = d.rito === 'jec', B = d.opcao === 'B', hon = HON[d.opcao][d.rito];
+    var P = function (t) { return { k: 'p', t: t }; }, H = function (t) { return { k: 'h', t: t }; }, L = function (t) { return { k: 'li', t: t }; };
+    var retido = clean(d.valor_retido) ? ', com valores retidos de aproximadamente ' + clean(d.valor_retido) : '';
+    var medicao = d.opoe_medicao
+      ? '§ 4º. O(a) CONTRATANTE manifestou oposição ao envio de informações sobre esta contratação a plataformas de anúncios para fins de medição de publicidade. Nenhum envio dessa natureza será feito.'
+      : '§ 4º. Se o(a) CONTRATANTE chegou ao escritório por anúncio, a CONTRATADA pode informar à plataforma de anúncios, apenas por meio do identificador técnico do clique, a ocorrência da contratação e o valor dos honorários, para medir o resultado de sua publicidade. Não são enviados nome, telefone, e-mail ou qualquer informação sobre o caso. O(a) CONTRATANTE pode se opor a esse envio a qualquer tempo, pelo canal oficial, sem qualquer efeito sobre este contrato.';
+    var out = [
+      { k: 'title', t: 'CONTRATO DE PRESTAÇÃO DE SERVIÇOS ADVOCATÍCIOS' }, { k: 'sub', t: 'Medida judicial — valores retidos ou conta suspensa em plataforma digital' },
+      H('Qualificação das partes'), P(qualificacao(d)), P(CONTRATADA),
+      P('As partes ajustam o presente contrato, regido pela Lei nº 8.906/1994 e pelo Código de Ética e Disciplina da OAB, conforme a Proposta nº ' + clean(d.proposta_numero) + ', que o integra.'),
+      H('Cláusula 1ª — Objeto'),
+      P('A CONTRATADA prestará serviços advocatícios para a defesa dos interesses do(a) CONTRATANTE em face de ' + clean(d.plataforma) + ', em razão de ' + clean(d.ocorrencia) + ' relativo(a) à conta identificada como ' + clean(d.conta_numero) + ', percebido(a) em ' + dataBR(d.data_fato) + retido + '.'),
+      P('§ 1º. O serviço compreende:'),
+      P('(i) análise jurídica do caso, dos avisos da plataforma, dos termos de uso aplicáveis e dos documentos fornecidos;'),
+      P('(ii) notificação à plataforma, quando a CONTRATADA a considerar útil;'),
+      P('(iii) propositura de ação judicial ' + (jec ? 'no Juizado Especial Cível' : 'pelo procedimento comum') + ', com pedido de tutela de urgência quando cabível, visando, conforme o caso, ao restabelecimento da conta, à liberação ou restituição dos valores retidos e à reparação dos prejuízos;'),
+      P('(iv) acompanhamento do processo até a sentença de primeiro grau, incluídos audiências, manifestações e o recurso contra a sentença ou as contrarrazões ao recurso da parte contrária' + (jec ? ' (recurso inominado)' : ' (apelação)') + ';'),
+      P('(v) cumprimento da decisão favorável, até a efetiva liberação ou pagamento dos valores; e'),
+      P('(vi) informação ao(à) CONTRATANTE sobre cada ato relevante.'),
+      P('§ 2º. Não estão compreendidos, salvo contratação escrita própria: recursos aos tribunais superiores; ações ou incidentes distintos; outras contas, plataformas ou fatos; questões criminais ou tributárias; perícias e pareceres técnicos.'),
+      P('§ 3º. A definição da estratégia processual, inclusive do rito e dos pedidos, cabe à CONTRATADA, ouvido(a) o(a) CONTRATANTE. Se a análise do item (i) indicar que o rito mais adequado é diverso do previsto nesta cláusula, as partes ajustarão por escrito a alteração e os honorários correspondentes antes do ajuizamento.'),
+      P('§ 4º. A petição inicial será enviada ao(à) CONTRATANTE para conferência dos fatos antes do protocolo. A procuração é outorgada em instrumento próprio.'),
+      H('Cláusula 2ª — Honorários e pagamento')
+    ];
+    out.push(P('Pelos serviços da Cláusula 1ª são devidos honorários iniciais de ' + brl(hon[0]) + ' (' + hon[1] + '), pagos na contratação' + (B ? ', e honorários de êxito, na forma do § 2º.' : '. Não há honorários de êxito.')));
+    out.push(P('§ 1º. Pagamento por Pix ou cartão de crédito, à vista ou em até 3 parcelas no cartão, pela página de pagamento do Asaas (instituição de pagamento autorizada pelo Banco Central), liberada ao(à) CONTRATANTE após a assinatura deste contrato. O comprovante do Asaas vale como recibo; a CONTRATADA emite recibo próprio quando solicitado. Os pagamentos são recebidos em conta de titularidade de Rodrigo Moura Silva, sócio titular da CONTRATADA, que a CONTRATADA indica para esse fim; o pagamento feito nessa conta quita os honorários perante a CONTRATADA. Se a página de pagamento estiver indisponível, o pagamento pode ser feito por Pix à chave rodrigo@rumosadv.com.br, da mesma titularidade, mediante confirmação prévia pelo canal oficial.'));
+    if (B) {
+      out.push(P('§ 2º. **Honorários de êxito.** São devidos 10% (dez por cento) sobre o proveito econômico total obtido pelo(a) CONTRATANTE, assim entendidos os valores liberados, restituídos ou pagos em razão da atuação da CONTRATADA, inclusive indenizações, lucros cessantes, multas e juros, por decisão judicial, acordo ou cumprimento espontâneo pela parte contrária após a notificação ou o ajuizamento. Os honorários de êxito são exigíveis à medida que os valores forem recebidos ou liberados, em até 5 dias úteis de cada recebimento.'));
+      out.push(P('§ 3º. Não havendo proveito econômico, nada é devido a título de êxito.'));
+    } else {
+      out.push(P('§ 2º. Os honorários desta cláusula remuneram integralmente os serviços da Cláusula 1ª, qualquer que seja o valor obtido pelo(a) CONTRATANTE.'));
+      out.push(P('§ 3º. Serviços não compreendidos na Cláusula 1ª dependem de proposta e contrato próprios.'));
+    }
+    out = out.concat([
+      P('§ 4º. Os honorários de sucumbência eventualmente fixados pelo juízo pertencem à CONTRATADA, nos termos do art. 23 da Lei nº 8.906/1994, e não se confundem com os honorários deste contrato.'),
+      P('§ 5º. A assinatura deste contrato formaliza a contratação. A confirmação do pagamento dos honorários iniciais marca o início dos trabalhos, que compreendem desde logo o atendimento, o estudo do caso e a análise dos documentos. Os honorários iniciais não dependem do resultado e, iniciados os trabalhos, não são restituídos, ressalvada a Cláusula 6ª, § 2º.'),
+      H('Cláusula 3ª — Custas, despesas e riscos do processo'),
+      P('§ 1º. Custas, taxas, preparo de recursos, despesas com citação, atas notariais e demais despesas do processo correm por conta do(a) CONTRATANTE e só são realizadas com sua autorização prévia.'),
+      P(jec ? '§ 2º. No Juizado Especial Cível não há custas em primeiro grau nem condenação em honorários à parte contrária, salvo litigância de má-fé; a interposição de recurso exige o recolhimento do preparo.'
+            : '§ 2º. No procedimento comum, a parte vencida responde pelas custas e por honorários ao advogado da parte contrária, fixados pelo juízo. O(a) CONTRATANTE declara ter sido informado(a) desse risco.'),
+      P('§ 3º. A CONTRATADA assume obrigação de meio. Não há promessa de resultado, de concessão de tutela de urgência, de valor de indenização nem de prazo de tramitação.'),
+      H('Cláusula 4ª — Obrigações da CONTRATADA'),
+      L('Atuar com zelo e técnica, sob responsabilidade pessoal do advogado em todos os atos jurídicos.'), L('Manter sigilo profissional.'), L('Informar os atos relevantes do processo e as propostas de acordo recebidas.'),
+      L('Submeter ao(à) CONTRATANTE, para decisão, qualquer proposta de acordo.'),
+      L('**Nunca** solicitar senha, código de verificação ou acesso à conta do(a) CONTRATANTE na plataforma.'),
+      H('Cláusula 5ª — Obrigações do(a) CONTRATANTE'),
+      L('Informar os fatos com verdade, inclusive os desfavoráveis, como contestações de compradores, reclamações, infrações apontadas pela plataforma ou uso da conta por terceiros.'),
+      L('Fornecer os documentos solicitados e preservar os originais de avisos, e-mails, extratos e mensagens; não editar capturas de tela.'),
+      L('Comunicar imediatamente: liberação de valores, restabelecimento da conta, nova comunicação ou proposta da plataforma, contratação de terceiro para o mesmo fim ou mudança de contato.'),
+      L('Comparecer às audiências designadas, quando sua presença for exigida.'),
+      L('Pagar os honorários e as despesas autorizadas.'),
+      P('Parágrafo único. Alertas e resumos automáticos de sites de consulta processual podem conter erros. A informação válida sobre o processo é a prestada pela CONTRATADA.'),
+      H('Cláusula 6ª — Encerramento'),
+      P('§ 1º. O contrato se encerra com a conclusão dos serviços da Cláusula 1ª ou com a solução do caso por acordo ou cumprimento espontâneo.'),
+      P('§ 2º. Qualquer parte pode rescindir o contrato por escrito. Na rescisão por culpa da CONTRATADA, é restituída a parcela dos honorários iniciais correspondente às atividades não concluídas com proveito.' + (B ? ' Na revogação do mandato pelo(a) CONTRATANTE sem culpa da CONTRATADA, os honorários de êxito permanecem devidos sobre o proveito que vier a ser obtido em razão do trabalho já realizado, proporcionalmente a ele.' : '')),
+      H('Cláusula 7ª — Canal oficial e prevenção a fraudes'),
+      P('§ 1º. O canal oficial escolhido pelo(a) CONTRATANTE é o WhatsApp nº ' + fone + ', com o e-mail ' + clean(d.email) + ' como alternativa. Os remetentes oficiais da CONTRATADA são o WhatsApp (19) 98911-9770 e o e-mail rodrigo@rumosadv.com.br.'),
+      P('§ 2º. A CONTRATADA não pede depósito para liberar contas ou valores, nem envia cobrança por contato diferente dos indicados. Em caso de dúvida, o(a) CONTRATANTE deve confirmar pelo WhatsApp oficial antes de pagar ou informar dados.'),
+      P('§ 3º. Rotinas de atendimento e acompanhamento podem ser executadas por sistemas automatizados do escritório, identificados como tais, sob supervisão do advogado.'),
+      H('Cláusula 8ª — Confidencialidade, dados pessoais e medição de publicidade'),
+      P('§ 1º. A CONTRATADA trata os dados pessoais do(a) CONTRATANTE para executar este contrato, nos termos da Lei nº 13.709/2018, pelo tempo necessário a essa finalidade e aos prazos legais.'),
+      P('§ 2º. O tratamento pode envolver fornecedores de hospedagem, mensagens, assinatura eletrônica, pagamento e ferramentas de inteligência artificial usadas para organizar e resumir informações, sempre sob revisão do advogado, conforme o aviso de privacidade em rumosadv.com.br/politica-de-privacidade.'),
+      P('§ 3º. Documentos, mensagens e fatos do caso não são usados em publicidade nem enviados a plataformas de anúncios.'),
+      P(medicao),
+      P('§ 5º. Direitos do titular podem ser exercidos pelo e-mail rodrigo@rumosadv.com.br.'),
+      H('Cláusula 9ª — Disposições finais'),
+      P('§ 1º. As partes admitem a assinatura eletrônica deste contrato por plataforma que registre autoria e integridade, nos termos do art. 10, § 2º, da MP nº 2.200-2/2001.'),
+      P('§ 2º. Fica eleito o foro da Comarca de Campinas/SP para as questões deste contrato.'),
+      { k: 'sign', data: 'Campinas, ' + dataExtenso(d.hoje || new Date()) + '.', a: 'CONTRATANTE — ' + (pj ? nome + ' — CNPJ ' + doc : nome + ' — CPF ' + doc), a2: pj ? 'Representada por ' + clean(d.rep_nome) + ' — CPF ' + fmtDoc(d.rep_cpf) : '', b: 'CONTRATADA — Rodrigo Moura Silva Sociedade Individual de Advocacia', b2: 'Rodrigo Moura Silva — OAB/SP 188.004' }
+    ]);
+    return out;
+  }
+
   function blocos(d) {
+    if (d.servico === 'dinheiro_retido') return blocosDinheiroRetido(d);
     var pj = d.tipo === 'pj', nome = clean(d.nome).toUpperCase(), doc = fmtDoc(d.cpf_cnpj), fone = fmtFone(d.whatsapp);
     var plat = { 'WhatsApp': 'WhatsApp', 'WhatsApp Business': 'WhatsApp Business', 'WhatsApp Business Platform (API)': 'WhatsApp Business Platform' }[d.plataforma] || clean(d.plataforma);
     var qual = pj
@@ -128,10 +218,10 @@
       else if (b.k === 'sign') { room(190); y -= 10; para(b.data, { after: 34 });
         [[b.a, b.a2], [b.b, b.b2]].forEach(function (s) { page.drawLine({ start: { x: ML, y: y + 12 }, end: { x: ML + 290, y: y + 12 }, thickness: 0.6, color: ink }); para(s[0], { after: 0, left: true }); if (s[1]) para(s[1], { after: 0, left: true }); y -= 38; }); }
     });
-    var pages = pdf.getPages(), foot = 'Contrato de prestação de serviços advocatícios — etapa administrativa · Proposta nº ' + safe(clean(d.proposta_numero), R);
+    var pages = pdf.getPages(), foot = 'Contrato de prestação de serviços advocatícios — ' + (d.servico === 'dinheiro_retido' ? 'medida judicial' : 'etapa administrativa') + ' · Proposta nº ' + safe(clean(d.proposta_numero), R);
     pages.forEach(function (p, i) { var t = foot + ' · página ' + (i + 1) + ' de ' + pages.length; p.drawText(t, { x: ML, y: 38, size: 8.5, font: R, color: soft }); });
-    pdf.setTitle('Contrato — etapa administrativa — ' + clean(d.nome)); pdf.setAuthor('Rumos Advocacia'); pdf.setLanguage('pt-BR');
+    pdf.setTitle('Contrato — ' + (d.servico === 'dinheiro_retido' ? 'medida judicial' : 'etapa administrativa') + ' — ' + clean(d.nome)); pdf.setAuthor('Rumos Advocacia'); pdf.setLanguage('pt-BR');
     return pdf.save();
   }
-  return { gerar: gerar, validar: validar, blocos: blocos, fmtDoc: fmtDoc, fmtFone: fmtFone };
+  return { gerar: gerar, validar: validar, blocos: blocos, fmtDoc: fmtDoc, fmtFone: fmtFone, HON: HON };
 });

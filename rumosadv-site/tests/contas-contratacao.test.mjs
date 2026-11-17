@@ -11,7 +11,7 @@ import { validateInput, publicView, parseAutentiqueEvent, buildCheckoutPayload, 
 const site = new URL('..', import.meta.url);
 function d1() {
   const db = new DatabaseSync(':memory:');
-  for (const m of ['0001_aceites.sql', '0002_asaas_checkout.sql', '0005_contas_contratacoes.sql']) db.exec(readFileSync(new URL('migrations/' + m, site), 'utf8'));
+  for (const m of ['0001_aceites.sql', '0002_asaas_checkout.sql', '0005_contas_contratacoes.sql', '0006_contas_andamento.sql', '0008_contas_servico.sql']) db.exec(readFileSync(new URL('migrations/' + m, site), 'utf8'));
   const stmt = (sql, args = []) => ({
     bind: (...a) => stmt(sql, a),
     run: async () => { const r = db.prepare(sql).run(...args); return { meta: { changes: r.changes } }; },
@@ -147,4 +147,23 @@ test('andamento: o cliente só vê as etapas depois do pagamento', async () => {
   assert.equal(v.andamento.length, lib.ETAPAS.length);
   assert.equal(v.andamento[1].em, '2026-11-20'); assert.equal(v.andamento[0].em, null);
   assert.equal(JSON.stringify(v).includes('cpf'), false);
+});
+
+test('serviço dinheiro retido: valor calculado no servidor por rito e opção', async () => {
+  const lib = await import('../functions/_lib/contas-contratacao.js');
+  const base = { nome: 'Maria Souza', cpf_cnpj: '52998224725', email: 'm@x.com', whatsapp: '19999990000', plataforma: 'Mercado Pago', ref: 'cab12c' };
+  assert.equal(lib.validateInput(base).value.valor_centavos, 50000);
+  assert.equal(lib.validateInput(base).value.servico, 'whatsapp_adm');
+  const v = (rito, opcao) => lib.validateInput({ ...base, servico: 'dinheiro_retido', rito, opcao, valor_centavos: '1' });
+  assert.equal(v('jec', 'A').value.valor_centavos, 150000); assert.equal(v('comum', 'A').value.valor_centavos, 250000);
+  assert.equal(v('jec', 'B').value.valor_centavos, 100000); assert.equal(v('comum', 'B').value.valor_centavos, 200000);
+  assert.deepEqual(v('', 'B').errors, ['rito_opcao']); assert.deepEqual(v('jec', 'C').errors, ['rito_opcao']);
+  const c = { ...v('jec', 'B').value, id: 'x1' };
+  const p = lib.buildCheckoutPayload(c, 'https://rumosadv.com.br', 'tok');
+  assert.equal(p.items[0].value, 1000); assert.equal(p.items[0].name, 'Honorários iniciais'); assert.ok(p.items[0].name.length <= 30);
+  const pub = lib.publicView({ ...c, status: 'caso_aberto', opcao: 'B', andamento: JSON.stringify([{ etapa: 'acao_protocolada', em: '2026-11-20' }]) });
+  assert.equal(pub.exito, true); assert.equal(pub.servico, 'dinheiro_retido');
+  assert.equal(pub.andamento.length, lib.ETAPAS_JUDICIAL.length); assert.equal(pub.andamento.find(e => e.etapa === 'acao_protocolada').em, '2026-11-20');
+  assert.throws(() => lib.registrarEtapa(null, 'pedido_enviado', { servico: 'dinheiro_retido', hoje: '2026-11-21' }), /desconhecida/);
+  assert.equal(lib.registrarEtapa(null, 'sentenca', { servico: 'dinheiro_retido', hoje: '2026-11-21' })[0].etapa, 'sentenca');
 });
