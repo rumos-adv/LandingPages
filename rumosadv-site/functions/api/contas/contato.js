@@ -1,7 +1,7 @@
 // POST /api/contas/contato — formulário das páginas /whatsapp-banido/ e /whatsapp-business-banido/,
 // para quem não consegue abrir o WhatsApp no próprio aparelho. Grava o pedido de retorno no D1;
 // o advogado vê e responde pelo painel /contas/admin/.
-const PAGES = new Set(['whatsapp-banido', 'whatsapp-business-banido', 'dinheiro-retido']);
+const PAGES = new Set(['whatsapp-banido', 'whatsapp-business-banido', 'dinheiro-retido', 'divida-ativa']);
 const PREFS = new Set(['ligacao', 'whatsapp_outro', 'email']);
 const ORIGINS = new Set(['https://rumosadv.com.br', 'https://www.rumosadv.com.br']);
 const LIMITE_HORA = 40; // teto global por hora, contra abuso do formulário
@@ -23,7 +23,7 @@ export function parseContato(body) {
   const email = txt(body.email, 160).toLowerCase();
   if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return { error: 'Confira o e-mail informado.' };
   if (preferencia === 'email' && !email) return { error: 'Informe o e-mail para o retorno.' };
-  const ref = typeof body.lead_ref === 'string' && /^[CWB][A-Z0-9]{3,9}$/.test(body.lead_ref.trim().toUpperCase()) ? body.lead_ref.trim().toUpperCase() : null;
+  const ref = typeof body.lead_ref === 'string' && /^[CWBF][A-Z0-9]{3,9}$/.test(body.lead_ref.trim().toUpperCase()) ? body.lead_ref.trim().toUpperCase() : null;
   const nb = digits(body.numero_banido).replace(/^55(?=\d{10,11}$)/, '');
   return { contato: { page, ref, nome, telefone: tel, email: email || null, preferencia, numero_banido: nb.length >= 10 && nb.length <= 11 ? nb : null, relato: txt(body.relato, 800) || null } };
 }

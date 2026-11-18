@@ -2,8 +2,8 @@
 // Recebe o beacon do clique no WhatsApp e grava {ref, identificador do clique, campanha} no D1.
 // Não grava telefone, nome nem texto da conversa. O vínculo com o contato é feito pelo código
 // "(Ref. XXXXX)" que segue na mensagem do WhatsApp e fica registrado pelo Worker de atendimento.
-const PAGES = new Set(['whatsapp-banido', 'whatsapp-business-banido', 'dinheiro-retido']);
-const SOURCES = new Set(['form', 'copiar', 'hero', 'header', 'sticky', 'float', 'footer', 'cta-final', 'faca-ja', 'quem-pf', 'quem-pj']);
+const PAGES = new Set(['whatsapp-banido', 'whatsapp-business-banido', 'dinheiro-retido', 'divida-ativa']);
+const SOURCES = new Set(['form', 'copiar', 'hero', 'header', 'sticky', 'float', 'footer', 'cta-final', 'faca-ja', 'quem-pf', 'quem-pj', 'form-urgente', 'form-whatsapp', 'situacao-1', 'situacao-2', 'situacao-3', 'situacao-4', 'situacao-outra']);
 const ORIGINS = new Set(['https://rumosadv.com.br', 'https://www.rumosadv.com.br']);
 const ID = /^[A-Za-z0-9_\-.~]{10,200}$/;
 const TEXT = /^[\p{L}\p{N} _\-.+{}]{1,120}$/u;
@@ -22,7 +22,7 @@ export function parseLeadOrigin(raw) {
   try { body = JSON.parse(String(raw).slice(0, 4000)); } catch { return null; }
   if (!body || typeof body !== 'object') return null;
   const ref = typeof body.lead_ref === 'string' ? body.lead_ref.trim().toUpperCase() : '';
-  if (!/^[CWB][A-Z0-9]{3,9}$/.test(ref)) return null;
+  if (!/^[CWBF][A-Z0-9]{3,9}$/.test(ref)) return null;
   if (!PAGES.has(body.page)) return null;
   const source = typeof body.source === 'string' && SOURCES.has(body.source) ? body.source : null;
   return {
