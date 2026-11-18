@@ -36,7 +36,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   
   
-  <link rel="preconnect" href="https://tally.so">
 
   <!-- ========== Fonts ========== -->
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Archivo:wght@400;500;600;700&display=swap">
@@ -231,8 +230,24 @@
     .situacao--4 { max-width: 820px; }
     @media (min-width: 720px) { .situacao--4 { grid-template-columns: repeat(2, 1fr); } }
     .situacao__link { text-align: center; margin: 1rem auto 0; max-width: 680px; font-size: .95rem; }
-    .tally-frame { position: relative; }
-    .tally-frame iframe { width: 100%; border: 0; min-height: 580px; display: block; }
+    .cform { display: grid; grid-template-columns: 1fr 1fr; gap: .9rem 1rem; }
+    .cform .full { grid-column: 1 / -1; }
+    .cform label { display: block; font: 600 .88rem var(--sans); color: var(--fg); margin-bottom: .3rem; }
+    .cform label small { font-weight: 400; color: var(--muted); }
+    .cform input, .cform select, .cform textarea { width: 100%; padding: .7rem .8rem; font: 400 1rem var(--sans); color: var(--fg); background: #fff; border: 1px solid var(--border); border-radius: var(--radius); }
+    .cform textarea { min-height: 110px; resize: vertical; }
+    .cform input:focus-visible, .cform select:focus-visible, .cform textarea:focus-visible { outline: 3px solid var(--primary); outline-offset: 1px; }
+    .cform .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+    .cform__note { font-size: .85rem; color: var(--muted); margin: 0; }
+    .cform button[disabled] { opacity: .6; cursor: wait; }
+    #form-status { margin-top: 1rem; padding: .8rem 1rem; border-radius: var(--radius); background: var(--bg-alt); font-size: .95rem; }
+    #form-status.error { background: #fbeaea; color: #8a1f1f; }
+    @media (max-width: 640px) { .cform { grid-template-columns: 1fr; } }
+    .return-prompt { position: fixed; left: 1rem; right: 1rem; bottom: 1rem; z-index: 80; max-width: 420px; margin: 0 auto; background: #fff; border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); padding: 1.1rem 1.2rem; }
+    .return-prompt p { margin: .35rem 0 .8rem; font-size: .95rem; color: var(--fg-soft); }
+    .return-prompt .dismiss { position: absolute; top: .4rem; right: .6rem; background: none; border: 0; font-size: 1.4rem; cursor: pointer; color: var(--muted); }
+    .return-actions { display: flex; gap: .6rem; flex-wrap: wrap; }
+    .return-actions button { background: none; border: 1.5px solid var(--border); border-radius: 999px; padding: .6rem 1rem; font: 600 .9rem var(--sans); cursor: pointer; }
 
     /* Casos concretos */
     .casos { display: grid; gap: 1.5rem; grid-template-columns: 1fr; max-width: 760px; margin: 0 auto; }
@@ -517,14 +532,34 @@
     </div>
   </section>
 
-  <!-- ========== FORMULÁRIO (Tally) ========== -->
+  <!-- ========== FORMULÁRIO (próprio, grava no painel /contas/admin/) ========== -->
   <section class="form-section" id="consulta">
     <div class="container">
       <div class="form-wrap">
         <h2 class="form-wrap__title">Prefere mandar por escrito?</h2>
         <p class="form-wrap__sub">Informe o CNPJ, o valor aproximado da dívida e se já existe execução fiscal. Com o relatório de situação fiscal do e-CAC ou a consulta do Regularize, a análise fica mais rápida. Retorno em até 48h úteis, com sigilo profissional.</p>
-        <iframe data-tally-src="https://tally.so/embed/6DJPQO?alignLeft=1&amp;hideTitle=1&amp;transparentBackground=1&amp;dynamicHeight=1&amp;page=divida-ativa&amp;source=lp" loading="lazy" width="100%" height="620" frameborder="0" marginheight="0" marginwidth="0" title="Formulário de análise — Dívida ativa e PGFN"></iframe>
-        <script>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function(e){e.src=e.dataset.tallySrc})};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w;s.onload=v;s.onerror=v;d.body.appendChild(s);}</script>
+        <form id="contact-form" class="cform" novalidate aria-label="Pedir análise da dívida">
+          <div><label for="f-nome">Seu nome</label><input id="f-nome" name="nome" autocomplete="name" required maxlength="120"></div>
+          <div><label for="f-tel">Telefone com DDD</label><input id="f-tel" name="telefone" type="tel" inputmode="tel" autocomplete="tel" required maxlength="20"></div>
+          <div><label for="f-cnpj">CNPJ <small>(opcional)</small></label><input id="f-cnpj" name="cnpj" inputmode="numeric" maxlength="20"></div>
+          <div><label for="f-valor">Valor aproximado da dívida <small>(opcional)</small></label><input id="f-valor" name="valor" maxlength="40" placeholder="Ex.: R$ 150 mil"></div>
+          <div class="full"><label for="f-sit">Situação</label><select id="f-sit" name="situacao" required>
+            <option value="">Escolha</option>
+            <option>Quero negociar a dívida ativa com a PGFN</option>
+            <option>Fui citado em execução fiscal</option>
+            <option>Tive conta bloqueada pela Fazenda</option>
+            <option>A cobrança chegou ao meu CPF de sócio</option>
+            <option>A empresa está sem certidão negativa</option>
+            <option>Outra situação</option>
+          </select></div>
+          <div class="full"><label for="f-relato">Conte em poucas linhas <small>(opcional)</small></label><textarea id="f-relato" name="relato" maxlength="500" placeholder="Ex.: há prazo correndo? já existe parcelamento?"></textarea></div>
+          <div><label for="f-pref">Como prefere o retorno?</label><select id="f-pref" name="preferencia"><option value="whatsapp_outro">WhatsApp</option><option value="ligacao">Ligação</option><option value="email">E-mail</option></select></div>
+          <div id="email-field" hidden><label for="f-email">E-mail</label><input id="f-email" name="email" type="email" autocomplete="email" maxlength="160"></div>
+          <div class="hp" aria-hidden="true"><label for="f-site">Site</label><input id="f-site" name="site" tabindex="-1" autocomplete="off"></div>
+          <div class="full"><button type="submit" class="btn btn--primary">Enviar para análise</button></div>
+          <p class="cform__note full">Não envie senhas nem documentos por aqui. Seus dados são usados só para o retorno, conforme a <a href="/politica-de-privacidade/">política de privacidade</a>.</p>
+        </form>
+        <p id="form-status" role="status" aria-live="polite" tabindex="-1" hidden></p>
         <div class="form-done" id="form-done" role="status" aria-live="polite" tabindex="-1">
           <h3>Recebi suas informações.</h3>
           <ol>
@@ -634,7 +669,7 @@
 
         <details class="faq__item">
           <summary>Quais são os descontos e prazos do edital atual?</summary>
-          <div class="faq__answer">O Edital PGDAU nº 6/2026, reaberto pelo Edital PGDAU nº 10/2026, aceita adesões até 29 de janeiro de 2027 para débitos de até R$ 45 milhões por contribuinte. Para empresas em geral, o desconto pode chegar a 65% do total, com entrada de 6% em até 6 parcelas e o saldo em até 114 meses. Para microempresas, empresas de pequeno porte e pessoas físicas, o limite sobe para 70%, com entrada em até 12 parcelas e saldo em até 133 meses. Débitos de contribuições previdenciárias têm limite de 60 parcelas. As condições exatas valem pelo texto oficial do edital e pelo que o Regularize oferece para cada inscrição.</div>
+          <div class="faq__answer">O Edital PGDAU nº 6/2026, reaberto pelo Edital PGDAU nº 10/2026, aceita adesões até 29 de janeiro de 2027 para débitos de até R$ 45 milhões por contribuinte. Para empresas em geral, o desconto pode chegar a 65% do total, com entrada de 6% em até 6 parcelas e o saldo em até 114 meses. Para microempresas, empresas de pequeno porte e pessoas físicas, o limite sobe para 70%, com entrada em até 12 parcelas e saldo em até 133 meses. Débitos de contribuições previdenciárias têm limite de 60 parcelas. Entram as dívidas inscritas em dívida ativa até 3 de julho de 2026; inscrições posteriores ficam de fora deste edital e precisam de outro caminho, como parcelamento comum ou defesa na execução. As condições exatas valem pelo texto oficial do edital e pelo que o Regularize oferece para cada inscrição.</div>
         </details>
 
         <details class="faq__item">
@@ -746,36 +781,9 @@
     });
   });
 
-  if (!window.__tallyListenerInstalled) {
-    window.__tallyListenerInstalled = true;
-    window.addEventListener('message', function(e) {
-      if (!e.data || typeof e.data !== 'string') return;
-      if (e.data.indexOf('Tally.FormSubmitted') === -1) return;
-      try {
-        var p = JSON.parse(e.data);
-        if (p.event === 'Tally.FormSubmitted') {
-          window.dataLayer.push({
-            event: 'lead_submit',
-            page: 'divida-ativa',
-            service: 'Dívida ativa e transação com a PGFN',
-            form_id: p.payload && p.payload.formId
-          });
-        }
-      } catch (err) {}
-    });
-  }
-
-  window.addEventListener('message', function(e) {
-    if (!e.data || typeof e.data !== 'string' || e.data.indexOf('Tally.FormSubmitted') === -1) return;
-    try {
-      var p = JSON.parse(e.data);
-      if (p.event !== 'Tally.FormSubmitted' || !p.payload || p.payload.formId !== '6DJPQO') return;
-      var box = document.getElementById('form-done');
-      if (box) { box.classList.add('is-on'); box.scrollIntoView({behavior: 'smooth', block: 'center'}); box.focus({preventScroll: true}); }
-    } catch (err) {}
-  });
 </script>
-<script src="/divida-ativa/origem.v1.js" defer></script>
+<aside class="return-prompt" id="return-prompt" aria-labelledby="return-title" hidden><button type="button" class="dismiss" id="return-close" aria-label="Fechar aviso">×</button><strong id="return-title">Não conseguiu enviar pelo WhatsApp?</strong><p>Deixe seus dados no formulário e o Dr. Rodrigo retorna pelo meio que você escolher.</p><div class="return-actions"><a href="#consulta" id="return-go" class="btn btn--primary">Deixar meu contato</a><button type="button" id="return-sent">Já enviei</button></div></aside>
+<script src="/divida-ativa/origem.v2.js" defer></script>
 
 </body>
 </html>
