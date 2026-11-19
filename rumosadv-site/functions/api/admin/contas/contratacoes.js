@@ -1,6 +1,6 @@
 // Painel do advogado: cria a contratação (envia o contrato à Autentique) e lista o andamento.
 import { isAdmin } from '../../../_lib/marcas-auth.js';
-import { json, validateInput, createAutentiqueDocument, clientToken, publicBase, createSignatureLink, ETAPAS, ETAPAS_JUDICIAL, parseAndamento, registrarEtapa, removerEtapa } from '../../../_lib/contas-contratacao.js';
+import { json, validateInput, createAutentiqueDocument, clientToken, publicBase, createSignatureLink, ETAPAS, ETAPAS_JUDICIAL, ETAPAS_FISCAL, parseAndamento, registrarEtapa, removerEtapa } from '../../../_lib/contas-contratacao.js';
 
 function guard(context, { needSign = false } = {}) {
   const env = context.env;
@@ -13,7 +13,7 @@ function guard(context, { needSign = false } = {}) {
 export async function onRequestGet(context) {
   const denied = guard(context); if (denied) return denied;
   const rows = await context.env.ACEITES_DB.prepare(`SELECT id, created_at, updated_at, ref, proposta_numero, nome, plataforma, servico, rito, opcao, valor_centavos, max_parcelas, status, signed_at, paid_at, caso_aberto_at, payment_status, andamento FROM contas_contratacoes ORDER BY created_at DESC LIMIT 200`).all();
-  return json({ ok: true, etapas: ETAPAS, etapasPorServico: { whatsapp_adm: ETAPAS, dinheiro_retido: ETAPAS_JUDICIAL }, contratacoes: (rows.results || []).map(r => ({ ...r, andamento: parseAndamento(r.andamento) })) });
+  return json({ ok: true, etapas: ETAPAS, etapasPorServico: { whatsapp_adm: ETAPAS, dinheiro_retido: ETAPAS_JUDICIAL, divida_ativa: ETAPAS_FISCAL }, contratacoes: (rows.results || []).map(r => ({ ...r, andamento: parseAndamento(r.andamento) })) });
 }
 
 export async function onRequestPost(context) {

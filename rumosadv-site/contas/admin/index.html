@@ -29,9 +29,9 @@
   <section id="novo" hidden><h2>Nova contratação</h2>
     <p><small>Preencha os dados do cliente. O painel monta o contrato, envia para assinatura na Autentique e devolve o link único do cliente: assinar → pagar → confirmação.</small></p>
     <form id="f"><div class="grid">
-      <div style="grid-column:1/-1"><label>Serviço</label><select name="servico" id="servico"><option value="whatsapp_adm">WhatsApp banido — etapa administrativa (R$ 500)</option><option value="dinheiro_retido">Dinheiro retido ou loja suspensa — medida judicial</option></select></div>
-      <div class="dr" hidden><label>Rito</label><select name="rito"><option value="jec">Juizado Especial Cível</option><option value="comum">Procedimento comum</option></select></div>
-      <div class="dr" hidden><label>Honorários</label><select name="opcao"><option value="A">Opção A — só honorários iniciais, sem êxito</option><option value="B">Opção B — entrada menor + 10% sobre a condenação</option></select></div>
+      <div style="grid-column:1/-1"><label>Serviço</label><select name="servico" id="servico"><option value="whatsapp_adm">WhatsApp banido — etapa administrativa (R$ 500)</option><option value="dinheiro_retido">Dinheiro retido ou loja suspensa — medida judicial</option><option value="divida_ativa">Dívida ativa da União — execução fiscal ou transação PGFN</option></select></div>
+      <div class="dr" hidden><label id="lrito">Rito</label><select name="rito"><option value="jec">Juizado Especial Cível</option><option value="comum">Procedimento comum</option></select></div>
+      <div class="dr" hidden><label>Honorários</label><select name="opcao"><option value="A">Opção A — só honorários iniciais, sem êxito</option><option value="B" id="optB">Opção B — entrada menor + 10% sobre a condenação</option></select></div>
       <div class="dr" hidden style="grid-column:1/-1"><small id="honinfo"></small></div>
       <div><label>Cliente</label><select name="tipo" id="tipo"><option value="pf">Pessoa física</option><option value="pj">Pessoa jurídica</option></select></div>
       <div><label id="lnome">Nome completo</label><input name="nome" required></div>
@@ -45,8 +45,8 @@
       <div style="grid-column:1/-1"><label id="lend">Endereço completo (rua, nº, bairro, cidade/UF, CEP)</label><input name="endereco"></div>
       <div><label>E-mail (recebe o contrato)</label><input name="email" type="email" required></div>
       <div><label>WhatsApp com DDD</label><input name="whatsapp" inputmode="tel" required></div>
-      <div class="dr" hidden style="grid-column:1/-1"><label>Plataforma demandada (nome que vai no contrato)</label><input name="plataforma_dr" maxlength="60" placeholder="Mercado Pago e Mercado Livre"></div>
-      <div class="dr" hidden><label>Valor retido aproximado</label><input name="valor_retido" placeholder="R$ 12.000,00"></div>
+      <div class="dr" hidden style="grid-column:1/-1"><label id="lplat">Plataforma demandada (nome que vai no contrato)</label><input name="plataforma_dr" maxlength="60" placeholder="Mercado Pago e Mercado Livre"></div>
+      <div class="dr" hidden><label id="lvalor">Valor retido aproximado</label><input name="valor_retido" placeholder="R$ 12.000,00"></div>
       <div class="dr" hidden><label>O que ocorreu</label><select name="ocorrencia_dr"><option>retenção de saldo</option><option>suspensão da conta de vendedor</option><option>bloqueio de repasses</option><option>encerramento da conta</option><option>retenção de saldo e suspensão da conta</option></select></div>
       <div class="wa"><label>Plataforma</label><select name="plataforma"><option>WhatsApp</option><option>WhatsApp Business</option><option>WhatsApp Business Platform (API)</option></select></div>
       <div><label id="lconta">Número da conta afetada (com DDD)</label><input name="conta_numero"></div>
@@ -106,7 +106,7 @@
       ETAPAS = d.etapas || []; ETAPAS_SV = d.etapasPorServico || {}; ROWS = {}; d.contratacoes.forEach(function(c){ ROWS[c.id] = c; }); if (andOpen && ROWS[andOpen] && ROWS[andOpen].status === 'caso_aberto') showAnd(andOpen, true); else { $('andbox').hidden = true; andOpen = null; }
       $('login').hidden = true; $('novo').hidden = false; $('lista').hidden = false; contatos();
       var pn = $('propnum'), sug = new Date().getFullYear() + '/' + String(d.contratacoes.length + 1).padStart(3, '0'); if (!pn.value || pn.dataset.auto === pn.value) { pn.value = sug; pn.dataset.auto = sug; }
-      $('rows').innerHTML = d.contratacoes.map(function(c){ return '<tr><td>' + day(c.created_at) + '</td><td>' + esc(c.nome) + '<br><small>' + (c.servico === 'dinheiro_retido' ? 'Dinheiro retido · ' + (c.rito === 'comum' ? 'comum' : 'JEC') + ' · opção ' + esc(c.opcao || '') : 'WhatsApp · adm.') + ' · R$ ' + Math.round((c.valor_centavos || 0) / 100) + '</small></td><td>' + esc(c.ref) + '</td><td>' + esc(LABEL[c.status] || c.status) + '</td><td>' + day(c.signed_at) + '</td><td>' + day(c.paid_at) + '</td><td>' +
+      $('rows').innerHTML = d.contratacoes.map(function(c){ return '<tr><td>' + day(c.created_at) + '</td><td>' + esc(c.nome) + '<br><small>' + (c.servico === 'dinheiro_retido' ? 'Dinheiro retido · ' + (c.rito === 'comum' ? 'comum' : 'JEC') + ' · opção ' + esc(c.opcao || '') : c.servico === 'divida_ativa' ? 'Dívida ativa · ' + (c.rito === 'defesa' ? 'defesa' : 'transação') + ' · opção ' + esc(c.opcao || '') : 'WhatsApp · adm.') + ' · R$ ' + Math.round((c.valor_centavos || 0) / 100) + '</small></td><td>' + esc(c.ref) + '</td><td>' + esc(LABEL[c.status] || c.status) + '</td><td>' + day(c.signed_at) + '</td><td>' + day(c.paid_at) + '</td><td>' +
         '<button class="sec" data-a="link" data-id="' + c.id + '" data-nome="' + esc(c.nome) + '">Link do cliente</button>' + (c.status === 'aguardando_assinatura' ? '<button class="sec" data-a="link_assinatura" data-id="' + c.id + '">Link de assinatura</button><button class="sec" data-a="marcar_assinado" data-id="' + c.id + '">Marcar assinado</button>' : '') + (['assinado','aguardando_pagamento','pagamento_cancelado','pagamento_expirado'].indexOf(c.status) >= 0 ? '<button class="sec" data-a="marcar_pago" data-id="' + c.id + '">Marcar pago (Pix direto)</button>' : '') + (c.status === 'caso_aberto' ? '<button class="sec" data-a="andamento" data-id="' + c.id + '">Andamento (' + (c.andamento || []).length + '/' + etapasDe(c).length + ')</button>' : '') + (c.status !== 'caso_aberto' && c.status !== 'cancelado' ? '<button class="sec" data-a="cancelar" data-id="' + c.id + '">Cancelar</button>' : '') + '</td></tr>'; }).join('') || '<tr><td colspan="7">Nenhuma contratação ainda.</td></tr>';
     }).catch(function(e){ alert(e.message); $('login').hidden = false; });
   }
@@ -117,17 +117,34 @@
   function tipoChange(){ var pj = F.tipo.value === 'pj'; document.querySelectorAll('#f .pf').forEach(function(e){ e.hidden = pj; }); document.querySelectorAll('#f .pj').forEach(function(e){ e.hidden = !pj; }); $('lnome').textContent = pj ? 'Razão social' : 'Nome completo'; $('ldoc').textContent = pj ? 'CNPJ' : 'CPF'; $('lend').textContent = pj ? 'Endereço da sede (rua, nº, bairro, cidade/UF, CEP)' : 'Endereço completo (rua, nº, bairro, cidade/UF, CEP)'; }
   $('tipo').onchange = tipoChange;
   var HONTXT = { A: { jec: 'R$ 1.500,00', comum: 'R$ 2.500,00' }, B: { jec: 'R$ 1.000,00', comum: 'R$ 2.000,00' } };
-  function servicoChange(){ var dr = F.servico.value === 'dinheiro_retido'; document.querySelectorAll('#f .dr').forEach(function(e){ e.hidden = !dr; }); document.querySelectorAll('#f .wa').forEach(function(e){ e.hidden = dr; });
-    $('lconta').textContent = dr ? 'Identificação da conta na plataforma (apelido, e-mail ou ID)' : 'Número da conta afetada (com DDD)';
-    $('honinfo').textContent = dr ? 'Honorários iniciais cobrados no link de pagamento: ' + HONTXT[F.opcao.value][F.rito.value] + (F.opcao.value === 'B' ? ', mais 10% de êxito sobre a condenação, previstos no contrato.' : ', sem êxito.') : ''; }
+  var HONTXT_FA = { A: { defesa: 'R$ 3.000,00', transacao: 'R$ 1.500,00' }, B: { defesa: 'R$ 2.500,00', transacao: 'R$ 1.000,00' } };
+  var OPT = {
+    dinheiro_retido: { rito: [['jec', 'Juizado Especial Cível'], ['comum', 'Procedimento comum']], oc: ['retenção de saldo', 'suspensão da conta de vendedor', 'bloqueio de repasses', 'encerramento da conta', 'retenção de saldo e suspensão da conta'], lrito: 'Rito', lplat: 'Plataforma demandada (nome que vai no contrato)', ph: 'Mercado Pago e Mercado Livre', lvalor: 'Valor retido aproximado', b: 'Opção B — entrada menor + 10% sobre a condenação' },
+    divida_ativa: { rito: [['defesa', 'Defesa em execução fiscal'], ['transacao', 'Transação com a PGFN']], oc: ['execução fiscal', 'execução fiscal com bloqueio de conta', 'redirecionamento da execução fiscal ao sócio', 'débitos inscritos em dívida ativa', 'falta de certidão negativa por débitos inscritos'], lrito: 'Modalidade', lplat: 'Credor (nome que vai no contrato)', ph: 'União (Fazenda Nacional)', lvalor: 'Valor aproximado da dívida', b: 'Opção B — entrada menor + 10% de êxito' }
+  };
+  var lastSv = null;
+  function servicoChange(){
+    var sv = F.servico.value;
+    if (sv !== lastSv && OPT[sv]) { var o = OPT[sv];
+      F.rito.innerHTML = o.rito.map(function(r){ return '<option value="' + r[0] + '">' + r[1] + '</option>'; }).join('');
+      F.ocorrencia_dr.innerHTML = o.oc.map(function(t){ return '<option>' + t + '</option>'; }).join('');
+      $('lrito').textContent = o.lrito; $('lplat').textContent = o.lplat; F.plataforma_dr.placeholder = o.ph; $('lvalor').textContent = o.lvalor; $('optB').textContent = o.b;
+      if (sv === 'divida_ativa' && !F.plataforma_dr.value) F.plataforma_dr.value = 'União (Fazenda Nacional)';
+      else if (sv !== 'divida_ativa' && F.plataforma_dr.value === 'União (Fazenda Nacional)') F.plataforma_dr.value = '';
+    }
+    lastSv = sv;
+    var fa = sv === 'divida_ativa', dr = sv !== 'whatsapp_adm'; document.querySelectorAll('#f .dr').forEach(function(e){ e.hidden = !dr; }); document.querySelectorAll('#f .wa').forEach(function(e){ e.hidden = dr; });
+    $('lconta').textContent = fa ? 'Nº do processo ou das inscrições em dívida ativa' : dr ? 'Identificação da conta na plataforma (apelido, e-mail ou ID)' : 'Número da conta afetada (com DDD)';
+    var tab = fa ? HONTXT_FA : HONTXT, txt = (tab[F.opcao.value] || {})[F.rito.value] || '';
+    $('honinfo').textContent = dr ? 'Honorários iniciais cobrados no link de pagamento: ' + txt + (F.opcao.value === 'B' ? (fa ? (F.rito.value === 'defesa' ? ', mais 10% sobre o valor cuja cobrança for afastada' : ', mais 10% sobre o desconto obtido') : ', mais 10% de êxito sobre a condenação') + ', previstos no contrato.' : ', sem êxito.') : ''; }
   F.servico.onchange = F.rito.onchange = F.opcao.onchange = servicoChange;
   function dados(){ var d = {}; ['tipo','nome','cpf_cnpj','nacionalidade','estado_civil','profissao','rep_nome','rep_cargo','rep_cpf','endereco','email','whatsapp','plataforma','conta_numero','ocorrencia','data_fato','proposta_numero'].forEach(function(k){ d[k] = F[k].value; }); d.opoe_medicao = F.opoe_medicao.checked;
-    d.servico = F.servico.value; if (d.servico === 'dinheiro_retido') { d.rito = F.rito.value; d.opcao = F.opcao.value; d.plataforma = F.plataforma_dr.value; d.ocorrencia = F.ocorrencia_dr.value; d.valor_retido = F.valor_retido.value; } return d; }
+    d.servico = F.servico.value; if (d.servico !== 'whatsapp_adm') { d.rito = F.rito.value; d.opcao = F.opcao.value; d.plataforma = F.plataforma_dr.value; d.ocorrencia = F.ocorrencia_dr.value; d.valor_retido = F.valor_retido.value; } return d; }
   function contratoPdf(){ if (!window.RumosContrato || !window.PDFLib) return Promise.reject(new Error('O gerador de contrato não carregou. Recarregue a página.')); return window.RumosContrato.gerar(dados()).then(function(bytes){ return new Blob([bytes], { type: 'application/pdf' }); }); }
   $('preview').onclick = function(){ $('out').hidden = false; if (F.contrato.files.length) { window.open(URL.createObjectURL(F.contrato.files[0]), '_blank'); return; } var w = window.open('', '_blank'); contratoPdf().then(function(blob){ var u = URL.createObjectURL(blob); if (w) w.location = u; else location.href = u; $('out').textContent = 'Contrato aberto em outra aba para conferência. Nada foi enviado ainda.'; }).catch(function(e){ if (w) w.close(); $('out').textContent = e.message; }); };
   $('f').onsubmit = function(ev){ ev.preventDefault(); var nomeNovo = ev.target.elements.nome.value; var btn = ev.target.querySelector('button:not([type=button])'); btn.disabled = true; $('out').hidden = false; $('out').textContent = 'Montando o contrato e enviando…';
     var fd = new FormData(ev.target), own = F.contrato.files.length > 0;
-    if (F.servico.value === 'dinheiro_retido') { fd.set('plataforma', F.plataforma_dr.value); } else { fd.delete('rito'); fd.delete('opcao'); }
+    if (F.servico.value !== 'whatsapp_adm') { fd.set('plataforma', F.plataforma_dr.value); } else { fd.delete('rito'); fd.delete('opcao'); }
     (own ? Promise.resolve(null) : contratoPdf()).then(function(blob){ if (blob) fd.set('contrato', blob, 'contrato-etapa-administrativa.pdf'); return api('POST', fd, true); }).then(function(d){ $('out').textContent = 'Contrato enviado para assinatura. O link do cliente está no quadro abaixo.\n\nLink direto de assinatura (uso interno):\n' + (d.linkAssinatura || '—'); showLink(d.linkCliente, nomeNovo); ev.target.reset(); tipoChange(); servicoChange(); list(); })
       .catch(function(e){ $('out').textContent = e.message; }).finally(function(){ btn.disabled = false; }); };
   if (key) list();

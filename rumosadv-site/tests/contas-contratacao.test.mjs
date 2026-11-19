@@ -167,3 +167,18 @@ test('serviço dinheiro retido: valor calculado no servidor por rito e opção',
   assert.throws(() => lib.registrarEtapa(null, 'pedido_enviado', { servico: 'dinheiro_retido', hoje: '2026-11-21' }), /desconhecida/);
   assert.equal(lib.registrarEtapa(null, 'sentenca', { servico: 'dinheiro_retido', hoje: '2026-11-21' })[0].etapa, 'sentenca');
 });
+
+test('serviço dívida ativa: valor por modalidade e opção, etapas fiscais', async () => {
+  const lib = await import('../functions/_lib/contas-contratacao.js');
+  const base = { nome: 'Metalúrgica Exemplo', cpf_cnpj: '11222333000181', email: 'm@x.com', whatsapp: '19999990000', plataforma: 'União (Fazenda Nacional)', ref: 'fcde61', servico: 'divida_ativa' };
+  const v = (rito, opcao) => lib.validateInput({ ...base, rito, opcao });
+  assert.equal(v('defesa', 'A').value.valor_centavos, 300000);
+  assert.equal(v('defesa', 'B').value.valor_centavos, 250000);
+  assert.equal(v('transacao', 'A').value.valor_centavos, 150000);
+  assert.equal(v('transacao', 'B').value.valor_centavos, 100000);
+  assert.deepEqual(v('jec', 'A').errors, ['rito_opcao']);
+  const p = lib.buildCheckoutPayload({ ...v('defesa', 'A').value, id: 'x' }, 'https://rumosadv.com.br', 't');
+  assert.equal(p.items[0].value, 3000); assert.ok(p.items[0].name.length <= 30);
+  assert.equal(lib.etapasDe('divida_ativa'), lib.ETAPAS_FISCAL);
+  assert.equal(lib.registrarEtapa(null, 'protocolo_ou_adesao', { servico: 'divida_ativa', hoje: '2026-11-25' })[0].etapa, 'protocolo_ou_adesao');
+});

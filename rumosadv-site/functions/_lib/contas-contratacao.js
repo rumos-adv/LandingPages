@@ -20,15 +20,18 @@ export const digits = (v) => String(v || '').replace(/\D/g, '');
 // Honorários iniciais do serviço "dinheiro retido", em centavos. Opção A: valor fixo, sem êxito.
 // Opção B: entrada menor e 10% sobre a condenação. O valor nunca vem do formulário: é calculado aqui.
 export const HONORARIOS_DR = { A: { jec: 150000, comum: 250000 }, B: { jec: 100000, comum: 200000 } };
+// Serviço "dívida ativa": a coluna rito guarda a modalidade ('defesa' ou 'transacao'). Valores do Rod, 19/11/2026.
+export const HONORARIOS_FA = { A: { defesa: 300000, transacao: 150000 }, B: { defesa: 250000, transacao: 100000 } };
 export const SERVICOS = {
   whatsapp_adm: { item: 'Etapa administrativa', descricao: 'Honorários fixos da etapa administrativa', documento: 'Contrato etapa administrativa', resumo: 'etapa administrativa' },
+  divida_ativa: { item: 'Honorários iniciais', descricao: 'Honorários iniciais — dívida ativa da União', documento: 'Contrato dívida ativa', resumo: 'dívida ativa da União' },
   dinheiro_retido: { item: 'Honorários iniciais', descricao: 'Honorários iniciais da medida judicial', documento: 'Contrato medida judicial', resumo: 'medida judicial' }
 };
 
 export function validateInput(f) {
-  const servico = f.servico === 'dinheiro_retido' ? 'dinheiro_retido' : 'whatsapp_adm';
-  const rito = servico === 'dinheiro_retido' && ['jec', 'comum'].includes(f.rito) ? f.rito : null;
-  const opcao = servico === 'dinheiro_retido' && ['A', 'B'].includes(f.opcao) ? f.opcao : null;
+  const servico = ['dinheiro_retido', 'divida_ativa'].includes(f.servico) ? f.servico : 'whatsapp_adm';
+  const rito = (servico === 'dinheiro_retido' && ['jec', 'comum'].includes(f.rito)) || (servico === 'divida_ativa' && ['defesa', 'transacao'].includes(f.rito)) ? f.rito : null;
+  const opcao = servico !== 'whatsapp_adm' && ['A', 'B'].includes(f.opcao) ? f.opcao : null;
   const out = {
     servico, rito, opcao,
     ref: String(f.ref || '').trim().toUpperCase().slice(0, 12) || null,
@@ -40,7 +43,7 @@ export function validateInput(f) {
     plataforma: String(f.plataforma || '').trim().slice(0, 60),
     conta_numero: String(f.conta_numero || '').trim().slice(0, 40) || null,
     max_parcelas: Math.min(Math.max(parseInt(f.max_parcelas || '1', 10) || 1, 1), 12),
-    valor_centavos: servico === 'dinheiro_retido' ? (HONORARIOS_DR[opcao]?.[rito] || 0) : 50000
+    valor_centavos: servico === 'dinheiro_retido' ? (HONORARIOS_DR[opcao]?.[rito] || 0) : servico === 'divida_ativa' ? (HONORARIOS_FA[opcao]?.[rito] || 0) : 50000
   };
   const errors = [];
   if (out.nome.length < 3) errors.push('nome');
@@ -48,8 +51,8 @@ export function validateInput(f) {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(out.email)) errors.push('email');
   if (out.whatsapp.length < 10 || out.whatsapp.length > 13) errors.push('whatsapp');
   if (!out.plataforma) errors.push('plataforma');
-  if (servico === 'dinheiro_retido' && (!rito || !opcao)) errors.push('rito_opcao');
-  if (out.ref && !/^[CWB][A-Z0-9]{3,9}$/.test(out.ref)) errors.push('ref');
+  if (servico !== 'whatsapp_adm' && (!rito || !opcao)) errors.push('rito_opcao');
+  if (out.ref && !/^[CWBF][A-Z0-9]{3,9}$/.test(out.ref)) errors.push('ref');
   return { value: out, errors };
 }
 
@@ -207,8 +210,17 @@ export const ETAPAS_JUDICIAL = [
   ['cumprimento', 'Cumprimento da decisão'],
   ['encerrado', 'Caso encerrado']
 ];
-export const etapasDe = (servico) => servico === 'dinheiro_retido' ? ETAPAS_JUDICIAL : ETAPAS;
-const ALL_KEYS = [...ETAPAS, ...ETAPAS_JUDICIAL].map(e => e[0]);
+export const ETAPAS_FISCAL = [
+  ['documentos_recebidos', 'Documentos e acesso às inscrições recebidos'],
+  ['analise_concluida', 'Análise das inscrições e da capacidade de pagamento'],
+  ['estrategia_definida', 'Estratégia apresentada ao cliente'],
+  ['protocolo_ou_adesao', 'Defesa protocolada ou adesão realizada'],
+  ['decisao', 'Decisão ou resposta da Fazenda'],
+  ['acompanhamento', 'Acompanhamento do acordo ou do processo'],
+  ['encerrado', 'Caso encerrado']
+];
+export const etapasDe = (servico) => servico === 'dinheiro_retido' ? ETAPAS_JUDICIAL : servico === 'divida_ativa' ? ETAPAS_FISCAL : ETAPAS;
+const ALL_KEYS = [...ETAPAS, ...ETAPAS_JUDICIAL, ...ETAPAS_FISCAL].map(e => e[0]);
 const isDay = (s) => /^\d{4}-\d{2}-\d{2}$/.test(String(s || '')) && !Number.isNaN(Date.parse(s + 'T12:00:00Z'));
 export function parseAndamento(raw) {
   let list; try { list = JSON.parse(raw || '[]'); } catch { list = []; }

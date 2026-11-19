@@ -49,7 +49,9 @@
   function render(c){
     $('steps').hidden = false;
     $('title').textContent = 'Olá, ' + c.primeiroNome;
-    $('lead').textContent = c.servico === 'dinheiro_retido'
+    $('lead').textContent = c.servico === 'divida_ativa'
+      ? 'Contratação — dívida ativa da União (' + c.plataforma + ')' + (c.ref ? ' (Ref. ' + c.ref + ')' : '') + '. Honorários iniciais de ' + brl(c.valor) + (c.exito ? ', mais os honorários de êxito previstos no contrato.' : '.')
+      : c.servico === 'dinheiro_retido'
       ? 'Contratação da medida judicial — ' + c.plataforma + (c.ref ? ' (Ref. ' + c.ref + ')' : '') + '. Honorários iniciais de ' + brl(c.valor) + (c.exito ? ', mais os honorários de êxito previstos no contrato.' : '.')
       : 'Contratação da etapa administrativa — recuperação de conta de ' + c.plataforma + (c.ref ? ' (Ref. ' + c.ref + ')' : '') + '. Honorários fixos de ' + brl(c.valor) + '.';
     $('paytext').textContent = 'Pix ou cartão de crédito' + (c.maxParcelas > 1 ? ' (à vista ou em até ' + c.maxParcelas + 'x)' : '') + ', pela página segura do Asaas.';
