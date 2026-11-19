@@ -58,3 +58,25 @@ test('dinheiro retido grava os detalhes e não sobrescreve pedido de outro servi
   assert.equal(parseLeadOrigin(JSON.stringify({ page: novo.page, lead_ref: novo.lead_ref, source: 'form' })).page, novo.page);
 });
 
+
+test('aviso ao Rod: texto sem dados pessoais e chamada só com URL e token configurados', async () => {
+  const { alertText } = await import('../functions/api/contas/contato.js');
+  const t = alertText({ page: 'whatsapp-banido', preferencia: 'ligacao', ref: 'W489KM', nome: 'Fulano', telefone: '19999990000' });
+  assert.match(t, /WhatsApp banido, prefere ligação \(Ref\. W489KM\)/);
+  assert.doesNotMatch(t, /Fulano|19999990000/);
+});
+
+test('pedido novo dispara um aviso; reenvio em 10 minutos não repete o aviso', async () => {
+  const calls = [], realFetch = globalThis.fetch;
+  globalThis.fetch = async (url, init) => { calls.push({ url, init }); return new Response('{}', { status: 200 }); };
+  try {
+    const env = { ACEITES_DB: d1(), OWNER_ALERT_URL: 'https://alerta.example/interno', OWNER_ALERT_TOKEN: 'tok' };
+    const pend = [];
+    assert.equal((await onRequestPost({ request: req(ok), env, waitUntil: (p) => pend.push(p) })).status, 201);
+    assert.equal((await onRequestPost({ request: req({ ...ok, relato: 'Mais.' }), env, waitUntil: (p) => pend.push(p) })).status, 201);
+    await Promise.all(pend);
+    assert.equal(calls.length, 1);
+    assert.equal(calls[0].init.headers.authorization, 'Bearer tok');
+    assert.doesNotMatch(calls[0].init.body, /Maria|99999/);
+  } finally { globalThis.fetch = realFetch; }
+});

@@ -28,7 +28,22 @@ export function parseContato(body) {
   return { contato: { page, ref, nome, telefone: tel, email: email || null, preferencia, numero_banido: nb.length >= 10 && nb.length <= 11 ? nb : null, relato: txt(body.relato, 800) || null } };
 }
 
-export async function onRequestPost({ request, env }) {
+// Aviso ao Rod no WhatsApp a cada pedido novo, via Worker rumos-whatsapp-atendimento (rota interna protegida).
+// Sem OWNER_ALERT_URL/OWNER_ALERT_TOKEN configurados, não faz nada. Nunca envia nome, telefone ou relato.
+const PAGE_LABEL = { 'whatsapp-banido': 'WhatsApp banido', 'whatsapp-business-banido': 'WhatsApp Business banido', 'dinheiro-retido': 'Dinheiro retido', 'divida-ativa': 'Dívida ativa / execução fiscal' };
+const PREF_LABEL = { ligacao: 'ligação', whatsapp_outro: 'WhatsApp', email: 'e-mail' };
+export function alertText(c) {
+  return `Novo pedido de retorno pelo formulário: ${PAGE_LABEL[c.page] || c.page}, prefere ${PREF_LABEL[c.preferencia] || 'contato'}${c.ref ? ` (Ref. ${c.ref})` : ''}. Abra o painel: https://rumosadv.com.br/contas/admin/`;
+}
+async function avisarRod(env, c) {
+  if (!env.OWNER_ALERT_URL || !env.OWNER_ALERT_TOKEN) return;
+  try {
+    const r = await fetch(env.OWNER_ALERT_URL, { method: 'POST', headers: { 'content-type': 'application/json', authorization: 'Bearer ' + env.OWNER_ALERT_TOKEN }, body: JSON.stringify({ kind: 'form_contact', text: alertText(c) }), signal: AbortSignal.timeout(8000) });
+    if (!r.ok) console.error(JSON.stringify({ event: 'contato_alerta_falhou', status: r.status }));
+  } catch { console.error(JSON.stringify({ event: 'contato_alerta_falhou', status: 0 })); }
+}
+
+export async function onRequestPost({ request, env, waitUntil }) {
   const origin = request.headers.get('origin');
   if (origin && !ORIGINS.has(origin) && origin !== env.LEAD_ORIGIN_DEV) return json({ error: 'Origem não permitida.' }, 403);
   if (!env.ACEITES_DB) return json({ error: 'Formulário indisponível no momento. Fale pelo WhatsApp (19) 98911-9770.' }, 503);
@@ -47,6 +62,8 @@ export async function onRequestPost({ request, env }) {
     } else {
       await env.ACEITES_DB.prepare(`INSERT INTO contas_contatos (id, created_at, ref, page, nome, telefone, email, preferencia, numero_banido, relato) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`)
         .bind(crypto.randomUUID(), now, c.ref, c.page, c.nome, c.telefone, c.email, c.preferencia, c.numero_banido, c.relato).run();
+      const aviso = avisarRod(env, c);
+      if (typeof waitUntil === 'function') waitUntil(aviso); else await aviso;
     }
     return json({ ok: true, ref: c.ref }, 201);
   } catch (e) {
