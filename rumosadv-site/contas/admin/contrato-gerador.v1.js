@@ -122,7 +122,7 @@
   }
 
   // Honorários do serviço "dívida ativa" (rito = modalidade). Devem coincidir com HONORARIOS_FA no servidor.
-  var HON_FA = { A: { defesa: [3000, 'três mil reais'], transacao: [1500, 'mil e quinhentos reais'] }, B: { defesa: [2500, 'dois mil e quinhentos reais'], transacao: [1000, 'mil reais'] } };
+  var HON_FA = { A: { defesa: [3000, 'três mil reais'], transacao: [2000, 'dois mil reais'] }, B: { defesa: [2500, 'dois mil e quinhentos reais'], transacao: [1200, 'mil e duzentos reais'] } };
 
   // Contrato de dívida ativa da União: defesa em execução fiscal ou transação com a PGFN. Texto-base: 19/11/2026.
   function blocosDividaAtiva(d) {
@@ -174,7 +174,7 @@
       out.push(P('§ 3º. Valores apenas liberados de bloqueio, sem redução da dívida, não geram honorários de êxito.'));
     } else if (B) {
       out.push(P('§ 2º. **Honorários de êxito.** São devidos 10% (dez por cento) sobre o desconto obtido, assim entendida a diferença entre o valor consolidado das inscrições antes da adesão e o valor total do acordo, conforme o demonstrativo do Regularize. Podem ser pagos em até 6 (seis) parcelas mensais, a primeira em até 10 dias da adesão.'));
-      out.push(P('§ 3º. Não havendo adesão por decisão do(a) CONTRATANTE, nada é devido a título de êxito.'));
+      out.push(P('§ 3º. Não havendo adesão por decisão do(a) CONTRATANTE, nada é devido a título de êxito. Se o acordo for rescindido pela PGFN, as parcelas de êxito ainda não vencidas deixam de ser devidas; as já vencidas permanecem devidas.'));
     } else {
       out.push(P('§ 2º. Os honorários desta cláusula remuneram integralmente os serviços da Cláusula 1ª, qualquer que seja o resultado obtido.'));
       out.push(P('§ 3º. Serviços não compreendidos na Cláusula 1ª dependem de proposta e contrato próprios.'));

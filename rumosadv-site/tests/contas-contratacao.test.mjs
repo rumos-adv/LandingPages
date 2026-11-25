@@ -174,8 +174,8 @@ test('serviço dívida ativa: valor por modalidade e opção, etapas fiscais', a
   const v = (rito, opcao) => lib.validateInput({ ...base, rito, opcao });
   assert.equal(v('defesa', 'A').value.valor_centavos, 300000);
   assert.equal(v('defesa', 'B').value.valor_centavos, 250000);
-  assert.equal(v('transacao', 'A').value.valor_centavos, 150000);
-  assert.equal(v('transacao', 'B').value.valor_centavos, 100000);
+  assert.equal(v('transacao', 'A').value.valor_centavos, 200000);
+  assert.equal(v('transacao', 'B').value.valor_centavos, 120000);
   assert.deepEqual(v('jec', 'A').errors, ['rito_opcao']);
   const p = lib.buildCheckoutPayload({ ...v('defesa', 'A').value, id: 'x' }, 'https://rumosadv.com.br', 't');
   assert.equal(p.items[0].value, 3000); assert.ok(p.items[0].name.length <= 30);

@@ -21,7 +21,7 @@ export const digits = (v) => String(v || '').replace(/\D/g, '');
 // Opção B: entrada menor e 10% sobre a condenação. O valor nunca vem do formulário: é calculado aqui.
 export const HONORARIOS_DR = { A: { jec: 150000, comum: 250000 }, B: { jec: 100000, comum: 200000 } };
 // Serviço "dívida ativa": a coluna rito guarda a modalidade ('defesa' ou 'transacao'). Valores do Rod, 19/11/2026.
-export const HONORARIOS_FA = { A: { defesa: 300000, transacao: 150000 }, B: { defesa: 250000, transacao: 100000 } };
+export const HONORARIOS_FA = { A: { defesa: 300000, transacao: 200000 }, B: { defesa: 250000, transacao: 120000 } }; // transação revista em 25/11/2026 pelo custo de aquisição estimado
 export const SERVICOS = {
   whatsapp_adm: { item: 'Etapa administrativa', descricao: 'Honorários fixos da etapa administrativa', documento: 'Contrato etapa administrativa', resumo: 'etapa administrativa' },
   divida_ativa: { item: 'Honorários iniciais', descricao: 'Honorários iniciais — dívida ativa da União', documento: 'Contrato dívida ativa', resumo: 'dívida ativa da União' },
